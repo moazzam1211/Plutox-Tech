@@ -22,10 +22,11 @@ import { cn, toWhatsAppHref } from "@/lib/utils";
  * inset plus a border makes it read as an object over the page, which suits the
  * flat, panel-based layout better than a full-width bar would.
  *
- * The seven route indices stay visible on large screens, so the numbered
- * sequence that the rest of the site leans on is still legible at a glance.
- * Below `lg` the links collapse into a drawer and the bar shows the current
- * index instead.
+ * Links show their names only — no index numbers. The numbered sequence still
+ * runs through the page headers and the prev/next pagers, where it has room to
+ * mean something; in the bar it was seven small figures competing with the
+ * labels. Below `lg` the links collapse into a drawer and the bar shows the
+ * current page's name.
  */
 export function FloatingNav() {
   const pathname = usePathname();
@@ -100,20 +101,12 @@ export function FloatingNav() {
                     href={route.href}
                     aria-current={active ? "page" : undefined}
                     className={cn(
-                      "relative flex items-baseline gap-1.5 rounded-md px-3 py-2 text-sm transition-colors duration-200",
+                      "relative flex items-center rounded-md px-3.5 py-2 text-sm transition-colors duration-200",
                       active
                         ? "text-foreground"
                         : "text-muted-foreground hover:text-foreground",
                     )}
                   >
-                    <span
-                      className={cn(
-                        "font-mono text-[0.5625rem] tabular-nums transition-colors",
-                        active ? "text-primary" : "text-muted-foreground/50",
-                      )}
-                    >
-                      {route.index}
-                    </span>
                     <span className="font-medium">{route.short}</span>
 
                     {/* Shared pill that slides between links via layoutId. */}
@@ -133,13 +126,8 @@ export function FloatingNav() {
 
           {/* ---- Mobile: current position ---- */}
           {current ? (
-            <span className="mx-auto flex min-w-0 items-baseline gap-2 lg:hidden">
-              <span className="font-mono text-[0.5625rem] text-primary">
-                {current.index}
-              </span>
-              <span className="truncate text-sm font-medium">
-                {current.short}
-              </span>
+            <span className="mx-auto min-w-0 truncate text-sm font-medium lg:hidden">
+              {current.short}
             </span>
           ) : (
             <span aria-hidden className="mx-auto lg:hidden" />
@@ -212,20 +200,12 @@ export function FloatingNav() {
                         onClick={() => setOpen(false)}
                         aria-current={active ? "page" : undefined}
                         className={cn(
-                          "flex items-baseline gap-3 border-l-2 py-3 pl-4 pr-3 transition-colors",
+                          "flex border-l-2 py-3 pr-3 pl-4 transition-colors",
                           active
                             ? "border-primary bg-primary/8 text-foreground"
                             : "border-transparent text-muted-foreground hover:bg-muted/40 hover:text-foreground",
                         )}
                       >
-                        <span
-                          className={cn(
-                            "font-mono text-[0.625rem]",
-                            active ? "text-primary" : "text-muted-foreground/60",
-                          )}
-                        >
-                          {route.index}
-                        </span>
                         <span className="min-w-0 flex-1">
                           <span className="block text-sm font-medium">
                             {route.label}

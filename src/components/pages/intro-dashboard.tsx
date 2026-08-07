@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpRight, ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import * as React from "react";
@@ -119,18 +119,20 @@ const INTERVAL_MS = 5200;
  * 2. **Colour changes snap, they don't transition.** A frozen compositor leaves
  *    a colour transition stuck part-way, which would strand the plate on the
  *    previous slide's colour. Snapping is invisible mid-crossfade.
- * 3. **Autoplay is opt-out-able and never fights the user.** It pauses on hover
- *    and on keyboard focus, stops for good once a control is used, and never
- *    starts under `prefers-reduced-motion`.
+ * 3. **It slides on its own, with no controls.** There are no arrows, dots or
+ *    pause button to click — the rotation just runs. It still pauses while the
+ *    pointer is over the frame or the slide link has keyboard focus, so it can't
+ *    change out from under someone reading it, and it never starts at all under
+ *    `prefers-reduced-motion`. Those two are the pause mechanism WCAG 2.2.2 asks
+ *    for on auto-updating content, without putting a button on screen.
  */
 export function IntroDashboard() {
   const [index, setIndex] = React.useState(0);
   const [paused, setPaused] = React.useState(false);
-  const [stopped, setStopped] = React.useState(false);
   const reducedMotion = usePrefersReducedMotion();
 
   const active = SLIDES[index];
-  const autoplaying = !reducedMotion && !stopped && !paused;
+  const autoplaying = !reducedMotion && !paused;
 
   React.useEffect(() => {
     if (!autoplaying) return;
@@ -140,12 +142,6 @@ export function IntroDashboard() {
     );
     return () => window.clearInterval(timer);
   }, [autoplaying]);
-
-  /** Any manual navigation ends autoplay — the visitor is driving now. */
-  const go = React.useCallback((next: number) => {
-    setStopped(true);
-    setIndex(((next % SLIDES.length) + SLIDES.length) % SLIDES.length);
-  }, []);
 
   return (
     <div className="relative" style={{ perspective: "1800px" }}>
@@ -195,24 +191,19 @@ export function IntroDashboard() {
               </span>
             </span>
 
-            {/* Autoplay toggle. Hidden from the reduced-motion path, where
-                nothing is playing to begin with. */}
-            {reducedMotion ? null : (
-              <button
-                type="button"
-                onClick={() => setStopped((was) => !was)}
-                aria-label={
-                  stopped ? "Resume the carousel" : "Pause the carousel"
-                }
-                className="grid size-6 shrink-0 place-items-center rounded-md border border-border text-muted-foreground transition-colors outline-none hover:border-primary/40 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
-              >
-                {stopped ? (
-                  <Play className="size-2.5" />
-                ) : (
-                  <Pause className="size-2.5" />
-                )}
-              </button>
-            )}
+            {/* Position in the rotation, as an indicator only — nothing here is
+                clickable. */}
+            <span className="flex shrink-0 items-center gap-1" aria-hidden>
+              {SLIDES.map((slide, position) => (
+                <span
+                  key={slide.slug}
+                  className={cn(
+                    "block h-1 rounded-full transition-all duration-500",
+                    position === index ? "w-4 bg-primary" : "w-1 bg-border",
+                  )}
+                />
+              ))}
+            </span>
           </div>
 
           {/* ---- Stacked slides ---- */}
@@ -264,7 +255,7 @@ export function IntroDashboard() {
             </span>
           </div>
 
-          {/* ---- Caption + controls ---- */}
+          {/* ---- Caption ---- */}
           <div className="flex items-center justify-between gap-3 border-t border-border bg-background px-3 py-2.5">
             <div className="min-w-0">
               <p className="truncate text-xs font-semibold">{active.screen}</p>
@@ -273,52 +264,10 @@ export function IntroDashboard() {
               </p>
             </div>
 
-            <div className="flex shrink-0 items-center gap-1.5">
-              {/*
-                Dots double as the slide labels for assistive tech.
-
-                The visible bar is 6px tall, but the padding makes every button at
-                least 24×24: a 6px hit area is unusable on a phone and would fail
-                the 24×24 minimum target size.
-              */}
-              <ul className="flex items-center">
-                {SLIDES.map((slide, position) => (
-                  <li key={slide.slug}>
-                    <button
-                      type="button"
-                      onClick={() => go(position)}
-                      aria-label={`Show ${slide.product}`}
-                      aria-current={position === index}
-                      className="grid h-6 place-items-center px-2 outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-ring"
-                    >
-                      <span
-                        className={cn(
-                          "block h-1.5 rounded-full transition-all duration-300",
-                          position === index ? "w-5 bg-primary" : "w-2 bg-border",
-                        )}
-                      />
-                    </button>
-                  </li>
-                ))}
-              </ul>
-
-              <button
-                type="button"
-                onClick={() => go(index - 1)}
-                aria-label="Previous product"
-                className="grid size-7 place-items-center rounded-md border border-border text-muted-foreground transition-colors outline-none hover:border-primary/40 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
-              >
-                <ChevronLeft className="size-3.5" />
-              </button>
-              <button
-                type="button"
-                onClick={() => go(index + 1)}
-                aria-label="Next product"
-                className="grid size-7 place-items-center rounded-md border border-border text-muted-foreground transition-colors outline-none hover:border-primary/40 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
-              >
-                <ChevronRight className="size-3.5" />
-              </button>
-            </div>
+            <p className="shrink-0 font-mono text-[0.625rem] text-muted-foreground/70">
+              {String(index + 1).padStart(2, "0")}/
+              {String(SLIDES.length).padStart(2, "0")}
+            </p>
           </div>
         </div>
       </div>
