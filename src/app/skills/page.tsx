@@ -58,7 +58,6 @@ export default function SkillsPage() {
       />
 
       <PageHeader
-        index="04"
         eyebrow="Skills"
         title={
           <>
@@ -99,8 +98,8 @@ export default function SkillsPage() {
                     <h3 className="font-display text-sm font-semibold tracking-tight">
                       {group.label}
                     </h3>
-                    <span className="ml-auto font-mono text-[0.625rem] text-muted-foreground">
-                      {String(group.skills.length).padStart(2, "0")}
+                    <span className="ml-auto font-mono text-[0.625rem] whitespace-nowrap text-muted-foreground">
+                      {group.skills.length} skills
                     </span>
                   </div>
 
@@ -140,8 +139,8 @@ export default function SkillsPage() {
                   <div className="flex items-center gap-4">
                     <p className="eyebrow text-muted-foreground">{category}</p>
                     <span className="h-px flex-1 bg-border" />
-                    <span className="font-mono text-[0.625rem] text-muted-foreground/70">
-                      {String(items.length).padStart(2, "0")}
+                    <span className="font-mono text-[0.625rem] whitespace-nowrap text-muted-foreground/70">
+                      {items.length} tools
                     </span>
                   </div>
 
@@ -179,12 +178,9 @@ export default function SkillsPage() {
         last
       >
         <RevealGroup stagger={0.03} className="grid gap-x-8 sm:grid-cols-2">
-          {platformFeatures.map((feature, index) => (
+          {platformFeatures.map((feature) => (
             <RevealItem key={feature.title}>
-              <div className="flex gap-4 border-b border-border py-4">
-                <span className="font-mono text-[0.625rem] text-muted-foreground/70">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
+              <div className="group/pf flex gap-4 border-b border-border py-4 pl-1 transition-[colors,padding] duration-300 hover:bg-muted/30 hover:pl-2">
                 <div className="min-w-0">
                   <h3 className="text-sm font-semibold">{feature.title}</h3>
                   <p className="mt-1 text-[0.8125rem] leading-relaxed text-muted-foreground">

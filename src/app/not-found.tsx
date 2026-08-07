@@ -54,11 +54,8 @@ export default function NotFound() {
               <Link href={route.href} className="block h-full">
                 <Panel
                   interactive
-                  className="group/idx flex h-full items-start gap-4 p-4"
+                  className="group/idx flex h-full flex-col p-4"
                 >
-                  <span className="font-mono text-[0.625rem] text-muted-foreground/70 transition-colors group-hover/idx:text-primary">
-                    {route.index}
-                  </span>
                   <span className="min-w-0 flex-1">
                     <span className="block text-sm font-semibold">
                       {route.label}

@@ -36,7 +36,7 @@ function ScreenGallery({ product }: { product: Product }) {
 
   return (
     <div className="flex flex-col gap-2">
-      <div className="overflow-hidden rounded-lg border border-border bg-white">
+      <div className="image-zoom rounded-lg border border-border bg-white">
         <div className="relative aspect-16/10">
           <div
             key={active.src}
@@ -94,8 +94,9 @@ function ScreenGallery({ product }: { product: Product }) {
               aria-label={`Show ${screen.label}`}
               aria-current={thumb === index}
               className={cn(
-                "relative block w-full overflow-hidden rounded border bg-white transition-all duration-200 outline-none",
-                "focus-visible:ring-2 focus-visible:ring-ring",
+                "relative block w-full overflow-hidden rounded border bg-white outline-none",
+                "transition-[transform,opacity,border-color] duration-200 ease-out",
+                "hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-ring",
                 thumb === index
                   ? "border-primary"
                   : "border-border opacity-50 hover:opacity-100",
@@ -127,13 +128,7 @@ function ScreenGallery({ product }: { product: Product }) {
  * tagline — enough for each product to keep its identity without any of them
  * fighting the Plutox palette.
  */
-export function ProjectEntry({
-  product,
-  position,
-}: {
-  product: Product;
-  position: number;
-}) {
+export function ProjectEntry({ product }: { product: Product }) {
   const moduleCount = product.moduleGroups.reduce(
     (total, group) => total + group.items.length,
     0,
@@ -146,9 +141,6 @@ export function ProjectEntry({
         <div className="flex flex-wrap items-start justify-between gap-6 border-b border-border pb-8">
           <div className="min-w-0">
             <div className="flex items-center gap-3">
-              <span className="font-mono text-[0.6875rem] text-muted-foreground/70">
-                {String(position).padStart(2, "0")}
-              </span>
               <span
                 className="h-px w-8"
                 style={{ backgroundColor: product.brandColor }}
@@ -324,9 +316,9 @@ export function ProjectEntry({
         >
           {product.moduleGroups.map((group) => (
             <Reveal key={group.title} preset="fadeUp">
-              <section>
+              <section className="group/mg">
                 <h3
-                  className="eyebrow flex items-baseline justify-between gap-2 border-b pb-2"
+                  className="eyebrow flex items-baseline justify-between gap-2 border-b pb-2 transition-colors"
                   style={{
                     color: product.brandColor,
                     borderColor: `${product.brandColor}33`,

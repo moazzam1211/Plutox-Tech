@@ -37,7 +37,6 @@ export default function AboutPage() {
       />
 
       <PageHeader
-        index="03"
         eyebrow="About & Services"
         title={
           <>
@@ -87,10 +86,9 @@ export default function AboutPage() {
         description="From the till at the counter to the ledger in the cloud. One team, one contract, no hand-offs between vendors."
       >
         <RevealGroup stagger={0.03} className="flex flex-col">
-          {services.map((service, index) => (
+          {services.map((service) => (
             <RevealItem key={service.slug}>
               <DefRow
-                index={String(index + 1).padStart(2, "0")}
                 term={service.title}
                 detail={service.description}
               />
@@ -106,11 +104,19 @@ export default function AboutPage() {
         description="You see working software every two weeks and always know which stage you're in."
       >
         <RevealGroup stagger={0.05} className="flex flex-col">
-          {processSteps.map((step) => (
+          {processSteps.map((step) => {
+            const Icon = step.icon;
+
+            return (
             <RevealItem key={step.step}>
-              <div className="grid gap-2 border-b border-border py-5 last:border-0 sm:grid-cols-[3rem_11rem_minmax(0,1fr)] sm:gap-6">
-                <span className="font-mono text-[0.6875rem] text-muted-foreground/70">
-                  {step.step}
+              {/*
+                The stage used to lead with its number. The icon carries the same
+                slot now — the stages are already in order down the page, so the
+                figure was only repeating what the position said.
+              */}
+              <div className="group/st grid gap-2 border-b border-border py-5 transition-colors last:border-0 hover:bg-muted/30 sm:grid-cols-[3rem_11rem_minmax(0,1fr)] sm:gap-6">
+                <span className="grid size-8 shrink-0 place-items-center rounded-md border border-border text-muted-foreground transition-[color,transform,border-color] duration-300 group-hover/st:-translate-y-0.5 group-hover/st:border-primary/40 group-hover/st:text-primary">
+                  <Icon className="size-3.5" />
                 </span>
                 <div>
                   <h3 className="text-sm font-semibold">{step.title}</h3>
@@ -130,7 +136,8 @@ export default function AboutPage() {
                 </p>
               </div>
             </RevealItem>
-          ))}
+            );
+          })}
         </RevealGroup>
       </Block>
 
@@ -141,10 +148,9 @@ export default function AboutPage() {
         description="Six commitments we can be measured against, not six adjectives."
       >
         <RevealGroup stagger={0.04} className="flex flex-col">
-          {coreValues.map((value, index) => (
+          {coreValues.map((value) => (
             <RevealItem key={value.title}>
               <DefRow
-                index={String(index + 1).padStart(2, "0")}
                 term={value.title}
                 detail={value.description}
               />

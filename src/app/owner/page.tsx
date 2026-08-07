@@ -65,7 +65,6 @@ export default function OwnerPage() {
       <JsonLd data={personJsonLd} />
 
       <PageHeader
-        index="06"
         eyebrow="Owner"
         title={
           <>
@@ -138,15 +137,12 @@ export default function OwnerPage() {
             </Reveal>
 
             <RevealGroup stagger={0.05} className="mt-4 flex flex-col">
-              {products.map((product, index) => (
+              {products.map((product) => (
                 <RevealItem key={product.slug}>
                   <Link
                     href={`/projects#${product.slug}`}
-                    className="group/p flex items-baseline gap-4 border-b border-border py-3.5 transition-colors first:border-t hover:bg-muted/40"
+                    className="group/p flex items-baseline gap-4 border-b border-border py-3.5 pl-1 transition-[colors,padding] duration-300 first:border-t hover:bg-muted/40 hover:pl-2"
                   >
-                    <span className="font-mono text-[0.625rem] text-muted-foreground/70 transition-colors group-hover/p:text-primary">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
                     <span className="min-w-0 flex-1">
                       <span className="text-sm font-semibold">
                         {product.name}
@@ -178,10 +174,9 @@ export default function OwnerPage() {
         last
       >
         <RevealGroup stagger={0.04} className="flex flex-col">
-          {coreValues.map((value, index) => (
+          {coreValues.map((value) => (
             <RevealItem key={value.title}>
               <DefRow
-                index={String(index + 1).padStart(2, "0")}
                 term={value.title}
                 detail={value.description}
               />

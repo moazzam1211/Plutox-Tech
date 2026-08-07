@@ -83,12 +83,9 @@ export function SiteFooter() {
               <li key={route.href}>
                 <Link
                   href={route.href}
-                  className="group/f inline-flex items-baseline gap-2.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                  className="group/f inline-flex text-sm text-muted-foreground transition-colors hover:text-foreground"
                 >
-                  <span className="font-mono text-[0.625rem] text-muted-foreground/50 transition-colors group-hover/f:text-primary">
-                    {route.index}
-                  </span>
-                  {route.label}
+                  <span className="link-underline">{route.label}</span>
                 </Link>
               </li>
             ))}
@@ -120,9 +117,9 @@ export function SiteFooter() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${siteConfig.name} on ${label}`}
-                  className="hover-lift grid size-9 place-items-center rounded-md border border-border text-muted-foreground hover:border-primary/40 hover:text-primary"
+                  className="hover-lift press group/so grid size-9 place-items-center rounded-md border border-border text-muted-foreground hover:border-primary/40 hover:text-primary"
                 >
-                  <Icon className="size-4" />
+                  <Icon className="size-4 transition-transform duration-300 group-hover/so:scale-110" />
                 </a>
               </li>
             ))}

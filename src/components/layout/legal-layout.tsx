@@ -37,7 +37,7 @@ export function LegalLayout({
 }: LegalLayoutProps) {
   return (
     <>
-      <PageHeader index="—" eyebrow={eyebrow} title={title} lede={description}>
+      <PageHeader eyebrow={eyebrow} title={title} lede={description}>
         <p className="inline-flex rounded-md border border-border px-3 py-1.5 font-mono text-[0.6875rem] text-muted-foreground">
           Last updated: {lastUpdated}
         </p>
@@ -54,12 +54,9 @@ export function LegalLayout({
                   <li key={section.heading}>
                     <a
                       href={`#section-${index + 1}`}
-                      className="flex items-baseline gap-4 border-b border-border py-2.5 text-sm text-muted-foreground transition-colors hover:text-primary"
+                      className="group/toc flex border-b border-border py-2.5 pl-1 text-sm text-muted-foreground transition-[colors,padding] duration-300 hover:pl-2 hover:text-primary"
                     >
-                      <span className="font-mono text-[0.625rem] text-muted-foreground/70">
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
-                      {section.heading}
+                      <span className="link-underline">{section.heading}</span>
                     </a>
                   </li>
                 ))}
@@ -75,10 +72,13 @@ export function LegalLayout({
                 id={`section-${index + 1}`}
                 className="scroll-mt-24"
               >
-                <h2 className="flex items-baseline gap-4 font-display text-lg font-semibold tracking-tight">
-                  <span className="font-mono text-[0.6875rem] text-primary">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
+                {/* The accent rule replaces the section number that used to sit
+                    here — the anchor still uses the index, it just isn't printed. */}
+                <h2 className="font-display text-lg font-semibold tracking-tight">
+                  <span
+                    aria-hidden
+                    className="mr-3 inline-block h-3 w-0.5 translate-y-px bg-primary align-middle"
+                  />
                   {section.heading}
                 </h2>
 

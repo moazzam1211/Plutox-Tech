@@ -41,7 +41,6 @@ export default function ReviewsPage() {
       <JsonLd data={faqJsonLd(faqs)} />
 
       <PageHeader
-        index="05"
         eyebrow="Reviews"
         title={
           <>
@@ -69,7 +68,7 @@ export default function ReviewsPage() {
         description="Listed in full rather than rotated in a carousel — a review you can't finish reading isn't proof of anything."
       >
         <RevealGroup stagger={0.06} className="grid gap-4 lg:grid-cols-2">
-          {testimonials.map((item, index) => (
+          {testimonials.map((item) => (
             <RevealItem key={item.author} className="h-full">
               <Panel className="flex h-full flex-col p-6">
                 <div className="flex items-start justify-between gap-4">
@@ -89,9 +88,6 @@ export default function ReviewsPage() {
                       />
                     ))}
                   </div>
-                  <span className="font-mono text-[0.625rem] text-muted-foreground/70">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
                 </div>
 
                 <Quote
@@ -146,14 +142,11 @@ export default function ReviewsPage() {
         last
       >
         <RevealGroup stagger={0.03} className="flex flex-col">
-          {faqs.map((item, index) => (
+          {faqs.map((item) => (
             <RevealItem key={item.question}>
               <details className="group/faq border-b border-border py-4">
                 <summary className="flex cursor-pointer list-none items-start gap-4 [&::-webkit-details-marker]:hidden">
-                  <span className="font-mono text-[0.625rem] text-muted-foreground/70">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="flex-1 text-sm font-semibold transition-colors group-hover/faq:text-primary">
+                  <h3 className="flex-1 text-sm font-semibold transition-transform duration-300 group-hover/faq:translate-x-0.5 group-hover/faq:text-primary">
                     {item.question}
                   </h3>
                   <span

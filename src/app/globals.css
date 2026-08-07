@@ -176,6 +176,10 @@
   --animate-sweep: sweep 1.4s cubic-bezier(0.22, 1, 0.36, 1) both;
   --animate-breathe: breathe 4s ease-in-out infinite;
 
+  /* Drives the carousel's dwell bar. Duration is set inline from the component's
+     INTERVAL_MS so the bar and the rotation can never drift apart. */
+  --animate-progress: progress linear both;
+
   --animate-marquee: marquee 42s linear infinite;
   --animate-marquee-reverse: marquee-reverse 42s linear infinite;
   --animate-float: float 7s ease-in-out infinite;
@@ -482,6 +486,86 @@
   &:focus-visible::after {
     transform: scaleX(1);
   }
+
+  /*
+   * Also react to an ancestor link being hovered. Navbar labels sit inside a
+   * padded <Link>, so without this the underline only appears when the pointer
+   * is over the glyphs themselves and not over the padding — which feels broken.
+   */
+  .group\/nl:hover &::after,
+  .group\/nl:focus-visible &::after,
+  .group\/f:hover &::after {
+    transform: scaleX(1);
+  }
+}
+
+/**
+ * Nudges a trailing icon along on hover.
+ *
+ * Put on the container; the direct-child `svg:last-child` moves. Saves repeating
+ * `group-hover:translate-x-0.5` on every arrow in the site, and keeps the
+ * distance identical everywhere so the gesture reads as one language.
+ */
+@utility icon-nudge {
+  & > svg:last-child {
+    transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  &:hover > svg:last-child,
+  &:focus-visible > svg:last-child {
+    transform: translateX(3px);
+  }
+}
+
+/**
+ * Slow zoom on a contained image when its container is hovered.
+ *
+ * Applied to the wrapper; the `img` inside scales. `overflow: hidden` on the
+ * wrapper is what turns the scale into a crop rather than an overflow.
+ */
+@utility image-zoom {
+  overflow: hidden;
+
+  & img {
+    transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+  }
+
+  &:hover img {
+    transform: scale(1.04);
+  }
+}
+
+/**
+ * A hairline that grows from the left when its group is hovered.
+ *
+ * Used on the accent rules beside eyebrows and list rows — the same gesture as
+ * `link-underline`, applied to a decorative rule instead of text.
+ */
+@utility rule-grow {
+  transform: scaleX(0.35);
+  transform-origin: left;
+  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+
+  .group:hover &,
+  .group\/prod:hover &,
+  .group\/idx:hover & {
+    transform: scaleX(1);
+  }
+}
+
+/**
+ * Press feedback for buttons and other clickable surfaces.
+ *
+ * Scale rather than translate: a 1px shift on a bordered button looks like a
+ * rendering glitch, where a 1% squash reads as a press.
+ */
+@utility press {
+  transition: transform 140ms cubic-bezier(0.22, 1, 0.36, 1);
+
+  &:active {
+    transform: scale(0.97);
+  }
 }
 
 /**
@@ -542,6 +626,17 @@
 
 /* A hairline drawing itself in from the left. */
 @keyframes sweep {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* The carousel's dwell bar filling left to right. Transform-only, so it stays on
+   the compositor and never triggers layout. */
+@keyframes progress {
   from {
     transform: scaleX(0);
   }

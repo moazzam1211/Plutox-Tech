@@ -12,13 +12,13 @@ import type { LucideIcon } from "lucide-react";
 /**
  * The whole site, in order.
  *
- * Seven pages, each with a two-digit index. The index is part of the visual
- * language — the navbar, page headers and prev/next pagers all show it, so the
- * reader always knows where they are in a short, finite site rather than
- * scrolling one endless landing page.
+ * Seven pages, in reading order. The order is the visual language: the navbar
+ * lists them in sequence and every page ends with a prev/next pager, so a
+ * visitor can read the whole site through rather than scrolling one endless
+ * landing page. Pages used to print a two-digit index as well — it was removed
+ * because the number carried no information the label didn't already give.
  */
 export interface Route {
-  index: string;
   label: string;
   href: string;
   /** Compact label for the floating navbar, where horizontal room is tight. */
@@ -30,7 +30,6 @@ export interface Route {
 
 export const routes: Route[] = [
   {
-    index: "01",
     label: "Intro",
     href: "/",
     short: "Intro",
@@ -38,7 +37,6 @@ export const routes: Route[] = [
     icon: Home,
   },
   {
-    index: "02",
     label: "Projects",
     href: "/projects",
     short: "Projects",
@@ -46,7 +44,6 @@ export const routes: Route[] = [
     icon: Briefcase,
   },
   {
-    index: "03",
     label: "About & Services",
     href: "/about",
     short: "About",
@@ -54,7 +51,6 @@ export const routes: Route[] = [
     icon: Building2,
   },
   {
-    index: "04",
     label: "Skills",
     href: "/skills",
     short: "Skills",
@@ -62,7 +58,6 @@ export const routes: Route[] = [
     icon: Wrench,
   },
   {
-    index: "05",
     label: "Reviews",
     href: "/reviews",
     short: "Reviews",
@@ -70,7 +65,6 @@ export const routes: Route[] = [
     icon: MessageSquareQuote,
   },
   {
-    index: "06",
     label: "Owner",
     href: "/owner",
     short: "Owner",
@@ -78,7 +72,6 @@ export const routes: Route[] = [
     icon: UserRound,
   },
   {
-    index: "07",
     label: "Contact",
     href: "/contact",
     short: "Contact",

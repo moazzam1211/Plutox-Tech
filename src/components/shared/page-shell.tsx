@@ -20,8 +20,6 @@ import { cn } from "@/lib/utils";
 /* ------------------------------------------------------------------ */
 
 interface PageHeaderProps {
-  /** Two-digit route index, e.g. "02". */
-  index: string;
   eyebrow: string;
   title: React.ReactNode;
   lede: string;
@@ -29,11 +27,13 @@ interface PageHeaderProps {
 }
 
 /**
- * The top of every page. The oversized index number anchors the reader in a
- * seven-page sequence, which a conventional breadcrumb doesn't do as directly.
+ * The top of every page: eyebrow, a rule that draws itself in, the h1 and a lede.
+ *
+ * There is no index number. The site used to print a two-digit page number here
+ * and in the navbar, footer and pager; it was removed everywhere because it made
+ * the reader track a sequence that carries no information.
  */
 export function PageHeader({
-  index,
   eyebrow,
   title,
   lede,
@@ -44,17 +44,16 @@ export function PageHeader({
       <div className="px-6 py-14 sm:px-10 lg:px-14 lg:py-20">
         <Reveal preset="fadeUp">
           <div className="flex items-center gap-4">
-            <span className="relative font-mono text-xs tracking-[0.25em] text-primary">
-              {/* Slow accent glow behind the page number. */}
+            <span className="relative eyebrow text-primary">
+              {/* Slow accent glow behind the label. */}
               <span
                 aria-hidden
                 className="absolute -inset-2 -z-10 rounded-full bg-primary/20 blur-md animate-breathe"
               />
-              {index}
+              {eyebrow}
             </span>
             {/* The rule draws itself in from the left on load. */}
             <span className="h-px flex-1 origin-left bg-border animate-sweep" />
-            <span className="eyebrow text-muted-foreground">{eyebrow}</span>
           </div>
         </Reveal>
 
@@ -178,16 +177,18 @@ export function Panel({
 /* ------------------------------------------------------------------ */
 
 /**
- * A numbered row: index, term, detail. Used for services, modules and skills —
- * one pattern instead of the old mix of icon cards, bento tiles and accordions.
+ * A term/detail row. Used for services, modules and skills — one pattern instead
+ * of the old mix of icon cards, bento tiles and accordions.
+ *
+ * It used to lead with a two-digit index. That went when the numbering came off
+ * the navbar and page headers: an accent tick now grows in on hover instead, which
+ * marks the row you're on without asking anyone to count.
  */
 export function DefRow({
-  index,
   term,
   detail,
   className,
 }: {
-  index?: string;
   term: string;
   detail: string;
   className?: string;
@@ -195,23 +196,18 @@ export function DefRow({
   return (
     <div
       className={cn(
-        "group/row grid gap-2 border-b border-border py-5 last:border-0 sm:grid-cols-[3rem_14rem_minmax(0,1fr)] sm:gap-6",
+        "group/row relative grid gap-2 border-b border-border py-5 pl-4 transition-colors last:border-0 hover:bg-muted/30 sm:grid-cols-[16rem_minmax(0,1fr)] sm:gap-6",
         className,
       )}
     >
-      {index ? (
-        <span className="relative font-mono text-[0.6875rem] text-muted-foreground/70 transition-colors group-hover/row:text-primary">
-          {/* Accent tick that grows out of the index on hover. */}
-          <span
-            aria-hidden
-            className="absolute top-1/2 -left-3 h-3 w-0.5 origin-center -translate-y-1/2 scale-y-0 bg-primary transition-transform duration-200 group-hover/row:scale-y-100"
-          />
-          {index}
-        </span>
-      ) : (
-        <span aria-hidden className="hidden sm:block" />
-      )}
-      <h3 className="text-sm font-semibold">{term}</h3>
+      {/* Accent tick that grows down the left edge on hover. */}
+      <span
+        aria-hidden
+        className="absolute top-1/2 left-0 h-4 w-0.5 origin-center -translate-y-1/2 scale-y-0 bg-primary transition-transform duration-200 group-hover/row:scale-y-100"
+      />
+      <h3 className="text-sm font-semibold transition-transform duration-300 group-hover/row:translate-x-0.5">
+        {term}
+      </h3>
       <p className="text-sm leading-relaxed text-muted-foreground">{detail}</p>
     </div>
   );
@@ -243,7 +239,7 @@ export function Pager({ current }: { current: string }) {
           <ArrowLeft className="size-4 shrink-0 text-muted-foreground transition-transform duration-300 group-hover/pg:-translate-x-1 group-hover/pg:text-primary" />
           <span className="min-w-0">
             <span className="block text-[0.6875rem] text-muted-foreground">
-              Previous · {previous.index}
+              Previous
             </span>
             <span className="block truncate font-display text-base font-semibold">
               {previous.label}
@@ -261,7 +257,7 @@ export function Pager({ current }: { current: string }) {
         >
           <span className="min-w-0">
             <span className="block text-[0.6875rem] text-muted-foreground">
-              Next · {next.index}
+              Next
             </span>
             <span className="block truncate font-display text-base font-semibold">
               {next.label}
@@ -293,9 +289,18 @@ export function StatStrip({
         className,
       )}
     >
+      {/*
+        Each figure lifts a little and takes the accent on hover. Not a link, so
+        this is purely a "these are the numbers that matter" cue — it's why the
+        hover is a 1px lift and a colour, not the full `hover-lift` treatment
+        reserved for things you can actually click.
+      */}
       {items.map((item) => (
-        <div key={item.label} className="px-0 py-4 sm:px-6 sm:first:pl-0">
-          <dd className="font-display text-2xl leading-none font-semibold">
+        <div
+          key={item.label}
+          className="group/stat px-0 py-4 transition-transform duration-300 ease-out hover:-translate-y-0.5 sm:px-6 sm:first:pl-0"
+        >
+          <dd className="font-display text-2xl leading-none font-semibold transition-colors duration-300 group-hover/stat:text-primary">
             {item.value}
           </dd>
           <dt className="mt-2 text-xs leading-tight text-muted-foreground">

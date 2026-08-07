@@ -19,7 +19,8 @@ export function FounderPortrait() {
   const [src, setSrc] = React.useState<string>(founder.photo);
 
   return (
-    <figure className="overflow-hidden rounded-lg border border-border bg-card">
+    // `image-zoom` supplies the overflow clip plus a slow scale on hover.
+    <figure className="image-zoom rounded-lg border border-border bg-card">
       <div className="relative aspect-4/5">
         <Image
           src={src}

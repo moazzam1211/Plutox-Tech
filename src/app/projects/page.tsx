@@ -30,7 +30,6 @@ export default function ProjectsPage() {
       />
 
       <PageHeader
-        index="02"
         eyebrow="Projects"
         title={
           <>
@@ -57,15 +56,12 @@ export default function ProjectsPage() {
         className="border-b border-border px-6 py-5 sm:px-10 lg:px-14"
       >
         <ul className="flex flex-wrap gap-2">
-          {products.map((product, index) => (
+          {products.map((product) => (
             <li key={product.slug}>
               <Link
                 href={`#${product.slug}`}
-                className="inline-flex items-center gap-2 rounded-md border border-border px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
+                className="hover-lift inline-flex items-center rounded-md border border-border px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
               >
-                <span className="font-mono text-[0.625rem] text-muted-foreground/70">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
                 {product.name}
               </Link>
             </li>
@@ -74,9 +70,9 @@ export default function ProjectsPage() {
       </nav>
 
       <div className="divide-y divide-border">
-        {products.map((product, index) => (
+        {products.map((product) => (
           <div key={product.slug} className="px-6 py-12 sm:px-10 lg:px-14">
-            <ProjectEntry product={product} position={index + 1} />
+            <ProjectEntry product={product} />
           </div>
         ))}
       </div>

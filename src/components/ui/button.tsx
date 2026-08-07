@@ -22,6 +22,15 @@ const buttonVariants = cva(
     "outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
     "disabled:pointer-events-none disabled:opacity-50",
     "[&_svg]:pointer-events-none [&_svg]:shrink-0",
+    /*
+      A trailing icon slides along on hover. Applied here rather than at each
+      call site so every button in the site nudges by the same 3px — an arrow
+      that moves a different distance on each page reads as a bug.
+      `svg:last-child` deliberately spares a *leading* icon, which shouldn't move.
+    */
+    "icon-nudge",
+    // Lift on hover, squash on press. Transform-only, so no layout work.
+    "hover:-translate-y-px",
   ],
   {
     variants: {

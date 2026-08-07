@@ -111,11 +111,12 @@ const INTERVAL_MS = 5200;
  *
  * Two deliberate implementation choices:
  *
- * 1. **No exit animations.** Every slide is mounted and stacked; only `opacity`
- *    and `pointer-events` change. An `AnimatePresence` crossfade holds the
+ * 1. **The track translates; nothing mounts or unmounts.** All four slides sit
+ *    in a row and the row slides. An `AnimatePresence` transition holds the
  *    outgoing slide until its exit finishes, so a stalled rAF (backgrounded tab,
- *    heavy main-thread work) silently freezes the carousel. Stacked opacity
- *    cannot — the worst case is an instant cut.
+ *    heavy main-thread work) silently freezes the carousel. A CSS transform on a
+ *    permanently-mounted track cannot — the worst case is an instant cut to the
+ *    right position.
  * 2. **Colour changes snap, they don't transition.** A frozen compositor leaves
  *    a colour transition stuck part-way, which would strand the plate on the
  *    previous slide's colour. Snapping is invisible mid-crossfade.
@@ -206,50 +207,95 @@ export function IntroDashboard() {
             </span>
           </div>
 
-          {/* ---- Stacked slides ---- */}
+          {/*
+            ---- Dwell bar ----
+            Fills over exactly one interval, then restarts because `key` changes
+            with the slide. `animationDuration` comes from the same constant that
+            drives the timer, so the bar can't drift out of step with the
+            rotation, and it freezes with the rotation on hover.
+          */}
           <div
-            className="relative aspect-16/10"
-            style={{ backgroundColor: active.plate }}
+            aria-hidden
+            className="h-px w-full overflow-hidden bg-border/60"
           >
-            {SLIDES.map((slide, position) => {
-              const current = position === index;
-              return (
-                <Link
-                  key={slide.src}
-                  href={`/projects#${slide.slug}`}
-                  aria-label={`${slide.product} — ${slide.screen}. See the full project.`}
-                  aria-hidden={!current}
-                  tabIndex={current ? 0 : -1}
-                  className={cn(
-                    "absolute inset-0 block outline-none transition-opacity duration-700 ease-out focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset",
-                    current
-                      ? "opacity-100"
-                      : "pointer-events-none opacity-0",
-                  )}
-                >
-                  <Image
-                    src={slide.src}
-                    alt={current ? slide.alt : ""}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 46vw"
-                    /* The first slide is the hero's largest contentful paint
-                       candidate, so it must not be lazy-loaded. The rest load
-                       eagerly too — they are seconds away and a blank frame
-                       mid-rotation is worse than the bytes. */
-                    {...(position === 0
-                      ? { priority: true }
-                      : { loading: "eager" as const })}
-                    unoptimized={slide.src.endsWith(".svg")}
-                    className="object-contain"
-                  />
-                </Link>
-              );
-            })}
+            <div
+              key={index}
+              className="h-full origin-left bg-primary animate-progress"
+              style={{
+                animationDuration: `${INTERVAL_MS}ms`,
+                animationPlayState: autoplaying ? "running" : "paused",
+              }}
+            />
+          </div>
+
+          {/*
+            ---- Sliding track ----
+            The slides sit in a row and the whole row translates. This replaces an
+            opacity crossfade: a translate reads as an actual slider, and being
+            transform-only it stays on the compositor with no per-frame paint.
+
+            `overflow-hidden` on the viewport is what clips the off-screen slides;
+            the frame's own rounded corners can't do it because the track is wider
+            than the frame.
+          */}
+          <div className="relative overflow-hidden">
+            <div
+              className="flex w-full transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform"
+              style={{ transform: `translate3d(-${index * 100}%, 0, 0)` }}
+            >
+              {SLIDES.map((slide, position) => {
+                const current = position === index;
+                return (
+                  <Link
+                    key={slide.src}
+                    href={`/projects#${slide.slug}`}
+                    aria-label={`${slide.product} — ${slide.screen}. See the full project.`}
+                    aria-hidden={!current}
+                    tabIndex={current ? 0 : -1}
+                    style={{ backgroundColor: slide.plate }}
+                    className={cn(
+                      "relative block aspect-16/10 w-full shrink-0 outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset",
+                      current ? null : "pointer-events-none",
+                    )}
+                  >
+                    {/*
+                      A slight inward drift on the incoming slide: the image lags
+                      the track by a fraction, which reads as depth rather than a
+                      flat panel sliding past. Transform-only, and it settles to
+                      identity so a stalled compositor leaves it merely off by a
+                      few pixels rather than blank.
+                    */}
+                    <span
+                      className={cn(
+                        "absolute inset-0 block transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform",
+                        current ? "scale-100" : "scale-[1.06]",
+                      )}
+                    >
+                      <Image
+                        src={slide.src}
+                        alt={current ? slide.alt : ""}
+                        fill
+                        sizes="(max-width: 1024px) 100vw, 46vw"
+                        /* The first slide is the hero's largest contentful paint
+                           candidate, so it must not be lazy-loaded. The rest load
+                           eagerly too — they are seconds away and a blank frame
+                           mid-rotation is worse than the bytes. */
+                        {...(position === 0
+                          ? { priority: true }
+                          : { loading: "eager" as const })}
+                        unoptimized={slide.src.endsWith(".svg")}
+                        className="object-contain"
+                      />
+                    </span>
+                  </Link>
+                );
+              })}
+            </div>
 
             {/* Hover affordance. */}
             <span
               aria-hidden
-              className="pointer-events-none absolute right-3 bottom-3 grid size-8 place-items-center rounded-md border border-border bg-background/90 text-muted-foreground opacity-0 transition-opacity duration-300 group-hover/dash:opacity-100"
+              className="pointer-events-none absolute right-3 bottom-3 grid size-8 place-items-center rounded-md border border-border bg-background/90 text-muted-foreground opacity-0 transition-all duration-300 group-hover/dash:translate-y-0 group-hover/dash:opacity-100 translate-y-1"
             >
               <ArrowUpRight className="size-3.5" />
             </span>
@@ -264,9 +310,13 @@ export function IntroDashboard() {
               </p>
             </div>
 
-            <p className="shrink-0 font-mono text-[0.625rem] text-muted-foreground/70">
-              {String(index + 1).padStart(2, "0")}/
-              {String(SLIDES.length).padStart(2, "0")}
+            {/* No NN/NN counter: the dots in the chrome already show position,
+                and the site prints no index numbers anywhere else. */}
+            <p
+              className="shrink-0 font-mono text-[0.625rem]"
+              style={{ color: active.brandColor }}
+            >
+              {active.path}
             </p>
           </div>
         </div>

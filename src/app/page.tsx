@@ -16,10 +16,10 @@ import { products } from "@/data/products";
 import { siteConfig } from "@/lib/site";
 
 /**
- * Intro — page 01.
+ * Intro.
  *
  * Deliberately short: a statement, the four products as a compact index, the
- * headline numbers, then a route index into the rest of the site. Everything
+ * headline numbers, then an index into the rest of the site. Everything
  * that used to be crammed into an eighteen-section landing page now has its own
  * page, which is the whole point of the restructure.
  */
@@ -32,11 +32,10 @@ export default function IntroPage() {
           {/* ---- Copy column ---- */}
           <div>
           <Reveal preset="fadeUp">
+            {/* No page number here any more — it matched the navbar, headers and
+                pager indices, all of which were removed. The rule now leads. */}
             <div className="flex items-center gap-4">
-              <span className="font-mono text-xs tracking-[0.25em] text-primary">
-                01
-              </span>
-              <span className="h-px w-16 bg-border" />
+              <span className="h-px w-16 origin-left bg-border animate-sweep" />
               <span className="eyebrow text-muted-foreground">
                 Plutox Tech · Lahore, Pakistan
               </span>
@@ -102,24 +101,23 @@ export default function IntroPage() {
         description="Each one designed, built and shipped by us — not resold, not white-labelled."
       >
         <RevealGroup stagger={0.07} className="flex flex-col">
-          {products.map((product, index) => (
+          {products.map((product) => (
             <RevealItem key={product.slug}>
               <Link
                 href={`/projects#${product.slug}`}
-                className="group/prod grid items-center gap-5 border-b border-border py-6 transition-colors first:border-t hover:bg-muted/40 sm:grid-cols-[3rem_11rem_minmax(0,1fr)_auto] sm:gap-6"
+                className="group/prod sheen-on-hover grid items-center gap-5 border-b border-border py-6 transition-colors first:border-t hover:bg-muted/40 sm:grid-cols-[11rem_minmax(0,1fr)_auto] sm:gap-6"
               >
-                <span className="font-mono text-[0.6875rem] text-muted-foreground/70 transition-colors group-hover/prod:text-primary">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
 
                 {/* Logo on a white plate so each product's own colours stay true. */}
-                <span className="inline-flex w-fit items-center rounded-md border border-border bg-white px-3 py-2">
+                {/* The plate lifts and the wordmark grows a shade on hover, so
+                    the row reads as one object reacting rather than four. */}
+                <span className="inline-flex w-fit items-center rounded-md border border-border bg-white px-3 py-2 transition-[transform,border-color] duration-300 ease-out group-hover/prod:-translate-y-0.5 group-hover/prod:border-primary/40">
                   <Image
                     src={product.image}
                     alt={product.name}
                     width={480}
                     height={96}
-                    className="h-5 w-auto object-contain"
+                    className="h-5 w-auto object-contain transition-transform duration-500 ease-out group-hover/prod:scale-[1.04]"
                   />
                 </span>
 
@@ -155,11 +153,8 @@ export default function IntroPage() {
               <Link href={route.href} className="block h-full">
                 <Panel
                   interactive
-                  className="group/idx flex h-full items-start gap-4 p-5"
+                  className="group/idx flex h-full flex-col p-5"
                 >
-                  <span className="font-mono text-[0.6875rem] text-muted-foreground/70 transition-colors group-hover/idx:text-primary">
-                    {route.index}
-                  </span>
                   <span className="min-w-0 flex-1">
                     <span className="block text-sm font-semibold">
                       {route.label}

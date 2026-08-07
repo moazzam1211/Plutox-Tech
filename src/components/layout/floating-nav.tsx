@@ -22,11 +22,13 @@ import { cn, toWhatsAppHref } from "@/lib/utils";
  * inset plus a border makes it read as an object over the page, which suits the
  * flat, panel-based layout better than a full-width bar would.
  *
- * Links show their names only — no index numbers. The numbered sequence still
- * runs through the page headers and the prev/next pagers, where it has room to
- * mean something; in the bar it was seven small figures competing with the
- * labels. Below `lg` the links collapse into a drawer and the bar shows the
- * current page's name.
+ * Links show their names only. The site used to print a two-digit index here and
+ * on every page header and pager; it is gone everywhere, because the number never
+ * told the reader anything the label didn't. The reading order still exists — the
+ * bar lists the pages in sequence and each page ends with a prev/next pager.
+ *
+ * Below `lg` the links collapse into a drawer and the bar shows the current
+ * page's name.
  */
 export function FloatingNav() {
   const pathname = usePathname();
@@ -101,13 +103,17 @@ export function FloatingNav() {
                     href={route.href}
                     aria-current={active ? "page" : undefined}
                     className={cn(
-                      "relative flex items-center rounded-md px-3.5 py-2 text-sm transition-colors duration-200",
+                      // The pill marks the active page; the underline is the
+                      // hover cue, so the two never read as the same state.
+                      "group/nl relative flex items-center rounded-md px-3.5 py-2 text-sm transition-colors duration-200",
                       active
                         ? "text-foreground"
                         : "text-muted-foreground hover:text-foreground",
                     )}
                   >
-                    <span className="font-medium">{route.short}</span>
+                    <span className="link-underline font-medium">
+                      {route.short}
+                    </span>
 
                     {/* Shared pill that slides between links via layoutId. */}
                     {active ? (
@@ -200,14 +206,14 @@ export function FloatingNav() {
                         onClick={() => setOpen(false)}
                         aria-current={active ? "page" : undefined}
                         className={cn(
-                          "flex border-l-2 py-3 pr-3 pl-4 transition-colors",
+                          "group/dr flex border-l-2 py-3 pr-3 pl-4 transition-colors",
                           active
                             ? "border-primary bg-primary/8 text-foreground"
                             : "border-transparent text-muted-foreground hover:bg-muted/40 hover:text-foreground",
                         )}
                       >
                         <span className="min-w-0 flex-1">
-                          <span className="block text-sm font-medium">
+                          <span className="block text-sm font-medium transition-transform duration-300 group-hover/dr:translate-x-1">
                             {route.label}
                           </span>
                           <span className="mt-0.5 block text-[0.6875rem] leading-tight text-muted-foreground/80">

@@ -111,7 +111,6 @@ export default function ContactPage() {
       />
 
       <PageHeader
-        index="07"
         eyebrow="Contact"
         title={
           <>
