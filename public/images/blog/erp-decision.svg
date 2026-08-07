@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img" aria-label="Strategy article cover">
+  
+  <defs>
+    <linearGradient id="g-erp-decision" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a1a1a"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+    <linearGradient id="bg-erp-decision" x1="0" y1="0" x2="0.7" y2="1">
+      <stop offset="0%" stop-color="#242424"/>
+      <stop offset="100%" stop-color="#1a1a1a"/>
+    </linearGradient>
+    <radialGradient id="glow-erp-decision" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#1a1a1a" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#1a1a1a" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid-erp-decision" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#ffffff" stroke-opacity="0.045" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg-erp-decision)"/>
+  <rect width="1200" height="675" fill="url(#grid-erp-decision)"/>
+  <ellipse cx="840" cy="121.5" rx="400" ry="280" fill="url(#glow-erp-decision)"/>
+  <polyline points="80,410 175,340 269,454 364,451 458,484 553,326 647,386 742,315 836,421 931,441 1025,377 1120,469" fill="none" stroke="url(#g-erp-decision)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+  <circle cx="80" cy="410" r="4.5" fill="#8b5cf6" opacity="0.9"/>
+  <circle cx="175" cy="340" r="4.5" fill="#8b5cf6" opacity="0.9"/>
+  <circle cx="269" cy="454" r="4.5" fill="#8b5cf6" opacity="0.9"/>
+  <circle cx="364" cy="451" r="4.5" fill="#8b5cf6" opacity="0.9"/>
+  <circle cx="458" cy="484" r="4.5" fill="#8b5cf6" opacity="0.9"/>
+  <circle cx="553" cy="326" r="4.5" fill="#8b5cf6" opacity="0.9"/>
+  <circle cx="647" cy="386" r="4.5" fill="#8b5cf6" opacity="0.9"/>
+  <circle cx="742" cy="315" r="4.5" fill="#8b5cf6" opacity="0.9"/>
+  <circle cx="836" cy="421" r="4.5" fill="#8b5cf6" opacity="0.9"/>
+  <circle cx="931" cy="441" r="4.5" fill="#8b5cf6" opacity="0.9"/>
+  <circle cx="1025" cy="377" r="4.5" fill="#8b5cf6" opacity="0.9"/>
+  <circle cx="1120" cy="469" r="4.5" fill="#8b5cf6" opacity="0.9"/>
+  <text x="80" y="162" font-family="Inter, system-ui, sans-serif" font-size="15" font-weight="600" letter-spacing="4" fill="#8b5cf6">STRATEGY</text>
+  <text x="80" y="220" font-family="Inter, system-ui, sans-serif" font-size="40" font-weight="700" fill="#f3ffff">Plutox Engineering</text>
+</svg>

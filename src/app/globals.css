@@ -1,0 +1,634 @@
+/**
+ * Plutox Tech — Global stylesheet & design system
+ * ------------------------------------------------
+ * Tailwind CSS v4 (CSS-first configuration).
+ *
+ * Structure:
+ *   1. Imports & variants
+ *   2. Design tokens (light + dark)
+ *   3. @theme mapping (exposes tokens as Tailwind utilities)
+ *   4. Base layer (typography rhythm, selection, scrollbars, a11y)
+ *   5. Custom utilities (glass, gradient text, mesh backgrounds, masks)
+ *   6. Keyframe animations
+ */
+
+/* ------------------------------------------------------------------ */
+/* 1. Imports & variants                                              */
+/* ------------------------------------------------------------------ */
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* Class-based dark mode so `next-themes` can drive it. */
+@custom-variant dark (&:is(.dark *));
+
+/* ------------------------------------------------------------------ */
+/* 2. Design tokens                                                   */
+/* ------------------------------------------------------------------ */
+/*
+ * Palette is taken directly from the brand lock-up: near-black ink, a single
+ * violet accent (the "X"), and the pale cyan-tinted off-white the logo sits on.
+ *
+ * One accent, deliberately. An earlier revision ran a blue → cyan → violet
+ * gradient through everything; reducing it to ink + violet is what makes the
+ * page read as calm rather than busy, and it lets the accent actually mean
+ * something when it appears.
+ */
+:root {
+  /* ---- Brand constants (identical in both themes) ---- */
+  --brand-ink: #1a1a1a; /* The mark's near-black        */
+  --brand-paper: #f3ffff; /* The logo's pale cyan canvas  */
+  --brand: #8b5cf6; /* Accent violet, the wordmark "X" */
+  --brand-deep: #6d28d9; /* Darker violet, for text on paper */
+
+  /* ---- Light theme — the default, matching the logo's own canvas ---- */
+  --background: #f3ffff;
+  --background-subtle: #e9f8f9;
+  --foreground: #1a1a1a;
+  --card: #ffffff;
+  --card-foreground: #1a1a1a;
+  --popover: #ffffff;
+  --popover-foreground: #1a1a1a;
+
+  --primary: #6d28d9;
+  --primary-foreground: #f3ffff;
+  --secondary: #1a1a1a;
+  --secondary-foreground: #f3ffff;
+  --accent: #8b5cf6;
+  --accent-foreground: #ffffff;
+
+  --muted: #e4f4f5;
+  --muted-foreground: #5a6060;
+
+  --border: #d8ebec;
+  --input: #d8ebec;
+  --ring: #8b5cf6;
+
+  --destructive: #c62828;
+  --success: #0f8f66;
+
+  /* Elevation & effects */
+  --surface-glass: rgb(243 255 255 / 0.78);
+  --surface-hairline: rgb(26 26 26 / 0.1);
+  --glow-opacity: 0.09;
+
+  --radius: 0.75rem;
+}
+
+.dark {
+  /* ---- Dark theme — the palette simply inverted onto the mark's ink ---- */
+  --background: #1a1a1a;
+  --background-subtle: #151515;
+  --foreground: #f3ffff;
+  --card: #212121;
+  --card-foreground: #f3ffff;
+  --popover: #212121;
+  --popover-foreground: #f3ffff;
+
+  --primary: #a78bfa;
+  --primary-foreground: #1a1a1a;
+  --secondary: #f3ffff;
+  --secondary-foreground: #1a1a1a;
+  --accent: #8b5cf6;
+  --accent-foreground: #ffffff;
+
+  --muted: #262626;
+  --muted-foreground: #a0a6a6;
+
+  --border: #2e2e2e;
+  --input: #2e2e2e;
+  --ring: #a78bfa;
+
+  --destructive: #f87171;
+  --success: #34d399;
+
+  --surface-glass: rgb(33 33 33 / 0.74);
+  --surface-hairline: rgb(243 255 255 / 0.1);
+  --glow-opacity: 0.2;
+}
+
+/* ------------------------------------------------------------------ */
+/* 3. Theme mapping                                                   */
+/* ------------------------------------------------------------------ */
+@theme inline {
+  --color-background: var(--background);
+  --color-background-subtle: var(--background-subtle);
+  --color-foreground: var(--foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-destructive: var(--destructive);
+  --color-success: var(--success);
+
+  /* Raw brand hues, theme-independent (for washes & glows). */
+  --color-brand: var(--brand);
+  --color-brand-deep: var(--brand-deep);
+  --color-brand-ink: var(--brand-ink);
+  --color-brand-paper: var(--brand-paper);
+  --color-hairline: var(--surface-hairline);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-sora), var(--font-inter), ui-sans-serif, sans-serif;
+
+  --radius-sm: calc(var(--radius) - 6px);
+  --radius-md: calc(var(--radius) - 3px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 6px);
+  --radius-2xl: calc(var(--radius) + 14px);
+  --radius-3xl: calc(var(--radius) + 26px);
+
+  /* Fluid display scale — clamps keep headlines proportional everywhere. */
+  --text-display-sm: clamp(1.75rem, 1.35rem + 1.9vw, 2.5rem);
+  --text-display-sm--line-height: 1.12;
+  --text-display-sm--letter-spacing: -0.02em;
+  --text-display-md: clamp(2.25rem, 1.6rem + 3vw, 3.5rem);
+  --text-display-md--line-height: 1.06;
+  --text-display-md--letter-spacing: -0.028em;
+  --text-display-lg: clamp(2.75rem, 1.7rem + 4.6vw, 5rem);
+  --text-display-lg--line-height: 1.02;
+  --text-display-lg--letter-spacing: -0.034em;
+  --text-display-xl: clamp(3rem, 1.6rem + 6.2vw, 6rem);
+  --text-display-xl--line-height: 0.98;
+  --text-display-xl--letter-spacing: -0.04em;
+
+  --shadow-glow: 0 0 0 1px rgb(139 92 246 / 0.18), 0 18px 60px -20px rgb(139 92 246 / 0.4);
+  --shadow-lift: 0 22px 60px -32px rgb(22 24 29 / 0.4);
+
+  /* Interaction animations. Short and eased-out — motion here is feedback, not
+     decoration, so nothing runs longer than ~600ms or loops in the viewport. */
+  --animate-sheen: sheen 900ms ease-out;
+  --animate-rise: rise 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-sweep: sweep 1.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-breathe: breathe 4s ease-in-out infinite;
+
+  --animate-marquee: marquee 42s linear infinite;
+  --animate-marquee-reverse: marquee-reverse 42s linear infinite;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-drift: drift 22s ease-in-out infinite;
+  --animate-shimmer: shimmer 2.6s linear infinite;
+  --animate-spin-slow: spin 18s linear infinite;
+  --animate-pulse-ring: pulse-ring 2.8s ease-out infinite;
+  --animate-aurora: aurora 14s ease-in-out infinite;
+}
+
+/* ------------------------------------------------------------------ */
+/* 4. Base layer                                                      */
+/* ------------------------------------------------------------------ */
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    -webkit-tap-highlight-color: transparent;
+    scrollbar-gutter: stable;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "cv11", "ss01";
+    overflow-x: clip;
+  }
+
+  /* Lenis owns the scroll transform on <html>. */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--brand) 34%, transparent);
+    color: var(--foreground);
+  }
+
+  /* Keyboard focus only — never a mouse-click ring. */
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  /* Slim, themed scrollbar (Chromium + Firefox). */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 999px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+  }
+
+  img,
+  svg,
+  video,
+  canvas {
+    max-width: 100%;
+  }
+
+  /* Respect the OS "reduce motion" setting across every animation. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* 5. Custom utilities                                                */
+/* ------------------------------------------------------------------ */
+
+/** Frosted translucent panel used by nav, cards and overlays. */
+@utility glass {
+  background: var(--surface-glass);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid var(--surface-hairline);
+}
+
+/**
+ * Accent text. A single flat violet rather than a multi-stop gradient — at
+ * heading sizes a gradient competes with the words; a solid accent just
+ * emphasises them.
+ */
+@utility text-accent {
+  color: var(--primary);
+}
+
+/**
+ * The one place a gradient earns its keep: the hero's emphasis line, where
+ * violet resolves into the ink colour. Two stops only.
+ */
+@utility text-gradient {
+  background-image: linear-gradient(
+    96deg,
+    var(--primary) 0%,
+    color-mix(in oklab, var(--primary) 45%, var(--foreground)) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+/**
+ * 1px hairline border drawn with a mask — crisper than a pseudo-element ring
+ * and it follows border-radius cleanly.
+ */
+@utility border-gradient {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      150deg,
+      color-mix(in oklab, var(--primary) 55%, transparent),
+      transparent 45%,
+      transparent 60%,
+      color-mix(in oklab, var(--primary) 25%, transparent)
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+}
+
+/** Fine grid / dot field backdrops. */
+@utility bg-grid {
+  background-image:
+    linear-gradient(to right, var(--surface-hairline) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--surface-hairline) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+@utility bg-dots {
+  background-image: radial-gradient(var(--surface-hairline) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+/** Subtle film grain that keeps large dark fields from banding. */
+@utility bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+}
+
+/** Radial / linear fade masks for grids, marquees and bleeding sections. */
+@utility mask-radial-faded {
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 40%, transparent 100%);
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 40%, transparent 100%);
+}
+
+@utility mask-fade-x {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+}
+
+@utility mask-fade-b {
+  -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent);
+  mask-image: linear-gradient(to bottom, #000 55%, transparent);
+}
+
+/** Consistent vertical rhythm for every top-level <section>. */
+@utility section-y {
+  padding-block: clamp(4.5rem, 3rem + 6vw, 9rem);
+}
+
+/** Page gutter + max width, shared by every section container. */
+@utility container-page {
+  width: 100%;
+  margin-inline: auto;
+  max-width: 84rem;
+  padding-inline: clamp(1.25rem, 0.5rem + 2.5vw, 2.5rem);
+}
+
+/** Small uppercase eyebrow label. */
+@utility eyebrow {
+  font-size: 0.75rem;
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/**
+ * Hover lift.
+ *
+ * Transform and border only — both compositor-friendly. Deliberately 2px: on a
+ * flat, panel-based layout a larger lift reads as the card detaching from the
+ * page rather than responding to the cursor.
+ */
+@utility hover-lift {
+  transition:
+    transform 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 200ms ease,
+    background-color 200ms ease;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+/**
+ * A light pass across a surface on hover.
+ *
+ * The moving element is a child pseudo-element inside `overflow: hidden`, so the
+ * animation never affects layout. Runs once per hover rather than looping —
+ * a looping shine on every card would be visual noise.
+ */
+@utility sheen-on-hover {
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      100deg,
+      transparent 35%,
+      color-mix(in oklab, var(--primary) 12%, transparent) 50%,
+      transparent 65%
+    );
+    transform: translateX(-120%) skewX(-12deg);
+    pointer-events: none;
+  }
+
+  &:hover::after {
+    animation: sheen 900ms ease-out;
+  }
+}
+
+/**
+ * Animated underline for text links — grows from the left on hover.
+ *
+ * A scaled pseudo-element rather than `text-decoration`, because only transform
+ * can be animated on the compositor.
+ */
+@utility link-underline {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  &:hover::after,
+  &:focus-visible::after {
+    transform: scaleX(1);
+  }
+}
+
+/**
+ * Visually hidden until focused — for the skip link.
+ *
+ * Must stay in sync with the `sr-only-focusable` class used in the navbar. When
+ * this definition was accidentally dropped, the class silently became a no-op
+ * and the skip link rendered as a visible pill over the page, which is exactly
+ * the sort of failure an unused-CSS-class has no way to warn you about.
+ *
+ * The `:not(:focus)` selector is more specific than the positioning utilities on
+ * the element, so the hidden state wins until the element actually takes focus.
+ */
+@utility sr-only-focusable {
+  &:not(:focus):not(:focus-within) {
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border-width: 0;
+  }
+}
+
+/** Tabular figures so numeric columns don't jitter. */
+@utility tnum {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* ------------------------------------------------------------------ */
+/* 6. Keyframes                                                       */
+/* ------------------------------------------------------------------ */
+/* A single light pass across a surface, triggered on hover. */
+@keyframes sheen {
+  from {
+    transform: translateX(-120%) skewX(-12deg);
+  }
+  to {
+    transform: translateX(240%) skewX(-12deg);
+  }
+}
+
+/* Content settling into place. Paired with `Reveal` for on-scroll entrances. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* A hairline drawing itself in from the left. */
+@keyframes sweep {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Very slow opacity drift for the accent glow behind the page index. */
+@keyframes breathe {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.75;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes marquee-reverse {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -14px, 0);
+  }
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  33% {
+    transform: translate3d(4%, -6%, 0) scale(1.08);
+  }
+  66% {
+    transform: translate3d(-5%, 4%, 0) scale(0.95);
+  }
+}
+
+@keyframes shimmer {
+  from {
+    transform: translateX(-120%);
+  }
+  to {
+    transform: translateX(220%);
+  }
+}
+
+@keyframes aurora {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.7;
+  }
+  80%,
+  100% {
+    transform: scale(1.9);
+    opacity: 0;
+  }
+}

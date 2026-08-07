@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160" role="img" aria-label="IN portrait placeholder">
+  <defs>
+    <linearGradient id="a-av4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a1a1a"/>
+      <stop offset="100%" stop-color="#6d28d9"/>
+    </linearGradient>
+  </defs>
+  <rect width="160" height="160" rx="80" fill="url(#a-av4)"/>
+  <rect width="160" height="160" rx="80" fill="#1a1a1a" fill-opacity="0.25"/>
+  <text x="80" y="80" text-anchor="middle" dominant-baseline="central" font-family="Inter, system-ui, sans-serif" font-size="58" font-weight="600" fill="#f3ffff" letter-spacing="1">IN</text>
+</svg>

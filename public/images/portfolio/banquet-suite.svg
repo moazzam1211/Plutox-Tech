@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800" role="img" aria-label="Banquet Suite — Hospitality case study">
+  
+  <defs>
+    <linearGradient id="g-banquet-suite" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a1a1a"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+    <linearGradient id="bg-banquet-suite" x1="0" y1="0" x2="0.7" y2="1">
+      <stop offset="0%" stop-color="#242424"/>
+      <stop offset="100%" stop-color="#1a1a1a"/>
+    </linearGradient>
+    <radialGradient id="glow-banquet-suite" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#1a1a1a" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#1a1a1a" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid-banquet-suite" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#ffffff" stroke-opacity="0.045" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg-banquet-suite)"/>
+  <rect width="1200" height="800" fill="url(#grid-banquet-suite)"/>
+  <ellipse cx="288" cy="176" rx="420" ry="320" fill="url(#glow-banquet-suite)"/>
+  <ellipse cx="983.9999999999999" cy="672" rx="380" ry="300" fill="url(#glow-banquet-suite)" opacity="0.55"/>
+  <circle cx="397" cy="320" r="108" fill="none" stroke="url(#g-banquet-suite)" stroke-width="1.5" opacity="0.184"/>
+  <rect x="473" y="461" width="96" height="96" rx="20" fill="url(#g-banquet-suite)" opacity="0.113" transform="rotate(19.0 473 461)"/>
+  <path d="M1022 223 l203 0 l-101 203 Z" fill="none" stroke="url(#g-banquet-suite)" stroke-width="1.5" opacity="0.067"/>
+  <circle cx="634" cy="323" r="54" fill="none" stroke="url(#g-banquet-suite)" stroke-width="1.5" opacity="0.173"/>
+  <rect x="1059" y="414" width="75" height="75" rx="20" fill="url(#g-banquet-suite)" opacity="0.098" transform="rotate(-19.4 1059 414)"/>
+  <path d="M872 248 l68 0 l-34 68 Z" fill="none" stroke="url(#g-banquet-suite)" stroke-width="1.5" opacity="0.109"/>
+  <circle cx="608" cy="534" r="63" fill="none" stroke="url(#g-banquet-suite)" stroke-width="1.5" opacity="0.165"/>
+
+  <!-- central plate -->
+  <rect x="300" y="270" width="600" height="260" rx="28" fill="#212121" fill-opacity="0.55" stroke="#ffffff" stroke-opacity="0.1"/>
+  <text x="600" y="344" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="15" font-weight="600" letter-spacing="4" fill="#8b5cf6" opacity="0.9">HOSPITALITY</text>
+  <text x="600" y="410" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="42" font-weight="700" fill="#f3ffff">Banquet Suite</text>
+  <rect x="560" y="452" width="80" height="4" rx="2" fill="url(#g-banquet-suite)"/>
+  <text x="600" y="498" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="500" letter-spacing="2" fill="#a0a6a6">PLUTOX TECH</text>
+</svg>

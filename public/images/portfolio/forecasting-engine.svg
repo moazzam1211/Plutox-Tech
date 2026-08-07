@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800" role="img" aria-label="Forecasting Engine — AI & Automation case study">
+  
+  <defs>
+    <linearGradient id="g-forecasting-engine" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a1a1a"/>
+      <stop offset="100%" stop-color="#6d28d9"/>
+    </linearGradient>
+    <linearGradient id="bg-forecasting-engine" x1="0" y1="0" x2="0.7" y2="1">
+      <stop offset="0%" stop-color="#242424"/>
+      <stop offset="100%" stop-color="#1a1a1a"/>
+    </linearGradient>
+    <radialGradient id="glow-forecasting-engine" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#1a1a1a" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#1a1a1a" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid-forecasting-engine" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#ffffff" stroke-opacity="0.045" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg-forecasting-engine)"/>
+  <rect width="1200" height="800" fill="url(#grid-forecasting-engine)"/>
+  <ellipse cx="288" cy="176" rx="420" ry="320" fill="url(#glow-forecasting-engine)"/>
+  <ellipse cx="983.9999999999999" cy="672" rx="380" ry="300" fill="url(#glow-forecasting-engine)" opacity="0.55"/>
+  <circle cx="396" cy="226" r="73" fill="none" stroke="url(#g-forecasting-engine)" stroke-width="1.5" opacity="0.172"/>
+  <rect x="167" y="204" width="122" height="122" rx="20" fill="url(#g-forecasting-engine)" opacity="0.140" transform="rotate(18.3 167 204)"/>
+  <path d="M916 271 l133 0 l-66 133 Z" fill="none" stroke="url(#g-forecasting-engine)" stroke-width="1.5" opacity="0.075"/>
+  <circle cx="723" cy="605" r="60" fill="none" stroke="url(#g-forecasting-engine)" stroke-width="1.5" opacity="0.124"/>
+  <rect x="1031" y="623" width="118" height="118" rx="20" fill="url(#g-forecasting-engine)" opacity="0.197" transform="rotate(15.6 1031 623)"/>
+  <path d="M559 173 l214 0 l-107 214 Z" fill="none" stroke="url(#g-forecasting-engine)" stroke-width="1.5" opacity="0.128"/>
+  <circle cx="425" cy="256" r="99" fill="none" stroke="url(#g-forecasting-engine)" stroke-width="1.5" opacity="0.127"/>
+
+  <!-- central plate -->
+  <rect x="300" y="270" width="600" height="260" rx="28" fill="#212121" fill-opacity="0.55" stroke="#ffffff" stroke-opacity="0.1"/>
+  <text x="600" y="344" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="15" font-weight="600" letter-spacing="4" fill="#6d28d9" opacity="0.9">AI & AUTOMATION</text>
+  <text x="600" y="410" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="42" font-weight="700" fill="#f3ffff">Forecasting Engine</text>
+  <rect x="560" y="452" width="80" height="4" rx="2" fill="url(#g-forecasting-engine)"/>
+  <text x="600" y="498" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="500" letter-spacing="2" fill="#a0a6a6">PLUTOX TECH</text>
+</svg>

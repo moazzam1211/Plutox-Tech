@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img" aria-label="Engineering article cover">
+  
+  <defs>
+    <linearGradient id="g-offline-first" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#6d28d9"/>
+    </linearGradient>
+    <linearGradient id="bg-offline-first" x1="0" y1="0" x2="0.7" y2="1">
+      <stop offset="0%" stop-color="#242424"/>
+      <stop offset="100%" stop-color="#1a1a1a"/>
+    </linearGradient>
+    <radialGradient id="glow-offline-first" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid-offline-first" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#ffffff" stroke-opacity="0.045" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg-offline-first)"/>
+  <rect width="1200" height="675" fill="url(#grid-offline-first)"/>
+  <ellipse cx="840" cy="121.5" rx="400" ry="280" fill="url(#glow-offline-first)"/>
+  <polyline points="80,410 175,362 269,378 364,460 458,402 553,264 647,247 742,295 836,301 931,455 1025,244 1120,392" fill="none" stroke="url(#g-offline-first)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+  <circle cx="80" cy="410" r="4.5" fill="#6d28d9" opacity="0.9"/>
+  <circle cx="175" cy="362" r="4.5" fill="#6d28d9" opacity="0.9"/>
+  <circle cx="269" cy="378" r="4.5" fill="#6d28d9" opacity="0.9"/>
+  <circle cx="364" cy="460" r="4.5" fill="#6d28d9" opacity="0.9"/>
+  <circle cx="458" cy="402" r="4.5" fill="#6d28d9" opacity="0.9"/>
+  <circle cx="553" cy="264" r="4.5" fill="#6d28d9" opacity="0.9"/>
+  <circle cx="647" cy="247" r="4.5" fill="#6d28d9" opacity="0.9"/>
+  <circle cx="742" cy="295" r="4.5" fill="#6d28d9" opacity="0.9"/>
+  <circle cx="836" cy="301" r="4.5" fill="#6d28d9" opacity="0.9"/>
+  <circle cx="931" cy="455" r="4.5" fill="#6d28d9" opacity="0.9"/>
+  <circle cx="1025" cy="244" r="4.5" fill="#6d28d9" opacity="0.9"/>
+  <circle cx="1120" cy="392" r="4.5" fill="#6d28d9" opacity="0.9"/>
+  <text x="80" y="162" font-family="Inter, system-ui, sans-serif" font-size="15" font-weight="600" letter-spacing="4" fill="#6d28d9">ENGINEERING</text>
+  <text x="80" y="220" font-family="Inter, system-ui, sans-serif" font-size="40" font-weight="700" fill="#f3ffff">Plutox Engineering</text>
+</svg>

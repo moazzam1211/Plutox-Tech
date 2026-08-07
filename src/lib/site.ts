@@ -1,0 +1,87 @@
+/**
+ * Single source of truth for company identity, contact details and SEO
+ * keywords. Everything user-facing that appears in more than one place
+ * lives here so a rebrand is a one-file change.
+ */
+export const siteConfig = {
+  name: "Plutox Tech",
+  legalName: "Plutox Tech (Pvt.) Ltd.",
+  tagline: "Smart Software. Smarter Business.",
+  description:
+    "Plutox Tech is a premium software house building custom POS systems, ERP solutions, hotel and pharmacy management software, web platforms, mobile apps, AI automation and cloud infrastructure for businesses worldwide.",
+  shortDescription:
+    "Custom POS, ERP, hotel & pharmacy software, web, mobile, AI automation and cloud solutions.",
+
+  /** Update to the production origin before deploying. */
+  url: "https://plutoxtech.com",
+  ogImage: "/opengraph-image",
+  locale: "en_US",
+  founded: "2022",
+
+  contact: {
+    email: "hello@plutoxtech.com",
+    salesEmail: "sales@plutoxtech.com",
+    careersEmail: "careers@plutoxtech.com",
+    phone: "+92 344 024 4449",
+    /**
+     * Digits-only in full international format — required by wa.me.
+     * Local 0344 024 4449 → country code 92 with the leading 0 dropped.
+     */
+    whatsapp: "923440244449",
+    address: {
+      street: "Central Park Housing Scheme, Ferozepur Road",
+      city: "Lahore",
+      region: "Punjab",
+      postalCode: "54600",
+      country: "Pakistan",
+      countryCode: "PK",
+    },
+    hours: "Mon – Sat, 9:00 AM – 8:00 PM (PKT) · Support 24/7",
+  },
+
+  /**
+   * Social profiles.
+   *
+   * `instagram` and `dribbble` are confirmed real. The rest are still
+   * placeholder guesses at the handle — replace or delete them before launch, as
+   * a footer full of 404s reads worse than a shorter, honest list. Every entry
+   * here is also emitted as `sameAs` in the Organization JSON-LD, so a dead URL
+   * is a dead structured-data claim too.
+   *
+   * URLs are stored canonically, without share-sheet tracking parameters
+   * (`utm_source`, `igsh`): those identify how a link was copied and carry no
+   * meaning on an outbound link from our own site.
+   */
+  social: {
+    linkedin: "https://www.linkedin.com/company/plutoxtech",
+    github: "https://github.com/plutoxtech",
+    instagram: "https://www.instagram.com/plutox.tech",
+    facebook: "https://www.facebook.com/plutoxtech",
+    youtube: "https://www.youtube.com/@plutoxtech",
+    dribbble: "https://dribbble.com/plutox-tech",
+  },
+
+  keywords: [
+    "software company",
+    "POS software",
+    "restaurant POS",
+    "pharmacy POS",
+    "mart POS",
+    "hotel software",
+    "hotel management system",
+    "ERP development",
+    "CRM development",
+    "custom software",
+    "business solutions",
+    "Pakistan software house",
+    "software company in Lahore",
+    "web development",
+    "mobile app development",
+    "AI automation",
+    "cloud solutions",
+    "inventory management software",
+    "Plutox Tech",
+  ],
+} as const;
+
+export type SiteConfig = typeof siteConfig;

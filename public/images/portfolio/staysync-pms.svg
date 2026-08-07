@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800" role="img" aria-label="StaySync PMS — Hospitality case study">
+  
+  <defs>
+    <linearGradient id="g-staysync-pms" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#1a1a1a"/>
+    </linearGradient>
+    <linearGradient id="bg-staysync-pms" x1="0" y1="0" x2="0.7" y2="1">
+      <stop offset="0%" stop-color="#242424"/>
+      <stop offset="100%" stop-color="#1a1a1a"/>
+    </linearGradient>
+    <radialGradient id="glow-staysync-pms" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid-staysync-pms" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#ffffff" stroke-opacity="0.045" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg-staysync-pms)"/>
+  <rect width="1200" height="800" fill="url(#grid-staysync-pms)"/>
+  <ellipse cx="288" cy="176" rx="420" ry="320" fill="url(#glow-staysync-pms)"/>
+  <ellipse cx="983.9999999999999" cy="672" rx="380" ry="300" fill="url(#glow-staysync-pms)" opacity="0.55"/>
+  <circle cx="394" cy="510" r="33" fill="none" stroke="url(#g-staysync-pms)" stroke-width="1.5" opacity="0.143"/>
+  <rect x="781" y="340" width="93" height="93" rx="20" fill="url(#g-staysync-pms)" opacity="0.207" transform="rotate(-3.4 781 340)"/>
+  <path d="M652 652 l242 0 l-121 242 Z" fill="none" stroke="url(#g-staysync-pms)" stroke-width="1.5" opacity="0.093"/>
+  <circle cx="944" cy="531" r="124" fill="none" stroke="url(#g-staysync-pms)" stroke-width="1.5" opacity="0.162"/>
+  <rect x="961" y="367" width="225" height="225" rx="20" fill="url(#g-staysync-pms)" opacity="0.124" transform="rotate(-17.0 961 367)"/>
+  <path d="M236 507 l102 0 l-51 102 Z" fill="none" stroke="url(#g-staysync-pms)" stroke-width="1.5" opacity="0.094"/>
+  <circle cx="428" cy="342" r="94" fill="none" stroke="url(#g-staysync-pms)" stroke-width="1.5" opacity="0.113"/>
+
+  <!-- central plate -->
+  <rect x="300" y="270" width="600" height="260" rx="28" fill="#212121" fill-opacity="0.55" stroke="#ffffff" stroke-opacity="0.1"/>
+  <text x="600" y="344" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="15" font-weight="600" letter-spacing="4" fill="#1a1a1a" opacity="0.9">HOSPITALITY</text>
+  <text x="600" y="410" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="42" font-weight="700" fill="#f3ffff">StaySync PMS</text>
+  <rect x="560" y="452" width="80" height="4" rx="2" fill="url(#g-staysync-pms)"/>
+  <text x="600" y="498" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="500" letter-spacing="2" fill="#a0a6a6">PLUTOX TECH</text>
+</svg>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160" role="img" aria-label="SY portrait placeholder">
+  <defs>
+    <linearGradient id="a-av3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#1a1a1a"/>
+    </linearGradient>
+  </defs>
+  <rect width="160" height="160" rx="80" fill="url(#a-av3)"/>
+  <rect width="160" height="160" rx="80" fill="#1a1a1a" fill-opacity="0.25"/>
+  <text x="80" y="80" text-anchor="middle" dominant-baseline="central" font-family="Inter, system-ui, sans-serif" font-size="58" font-weight="600" fill="#f3ffff" letter-spacing="1">SY</text>
+</svg>
