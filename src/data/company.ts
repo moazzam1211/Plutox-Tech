@@ -1,35 +1,13 @@
 import {
-  Award,
-  BadgeCheck,
-  Banknote,
-  Building,
-  Clock,
   Eye,
-  Gauge,
-  Globe2,
-  GraduationCap,
   HeartHandshake,
-  Layers,
   Lightbulb,
-  LifeBuoy,
   Lock,
-  Rocket,
-  ShieldCheck,
   Sparkles,
   Target,
-  TrendingUp,
-  Trophy,
-  Users,
-  Wrench,
 } from "lucide-react";
 
-import type {
-  Award as AwardType,
-  Differentiator,
-  Stat,
-  TimelineEntry,
-  ValuePillar,
-} from "@/types";
+import type { TimelineEntry, ValuePillar } from "@/types";
 
 /* ------------------------------------------------------------------ */
 /* Mission, vision, values                                            */
@@ -133,187 +111,10 @@ export const timeline: TimelineEntry[] = [
 /* Statistics                                                         */
 /* ------------------------------------------------------------------ */
 
-/** Headline counters in the statistics band. */
-export const stats: Stat[] = [
-  {
-    value: 100,
-    suffix: "+",
-    label: "Projects Delivered",
-    description: "Shipped, live and in production",
-    icon: Rocket,
-  },
-  {
-    value: 50,
-    suffix: "+",
-    label: "Happy Clients",
-    description: "Across retail, hospitality and health",
-    icon: Users,
-  },
-  {
-    value: 10,
-    suffix: "+",
-    label: "Industries Served",
-    description: "From pharmacies to logistics fleets",
-    icon: Layers,
-  },
-  {
-    value: 99,
-    suffix: "%",
-    label: "Client Satisfaction",
-    description: "Post-delivery survey average",
-    icon: TrendingUp,
-  },
-];
-
-/** Secondary counters used inside the About section. */
-export const companyStats: Stat[] = [
-  {
-    value: 100,
-    suffix: "+",
-    label: "Projects Completed",
-    description: "Delivered end to end since 2022",
-    icon: BadgeCheck,
-  },
-  {
-    value: 50,
-    suffix: "+",
-    label: "Clients Worldwide",
-    description: "Long-term retained partnerships",
-    icon: Building,
-  },
-  {
-    value: 10,
-    suffix: "",
-    label: "Countries Served",
-    description: "Pakistan, GCC, UK, US and Australia",
-    icon: Globe2,
-  },
-  {
-    value: 4,
-    suffix: "+",
-    label: "Years Experience",
-    description: "Building production software since 2022",
-    icon: GraduationCap,
-  },
-  {
-    value: 24,
-    suffix: "/7",
-    label: "Support Availability",
-    description: "Monitored uptime and on-call engineers",
-    icon: LifeBuoy,
-  },
-];
-
 /* ------------------------------------------------------------------ */
 /* Why choose us                                                      */
 /* ------------------------------------------------------------------ */
 
-export const differentiators: Differentiator[] = [
-  {
-    title: "24/7 Support",
-    description:
-      "A named engineer, a monitored status page and a phone number that a human answers at 3 AM.",
-    icon: LifeBuoy,
-    others: "Email ticket, 48-hour SLA",
-    plutox: "Named engineer, 15-minute critical response",
-  },
-  {
-    title: "Scalable Architecture",
-    description:
-      "Built to survive the growth you are planning for, not just the load you have today.",
-    icon: Gauge,
-    others: "Rewrite needed at scale",
-    plutox: "Horizontally scalable from day one",
-  },
-  {
-    title: "Transparent Pricing",
-    description:
-      "Fixed-scope milestones agreed before work starts. No change-request ambush at 80% complete.",
-    icon: Banknote,
-    others: "Hourly billing, moving totals",
-    plutox: "Fixed milestone pricing, quoted upfront",
-  },
-  {
-    title: "Senior Team",
-    description:
-      "Every project has a senior engineer accountable for it. Juniors learn on our time, not your budget.",
-    icon: Users,
-    others: "Junior team, senior in sales calls",
-    plutox: "Senior lead on every engagement",
-  },
-  {
-    title: "Fast Delivery",
-    description:
-      "First usable milestone inside four weeks, then a working demo every fortnight.",
-    icon: Rocket,
-    others: "Six months to first demo",
-    plutox: "Working milestone in 4 weeks",
-  },
-  {
-    title: "Modern Stack",
-    description:
-      "Next.js, TypeScript and containerised cloud infrastructure — hiring for it stays easy years from now.",
-    icon: Wrench,
-    others: "Legacy frameworks, hard to staff",
-    plutox: "Current, well-documented, mainstream stack",
-  },
-  {
-    title: "Security First",
-    description:
-      "Encryption at rest and in transit, least-privilege access, dependency scanning in CI and annual penetration tests.",
-    icon: ShieldCheck,
-    others: "Security reviewed after launch",
-    plutox: "Threat modelled before the first sprint",
-  },
-  {
-    title: "Truly Custom",
-    description:
-      "We shape the software around your workflow instead of asking your team to work around a template.",
-    icon: Sparkles,
-    others: "Rebranded template, rigid workflow",
-    plutox: "Built to your process, source code yours",
-  },
-];
-
 /* ------------------------------------------------------------------ */
 /* Awards & certifications                                            */
 /* ------------------------------------------------------------------ */
-
-export const awards: AwardType[] = [
-  {
-    title: "Top Software Development Company",
-    issuer: "Clutch Regional Awards",
-    year: "2025",
-    icon: Trophy,
-  },
-  {
-    title: "Rising Tech Exporter",
-    issuer: "Pakistan Software Export Board",
-    year: "2024",
-    icon: Award,
-  },
-  {
-    title: "ISO/IEC 27001 Aligned Practices",
-    issuer: "Independent security audit",
-    year: "2024",
-    icon: ShieldCheck,
-  },
-  {
-    title: "Microsoft for Startups Member",
-    issuer: "Microsoft",
-    year: "2023",
-    icon: BadgeCheck,
-  },
-  {
-    title: "Best Hospitality Tech Product",
-    issuer: "Regional HoReCa Expo",
-    year: "2025",
-    icon: Trophy,
-  },
-  {
-    title: "99.98% Platform Uptime",
-    issuer: "12-month rolling average",
-    year: "2026",
-    icon: Clock,
-  },
-];

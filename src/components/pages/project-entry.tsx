@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  ArrowRight,
-  Check,
-  ChevronLeft,
-  ChevronRight,
-  ExternalLink,
-} from "lucide-react";
+import { ArrowRight, Check, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import * as React from "react";
@@ -140,6 +134,11 @@ export function ProjectEntry({
   product: Product;
   position: number;
 }) {
+  const moduleCount = product.moduleGroups.reduce(
+    (total, group) => total + group.items.length,
+    0,
+  );
+
   return (
     <article id={product.slug} className="scroll-mt-24">
       {/* ---------------- Header ---------------- */}
@@ -275,15 +274,12 @@ export function ProjectEntry({
           <div className="mt-auto flex flex-wrap gap-3 pt-7">
             <Button asChild size="md">
               <Link href={product.demoUrl}>
-                Live demo
-                <ExternalLink />
+                Book a demo
+                <ArrowRight />
               </Link>
             </Button>
             <Button asChild variant="outline" size="md">
-              <Link href="/contact">
-                Request a walkthrough
-                <ArrowRight />
-              </Link>
+              <Link href="/skills">See the stack behind it</Link>
             </Button>
           </div>
         </Reveal>
@@ -292,23 +288,54 @@ export function ProjectEntry({
       {/* ---------------- Full module breakdown ---------------- */}
       <div className="py-8">
         <Reveal preset="fadeUp">
-          <p className="eyebrow text-muted-foreground">
-            Every module, in detail
-          </p>
+          <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+            <p className="eyebrow text-muted-foreground">
+              Every module, in detail
+            </p>
+            {/*
+              Counted from the data rather than written in, so the figure can
+              never drift out of step with the list printed underneath it.
+
+              "Capabilities", not "modules": the breakdown also covers things
+              that aren't sidebar modules — ServeSync's five field apps, for
+              instance — so this figure is deliberately not the same number as
+              the module count in the badge and specs.
+            */}
+            <p className="font-mono text-[0.6875rem] text-muted-foreground/70">
+              {moduleCount} capabilities across {product.moduleGroups.length}{" "}
+              areas
+            </p>
+          </div>
         </Reveal>
 
-        <div className="mt-6 grid gap-8 lg:grid-cols-3">
+        {/*
+          Four groups get a 2×2 then 4-up layout; three stay on the 3-up.
+          Column count follows the data so no product ends up with a stray
+          empty column, and the breakpoint is `xl` for four because at `lg`
+          these columns get too narrow for the module descriptions to read.
+        */}
+        <div
+          className={cn(
+            "mt-6 grid gap-x-8 gap-y-10 sm:grid-cols-2",
+            product.moduleGroups.length >= 4
+              ? "xl:grid-cols-4"
+              : "lg:grid-cols-3",
+          )}
+        >
           {product.moduleGroups.map((group) => (
             <Reveal key={group.title} preset="fadeUp">
               <section>
                 <h3
-                  className="eyebrow border-b pb-2"
+                  className="eyebrow flex items-baseline justify-between gap-2 border-b pb-2"
                   style={{
                     color: product.brandColor,
                     borderColor: `${product.brandColor}33`,
                   }}
                 >
                   {group.title}
+                  <span className="font-mono text-[0.625rem] opacity-60">
+                    {group.items.length}
+                  </span>
                 </h3>
                 <dl className="mt-4 flex flex-col gap-4">
                   {group.items.map((item) => (

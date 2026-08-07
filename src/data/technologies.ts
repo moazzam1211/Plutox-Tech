@@ -49,13 +49,3 @@ export const clients = [
   "Bluepeak Foods",
   "Orbit Telecom",
 ] as const;
-
-/** Technology & platform partnerships. */
-export const partners = [
-  { name: "Microsoft for Startups", role: "Cloud Partner" },
-  { name: "AWS Activate", role: "Infrastructure Partner" },
-  { name: "Stripe", role: "Payments Partner" },
-  { name: "Google Cloud", role: "Solutions Partner" },
-  { name: "Meta Business", role: "WhatsApp API Partner" },
-  { name: "Pakistan Software Houses Assoc.", role: "Registered Member" },
-] as const;

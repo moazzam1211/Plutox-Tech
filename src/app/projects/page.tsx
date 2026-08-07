@@ -46,7 +46,7 @@ export default function ProjectsPage() {
             { value: "4", label: "Products" },
             { value: "60+", label: "Live modules" },
             { value: "289+", label: "REST endpoints" },
-            { value: "24", label: "Screens shown" },
+            { value: "81", label: "Capabilities detailed" },
           ]}
         />
       </PageHeader>

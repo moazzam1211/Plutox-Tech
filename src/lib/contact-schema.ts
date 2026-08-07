@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { budgetOptions, serviceOptions } from "@/data/blog";
+import { budgetOptions, serviceOptions } from "@/data/enquiry";
 
 /**
  * Contact form contract.

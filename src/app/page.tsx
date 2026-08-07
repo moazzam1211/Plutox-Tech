@@ -2,6 +2,7 @@ import { ArrowRight, ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
+import { IntroDashboard } from "@/components/pages/intro-dashboard";
 import {
   Block,
   Pager,
@@ -27,7 +28,9 @@ export default function IntroPage() {
     <>
       {/* ---------------- Statement ---------------- */}
       <section className="border-b border-border">
-        <div className="px-6 py-20 sm:px-10 lg:px-14 lg:py-28">
+        <div className="grid items-center gap-14 px-6 py-20 sm:px-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.92fr)] lg:gap-16 lg:px-14 lg:py-28">
+          {/* ---- Copy column ---- */}
+          <div>
           <Reveal preset="fadeUp">
             <div className="flex items-center gap-4">
               <span className="font-mono text-xs tracking-[0.25em] text-primary">
@@ -74,7 +77,7 @@ export default function IntroPage() {
 
           <Reveal preset="fadeUp" delay={0.24}>
             <StatStrip
-              className="mt-16 max-w-3xl border-t pt-4"
+              className="mt-14 border-t pt-4"
               items={[
                 { value: "4", label: "Products built & deployed" },
                 { value: "60+", label: "Live modules across them" },
@@ -82,6 +85,12 @@ export default function IntroPage() {
                 { value: "24/7", label: "Support availability" },
               ]}
             />
+          </Reveal>
+          </div>
+
+          {/* ---- Dashboard column ---- */}
+          <Reveal preset="fadeUp" delay={0.3} className="lg:pl-4">
+            <IntroDashboard />
           </Reveal>
         </div>
       </section>

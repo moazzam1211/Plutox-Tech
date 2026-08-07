@@ -64,8 +64,8 @@ export interface Product {
   payments?: string[];
   /** Who it's for. */
   audience: string;
+  /** Where the demo CTA points — /contact, since there is no hosted demo. */
   demoUrl: string;
-  learnMoreUrl: string;
   /** Shown as a small metric row under the feature list. */
   metric?: { label: string; value: string };
   badge?: string;
@@ -125,16 +125,6 @@ export interface Technology {
     | "AI";
 }
 
-export interface Differentiator {
-  title: string;
-  description: string;
-  icon: LucideIcon;
-  /** Left column of the comparison card: what most vendors do. */
-  others: string;
-  /** Right column: the Plutox Tech approach. */
-  plutox: string;
-}
-
 export interface Testimonial {
   quote: string;
   author: string;
@@ -161,38 +151,6 @@ export interface FaqItem {
   category: "General" | "Pricing" | "Technical" | "Support";
 }
 
-export interface PricingPlan {
-  name: string;
-  tagline: string;
-  price: string;
-  period: string;
-  description: string;
-  features: string[];
-  cta: string;
-  featured?: boolean;
-}
-
-export interface BlogPost {
-  slug: string;
-  title: string;
-  excerpt: string;
-  category: string;
-  readingTime: string;
-  date: string;
-  /** Pre-formatted for display so no client-side date lib is needed. */
-  dateLabel: string;
-  image: string;
-  author: { name: string; role: string };
-}
-
-export interface JobOpening {
-  title: string;
-  department: string;
-  location: string;
-  type: "Full-time" | "Contract" | "Internship";
-  experience: string;
-}
-
 export interface TimelineEntry {
   year: string;
   title: string;
@@ -206,9 +164,3 @@ export interface ValuePillar {
   icon: LucideIcon;
 }
 
-export interface Award {
-  title: string;
-  issuer: string;
-  year: string;
-  icon: LucideIcon;
-}

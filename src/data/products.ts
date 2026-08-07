@@ -9,6 +9,10 @@ import type { Product } from "@/types";
  *
  * `image` is each product's own logo, trimmed by `npm run product-logos`.
  * `screens` point at screenshots captured from the running applications.
+ *
+ * `demoUrl` goes to /contact rather than a hosted instance: there is no public
+ * live demo, and the previous /portfolio and /products anchors were deleted in
+ * the seven-page restructure, so they 404'd.
  */
 export const products: Product[] = [
   /* ------------------------------------------------------------------ */
@@ -31,6 +35,8 @@ export const products: Product[] = [
       "Live floor plan with dwell-time escalation, merge & transfer",
       "Offline-first PWA — an outbox replays every sale on reconnect",
       "Central warehouse: branch demands → dispatch → goods received",
+      "Foodpanda orders arrive as a first-class channel, not a re-key",
+      "Ten ranked roles from super-admin down to a kitchen kiosk login",
       "Five field apps: waiter pad, rider app, QR menu, display, tracking",
     ],
     moduleGroups: [
@@ -53,9 +59,29 @@ export const products: Product[] = [
               "Live tickets per station, bump and recall, 86-items, KOT notes, and a cross-branch view for the owner.",
           },
           {
+            name: "Orders & invoices",
+            detail:
+              "The full order list with manage, void and refund behind a supervisor PIN, pre-bill and customer bill, and a QR code on every receipt.",
+          },
+          {
             name: "Till & shift",
             detail:
               "Opening float, cash in/out, mid-shift X-report, Z-report with variance, and one-step cashier handover.",
+          },
+          {
+            name: "Menu management",
+            detail:
+              "Categories and sub-categories, recipes, modifier groups, custom add-ons and emoji items.",
+          },
+          {
+            name: "Customers & CRM",
+            detail:
+              "Guest profiles with order history, loyalty points and tiers, and Excel export.",
+          },
+          {
+            name: "Reports & BI",
+            detail:
+              "Sales, by-channel, discounts, tax by method, top sellers and forecast — with the owner rolling every figure up across branches.",
           },
         ],
       },
@@ -65,12 +91,12 @@ export const products: Product[] = [
           {
             name: "All-branches command centre",
             detail:
-              "Every branch's live sales, open orders, tables, alerts and who's on shift — each card drilling into that branch.",
+              "Every branch's live sales, open orders, tables, alerts and who's on shift — each card drilling into that branch's reports, stock, staff and demand.",
           },
           {
             name: "Central warehouse",
             detail:
-              "In-house and supply items by category, branch demands → dispatch → receive, with goods-received notes.",
+              "In-house and supply items filed by category and sub-category, branch demands → dispatch → receive, with goods-received notes.",
           },
           {
             name: "Inventory",
@@ -78,9 +104,19 @@ export const products: Product[] = [
               "Two linked inventories (menu + ingredient) with live 'makeable' counts, FIFO/LIFO valuation, expiry flags and Excel export.",
           },
           {
-            name: "Delivery & aggregators",
+            name: "Delivery",
             detail:
-              "Zones, riders, live Google Maps plotting, geocoding and navigation links, plus Foodpanda orders as a first-class channel via a secret-gated webhook.",
+              "Zones and riders with live Google Maps plotting, geocoding, one-tap navigate links and customer GPS share.",
+          },
+          {
+            name: "Foodpanda channel",
+            detail:
+              "Aggregator orders as a first-class channel through a secret-gated webhook, with accept/decline and SKU mapping.",
+          },
+          {
+            name: "Settings",
+            detail:
+              "Branches, tax rules, printers, subscription packages, OTP, branding, access control and integrations.",
           },
         ],
       },
@@ -98,24 +134,59 @@ export const products: Product[] = [
               "Attendance, payroll runs, advances and leaves across all branches.",
           },
           {
+            name: "Vendors & payables",
+            detail:
+              "Supplier records and invoices with pay-now or pay-later terms and payment reminders.",
+          },
+          {
+            name: "Expenses",
+            detail:
+              "Petty cash and category expenses feeding straight into the P&L.",
+          },
+          {
+            name: "Promos",
+            detail:
+              "Promo codes as a percentage or fixed amount, with spend caps and usage tracking.",
+          },
+          {
             name: "PRA / FBR fiscal",
             detail:
               "Reports paid invoices to Punjab and Federal tax authorities, printing the official invoice number and QR on receipts.",
           },
+        ],
+      },
+      {
+        title: "Field & guest apps",
+        items: [
           {
-            name: "Vendors, promos & expenses",
+            name: "Waiter order pad",
             detail:
-              "Supplier records with pay-now/pay-later, promo codes with caps and usage tracking, petty cash and category expenses feeding the P&L.",
+              "Mobile dine-in and takeaway punching from the floor, table-aware, with PIN login.",
+          },
+          {
+            name: "Rider delivery app",
+            detail:
+              "A phone-login field app listing assigned deliveries with navigate, call and status updates.",
+          },
+          {
+            name: "Customer QR self-order",
+            detail:
+              "A scan-to-order card menu with its own per-device theme, cart and checkout.",
+          },
+          {
+            name: "Customer display",
+            detail:
+              "A customer-facing second screen mirroring the cart live, working offline over a same-origin broadcast channel.",
+          },
+          {
+            name: "Order tracking",
+            detail:
+              "A guest order-journey page linked from the confirmation, so nobody has to phone the branch.",
           },
         ],
       },
     ],
     screens: [
-      {
-        src: "/images/products/screens/servesync-dashboard.png",
-        label: "Dashboard",
-        caption: "Revenue, average ticket, covers and low-stock alerts",
-      },
       {
         src: "/images/products/screens/servesync-new-order.png",
         label: "New Order",
@@ -141,6 +212,11 @@ export const products: Product[] = [
         label: "Reports & BI",
         caption: "Sales by channel, discounts, tax and forecast",
       },
+      {
+        src: "/images/products/screens/servesync-dashboard.png",
+        label: "Dashboard",
+        caption: "Revenue, average ticket, covers and low-stock alerts",
+      },
     ],
     stack: ["Node.js", "Express", "Socket.IO", "Vanilla JS PWA", "ESC/POS", "Stripe"],
     specs: [
@@ -151,8 +227,7 @@ export const products: Product[] = [
     ],
     payments: ["Cash", "Card", "JazzCash", "EasyPaisa", "Bank transfer"],
     metric: { label: "Front-end apps & surfaces", value: "7" },
-    demoUrl: "/portfolio#servesync-pos",
-    learnMoreUrl: "/products#servesync-pos",
+    demoUrl: "/contact",
   },
 
   /* ------------------------------------------------------------------ */
@@ -174,11 +249,13 @@ export const products: Product[] = [
       "Rx-required and controlled medicines gated at the counter",
       "Controlled-drug register, exportable for audit",
       "One-tap dosage and usage info for cashier and customer",
+      "Purchase order → approval → receive creates batches, GRN and payable",
+      "Patients and customers in one record set, two views",
       "Demand forecasting with reorder suggestions",
     ],
     moduleGroups: [
       {
-        title: "Selling & compliance",
+        title: "Dispensing & point of sale",
         items: [
           {
             name: "Point of sale",
@@ -196,19 +273,39 @@ export const products: Product[] = [
               "Every medicine is stocked by batch with manufacture and expiry dates; sales dispense first-expiry-first and expired stock can never be sold.",
           },
           {
-            name: "Prescriptions & controlled drugs",
+            name: "Prescriptions & doctors",
             detail:
-              "Record an Rx with an image and attach it at the till. Rx-required and controlled medicines are gated without a valid prescription or a pharmacist override, and every controlled dispense is logged with medicine, batch, patient, doctor and dispenser.",
+              "Record an Rx with an image and attach it at the till; Rx-required and controlled medicines are gated without a valid prescription or a pharmacist override.",
+          },
+          {
+            name: "Controlled-drug register",
+            detail:
+              "Every controlled dispense is logged with medicine, batch, patient, doctor and dispenser, and the register exports to Excel for inspection.",
+          },
+          {
+            name: "Medicine info",
+            detail:
+              "One tap shows dosage and usage, so the cashier can answer the customer without reaching for the carton.",
+          },
+          {
+            name: "Receipt & bill",
+            detail:
+              "On-screen and thermal (ESC/POS) output with a QR code and logo watermark, and a fully customisable bill layout.",
           },
         ],
       },
       {
-        title: "Stock, purchasing & finance",
+        title: "Stock & purchasing",
         items: [
           {
             name: "Inventory",
             detail:
-              "Medicine master covering generic, brand, manufacturer, strength, form, drug schedule, cold-chain flag and rack location, plus adjustments and write-offs.",
+              "Medicine master covering generic, brand, manufacturer, strength, form, drug schedule, cold-chain flag and rack/shelf location, plus adjustments and write-offs.",
+          },
+          {
+            name: "Pharma companies",
+            detail:
+              "A managed manufacturer list with one-click filtering across the catalogue.",
           },
           {
             name: "Purchasing",
@@ -221,6 +318,11 @@ export const products: Product[] = [
               "Vendors, credit terms, bills, partial payments and overdue tracking.",
           },
           {
+            name: "Expenses & petty cash",
+            detail:
+              "Operating costs by category and a petty-cash float, reconciled against the drawer.",
+          },
+          {
             name: "Reports & forecasting",
             detail:
               "Sales, stock valuation, expiry, expenses and the controlled register, plus demand forecasting — filterable by day, week, month, quarter, year or a custom range, with Excel and thermal export.",
@@ -228,17 +330,22 @@ export const products: Product[] = [
         ],
       },
       {
-        title: "People & platform",
+        title: "People, platform & compliance",
         items: [
           {
             name: "Patients & customers",
             detail:
-              "One record set with two views — Patients (allergies, blood group, insurance) and Customers (loyalty, spend, purchase history).",
+              "One record set with two views — Patients (allergies, blood group, insurance) and Customers (loyalty, spend, purchase history) — both exportable to Excel.",
           },
           {
-            name: "Staff & payroll",
+            name: "Staff & salary slips",
             detail:
-              "PIN login, ranked roles, an audit log and printable payslips with history.",
+              "PIN login across six ranked roles, an audit log, and printable payslips with full history.",
+          },
+          {
+            name: "Subscription billing",
+            detail:
+              "A monthly plan that locks the POS when the fee lapses, with owner-side Pay & Renew and printable SUB-#### invoices.",
           },
           {
             name: "PRA / FBR fiscal",
@@ -308,8 +415,7 @@ export const products: Product[] = [
       "Credit on account",
     ],
     metric: { label: "Dispensing rule", value: "FEFO" },
-    demoUrl: "/portfolio#pharmasync-pos",
-    learnMoreUrl: "/products#pharmasync-pos",
+    demoUrl: "/contact",
   },
 
   /* ------------------------------------------------------------------ */
@@ -333,11 +439,18 @@ export const products: Product[] = [
       "Promotions auto-applied at checkout: BOGO, combo, flash sales",
       "Loyalty tiers that upgrade themselves, plus gift cards and store credit",
       "Split and multi-method payments with thermal or A4 invoices",
+      "Zero infrastructure — a JSON snapshot store with one swap-point for Postgres",
+      "Installable as a PWA on the till and on staff phones",
     ],
     moduleGroups: [
       {
-        title: "Selling & scanning",
+        title: "Checkout & scanning",
         items: [
+          {
+            name: "Dashboard",
+            detail:
+              "A feature-card hub over live metrics: sales and profit by day, week, month or year, a seven-day chart, and top products and customers.",
+          },
           {
             name: "Sell (POS)",
             detail:
@@ -346,7 +459,7 @@ export const products: Product[] = [
           {
             name: "Barcode scanning",
             detail:
-              "USB and Bluetooth guns captured globally (no need to focus the search box), device-camera scanning via ZXing, and a phone paired by QR that streams scans over Socket.IO.",
+              "USB and Bluetooth guns captured globally (no need to focus the search box), device-camera scanning via ZXing, and a phone paired by QR that streams scans over Socket.IO for both selling and stock-in.",
           },
           {
             name: "Auto product lookup",
@@ -354,19 +467,24 @@ export const products: Product[] = [
               "An unknown barcode is queried against your catalogue, then Open Food Facts, then UPCitemdb — pre-filling name, brand and size, and auto-selecting the department.",
           },
           {
-            name: "Checkout & receipts",
+            name: "Orders",
             detail:
-              "Split and multi-method payments, thermal receipts at 58 or 80mm, and printable A4 invoices.",
+              "A daily order register, so the shift can be reviewed line by line.",
+          },
+          {
+            name: "Invoices",
+            detail:
+              "Three registers on one screen — Sales, Purchase and Supplies — with thermal or A4 reprints of any document.",
           },
         ],
       },
       {
-        title: "Inventory & purchasing",
+        title: "Stock & supply chain",
         items: [
           {
             name: "Inventory",
             detail:
-              "Every product tracks batches with expiry; sales allocate first-expiry-first-out, with low-stock, near-expiry and expired alerts, adjustments, transfers and aisle/shelf locations.",
+              "Every product tracks batches with expiry; sales allocate first-expiry-first-out, with low-stock, near-expiry and expired alerts, adjustments, transfers, aisle/shelf locations and Excel export.",
           },
           {
             name: "Purchases",
@@ -378,34 +496,53 @@ export const products: Product[] = [
             detail: "Vendor ledger, bills, payables and ageing analysis.",
           },
           {
-            name: "Invoices",
+            name: "Reports & forecasting",
             detail:
-              "Three registers on one screen — Sales, Purchase and Supplies — with thermal or A4 reprints.",
+              "Sales, stock valuation, expiry, profit and tax with a period selector, plus a demand forecast with reorder suggestions.",
           },
         ],
       },
       {
-        title: "Customers, finance & staff",
+        title: "Customers & growth",
         items: [
           {
             name: "Customers & loyalty",
             detail:
-              "Points, visits and lifetime spend driving automatic tier upgrades from Silver through Gold and Platinum to VIP, plus store credit.",
+              "Points, visits and lifetime spend driving automatic tier upgrades from Silver through Gold and Platinum to VIP, plus store credit and Excel export.",
           },
           {
-            name: "Promotions & gift cards",
+            name: "Promotions",
             detail:
-              "Buy-X-Get-Y, category percentage off, flash sales and combo pricing applied automatically at checkout; gift cards can be issued, topped up and disabled.",
+              "Buy-X-Get-Y, category percentage off, flash sales and combo pricing — all applied automatically at checkout rather than keyed in by the cashier.",
           },
           {
-            name: "Till & expenses",
+            name: "Gift cards",
             detail:
-              "Open and close shifts with cash reconciliation and drawer moves, plus costs by category and petty cash.",
+              "Issue, top up, look up a balance, and enable or disable a card.",
+          },
+        ],
+      },
+      {
+        title: "Money, people & setup",
+        items: [
+          {
+            name: "Till",
+            detail:
+              "Open and close the shift with cash reconciliation and recorded drawer moves.",
           },
           {
-            name: "Reports & payroll",
+            name: "Expenses",
+            detail: "Costs by category and a petty-cash float.",
+          },
+          {
+            name: "Staff & payroll",
             detail:
-              "Sales, stock valuation, expiry, profit and tax with a period selector, demand forecasting with reorder suggestions, and A4 salary slips.",
+              "Team records, roles and PINs with ranked permissions, and A4 salary slips itemising earnings, deductions and net pay.",
+          },
+          {
+            name: "Settings",
+            detail:
+              "Store details, tax, receipt branding, theme switcher, layout, data reset, and subscription and billing.",
           },
         ],
       },
@@ -460,8 +597,7 @@ export const products: Product[] = [
       "Store credit",
     ],
     metric: { label: "Ways to scan a product", value: "3" },
-    demoUrl: "/portfolio#vendeez-pos",
-    learnMoreUrl: "/products#vendeez-pos",
+    demoUrl: "/contact",
   },
 
   /* ------------------------------------------------------------------ */
@@ -484,6 +620,8 @@ export const products: Product[] = [
       "Live room rack combining occupancy and housekeeping status",
       "Folios with auto-posted room charges, tax and split payments",
       "Channel manager syncing OTA rates, inventory and commission",
+      "Five revenue centres beyond rooms: F&B, banquet, spa, laundry, room service",
+      "Per-room IoT registry for smart locks, thermostats and energy meters",
       "Occupancy, ADR and RevPAR analytics rolled up across the portfolio",
     ],
     moduleGroups: [
@@ -496,9 +634,9 @@ export const products: Product[] = [
               "Walk-in, OTA, corporate, group and web bookings against a live availability engine, with check-in and check-out.",
           },
           {
-            name: "Front desk & room rack",
+            name: "Front desk",
             detail:
-              "A live room rack showing occupancy alongside housekeeping status, assign-on-check-in, and checkout gated on the folio balance.",
+              "A live room rack with assign-on-check-in, and a checkout gated on the folio balance so nobody leaves owing.",
           },
           {
             name: "Room management",
@@ -506,9 +644,19 @@ export const products: Product[] = [
               "Room types, rate plans, and live room plus housekeeping status.",
           },
           {
+            name: "Housekeeping",
+            detail:
+              "A Kanban board running pending → in progress → done → verified, with tasks created automatically on checkout.",
+          },
+          {
             name: "Folio & billing",
             detail:
               "Auto-posted room charges and tax, F&B, service and discount lines, split and multi-method payments, A4 invoices and thermal receipts.",
+          },
+          {
+            name: "Room Service POS",
+            detail:
+              "A menu and cart that charges straight to the room folio rather than taking a separate payment.",
           },
         ],
       },
@@ -516,29 +664,39 @@ export const products: Product[] = [
         title: "Operations & revenue centres",
         items: [
           {
-            name: "Housekeeping",
+            name: "Maintenance",
             detail:
-              "A Kanban board running pending → in progress → done → verified, with tasks created automatically on checkout.",
+              "Work orders by area, category and priority, with assignment and resolution tracking.",
           },
           {
-            name: "Maintenance & laundry",
+            name: "Laundry",
             detail:
-              "Work orders by area, category and priority with assignment and resolution; guest, linen and uniform laundry orders with an express tier and status pipeline.",
+              "Guest, linen and uniform orders with an express tier and a status pipeline.",
           },
           {
-            name: "Banquet, spa & room service",
+            name: "Banquet & events",
             detail:
-              "Halls with package pricing and booking lifecycle, spa services with therapists and appointments, and a room-service POS that charges to the room.",
+              "Halls and bookings for weddings, conferences and more, with package pricing and a full booking lifecycle.",
+          },
+          {
+            name: "Spa & salon",
+            detail:
+              "Services, appointments, therapist assignment and completion.",
           },
           {
             name: "Channel manager",
             detail:
               "OTA channels with connect and disconnect, rate and inventory sync, and commission tracking.",
           },
+          {
+            name: "Loyalty & marketing",
+            detail:
+              "Campaigns over email, SMS and WhatsApp, plus promo codes.",
+          },
         ],
       },
       {
-        title: "Finance, people & platform",
+        title: "Finance & supply chain",
         items: [
           {
             name: "Finance & accounting",
@@ -546,19 +704,49 @@ export const products: Product[] = [
               "P&L comparing revenue against expenses, expenses by category, a chart of accounts and the ledger.",
           },
           {
-            name: "Procurement & assets",
+            name: "Procurement",
             detail:
-              "Vendors and purchase orders with computed totals and an approve-then-receive flow, plus an asset register tracking cost against current value, warranty and status.",
+              "Vendors and purchase orders with computed totals and an approve-then-receive flow.",
+          },
+          {
+            name: "Inventory",
+            detail:
+              "Stock levels with reorder alerts, stock value and adjustments.",
+          },
+          {
+            name: "Asset management",
+            detail:
+              "An asset register tracking purchase cost against current value, warranty and status.",
           },
           {
             name: "HR & payroll",
             detail:
               "Employees and payroll runs covering basic pay, allowances, deductions and net, with finalisation.",
           },
+        ],
+      },
+      {
+        title: "Platform & intelligence",
+        items: [
+          {
+            name: "Multi-property",
+            detail:
+              "One login opening many properties, each scoped separately but sharing guests and CRM, with an executive portfolio view over all of them.",
+          },
           {
             name: "Super administration",
             detail:
-              "Hotel group and properties, users, roles and RBAC, subscription control and a full audit log — plus a per-room IoT device registry for smart locks, thermostats and energy meters.",
+              "Hotel group and properties, users, roles and RBAC, subscription control and a full audit log.",
+          },
+          {
+            name: "BI dashboard & reports",
+            detail:
+              "Occupancy, ADR, RevPAR and revenue with trends and a multi-property rollup.",
+          },
+          {
+            name: "Smart hotel (IoT)",
+            detail:
+              "A per-room device registry covering smart locks, thermostats and energy meters.",
           },
         ],
       },
@@ -620,7 +808,6 @@ export const products: Product[] = [
       "City ledger",
     ],
     metric: { label: "Properties per login", value: "Unlimited" },
-    demoUrl: "/portfolio#staysync",
-    learnMoreUrl: "/products#staysync",
+    demoUrl: "/contact",
   },
 ];

@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 
 import { Field, Input, Select, Textarea } from "@/components/ui/form-field";
 import { Button } from "@/components/ui/button";
-import { budgetOptions, serviceOptions } from "@/data/blog";
+import { budgetOptions, serviceOptions } from "@/data/enquiry";
 import { contactSchema, type ContactInput } from "@/lib/contact-schema";
 import { EASE_OUT } from "@/lib/motion";
 

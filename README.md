@@ -35,7 +35,7 @@ npm run dev          # → http://localhost:3400
 | `npm run start` | Serve the production build on port 3400 |
 | `npm run typecheck` | `tsc --noEmit` |
 | `npm run lint` | ESLint |
-| `npm run assets` | Regenerate placeholder SVGs (portfolio, blog, avatars, map) |
+| `npm run assets` | Regenerate placeholder SVGs (review avatars, founder fallback, map) |
 | `npm run icons` | Rebuild the rounded favicon / Apple icon from the brand mark |
 | `npm run product-logos` | Trim and normalise the four product wordmarks |
 | `npm run portrait` | Crop + compress the founder portrait to a web-ready JPEG |
@@ -50,7 +50,7 @@ lean on that.
 
 | # | Route | Purpose |
 | --- | --- | --- |
-| 01 | `/` | Intro — statement, the four products, site index |
+| 01 | `/` | Intro — statement, product carousel, the four products, site index |
 | 02 | `/projects` | Full detail on all four platforms, with screenshots |
 | 03 | `/about` | Company, 16 services, delivery process, values, timeline |
 | 04 | `/skills` | Skill matrix by discipline + the full stack |
