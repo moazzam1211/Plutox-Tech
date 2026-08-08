@@ -23,7 +23,7 @@ import { breadcrumbJsonLd, buildMetadata } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "Services",
   description:
-    "POS system consultancy, cloud kitchen setup and software project consultancy in Lahore — feasibility, licensing, layout, equipment, menu costing, requirements, build-vs-buy, architecture, estimates, vendor selection, training and launch. Everything needed to take a business from scratch to running smoothly, plus sixteen software services.",
+    "POS system consultancy, cloud kitchen setup and food business consultancy in Lahore — for restaurants, cafés, QSR, bakeries and multi-outlet groups. Feasibility, licensing, site selection, kitchen layout, equipment, menu costing, POS and aggregator setup, hiring, training and launch. Everything needed to take a food business from scratch to running smoothly, plus sixteen software services.",
   path: "/services",
   keywords: [
     "POS consultancy Pakistan",
@@ -31,9 +31,11 @@ export const metadata = buildMetadata({
     "restaurant POS consultant",
     "how to start a cloud kitchen",
     "POS system implementation",
-    "software project consultancy",
-    "IT project consultant Lahore",
-    "software requirements and estimation",
+    "restaurant setup consultancy Lahore",
+    "how to open a café in Pakistan",
+    "QSR business consultant",
+    "food business consultancy",
+    "restaurant menu costing and engineering",
     "business setup consultancy Lahore",
   ],
 });
@@ -43,9 +45,8 @@ export const metadata = buildMetadata({
  *
  * Split out of `/about`, which had become two pages wearing one URL. The page
  * leads with the three end-to-end programmes because that is what someone opening
- * a business — or about to commission software — is actually looking for; the
- * sixteen build services sit underneath for the visitor who already knows what
- * they want built.
+ * an outlet is actually looking for; the sixteen build services sit underneath
+ * for the visitor who already knows what they want built.
  */
 export default function ServicesPage() {
   const totalPhases = consultancyPrograms.reduce(
@@ -70,7 +71,7 @@ export default function ServicesPage() {
             <span className="text-primary">that runs without you</span>
           </>
         }
-        lede="Three end-to-end programmes — POS system consultancy, cloud kitchen setup and project consultancy — plus the software we build around them. We start before the software: the numbers, the licences, the layout, the equipment, and the specification that decides whether the thing should be built at all. Then the system that ties it together, the training, the launch, and the review that keeps it honest."
+        lede="Three end-to-end programmes — POS system consultancy, cloud kitchen setup and food business consultancy for restaurants, cafés and QSR — plus the software we build around them. We start well before the software: the unit economics, the licences, the site, the layout, the equipment and the menu. Then the system that ties it together, the hiring, the training, the launch, and the monthly review that keeps it honest."
       >
         <StatStrip
           className="max-w-2xl border-t pt-4"

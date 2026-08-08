@@ -5,7 +5,6 @@ import {
   Building,
   ChefHat,
   ClipboardCheck,
-  Compass,
   CreditCard,
   FileCheck2,
   GraduationCap,
@@ -16,6 +15,7 @@ import {
   Store,
   TrendingUp,
   Truck,
+  UtensilsCrossed,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -25,7 +25,7 @@ import type { LucideIcon } from "lucide-react";
  * Two things are modelled here, and they are deliberately separate:
  *
  * 1. `consultancyPrograms` — the three end-to-end engagements: POS, cloud
- *    kitchen and software projects. Each is a sequence of phases with named
+ *    kitchen and food business. Each is a sequence of phases with named
  *    deliverables, because "consultancy" with no deliverable list is
  *    indistinguishable from a conversation.
  * 2. `launchJourney` — the ten stages of opening a business, with an explicit
@@ -287,114 +287,146 @@ export const consultancyPrograms: ConsultancyProgram[] = [
   },
 
   /* ------------------------------------------------------------------ */
-  /* Project consultancy                                                */
+  /* Food business consultancy                                          */
   /* ------------------------------------------------------------------ */
   {
-    slug: "project-consultancy",
-    name: "Project Consultancy",
-    tagline: "Decide what to build, and what it will really cost, before you commit",
+    slug: "food-business",
+    name: "Food Business Consultancy",
+    tagline: "Open the restaurant, café or QSR — and still be trading in year three",
     audience:
-      "Businesses about to commission custom software, teams whose project has stalled or overrun, and anyone holding three vendor quotes that are impossible to compare",
+      "Dine-in restaurants, cafés and coffee shops, QSR and takeaway counters, bakeries and dessert parlours, food-court units, and groups opening their second, fifth or twentieth outlet. Delivery-only operators are better served by the Cloud Kitchen Setup programme above",
     summary:
-      "Most software money is lost before a line of code is written — on a scope nobody wrote down, a quote nobody could compare, and a decision to build something that already existed off the shelf. We do the thinking first: what the software has to do, whether it should be built at all, what it will genuinely cost and how long it will take. You get a specification and an estimate you own outright — and you are free to hand them to any developer, including one who isn't us.",
-    icon: Compass,
-    brandColor: "#004AAD",
+      "Most food businesses do not close because the food was bad. They close because the rent was too high for the covers the site could ever do, the menu was never costed, and nobody knew the daily numbers until the money had already gone. We run the whole project — concept, feasibility, site, licences, layout, equipment, menu, systems, hiring, launch — and we say no early when the numbers do not work, which is the cheapest advice you will ever get.",
+    icon: UtensilsCrossed,
+    brandColor: "#D97706",
     phases: [
       {
-        title: "Discovery & requirements",
+        title: "Concept & feasibility",
         detail:
-          "Interviews with the people who will actually use the software and the people who will pay for it, then the current process mapped as it is rather than as the org chart says it is. Requirements are written down and ranked — must, should, could, won't — so the argument about priority happens now and not in month four.",
+          "Format, cuisine, price point and service model decided together rather than assumed: a 40-cover trattoria, a 12-seat speciality café and a QSR counter are three different businesses. We build the unit economics — covers per day, average ticket, food cost, rent, staff, utilities — and give you the break-even before you sign anything.",
         deliverables: [
-          "Stakeholder interviews and process map",
-          "Prioritised requirements document",
-          "Success metrics with numbers attached",
+          "Unit-economics model with break-even covers",
+          "Format and service-model recommendation",
+          "Go / no-go call, in writing",
         ],
       },
       {
-        title: "Feasibility & build-vs-buy",
+        title: "Brand & positioning",
         detail:
-          "The uncomfortable question asked properly: does this need building? We price the custom build against the off-the-shelf products that already do most of it, including ours, and against doing nothing. Sometimes the honest answer is a configured product and two integrations, and we would rather say that than take the larger contract.",
+          "Name, identity, menu design, packaging, signage and the photography your listings and social accounts will live on. A café and a QSR chain are read by customers in seconds, and most of that reading happens before anyone tastes anything.",
         deliverables: [
-          "Build, buy or configure recommendation",
-          "Off-the-shelf options priced and compared",
-          "Cost of doing nothing",
+          "Brand identity and menu design",
+          "Packaging and signage artwork",
+          "Food photography and launch social kit",
         ],
       },
       {
-        title: "Solution architecture",
+        title: "Site selection & lease",
         detail:
-          "How the system is put together and why: data model, integrations, hosting, offline behaviour, security and the concurrency it has to survive. Written for a technical reader but explained for a non-technical one, because you are the person who has to live with the consequences.",
+          "Footfall counted at the hours you will actually trade, not on a Sunday afternoon. Catchment, visibility, parking, service access, power and the rent-to-revenue ratio your model can carry — then a read of the lease terms before you commit to five years of them.",
         deliverables: [
-          "Architecture and data model",
-          "Integration and hosting plan",
-          "Security and access-control design",
+          "Site scorecard for each shortlisted unit",
+          "Footfall and catchment assessment",
+          "Rent-to-revenue check and lease review notes",
         ],
       },
       {
-        title: "Scope, estimate & roadmap",
+        title: "Licensing & compliance",
         detail:
-          "Every requirement broken into work you can actually schedule, with ranged estimates rather than a single optimistic number, and the assumptions behind each one written down. Phased so that something useful ships early instead of everything landing at the end.",
+          "Business registration, NTN, sales-tax registration, the food authority licence, hygiene and health requirements, signage NOC and music licensing where it applies. We prepare the checklist and the document pack; you or your lawyer sign and file them.",
         deliverables: [
-          "Itemised scope with ranged estimates",
-          "Phased roadmap with a defined first release",
-          "Written assumptions and risk register",
+          "Licence and registration checklist",
+          "Document pack ready for submission",
+          "Renewal and inspection calendar",
         ],
       },
       {
-        title: "Vendor selection & tender",
+        title: "Layout, kitchen & fit-out",
         detail:
-          "If you are not building with us, we turn the specification into a tender pack, help you shortlist, sit in on the technical interviews and score the responses against the same criteria. Quotes stop being incomparable once every vendor is answering the same document.",
+          "Seating plan sized to the covers in your model, then the back of house designed around it — prep, cook, plating, wash-up, cold and dry storage, and a counter or bar that does not become the bottleneck at peak. Service flow is planned so staff and guests never cross.",
         deliverables: [
-          "Tender pack built from the specification",
-          "Vendor scorecard and shortlist",
-          "Contract and milestone review",
+          "Seating plan and cover count",
+          "Kitchen line and service-flow layout",
+          "Fit-out scope your contractor can price",
         ],
       },
       {
-        title: "Delivery governance",
+        title: "Equipment & hardware",
         detail:
-          "Someone technical on your side of the table for the length of the build. We review what is actually shipped against what was promised each sprint, read the code where it matters, and flag scope creep and slipping timelines while there is still room to correct them.",
+          "Cooking line, refrigeration, storage, extraction and — for cafés — the espresso setup and grinders that decide your cup quality. Alongside it the technology: POS terminals, kitchen display, thermal printers, customer-facing screen and the tablets for the floor.",
         deliverables: [
-          "Sprint reviews against agreed scope",
-          "Code and architecture spot-checks",
-          "Fortnightly status report in plain English",
+          "Costed equipment schedule with lead times",
+          "Technology hardware list",
+          "Supplier shortlist and warranty terms",
         ],
       },
       {
-        title: "Quality assurance & UAT",
+        title: "Menu engineering & suppliers",
         detail:
-          "Test cases written from the requirements document, not from the software that got built — that distinction is the whole point. Functional, load and security testing, then user-acceptance sessions run with your staff so problems surface before go-live rather than during it.",
+          "Every dish costed to the gram with recipes loaded into the system so stock depletes as you sell, portions standardised so the tenth plate matches the first, and items ranked by margin and popularity. Supplier terms agreed and opening stock counted in.",
         deliverables: [
-          "Test plan traced to requirements",
-          "Defect log with severity and owner",
-          "Signed user-acceptance record",
+          "Costed recipe cards and portion standards",
+          "Menu margin and popularity ranking",
+          "Supplier terms and counted opening stock",
         ],
       },
       {
-        title: "Handover & knowledge transfer",
+        title: "Systems & channels",
         detail:
-          "The end of a project should not be the start of a dependency. Source code, credentials, deployment instructions and documentation transferred into your ownership, with your team walked through running it — whether we built it or somebody else did.",
+          "ServeSync POS configured for your format — live floor plan and table service for dine-in, a fast counter flow for QSR, kitchen display, QR self-order, delivery zones and riders, loyalty, and Foodpanda arriving in the same queue instead of on a separate tablet.",
         deliverables: [
-          "Source, credentials and infrastructure handover",
-          "Technical and user documentation",
-          "Team training and support plan",
+          "Configured POS, floor plan and kitchen display",
+          "Delivery, QR ordering and aggregator setup",
+          "Reports, tax rules and fiscal invoicing",
+        ],
+      },
+      {
+        title: "Hiring & training",
+        detail:
+          "Front and back of house roles defined, a shift roster sized to your forecast covers, and service standards written down rather than assumed. Then training by role — floor staff on the pad and the table plan, kitchen on the display, managers on close and reports.",
+        deliverables: [
+          "Role definitions and shift roster",
+          "Service standards and SOPs",
+          "Trained team, signed off by role",
+        ],
+      },
+      {
+        title: "Soft launch & launch",
+        detail:
+          "Friends and family, then a limited menu at limited covers, with ticket times and service gaps measured while the volume is survivable. The fix list is closed before the full launch — the opening week is when reviews are written, and they are permanent.",
+        deliverables: [
+          "Soft-launch plan and cover caps",
+          "Ticket-time and service-gap log",
+          "Fix list closed, then launch marketing live",
+        ],
+      },
+      {
+        title: "Run, review & scale",
+        detail:
+          "Monthly review against the model built in phase one: margin by item, waste, labour percentage, covers by daypart, repeat rate. When the outlet is proven, the same configuration and playbook are repeated so the second opening takes days rather than months.",
+        deliverables: [
+          "Monthly P&L and menu review",
+          "Waste and labour-cost actions",
+          "Second-outlet playbook and rollout plan",
         ],
       },
     ],
     includes: [
-      "A written specification and estimate you own outright",
-      "An honest build-vs-buy call, even when buying is worth less to us",
-      "Architecture designed for the load and the offline behaviour you need",
-      "Ranged estimates with the assumptions written down, not one hopeful figure",
-      "Tender pack and vendor scoring if you build with someone else",
-      "Technical oversight for the length of the build",
-      "Test plans traced to requirements, and UAT run with your staff",
-      "Full handover — code, credentials, documentation and training",
+      "Unit economics and a break-even cover count before you sign a lease",
+      "Brand, menu design, packaging and launch photography",
+      "Site scorecard, footfall assessment and lease review notes",
+      "Licensing checklist and document pack",
+      "Seating plan, kitchen layout and a fit-out scope for your contractor",
+      "Costed equipment schedule and the POS hardware alongside it",
+      "Recipes costed to the gram and loaded into the system",
+      "ServeSync POS configured for your format, with delivery and Foodpanda",
+      "Role-based hiring, rosters and staff training",
+      "Soft launch, full launch, and a monthly review after it",
     ],
     timeline:
-      "2–4 weeks for discovery through to estimate; governance runs for the length of the build",
+      "10–16 weeks from first meeting to opening, site and fit-out depending",
     outcome:
-      "A specification precise enough to quote against, an estimate you can budget from, and no vendor holding your source code hostage.",
+      "An outlet that opens on plan, a menu you know the margin on, a team that runs service without you on the floor, and numbers you read monthly instead of discovering annually.",
   },
 ];
 

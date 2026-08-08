@@ -116,11 +116,11 @@ export default function AboutPage() {
           </Reveal>
           <Reveal preset="fadeUp" delay={0.16}>
             <Panel className="h-full p-6">
-              <p className="eyebrow text-primary">Project Consultancy</p>
+              <p className="eyebrow text-primary">Food Business Consultancy</p>
               <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                Requirements, an honest build-vs-buy call, architecture, ranged
-                estimates, vendor selection, oversight for the length of the
-                build, and a handover that leaves you owning everything.
+                Restaurants, cafés and QSR — break-even covers before the lease,
+                brand, site and licensing, seating and kitchen layout, menu
+                costed to the gram, hiring, launch and the second outlet.
               </p>
             </Panel>
           </Reveal>
