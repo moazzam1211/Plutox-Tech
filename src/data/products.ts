@@ -12,7 +12,7 @@ import type { Product } from "@/types";
  *
  * `demoUrl` goes to /contact rather than a hosted instance: there is no public
  * live demo, and the previous /portfolio and /products anchors were deleted in
- * the seven-page restructure, so they 404'd.
+ * the restructure into a small set of pages, so they 404'd.
  */
 export const products: Product[] = [
   /* ------------------------------------------------------------------ */

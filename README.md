@@ -44,20 +44,21 @@ npm run dev          # → http://localhost:3400
 
 ## Structure
 
-Seven numbered pages, plus two legal pages outside the sequence. Deliberately
-finite — the numbered index in the navbar, page headers and prev/next pagers all
-lean on that.
+Seven pages in the navbar, plus Skills and two legal pages that are linked from
+the footer and indexed but kept out of the bar. Deliberately finite — every page
+ends with a prev/next pager rather than an endless scroll.
 
-| # | Route | Purpose |
-| --- | --- | --- |
-| 01 | `/` | Intro — statement, product carousel, the four products, site index |
-| 02 | `/projects` | Full detail on all four platforms, with screenshots |
-| 03 | `/about` | Company, 16 services, delivery process, values, timeline |
-| 04 | `/skills` | Skill matrix by discipline + the full stack |
-| 05 | `/reviews` | Client reviews and FAQs |
-| 06 | `/owner` | Founder profile |
-| 07 | `/contact` | Contact channels, enquiry form, location |
-| — | `/privacy-policy`, `/terms` | Legal |
+| Route | Purpose |
+| --- | --- |
+| `/` | Intro — statement, product carousel, the four products, site index |
+| `/about` | The company, mission, delivery process, values, timeline |
+| `/services` | POS and cloud-kitchen consultancy, scratch-to-running stages, 16 build services |
+| `/projects` | Full detail on all four platforms, 81 capabilities, screenshots |
+| `/reviews` | Client reviews and FAQs |
+| `/owner` | Founder profile |
+| `/contact` | Contact channels, enquiry form, location |
+| `/skills` | Skill matrix by discipline + the full stack (footer-linked, not in the bar) |
+| `/privacy-policy`, `/terms` | Legal |
 
 ```
 src/
@@ -92,12 +93,15 @@ from the logo:
 | `--brand` | `#8b5cf6` | The single accent (the wordmark's "X") |
 
 The visual language is flat and typographic: hairline rules, square-ish panels,
-monospace for indices and figures, generous whitespace. No glass, blur, gradient
-blobs or 3D — an earlier revision had all of those and they fought the content.
+monospace for figures, generous whitespace. No glass, blur, gradient blobs or 3D
+— an earlier revision had all of those and they fought the content. There are no
+page numbers anywhere; an earlier revision printed a two-digit index in the
+navbar, every page header and the pager, and it only ever repeated the label.
 
-Animation is treated as feedback, not decoration — `hover-lift`, `sheen-on-hover`
-and `link-underline` are transform/opacity only so they stay on the compositor,
-and everything is disabled under `prefers-reduced-motion`.
+Animation is treated as feedback, not decoration. `hover-lift`, `sheen-on-hover`,
+`link-underline`, `icon-nudge`, `image-zoom`, `rule-grow` and `press` are all
+transform/opacity only so they stay on the compositor, and everything is disabled
+under `prefers-reduced-motion`.
 
 ---
 

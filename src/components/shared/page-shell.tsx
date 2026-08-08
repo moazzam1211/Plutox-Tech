@@ -214,13 +214,13 @@ export function DefRow({
 }
 
 /* ------------------------------------------------------------------ */
-/* Pager — prev / next through the seven pages                        */
+/* Pager — prev / next through the primary pages                      */
 /* ------------------------------------------------------------------ */
 
 /**
  * Sequential navigation at the foot of every page.
  *
- * With only seven pages, a prev/next pager is a better model than a footer
+ * With a handful of pages, a prev/next pager is a better model than a footer
  * sitemap: it invites the visitor to read the whole site in order.
  */
 export function Pager({ current }: { current: string }) {

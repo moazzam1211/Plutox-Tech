@@ -25,7 +25,7 @@ interface LegalLayoutProps {
  * legal text is the one thing on the site people genuinely read line by line, so
  * line length matters more here than anywhere else.
  *
- * These sit outside the numbered seven-page sequence, so the pager returns the
+ * These sit outside the primary reading sequence, so the pager returns the
  * reader to the intro rather than pretending they're mid-sequence.
  */
 export function LegalLayout({

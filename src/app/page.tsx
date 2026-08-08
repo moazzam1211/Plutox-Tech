@@ -11,7 +11,7 @@ import {
 } from "@/components/shared/page-shell";
 import { Reveal, RevealGroup, RevealItem } from "@/components/shared/reveal";
 import { Button } from "@/components/ui/button";
-import { routes } from "@/data/navigation";
+import { routes, secondaryRoutes } from "@/data/navigation";
 import { products } from "@/data/products";
 import { siteConfig } from "@/lib/site";
 
@@ -143,12 +143,12 @@ export default function IntroPage() {
       {/* ---------------- Site index ---------------- */}
       <Block
         label="This site"
-        title="Seven pages"
+        title="Every page"
         description="No endless scroll. Each page answers one question."
         last
       >
         <RevealGroup stagger={0.05} className="grid gap-3 sm:grid-cols-2">
-          {routes.slice(1).map((route) => (
+          {[...routes.slice(1), ...secondaryRoutes].map((route) => (
             <RevealItem key={route.href}>
               <Link href={route.href} className="block h-full">
                 <Panel

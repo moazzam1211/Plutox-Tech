@@ -9,7 +9,7 @@ import {
   InstagramIcon,
   LinkedInIcon,
 } from "@/components/shared/social-icons";
-import { legalRoutes, routes } from "@/data/navigation";
+import { legalRoutes, routes, secondaryRoutes } from "@/data/navigation";
 import { siteConfig } from "@/lib/site";
 import { toTelHref } from "@/lib/utils";
 
@@ -75,11 +75,14 @@ export function SiteFooter() {
           </ul>
         </div>
 
-        {/* The numbered index again, for people who scroll to the bottom. */}
+        {/*
+          Every page, for anyone who scrolls to the bottom — including the ones
+          the navbar doesn't have room for, so nothing is reachable only by URL.
+        */}
         <nav aria-label="All pages">
           <p className="eyebrow text-muted-foreground">Pages</p>
           <ul className="mt-4 flex flex-col gap-2">
-            {routes.map((route) => (
+            {[...routes, ...secondaryRoutes].map((route) => (
               <li key={route.href}>
                 <Link
                   href={route.href}

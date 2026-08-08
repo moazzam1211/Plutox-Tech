@@ -12,7 +12,7 @@ import type { LucideIcon } from "lucide-react";
 /**
  * The whole site, in order.
  *
- * Seven pages, in reading order. The order is the visual language: the navbar
+ * The primary pages, in reading order. The order is the visual language: the navbar
  * lists them in sequence and every page ends with a prev/next pager, so a
  * visitor can read the whole site through rather than scrolling one endless
  * landing page. Pages used to print a two-digit index as well — it was removed
@@ -37,25 +37,25 @@ export const routes: Route[] = [
     icon: Home,
   },
   {
+    label: "About",
+    href: "/about",
+    short: "About",
+    summary: "The company, how we work and what we stand for",
+    icon: Building2,
+  },
+  {
+    label: "Services",
+    href: "/services",
+    short: "Services",
+    summary: "Consultancy and build — from an idea to a running business",
+    icon: Wrench,
+  },
+  {
     label: "Projects",
     href: "/projects",
     short: "Projects",
     summary: "Four platforms, built and deployed",
     icon: Briefcase,
-  },
-  {
-    label: "About & Services",
-    href: "/about",
-    short: "About",
-    summary: "The company and what we build",
-    icon: Building2,
-  },
-  {
-    label: "Skills",
-    href: "/skills",
-    short: "Skills",
-    summary: "The stack, hands-on",
-    icon: Wrench,
   },
   {
     label: "Reviews",
@@ -80,7 +80,25 @@ export const routes: Route[] = [
   },
 ];
 
-/** Legal pages — footer only, deliberately out of the numbered sequence. */
+/**
+ * Pages that exist and are indexed, but stay out of the primary bar.
+ *
+ * Skills sits here rather than in `routes`: it is supporting evidence for the
+ * work rather than a destination in its own right, and the bar only has room for
+ * so many labels before they stop being scannable. It is still linked from the
+ * footer, the About page and the Owner profile, and it is still in the sitemap.
+ */
+export const secondaryRoutes: Route[] = [
+  {
+    label: "Skills",
+    href: "/skills",
+    short: "Skills",
+    summary: "The stack, hands-on",
+    icon: Wrench,
+  },
+];
+
+/** Legal pages — footer only, deliberately out of the reading sequence. */
 export const legalRoutes = [
   { label: "Privacy Policy", href: "/privacy-policy" },
   { label: "Terms of Service", href: "/terms" },

@@ -1,3 +1,6 @@
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
+
 import { JsonLd } from "@/components/shared/json-ld";
 import {
   Block,
@@ -8,15 +11,15 @@ import {
   StatStrip,
 } from "@/components/shared/page-shell";
 import { Reveal, RevealGroup, RevealItem } from "@/components/shared/reveal";
+import { Button } from "@/components/ui/button";
 import { coreValues, mission, timeline, vision } from "@/data/company";
 import { processSteps } from "@/data/process";
-import { services } from "@/data/services";
 import { breadcrumbJsonLd, buildMetadata } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
 
 export const metadata = buildMetadata({
-  title: "About & Services",
-  description: `Founded in ${siteConfig.founded} in Lahore, Plutox Tech is a founder-led software house. Our mission, values, delivery process and the sixteen services we offer — POS, ERP, CRM, web, mobile, cloud and AI automation.`,
+  title: "About",
+  description: `Founded in ${siteConfig.founded} in Lahore, Plutox Tech is a founder-led software house building POS, ERP and hospitality platforms. Our mission, values, seven-stage delivery process and the story so far.`,
   path: "/about",
   keywords: [
     "software house in Lahore",
@@ -32,12 +35,12 @@ export default function AboutPage() {
       <JsonLd
         data={breadcrumbJsonLd([
           { name: "Intro", path: "/" },
-          { name: "About & Services", path: "/about" },
+          { name: "About", path: "/about" },
         ])}
       />
 
       <PageHeader
-        eyebrow="About & Services"
+        eyebrow="About"
         title={
           <>
             A software house that behaves like{" "}
@@ -51,7 +54,7 @@ export default function AboutPage() {
           items={[
             { value: siteConfig.founded, label: "Founded" },
             { value: "4", label: "Products shipped" },
-            { value: "16", label: "Services offered" },
+            { value: "18", label: "Services & programmes" },
             { value: "7", label: "Delivery stages" },
           ]}
         />
@@ -79,22 +82,51 @@ export default function AboutPage() {
         </div>
       </Block>
 
-      {/* ---------------- Services ---------------- */}
+      {/* ---------------- Services pointer ---------------- */}
+      {/*
+        The full catalogue used to live here, which made this page two pages
+        wearing one URL. It moved to /services alongside the two consultancy
+        programmes; what stays behind is a summary and a way through.
+      */}
       <Block
         label="What we build"
-        title="Sixteen services"
-        description="From the till at the counter to the ledger in the cloud. One team, one contract, no hand-offs between vendors."
+        title="Consultancy and software"
+        description="Two end-to-end programmes and sixteen build services — all of it now on its own page, where it has the room it needs."
       >
-        <RevealGroup stagger={0.03} className="flex flex-col">
-          {services.map((service) => (
-            <RevealItem key={service.slug}>
-              <DefRow
-                term={service.title}
-                detail={service.description}
-              />
-            </RevealItem>
-          ))}
-        </RevealGroup>
+        <div className="grid gap-4 sm:grid-cols-2">
+          <Reveal preset="fadeUp">
+            <Panel className="h-full p-6">
+              <p className="eyebrow text-primary">POS System Consultancy</p>
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                A counter audit, an honest platform recommendation, hardware
+                specified to budget, PRA / FBR fiscal setup, data migration,
+                role-based training and a supervised go-live.
+              </p>
+            </Panel>
+          </Reveal>
+          <Reveal preset="fadeUp" delay={0.08}>
+            <Panel className="h-full p-6">
+              <p className="eyebrow text-primary">Cloud Kitchen Setup</p>
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                Unit economics before the lease, licensing, kitchen layout,
+                equipment, menu costed to the gram, POS and aggregator
+                integration, hiring, soft launch and a monthly review after it.
+              </p>
+            </Panel>
+          </Reveal>
+        </div>
+
+        <Reveal preset="fadeUp" className="mt-8 flex flex-wrap gap-3">
+          <Button asChild size="md">
+            <Link href="/services">
+              See all services
+              <ArrowRight />
+            </Link>
+          </Button>
+          <Button asChild variant="outline" size="md">
+            <Link href="/skills">The stack we build on</Link>
+          </Button>
+        </Reveal>
       </Block>
 
       {/* ---------------- Process ---------------- */}

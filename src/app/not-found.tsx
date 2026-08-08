@@ -4,12 +4,12 @@ import Link from "next/link";
 import { Panel } from "@/components/shared/page-shell";
 import { Reveal } from "@/components/shared/reveal";
 import { Button } from "@/components/ui/button";
-import { routes } from "@/data/navigation";
+import { routes, secondaryRoutes } from "@/data/navigation";
 
 /**
  * 404.
  *
- * Because the site is a finite, numbered set of seven pages, the most useful
+ * Because the site is a small, finite set of pages, the most useful
  * thing a not-found page can do is show that whole index — the visitor can see
  * everything that exists and pick, rather than guess.
  */
@@ -35,7 +35,7 @@ export default function NotFound() {
       <Reveal preset="fadeUp" delay={0.12}>
         <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground">
           The URL you followed doesn&apos;t exist — it may have moved, or the link
-          may have a typo. The whole site is seven pages, listed below.
+          may have a typo. The whole site is listed below.
         </p>
       </Reveal>
 
@@ -49,7 +49,7 @@ export default function NotFound() {
 
       <Reveal preset="fadeUp" delay={0.24}>
         <ul className="mt-14 grid max-w-3xl gap-3 sm:grid-cols-2">
-          {routes.map((route) => (
+          {[...routes, ...secondaryRoutes].map((route) => (
             <li key={route.href}>
               <Link href={route.href} className="block h-full">
                 <Panel
