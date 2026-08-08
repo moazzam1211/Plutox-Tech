@@ -23,7 +23,7 @@ import { breadcrumbJsonLd, buildMetadata } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "Services",
   description:
-    "POS system consultancy and cloud kitchen setup in Lahore — feasibility, licensing, layout, equipment, menu costing, POS, aggregator integration, staff training and launch. Everything needed to take a business from scratch to running smoothly, plus sixteen software services.",
+    "POS system consultancy, cloud kitchen setup and software project consultancy in Lahore — feasibility, licensing, layout, equipment, menu costing, requirements, build-vs-buy, architecture, estimates, vendor selection, training and launch. Everything needed to take a business from scratch to running smoothly, plus sixteen software services.",
   path: "/services",
   keywords: [
     "POS consultancy Pakistan",
@@ -31,6 +31,9 @@ export const metadata = buildMetadata({
     "restaurant POS consultant",
     "how to start a cloud kitchen",
     "POS system implementation",
+    "software project consultancy",
+    "IT project consultant Lahore",
+    "software requirements and estimation",
     "business setup consultancy Lahore",
   ],
 });
@@ -39,9 +42,10 @@ export const metadata = buildMetadata({
  * Services — consultancy first, software second.
  *
  * Split out of `/about`, which had become two pages wearing one URL. The page
- * leads with the two end-to-end programmes because that is what someone opening
- * a business is actually looking for; the sixteen build services sit underneath
- * for the visitor who already knows what they want built.
+ * leads with the three end-to-end programmes because that is what someone opening
+ * a business — or about to commission software — is actually looking for; the
+ * sixteen build services sit underneath for the visitor who already knows what
+ * they want built.
  */
 export default function ServicesPage() {
   const totalPhases = consultancyPrograms.reduce(
@@ -66,12 +70,15 @@ export default function ServicesPage() {
             <span className="text-primary">that runs without you</span>
           </>
         }
-        lede="Two end-to-end programmes — POS system consultancy and cloud kitchen setup — plus the software we build around them. We start before the software: the numbers, the licences, the layout and the equipment. Then the system that ties it together, the training, the launch, and the monthly review that keeps it honest."
+        lede="Three end-to-end programmes — POS system consultancy, cloud kitchen setup and project consultancy — plus the software we build around them. We start before the software: the numbers, the licences, the layout, the equipment, and the specification that decides whether the thing should be built at all. Then the system that ties it together, the training, the launch, and the review that keeps it honest."
       >
         <StatStrip
           className="max-w-2xl border-t pt-4"
           items={[
-            { value: "2", label: "Consultancy programmes" },
+            {
+              value: String(consultancyPrograms.length),
+              label: "Consultancy programmes",
+            },
             { value: String(totalPhases), label: "Phases, all named" },
             { value: String(launchJourney.length), label: "Stages to launch" },
             { value: String(services.length), label: "Software services" },
@@ -79,7 +86,7 @@ export default function ServicesPage() {
         />
       </PageHeader>
 
-      {/* ---------------- The two programmes ---------------- */}
+      {/* ---------------- The consultancy programmes ---------------- */}
       {consultancyPrograms.map((program) => {
         const Icon = program.icon;
 

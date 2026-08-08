@@ -54,7 +54,7 @@ export default function AboutPage() {
           items={[
             { value: siteConfig.founded, label: "Founded" },
             { value: "4", label: "Products shipped" },
-            { value: "18", label: "Services & programmes" },
+            { value: "19", label: "Services & programmes" },
             { value: "7", label: "Delivery stages" },
           ]}
         />
@@ -85,15 +85,15 @@ export default function AboutPage() {
       {/* ---------------- Services pointer ---------------- */}
       {/*
         The full catalogue used to live here, which made this page two pages
-        wearing one URL. It moved to /services alongside the two consultancy
+        wearing one URL. It moved to /services alongside the three consultancy
         programmes; what stays behind is a summary and a way through.
       */}
       <Block
         label="What we build"
         title="Consultancy and software"
-        description="Two end-to-end programmes and sixteen build services — all of it now on its own page, where it has the room it needs."
+        description="Three end-to-end programmes and sixteen build services — all of it now on its own page, where it has the room it needs."
       >
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid gap-4 sm:grid-cols-3">
           <Reveal preset="fadeUp">
             <Panel className="h-full p-6">
               <p className="eyebrow text-primary">POS System Consultancy</p>
@@ -111,6 +111,16 @@ export default function AboutPage() {
                 Unit economics before the lease, licensing, kitchen layout,
                 equipment, menu costed to the gram, POS and aggregator
                 integration, hiring, soft launch and a monthly review after it.
+              </p>
+            </Panel>
+          </Reveal>
+          <Reveal preset="fadeUp" delay={0.16}>
+            <Panel className="h-full p-6">
+              <p className="eyebrow text-primary">Project Consultancy</p>
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                Requirements, an honest build-vs-buy call, architecture, ranged
+                estimates, vendor selection, oversight for the length of the
+                build, and a handover that leaves you owning everything.
               </p>
             </Panel>
           </Reveal>

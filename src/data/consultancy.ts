@@ -5,6 +5,7 @@ import {
   Building,
   ChefHat,
   ClipboardCheck,
+  Compass,
   CreditCard,
   FileCheck2,
   GraduationCap,
@@ -23,10 +24,10 @@ import type { LucideIcon } from "lucide-react";
  *
  * Two things are modelled here, and they are deliberately separate:
  *
- * 1. `consultancyPrograms` — the two end-to-end engagements, POS and cloud
- *    kitchen. Each is a sequence of phases with named deliverables, because
- *    "consultancy" with no deliverable list is indistinguishable from a
- *    conversation.
+ * 1. `consultancyPrograms` — the three end-to-end engagements: POS, cloud
+ *    kitchen and software projects. Each is a sequence of phases with named
+ *    deliverables, because "consultancy" with no deliverable list is
+ *    indistinguishable from a conversation.
  * 2. `launchJourney` — the ten stages of opening a business, with an explicit
  *    `owner` on every one. That column matters: a software house cannot sign a
  *    lease or hold a food licence for a client, and saying so in the data keeps
@@ -283,6 +284,117 @@ export const consultancyPrograms: ConsultancyProgram[] = [
     timeline: "8–14 weeks from first meeting to first order, site depending",
     outcome:
       "A kitchen taking orders on every channel through one queue, with a P&L you can read daily and a menu you know the margin on.",
+  },
+
+  /* ------------------------------------------------------------------ */
+  /* Project consultancy                                                */
+  /* ------------------------------------------------------------------ */
+  {
+    slug: "project-consultancy",
+    name: "Project Consultancy",
+    tagline: "Decide what to build, and what it will really cost, before you commit",
+    audience:
+      "Businesses about to commission custom software, teams whose project has stalled or overrun, and anyone holding three vendor quotes that are impossible to compare",
+    summary:
+      "Most software money is lost before a line of code is written — on a scope nobody wrote down, a quote nobody could compare, and a decision to build something that already existed off the shelf. We do the thinking first: what the software has to do, whether it should be built at all, what it will genuinely cost and how long it will take. You get a specification and an estimate you own outright — and you are free to hand them to any developer, including one who isn't us.",
+    icon: Compass,
+    brandColor: "#004AAD",
+    phases: [
+      {
+        title: "Discovery & requirements",
+        detail:
+          "Interviews with the people who will actually use the software and the people who will pay for it, then the current process mapped as it is rather than as the org chart says it is. Requirements are written down and ranked — must, should, could, won't — so the argument about priority happens now and not in month four.",
+        deliverables: [
+          "Stakeholder interviews and process map",
+          "Prioritised requirements document",
+          "Success metrics with numbers attached",
+        ],
+      },
+      {
+        title: "Feasibility & build-vs-buy",
+        detail:
+          "The uncomfortable question asked properly: does this need building? We price the custom build against the off-the-shelf products that already do most of it, including ours, and against doing nothing. Sometimes the honest answer is a configured product and two integrations, and we would rather say that than take the larger contract.",
+        deliverables: [
+          "Build, buy or configure recommendation",
+          "Off-the-shelf options priced and compared",
+          "Cost of doing nothing",
+        ],
+      },
+      {
+        title: "Solution architecture",
+        detail:
+          "How the system is put together and why: data model, integrations, hosting, offline behaviour, security and the concurrency it has to survive. Written for a technical reader but explained for a non-technical one, because you are the person who has to live with the consequences.",
+        deliverables: [
+          "Architecture and data model",
+          "Integration and hosting plan",
+          "Security and access-control design",
+        ],
+      },
+      {
+        title: "Scope, estimate & roadmap",
+        detail:
+          "Every requirement broken into work you can actually schedule, with ranged estimates rather than a single optimistic number, and the assumptions behind each one written down. Phased so that something useful ships early instead of everything landing at the end.",
+        deliverables: [
+          "Itemised scope with ranged estimates",
+          "Phased roadmap with a defined first release",
+          "Written assumptions and risk register",
+        ],
+      },
+      {
+        title: "Vendor selection & tender",
+        detail:
+          "If you are not building with us, we turn the specification into a tender pack, help you shortlist, sit in on the technical interviews and score the responses against the same criteria. Quotes stop being incomparable once every vendor is answering the same document.",
+        deliverables: [
+          "Tender pack built from the specification",
+          "Vendor scorecard and shortlist",
+          "Contract and milestone review",
+        ],
+      },
+      {
+        title: "Delivery governance",
+        detail:
+          "Someone technical on your side of the table for the length of the build. We review what is actually shipped against what was promised each sprint, read the code where it matters, and flag scope creep and slipping timelines while there is still room to correct them.",
+        deliverables: [
+          "Sprint reviews against agreed scope",
+          "Code and architecture spot-checks",
+          "Fortnightly status report in plain English",
+        ],
+      },
+      {
+        title: "Quality assurance & UAT",
+        detail:
+          "Test cases written from the requirements document, not from the software that got built — that distinction is the whole point. Functional, load and security testing, then user-acceptance sessions run with your staff so problems surface before go-live rather than during it.",
+        deliverables: [
+          "Test plan traced to requirements",
+          "Defect log with severity and owner",
+          "Signed user-acceptance record",
+        ],
+      },
+      {
+        title: "Handover & knowledge transfer",
+        detail:
+          "The end of a project should not be the start of a dependency. Source code, credentials, deployment instructions and documentation transferred into your ownership, with your team walked through running it — whether we built it or somebody else did.",
+        deliverables: [
+          "Source, credentials and infrastructure handover",
+          "Technical and user documentation",
+          "Team training and support plan",
+        ],
+      },
+    ],
+    includes: [
+      "A written specification and estimate you own outright",
+      "An honest build-vs-buy call, even when buying is worth less to us",
+      "Architecture designed for the load and the offline behaviour you need",
+      "Ranged estimates with the assumptions written down, not one hopeful figure",
+      "Tender pack and vendor scoring if you build with someone else",
+      "Technical oversight for the length of the build",
+      "Test plans traced to requirements, and UAT run with your staff",
+      "Full handover — code, credentials, documentation and training",
+    ],
+    timeline:
+      "2–4 weeks for discovery through to estimate; governance runs for the length of the build",
+    outcome:
+      "A specification precise enough to quote against, an estimate you can budget from, and no vendor holding your source code hostage.",
   },
 ];
 
