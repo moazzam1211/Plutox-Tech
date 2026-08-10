@@ -30,9 +30,12 @@ const LOGOS = [
   { src: "pharmasync.png", out: "pharmasync-logo.png" },
   { src: "vendeez.png", out: "vendeez-logo.png" },
   { src: "staysync.png", out: "staysync-logo.png" },
+  // Fleet Flow ships a stacked lock-up rather than a horizontal wordmark, so it
+  // is trimmed to a taller target and rendered larger on the page.
+  { src: "fleetflow.png", out: "fleetflow-logo.png", height: 420 },
 ];
 
-async function prepare({ src, out }) {
+async function prepare({ src, out, height = TARGET_HEIGHT }) {
   const inputPath = join(SRC, src);
   const outputPath = join(DIR, out);
 
@@ -43,7 +46,7 @@ async function prepare({ src, out }) {
     // and near-transparent margins, not just pixel-perfect ones.
     .trim({ threshold: 10 })
     // Scale to a common height; width follows the logo's own proportions.
-    .resize({ height: TARGET_HEIGHT, fit: "inside", withoutEnlargement: false })
+    .resize({ height, fit: "inside", withoutEnlargement: false })
     .png({ compressionLevel: 9 })
     .toFile(outputPath);
 

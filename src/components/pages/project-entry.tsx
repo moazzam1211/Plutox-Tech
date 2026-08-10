@@ -24,10 +24,16 @@ import type { Product } from "@/types";
  * animation finishes, so if rAF stalls (backgrounded tab, heavy main-thread
  * work) the gallery silently stops advancing. A mount-only CSS fade cannot.
  */
-function ScreenGallery({ product }: { product: Product }) {
+function ScreenGallery({
+  product,
+  screens,
+}: {
+  product: Product;
+  screens: NonNullable<Product["screens"]>;
+}) {
   const [index, setIndex] = React.useState(0);
-  const count = product.screens.length;
-  const active = product.screens[index];
+  const count = screens.length;
+  const active = screens[index];
 
   const go = React.useCallback(
     (next: number) => setIndex(((next % count) + count) % count),
@@ -86,7 +92,7 @@ function ScreenGallery({ product }: { product: Product }) {
       </div>
 
       <ul className="grid grid-cols-6 gap-1.5">
-        {product.screens.map((screen, thumb) => (
+        {screens.map((screen, thumb) => (
           <li key={screen.src}>
             <button
               type="button"
@@ -117,6 +123,103 @@ function ScreenGallery({ product }: { product: Product }) {
         ))}
       </ul>
     </div>
+  );
+}
+
+/**
+ * Delivery roadmap, shown in place of the gallery while a product is still being
+ * built.
+ *
+ * The alternative was a screenshot of an unfinished console or an invented
+ * mockup, and the page's entire claim is that nothing on it is a mockup. A phase
+ * list is also the more useful answer to the question a visitor actually has:
+ * what works today, and what doesn't yet.
+ */
+function Roadmap({
+  phases,
+  brandColor,
+}: {
+  phases: NonNullable<Product["roadmap"]>;
+  brandColor: string;
+}) {
+  const shipped = phases.filter((phase) => phase.state === "done").length;
+
+  return (
+    <Panel className="p-5">
+      <div className="flex items-baseline justify-between gap-3 border-b border-border pb-3">
+        <p className="eyebrow text-muted-foreground">Delivery roadmap</p>
+        <p className="font-mono text-[0.625rem] text-muted-foreground">
+          {shipped} of {phases.length} shipped
+        </p>
+      </div>
+
+      {/* Progress rail. Transform-only, and it reads the same figure as the
+          count above so the two can never disagree. */}
+      <div
+        aria-hidden
+        className="mt-3 h-1 w-full overflow-hidden rounded-full bg-border"
+      >
+        <div
+          className="h-full origin-left rounded-full transition-transform duration-700 ease-out"
+          style={{
+            backgroundColor: brandColor,
+            transform: `scaleX(${shipped / phases.length})`,
+          }}
+        />
+      </div>
+
+      <ol className="mt-5 flex flex-col">
+        {phases.map((phase) => (
+          <li
+            key={phase.label}
+            className="group/rd flex gap-3 border-b border-border py-3 last:border-0"
+          >
+            <span
+              aria-hidden
+              className={cn(
+                "mt-1 size-2 shrink-0 rounded-full transition-transform duration-300 group-hover/rd:scale-125",
+                phase.state === "planned" && "bg-border",
+              )}
+              style={
+                phase.state === "planned"
+                  ? undefined
+                  : {
+                      backgroundColor:
+                        phase.state === "done" ? brandColor : "transparent",
+                      boxShadow:
+                        phase.state === "next"
+                          ? `inset 0 0 0 1.5px ${brandColor}`
+                          : undefined,
+                    }
+              }
+            />
+
+            <div className="min-w-0">
+              <p className="flex flex-wrap items-baseline gap-2">
+                <span className="font-mono text-[0.625rem] text-muted-foreground">
+                  {phase.label}
+                </span>
+                <span className="text-sm font-semibold">{phase.title}</span>
+                {phase.state === "next" ? (
+                  <span
+                    className="rounded border px-1.5 py-0.5 font-mono text-[0.5625rem]"
+                    style={{
+                      color: brandColor,
+                      borderColor: `${brandColor}55`,
+                    }}
+                  >
+                    in progress
+                  </span>
+                ) : null}
+              </p>
+              <p className="mt-1 text-[0.8125rem] leading-relaxed text-muted-foreground">
+                {phase.detail}
+              </p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </Panel>
   );
 }
 
@@ -153,6 +256,24 @@ export function ProjectEntry({ product }: { product: Product }) {
                   {product.badge}
                 </span>
               ) : null}
+
+              {/*
+                Only in-development products get a status pill. Labelling the
+                other four "shipped" would be noise — and the absence of the pill
+                has to mean shipped, or the page starts implying that everything
+                unlabelled might be vapour.
+              */}
+              {product.status === "in-development" ? (
+                <span
+                  className="rounded border px-2 py-0.5 font-mono text-[0.625rem]"
+                  style={{
+                    color: product.brandColor,
+                    borderColor: `${product.brandColor}55`,
+                  }}
+                >
+                  In development
+                </span>
+              ) : null}
             </div>
 
             {/*
@@ -168,8 +289,16 @@ export function ProjectEntry({ product }: { product: Product }) {
                 src={product.image}
                 alt={product.name}
                 width={480}
-                height={96}
-                className="h-6 w-auto object-contain sm:h-7"
+                height={480}
+                className={cn(
+                  "w-auto object-contain",
+                  // A stacked lock-up is a mark sitting above a wordmark, so at
+                  // the horizontal wordmarks' height the words become unreadable.
+                  // Roughly double the height evens up the optical weight.
+                  product.logoLayout === "stacked"
+                    ? "h-14 sm:h-16"
+                    : "h-6 sm:h-7",
+                )}
               />
             </h2>
 
@@ -206,10 +335,14 @@ export function ProjectEntry({ product }: { product: Product }) {
         </div>
       </Reveal>
 
-      {/* ---------------- Gallery + headline features ---------------- */}
+      {/* ---------------- Gallery (or roadmap) + headline features ---------------- */}
       <div className="grid gap-8 border-b border-border py-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:gap-12">
-        <Reveal preset="fadeUp">
-          <ScreenGallery product={product} />
+        <Reveal preset="fadeUp" className="min-w-0">
+          {product.screens?.length ? (
+            <ScreenGallery product={product} screens={product.screens} />
+          ) : product.roadmap?.length ? (
+            <Roadmap phases={product.roadmap} brandColor={product.brandColor} />
+          ) : null}
         </Reveal>
 
         <Reveal preset="fadeUp" delay={0.08} className="flex flex-col">

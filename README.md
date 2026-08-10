@@ -7,7 +7,7 @@
 <p align="center">
   <b>Smart Software. Smarter Business.</b><br/>
   The marketing site for Plutox Tech — a founder-led software house in Lahore
-  building point-of-sale, ERP and hospitality platforms.
+  building point-of-sale, ERP, hospitality and logistics platforms.
 </p>
 
 <p align="center">
@@ -37,7 +37,7 @@ npm run dev          # → http://localhost:3400
 | `npm run lint` | ESLint |
 | `npm run assets` | Regenerate placeholder SVGs (review avatars, founder fallback, map) |
 | `npm run icons` | Rebuild the rounded favicon / Apple icon from the brand mark |
-| `npm run product-logos` | Trim and normalise the four product wordmarks |
+| `npm run product-logos` | Trim and normalise the five product lock-ups |
 | `npm run portrait` | Crop + compress the founder portrait to a web-ready JPEG |
 
 ---
@@ -50,10 +50,10 @@ ends with a prev/next pager rather than an endless scroll.
 
 | Route | Purpose |
 | --- | --- |
-| `/` | Intro — statement, product carousel, the four products, site index |
+| `/` | Intro — statement, product carousel, the five platforms, site index |
 | `/about` | The company, mission, delivery process, values, timeline |
-| `/services` | POS and cloud-kitchen consultancy, scratch-to-running stages, 16 build services |
-| `/projects` | Full detail on all four platforms, 81 capabilities, screenshots |
+| `/services` | POS, cloud-kitchen and food-business consultancy, scratch-to-running stages, 16 build services |
+| `/projects` | Full detail on all five platforms, 99 capabilities, screenshots |
 | `/reviews` | Client reviews and FAQs |
 | `/owner` | Founder profile |
 | `/contact` | Contact channels, enquiry form, location |
@@ -122,7 +122,10 @@ variant of every lock-up, swapped with Tailwind's `dark:` variant. See
   deliberate no-op. Wire a mail provider (Resend, SES) there; it is one function.
   The in-memory rate limiter is per-process — use a shared store behind more than
   one instance.
-- Client names, reviews and blog entries are illustrative placeholders.
+- Client names and reviews are illustrative placeholders.
+- Fleet Flow is marked `in-development` and shows a roadmap instead of a gallery,
+  because it has no finished screens to capture. Add `screens` and flip `status`
+  to `shipped` in `src/data/products.ts` once it ships — the page switches itself.
 - Of the social links in `src/lib/site.ts`, only Instagram and Dribbble are
   confirmed. Replace or remove the rest — each is also emitted as `sameAs` in the
   Organization structured data.

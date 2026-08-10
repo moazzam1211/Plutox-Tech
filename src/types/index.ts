@@ -39,23 +39,46 @@ export interface ProductScreen {
   caption: string;
 }
 
+/** One entry in a product's delivery roadmap. */
+export interface ProductPhase {
+  label: string;
+  title: string;
+  detail: string;
+  /** `done` phases are shipped; `next` is in progress; `planned` is scoped only. */
+  state: "done" | "next" | "planned";
+}
+
 export interface Product {
   slug: string;
   name: string;
   category: string;
   tagline: string;
+  /**
+   * Whether the product is shipped or still being built. Drives the status pill
+   * and, for `in-development`, swaps the screenshot gallery for the roadmap —
+   * there are no screenshots of software that isn't finished, and inventing them
+   * is the one thing this page must never do.
+   */
+  status?: "shipped" | "in-development";
   /** One-paragraph positioning statement. */
   description: string;
   /** The product's own logo (trimmed wordmark). */
   image: string;
+  /**
+   * `stacked` logos are a mark above a wordmark rather than a horizontal strip,
+   * so they need roughly twice the height to stay legible on the plate.
+   */
+  logoLayout?: "horizontal" | "stacked";
   /** Brand colour of the product itself, used for its accent wash. */
   brandColor: string;
   /** Headline capability bullets — the scannable summary. */
   features: string[];
   /** Full capability breakdown, grouped by area. */
   moduleGroups: ModuleGroup[];
-  /** Screenshot gallery from the live product. */
-  screens: ProductScreen[];
+  /** Screenshot gallery from the live product. Absent while in development. */
+  screens?: ProductScreen[];
+  /** Delivery roadmap, shown in place of the gallery while in development. */
+  roadmap?: ProductPhase[];
   /** Technologies the product is actually built on. */
   stack: string[];
   /** Hard numbers about the build (modules, endpoints, etc.). */

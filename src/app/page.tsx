@@ -14,11 +14,12 @@ import { Button } from "@/components/ui/button";
 import { routes, secondaryRoutes } from "@/data/navigation";
 import { products } from "@/data/products";
 import { siteConfig } from "@/lib/site";
+import { cn } from "@/lib/utils";
 
 /**
  * Intro.
  *
- * Deliberately short: a statement, the four products as a compact index, the
+ * Deliberately short: a statement, the products as a compact index, the
  * headline numbers, then an index into the rest of the site. Everything
  * that used to be crammed into an eighteen-section landing page now has its own
  * page, which is the whole point of the restructure.
@@ -54,9 +55,10 @@ export default function IntroPage() {
 
           <Reveal preset="fadeUp" delay={0.12}>
             <p className="mt-8 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-              A founder-led software house building point-of-sale, ERP and
-              hospitality platforms — four of them already built, deployed and
-              running real businesses. {siteConfig.tagline}
+              A founder-led software house building point-of-sale, ERP,
+              hospitality and logistics platforms — four already built, deployed
+              and running real businesses, with a fifth in build.{" "}
+              {siteConfig.tagline}
             </p>
           </Reveal>
 
@@ -64,7 +66,7 @@ export default function IntroPage() {
             <div className="mt-10 flex flex-wrap items-center gap-3">
               <Button asChild variant="accent" size="lg">
                 <Link href="/projects">
-                  See the four platforms
+                  See the platforms
                   <ArrowRight />
                 </Link>
               </Button>
@@ -94,11 +96,11 @@ export default function IntroPage() {
         </div>
       </section>
 
-      {/* ---------------- The four products ---------------- */}
+      {/* ---------------- The products ---------------- */}
       <Block
         label="What we've built"
-        title="Four platforms"
-        description="Each one designed, built and shipped by us — not resold, not white-labelled."
+        title="Five platforms"
+        description="Each one designed and built by us — not resold, not white-labelled. Four are shipped and running; Fleet Flow is in build."
       >
         <RevealGroup stagger={0.07} className="flex flex-col">
           {products.map((product) => (
@@ -108,25 +110,44 @@ export default function IntroPage() {
                 className="group/prod sheen-on-hover grid items-center gap-5 border-b border-border py-6 transition-colors first:border-t hover:bg-muted/40 sm:grid-cols-[11rem_minmax(0,1fr)_auto] sm:gap-6"
               >
 
-                {/* Logo on a white plate so each product's own colours stay true. */}
-                {/* The plate lifts and the wordmark grows a shade on hover, so
-                    the row reads as one object reacting rather than four. */}
+                {/*
+                  Logo on a white plate so each product's own colours stay true.
+                  The plate lifts and the wordmark grows a shade on hover, so the
+                  row reads as one object reacting rather than three.
+
+                  Stacked lock-ups (a mark above a wordmark) need roughly double
+                  the height of a horizontal wordmark to stay legible.
+                */}
                 <span className="inline-flex w-fit items-center rounded-md border border-border bg-white px-3 py-2 transition-[transform,border-color] duration-300 ease-out group-hover/prod:-translate-y-0.5 group-hover/prod:border-primary/40">
                   <Image
                     src={product.image}
                     alt={product.name}
                     width={480}
-                    height={96}
-                    className="h-5 w-auto object-contain transition-transform duration-500 ease-out group-hover/prod:scale-[1.04]"
+                    height={480}
+                    className={cn(
+                      "w-auto object-contain transition-transform duration-500 ease-out group-hover/prod:scale-[1.04]",
+                      product.logoLayout === "stacked" ? "h-10" : "h-5",
+                    )}
                   />
                 </span>
 
                 <span className="min-w-0">
                   <span className="block text-sm font-semibold">
                     {product.name}
-                    <span className="ml-2 font-normal text-muted-foreground">
+                    {/* Explicit space: `ml-2` puts a visual gap here but leaves
+                        textContent reading "ServeSync POSRestaurant" for
+                        crawlers, screen readers and copy-paste. */}{" "}
+                    <span className="font-normal text-muted-foreground">
                       {product.category}
                     </span>
+                    {product.status === "in-development" ? (
+                      <>
+                        {" "}
+                        <span className="rounded border border-border px-1.5 py-0.5 align-middle font-mono text-[0.5625rem] font-normal text-muted-foreground">
+                          in development
+                        </span>
+                      </>
+                    ) : null}
                   </span>
                   <span className="mt-1 block text-sm leading-relaxed text-muted-foreground">
                     {product.tagline}

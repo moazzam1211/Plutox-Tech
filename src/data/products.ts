@@ -1,14 +1,17 @@
 import type { Product } from "@/types";
 
 /**
- * The four products built and deployed by Plutox Tech.
+ * The products built by Plutox Tech — four shipped, one in build.
  *
  * Every capability, spec figure and technology listed here is taken from the
  * products' own documentation rather than written as marketing copy — the
  * module counts, endpoint counts and payment rails are the real ones.
  *
  * `image` is each product's own logo, trimmed by `npm run product-logos`.
- * `screens` point at screenshots captured from the running applications.
+ * `screens` point at screenshots captured from the running applications, and are
+ * absent on anything still in development — a product with no finished screens
+ * shows its roadmap instead. Inventing a screenshot is the one thing this page
+ * must never do, since its whole claim is that none of it is a mockup.
  *
  * `demoUrl` goes to /contact rather than a hosted instance: there is no public
  * live demo, and the previous /portfolio and /products anchors were deleted in
@@ -808,6 +811,216 @@ export const products: Product[] = [
       "City ledger",
     ],
     metric: { label: "Properties per login", value: "Unlimited" },
+    demoUrl: "/contact",
+  },
+/* ------------------------------------------------------------------ */
+  /* Fleet Flow TMS                                                     */
+  /* ------------------------------------------------------------------ */
+  {
+    slug: "fleet-flow",
+    name: "Fleet Flow",
+    category: "Transport & Logistics",
+    status: "in-development",
+    tagline: "Smart fleet. Real-time control.",
+    description:
+      "A multi-tenant transport management platform for truck fleets: vehicles, drivers, customers, shipments and trips, with a trip lifecycle the software actually enforces rather than trusts. Built on a NestJS API and a Next.js console over PostgreSQL and PostGIS, with tenant isolation enforced at four layers so one company's data cannot leak into another's. Two of eight phases are delivered; live GPS tracking, maintenance, finance and the driver app follow.",
+    image: "/images/products/fleetflow-logo.png",
+    logoLayout: "stacked",
+    brandColor: "#FF7B56",
+    audience:
+      "Trucking companies, logistics operators and freight brokers running their own fleets — from a dozen trucks to several hundred across branches",
+    badge: "Phase 2 of 8",
+    features: [
+      "Multi-tenant by design — tenant isolation enforced at four layers",
+      "Trip lifecycle validated against a transition map, not trusted",
+      "Conflict detection dry-runs an assignment before it is committed",
+      "Driver assignment over a time window, so history survives reassignment",
+      "Shipment totals derived from cargo lines, never typed twice",
+      "190 granular permissions across 15 groups and nine seeded roles",
+      "Per-tenant numbering that survives two concurrent dispatchers",
+      "Vendor kill switch that revokes every live session for a company",
+    ],
+    moduleGroups: [
+      {
+        title: "Operations",
+        items: [
+          {
+            name: "Vehicles",
+            detail:
+              "Full records with plan-limit enforcement, a status lifecycle that refuses to move a truck mid-trip, soft delete that releases the driver and blocks while trips are open, and a per-vehicle count of documents expiring inside 30 days.",
+          },
+          {
+            name: "Drivers",
+            detail:
+              "Assignment to a truck over a time window rather than a foreign key, so \"who was driving on the 14th\" survives every later reassignment. One primary driver per truck, enforced by a partial unique index, and expired licences surfaced on the list.",
+          },
+          {
+            name: "Customers",
+            detail:
+              "Contacts, credit limit and payment terms, with deletion blocked while shipments are in progress.",
+          },
+          {
+            name: "Shipments",
+            detail:
+              "Cargo lines with concurrency-safe numbering and an opaque public tracking code minted at creation. Header weight and value are derived from the lines — a header that disagrees with its items is the classic source of billing disputes.",
+          },
+          {
+            name: "Trips",
+            detail:
+              "Stops, shipment links, rate and advance, with an append-only event timeline. Every status move is applied with its side effects in one transaction: the truck, the driver, every shipment on board and the timeline entry all move, or none do.",
+          },
+          {
+            name: "Conflict detection",
+            detail:
+              "Dry-runs an assignment and reports overlapping trips, unavailable trucks, drivers on leave and licences expiring mid-trip. Conflicts block assignment unless an override reason is supplied — and the reason is recorded.",
+          },
+        ],
+      },
+      {
+        title: "Platform & tenancy",
+        items: [
+          {
+            name: "Multi-tenancy",
+            detail:
+              "Four enforcement layers: the tenant comes from the signed JWT only, AsyncLocalStorage carries it through the request, and a Prisma extension injects it into every read, stamps it on every write and throws if a scoped query runs without one. The scoped-model set is derived from the schema at boot, so a model added later is protected the day it exists.",
+          },
+          {
+            name: "Authentication",
+            detail:
+              "Registration with automatic tenant provisioning, argon2id hashing, rotating refresh tokens with family-wide revocation on reuse, TOTP two-factor with single-use recovery codes, phone OTP for drivers, and rate limits on every credential endpoint.",
+          },
+          {
+            name: "RBAC",
+            detail:
+              "190 permissions in 15 groups across nine seeded roles, with wildcard expansion, a global guard and cache-backed resolution — so a revoked role takes effect immediately rather than when the token expires.",
+          },
+          {
+            name: "Platform console",
+            detail:
+              "The vendor's own account: suspend a company to revoke every live session and block both sign-in and tenant switching, reactivate, extend the period after payment, change plan, or enter a company through the audited switch-tenant path.",
+          },
+          {
+            name: "Branches & users",
+            detail:
+              "Multiple branches per company, user management, invitations and per-branch scoping.",
+          },
+          {
+            name: "Audit log",
+            detail:
+              "Append-only at the database level via a trigger, so history cannot be quietly rewritten from the application tier.",
+          },
+        ],
+      },
+      {
+        title: "Data & integrity",
+        items: [
+          {
+            name: "Schema",
+            detail:
+              "68 Prisma models covering all eight phases, so later features slot into a schema that already anticipated them instead of forcing a migration of live data.",
+          },
+          {
+            name: "Constraints Prisma cannot express",
+            detail:
+              "A hand-authored SQL layer: check constraints (a geofence is a circle or a polygon, never both; a ledger line is a debit or a credit), partial unique indexes, and a deferred constraint trigger asserting that every journal balances.",
+          },
+          {
+            name: "Spatial & search indexes",
+            detail:
+              "PostGIS geography columns with GiST indexes for tracking, BRIN indexes for time-series telemetry, and trigram indexes so search stays fast as the tables grow.",
+          },
+          {
+            name: "Numbering",
+            detail:
+              "A per-tenant sequence incremented by one atomic upsert, allocated inside the creating transaction. MAX(number) + 1 races under two concurrent dispatchers, and a unique violation on trip creation is a terrible way to find out.",
+          },
+          {
+            name: "Shared contracts",
+            detail:
+              "The permission catalogue, role definitions, status enums, the legal trip-transition map, the GPS packet contract and the Zod schemas all live in one package used by API and console alike, so a status string cannot drift between tiers.",
+          },
+          {
+            name: "Dashboard",
+            detail:
+              "Real fleet, driver, trip and shipment tallies, month-to-date revenue, expenses and profit, on-time delivery over 30 days, a daily trip trend and a six-month revenue series.",
+          },
+        ],
+      },
+    ],
+    roadmap: [
+      {
+        label: "Phase 1",
+        title: "Foundation",
+        detail:
+          "Monorepo, 68-model schema, authentication, multi-tenancy, RBAC, the design system and the app shell.",
+        state: "done",
+      },
+      {
+        label: "Phase 2",
+        title: "Operational core",
+        detail:
+          "Vehicles, drivers, customers, shipments, trips with an enforced lifecycle, and a dashboard on real tenant data.",
+        state: "done",
+      },
+      {
+        label: "Phase 3",
+        title: "Dispatch & live tracking",
+        detail:
+          "Route planning, GPS ingestion, geofencing and alerting over PostGIS.",
+        state: "next",
+      },
+      {
+        label: "Phase 4",
+        title: "Fleet upkeep",
+        detail:
+          "Fuel, maintenance schedules, workshop jobs, tyre management and parts inventory.",
+        state: "planned",
+      },
+      {
+        label: "Phase 5",
+        title: "Finance",
+        detail:
+          "Expenses, invoicing, payments, driver payroll and double-entry accounting.",
+        state: "planned",
+      },
+      {
+        label: "Phase 6",
+        title: "Portals & driver app",
+        detail:
+          "A customer portal, public shipment tracking, and a React Native app for drivers.",
+        state: "planned",
+      },
+      {
+        label: "Phase 7",
+        title: "Analytics & command centre",
+        detail:
+          "Reporting, notifications, a live command centre and AI-assisted dispatch.",
+        state: "planned",
+      },
+      {
+        label: "Phase 8",
+        title: "Hardening & launch",
+        detail: "Performance, security review, billing and production rollout.",
+        state: "planned",
+      },
+    ],
+    stack: [
+      "TypeScript",
+      "NestJS",
+      "Next.js 15",
+      "Prisma",
+      "PostgreSQL 16",
+      "PostGIS",
+      "Redis",
+      "Docker",
+    ],
+    specs: [
+      { label: "Prisma models", value: "68" },
+      { label: "API endpoints", value: "90" },
+      { label: "Permissions", value: "190" },
+      { label: "Phases shipped", value: "2 / 8" },
+    ],
+    metric: { label: "Tenant isolation layers", value: "4" },
     demoUrl: "/contact",
   },
 ];

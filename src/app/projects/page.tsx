@@ -9,13 +9,15 @@ import { breadcrumbJsonLd, buildMetadata } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "Projects",
   description:
-    "ServeSync POS, PharmaSync POS, Vendeez POS and StaySync Hotel ERP — four platforms designed, built and deployed by Plutox Tech, with full module detail and screenshots from the running software.",
+    "ServeSync POS, PharmaSync POS, Vendeez POS, StaySync Hotel ERP and Fleet Flow — five platforms designed and built by Plutox Tech, four of them shipped and running, with full module detail and screenshots from the running software.",
   path: "/projects",
   keywords: [
     "restaurant POS software",
     "pharmacy POS software",
     "supermarket POS software",
     "hotel ERP software",
+    "fleet management software",
+    "transport management system",
   ],
 });
 
@@ -33,24 +35,24 @@ export default function ProjectsPage() {
         eyebrow="Projects"
         title={
           <>
-            Four platforms,{" "}
-            <span className="text-primary">built and deployed</span>
+            Five platforms,{" "}
+            <span className="text-primary">four of them shipped</span>
           </>
         }
-        lede="Every figure below — module counts, endpoint counts, payment rails — comes from the products' own documentation, and every screenshot is from the running software. Nothing here is a mockup."
+        lede="Every figure below — module counts, endpoint counts, payment rails — comes from the products' own documentation, and every screenshot is from the running software. Nothing here is a mockup, which is why the one product still in build shows its delivery roadmap instead of screens it does not have yet."
       >
         <StatStrip
           className="max-w-2xl border-t pt-4"
           items={[
-            { value: "4", label: "Products" },
+            { value: "5", label: "Platforms" },
             { value: "60+", label: "Live modules" },
-            { value: "289+", label: "REST endpoints" },
-            { value: "81", label: "Capabilities detailed" },
+            { value: "379+", label: "REST endpoints" },
+            { value: "99", label: "Capabilities detailed" },
           ]}
         />
       </PageHeader>
 
-      {/* Jump links — with four long entries, an index at the top is worth it. */}
+      {/* Jump links — with five long entries, an index at the top is worth it. */}
       <nav
         aria-label="Jump to a project"
         className="border-b border-border px-6 py-5 sm:px-10 lg:px-14"
