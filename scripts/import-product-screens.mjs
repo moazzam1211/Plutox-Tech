@@ -147,6 +147,12 @@ const PRODUCTS = [
       ["42-inventory.png", "Parts Inventory", "Stock and reorder points, drawn down by jobs"],
       ["43-running-costs.png", "Running Costs", "Cost per kilometre from fuel, upkeep and expenses"],
       ["14-customers.png", "Customers", "Credit limits and payment terms"],
+      // Phase 5 — finance.
+      ["45-invoices.png", "Invoices", "Issued against trips, with overdue derived from today"],
+      ["46-payments.png", "Payments", "Receipts allocated to invoices, never re-crediting revenue"],
+      ["47-expenses.png", "Expenses", "Costs against the trip, vehicle or the business"],
+      ["48-payroll.png", "Payroll", "Gross expensed, advances recovered at a capped share"],
+      ["49-accounting.png", "Accounting", "Trial balance, P&L and receivables ageing"],
       ["30-platform-console.png", "Platform Console", "Every tenant, its plan and its usage"],
       ["25-settings.png", "Settings", "Plan limits and usage against them"],
     ],

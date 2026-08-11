@@ -1114,13 +1114,13 @@ export const products: Product[] = [
     status: "in-development",
     tagline: "Smart fleet. Real-time control.",
     description:
-      "A multi-tenant transport management platform for truck fleets: vehicles, drivers, customers, shipments and trips with a lifecycle the software enforces rather than trusts, a drag-and-drop dispatch board, a live-tracking feed, and the whole upkeep side — fuel, maintenance, workshop jobs, tyres and parts. Built on a NestJS API and a Next.js console over PostgreSQL and PostGIS, with tenant isolation enforced at four layers so one company's data cannot reach another's. Twenty-five API modules are in; the map layer, geofencing, invoicing, the customer portal and the driver app are what remain.",
+      "A multi-tenant transport management platform for truck fleets: vehicles, drivers, customers, shipments and trips with a lifecycle the software enforces rather than trusts, a drag-and-drop dispatch board, a live-tracking feed, and the whole upkeep side — fuel, maintenance, workshop jobs, tyres and parts. Built on a NestJS API and a Next.js console over PostgreSQL and PostGIS, with tenant isolation enforced at four layers so one company's data cannot reach another's. Twenty-nine API modules are in, including a finance tier where every invoice, payment, expense and payroll run posts a balanced double-entry journal. The map layer, geofencing, reporting, the customer portal and the driver app are what remain.",
     image: "/images/products/fleetflow-logo.png",
     logoLayout: "stacked",
     brandColor: "#FF7B56",
     audience:
       "Trucking companies, logistics operators and freight brokers running their own fleets — from a dozen trucks to several hundred across branches",
-    badge: "25 modules",
+    badge: "29 modules",
     features: [
       "Multi-tenant by design — tenant isolation enforced at four layers",
       "Trip lifecycle validated against a transition map, not trusted",
@@ -1130,6 +1130,8 @@ export const products: Product[] = [
       "190 granular permissions across 15 groups and nine seeded roles",
       "A drag-and-drop dispatch board that refuses to double-book a truck",
       "Fuel, maintenance, workshop, tyres and parts, all against the vehicle",
+      "Double-entry accounting where debits equal credits, enforced three ways",
+      "Overdue is derived from today's date, never stored and never stale",
       "Per-tenant numbering that survives two concurrent dispatchers",
       "Vendor kill switch that revokes every live session for a company",
     ],
@@ -1211,6 +1213,41 @@ export const products: Product[] = [
             name: "Running costs",
             detail:
               "Cost per kilometre assembled from fuel, maintenance, tyres and trip expenses — the figure that decides whether a rate is worth accepting.",
+          },
+        ],
+      },
+      {
+        title: "Finance & accounting",
+        items: [
+          {
+            name: "Invoices",
+            detail:
+              "Raised against trips, with tax credited to a liability rather than revenue — the carrier collects it for the state, and booking it as income overstates earnings and understates what is owed at filing. Overdue is derived from today's date, so it is never stale.",
+          },
+          {
+            name: "Payments",
+            detail:
+              "Receipts allocated against invoices without touching revenue, which was recognised when the invoice issued. Crediting it again on receipt is the double-count that reports twice the income.",
+          },
+          {
+            name: "Expenses",
+            detail:
+              "Costs booked against a trip, a vehicle or the business, feeding both the P&L and the per-kilometre running cost.",
+          },
+          {
+            name: "Payroll",
+            detail:
+              "Runs that expense the gross and treat an advance as money owed back rather than salary, so the same rupee is not billed twice. Recovery is capped at a share of gross — clawing back a whole balance in one run is arithmetically correct and operationally ruinous.",
+          },
+          {
+            name: "Double-entry ledger",
+            detail:
+              "Every financial act posts a balanced journal, enforced three deliberately overlapping ways: a check that refuses an unbalanced draft with a named rule, posting inside the caller's transaction because the constraint is deferred to commit, and a database trigger that makes an unbalanced journal impossible even from psql.",
+          },
+          {
+            name: "Accounting reports",
+            detail:
+              "Trial balance, profit and loss, and receivables ageing — checkable precisely because the ledger balances, so a wrong figure is a posting rule to fix rather than a number nobody can trace.",
           },
         ],
       },
@@ -1372,6 +1409,31 @@ export const products: Product[] = [
         caption: "Credit limits and payment terms",
       },
       {
+        src: "/images/products/screens/fleetflow-invoices.webp",
+        label: "Invoices",
+        caption: "Issued against trips, with overdue derived from today",
+      },
+      {
+        src: "/images/products/screens/fleetflow-payments.webp",
+        label: "Payments",
+        caption: "Receipts allocated to invoices, never re-crediting revenue",
+      },
+      {
+        src: "/images/products/screens/fleetflow-expenses.webp",
+        label: "Expenses",
+        caption: "Costs against the trip, vehicle or the business",
+      },
+      {
+        src: "/images/products/screens/fleetflow-payroll.webp",
+        label: "Payroll",
+        caption: "Gross expensed, advances recovered at a capped share",
+      },
+      {
+        src: "/images/products/screens/fleetflow-accounting.webp",
+        label: "Accounting",
+        caption: "Trial balance, P&L and receivables ageing",
+      },
+      {
         src: "/images/products/screens/fleetflow-platform-console.webp",
         label: "Platform Console",
         caption: "Every tenant, its plan and its usage",
@@ -1414,8 +1476,8 @@ export const products: Product[] = [
         label: "Phase 5",
         title: "Finance",
         detail:
-          "Running costs and the costing engine are in. Invoicing, payments, driver payroll and double-entry accounting are in progress.",
-        state: "next",
+          "Invoices, payments, expenses, payroll and a double-entry ledger, all in — debits equal to credits, enforced at the service, in the transaction and by the database.",
+        state: "done",
       },
       {
         label: "Phase 6",
@@ -1451,9 +1513,9 @@ export const products: Product[] = [
     ],
     specs: [
       { label: "Prisma models", value: "68" },
-      { label: "API endpoints", value: "136" },
-      { label: "API modules", value: "25" },
-      { label: "Phases shipped", value: "3 / 8" },
+      { label: "API endpoints", value: "160" },
+      { label: "API modules", value: "29" },
+      { label: "Phases shipped", value: "4 / 8" },
     ],
     metric: { label: "Tenant isolation layers", value: "4" },
     demoUrl: "/contact",
