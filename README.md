@@ -38,6 +38,7 @@ npm run dev          # → http://localhost:3400
 | `npm run assets` | Regenerate placeholder SVGs (review avatars, founder fallback, map) |
 | `npm run icons` | Rebuild the rounded favicon / Apple icon from the brand mark |
 | `npm run product-logos` | Trim and normalise the five product lock-ups |
+| `npm run product-screens` | Re-import the 18 gallery screenshots per product as WebP |
 | `npm run portrait` | Crop + compress the founder portrait to a web-ready JPEG |
 
 ---

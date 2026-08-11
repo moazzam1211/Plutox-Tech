@@ -2,9 +2,14 @@
  * Product screenshot importer.
  *
  * Copies the chosen captures out of each product's own `docs/screenshots` folder,
- * normalises them for the web (PNGs capped at 1920 wide; SVGs copied as-is, since
- * they are already resolution-independent) and prints the `screens` array to paste
- * into `src/data/products.ts`.
+ * normalises them for the web and prints the `screens` array to paste into
+ * `src/data/products.ts`.
+ *
+ * Raster captures are re-encoded to **WebP** at 1920 wide. On flat UI screenshots
+ * — large areas of one colour, hard edges, text — WebP lands around a third of the
+ * PNG weight at a quality that survives being viewed at full width. SVGs are
+ * copied through untouched: PharmaSync documents itself in vectors, and rasterising
+ * them would trade resolution independence for nothing.
  *
  * The selection is deliberate, not "everything in the folder": login, lock and
  * help screens are skipped, and so are captures that were taken against a fresh
@@ -148,6 +153,35 @@ const PRODUCTS = [
   },
 ];
 
+/**
+ * Downscale rasters embedded as data URIs inside an SVG.
+ *
+ * PharmaSync's vector captures each carry the product logo as a base64 PNG at its
+ * original 4800×4800, which is 94% of a 163 KB file — for a mark drawn at 34 px in
+ * the sidebar. The `<image>` element declares its own width and height, so the SVG
+ * scales whatever it is given: shrinking the payload changes nothing on screen and
+ * takes the file to about 12 KB.
+ */
+async function shrinkEmbeddedRasters(file) {
+  const { readFile, writeFile } = await import("node:fs/promises");
+  const original = await readFile(file, "utf8");
+
+  const matches = [...original.matchAll(/data:image\/png;base64,([A-Za-z0-9+/=]+)/g)];
+  if (!matches.length) return;
+
+  let updated = original;
+  for (const [, base64] of matches) {
+    const shrunk = await sharp(Buffer.from(base64, "base64"))
+      // 128px covers a 34px mark at 3× density with room to spare.
+      .resize({ width: 128, height: 128, fit: "inside" })
+      .png({ compressionLevel: 9 })
+      .toBuffer();
+    updated = updated.replace(base64, shrunk.toString("base64"));
+  }
+
+  await writeFile(file, updated, "utf8");
+}
+
 await mkdir(OUT, { recursive: true });
 
 const missing = [];
@@ -165,16 +199,19 @@ for (const product of PRODUCTS) {
 
     // `<slug>-<descriptive>` keeps the public URLs readable and stable.
     const stem = file.replace(/^\d+-/, "").replace(/\.(png|svg)$/, "");
-    const ext = file.endsWith(".svg") ? "svg" : "png";
-    const out = `${product.slug}-${stem}.${ext}`;
+    const isVector = file.endsWith(".svg");
+    const out = `${product.slug}-${stem}.${isVector ? "svg" : "webp"}`;
 
-    if (ext === "svg") {
+    if (isVector) {
       await copyFile(from, join(OUT, out));
+      await shrinkEmbeddedRasters(join(OUT, out));
     } else {
       const meta = await sharp(from).metadata();
       const pipeline = sharp(from);
       if (meta.width > MAX_WIDTH) pipeline.resize({ width: MAX_WIDTH });
-      await pipeline.png({ compressionLevel: 9 }).toFile(join(OUT, out));
+      // `effort: 6` is the slowest sensible setting; this runs once, offline,
+      // so trading encode time for bytes on every visitor is the right way round.
+      await pipeline.webp({ quality: 82, effort: 6 }).toFile(join(OUT, out));
     }
 
     entries.push(
