@@ -39,7 +39,7 @@ export default function ProjectsPage() {
             <span className="text-primary">four of them shipped</span>
           </>
         }
-        lede="Every figure below — module counts, endpoint counts, payment rails — comes from the products' own documentation, and every screenshot is from the running software. Nothing here is a mockup, which is why the one product still in build shows its delivery roadmap instead of screens it does not have yet."
+        lede="Every figure below — module counts, endpoint counts, payment rails — comes from the products' own documentation, and every screenshot is from the running software. Nothing here is a mockup — and the one platform still in build carries its delivery roadmap alongside the screens, so what is not finished yet is on the page too."
       >
         <StatStrip
           className="max-w-2xl border-t pt-4"
@@ -47,7 +47,7 @@ export default function ProjectsPage() {
             { value: "5", label: "Platforms" },
             { value: "60+", label: "Live modules" },
             { value: "379+", label: "REST endpoints" },
-            { value: "99", label: "Capabilities detailed" },
+            { value: "106", label: "Capabilities detailed" },
           ]}
         />
       </PageHeader>

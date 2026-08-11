@@ -53,7 +53,7 @@ ends with a prev/next pager rather than an endless scroll.
 | `/` | Intro — statement, product carousel, the five platforms, site index |
 | `/about` | The company, mission, delivery process, values, timeline |
 | `/services` | POS, cloud-kitchen and food-business consultancy, scratch-to-running stages, 16 build services |
-| `/projects` | Full detail on all five platforms, 99 capabilities, screenshots |
+| `/projects` | Full detail on all five platforms, 106 capabilities, screenshots |
 | `/reviews` | Client reviews and FAQs |
 | `/owner` | Founder profile |
 | `/contact` | Contact channels, enquiry form, location |
@@ -123,9 +123,11 @@ variant of every lock-up, swapped with Tailwind's `dark:` variant. See
   The in-memory rate limiter is per-process — use a shared store behind more than
   one instance.
 - Client names and reviews are illustrative placeholders.
-- Fleet Flow is marked `in-development` and shows a roadmap instead of a gallery,
-  because it has no finished screens to capture. Add `screens` and flip `status`
-  to `shipped` in `src/data/products.ts` once it ships — the page switches itself.
+- Fleet Flow is marked `in-development`: it shows its screen gallery *and* an
+  eight-phase roadmap, so the page says which parts are not built yet. Flip
+  `status` to `shipped` in `src/data/products.ts` when it lands and the pill and
+  the roadmap section drop away on their own. A product with no screens at all
+  falls back to showing only the roadmap.
 - Of the social links in `src/lib/site.ts`, only Instagram and Dribbble are
   confirmed. Replace or remove the rest — each is also emitted as `sameAs` in the
   Organization structured data.

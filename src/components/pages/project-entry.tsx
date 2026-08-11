@@ -337,6 +337,12 @@ export function ProjectEntry({ product }: { product: Product }) {
 
       {/* ---------------- Gallery (or roadmap) + headline features ---------------- */}
       <div className="grid gap-8 border-b border-border py-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:gap-12">
+        {/*
+          Screens when there are any, the roadmap when there aren't. A product
+          with both — one that is shipping in phases — shows the gallery here and
+          the roadmap in its own section further down, because the two answer
+          different questions: what it looks like, and what isn't done yet.
+        */}
         <Reveal preset="fadeUp" className="min-w-0">
           {product.screens?.length ? (
             <ScreenGallery product={product} screens={product.screens} />
@@ -477,6 +483,23 @@ export function ProjectEntry({ product }: { product: Product }) {
           ))}
         </div>
       </div>
+
+      {/*
+        Roadmap, for a product that has screens *and* is still shipping in
+        phases. It sits after the module breakdown rather than replacing the
+        gallery: the screens show what the software looks like today, and this
+        says plainly which parts of it are not built yet.
+      */}
+      {product.screens?.length && product.roadmap?.length ? (
+        <div className="border-t border-border py-8">
+          <Reveal preset="fadeUp" className="max-w-3xl">
+            <Roadmap
+              phases={product.roadmap}
+              brandColor={product.brandColor}
+            />
+          </Reveal>
+        </div>
+      ) : null}
     </article>
   );
 }

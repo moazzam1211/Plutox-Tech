@@ -27,7 +27,7 @@ export const products: Product[] = [
     category: "Restaurant",
     tagline: "Run a whole restaurant chain from one codebase",
     description:
-      "A multi-branch, offline-first restaurant POS with 24 live modules spanning point of sale, kitchen, floor, delivery, inventory, a central warehouse, HR, accounting and fiscal compliance — all synced in real time across every terminal. One owner login oversees many branches, each with its own menu, tables, tax and staff, fed by a central warehouse.",
+      "A multi-branch, offline-first restaurant POS with 24 live modules spanning point of sale, kitchen, floor, delivery, inventory, a central warehouse, an R&D lab, HR, accounting and fiscal compliance — all synced in real time across every terminal. One owner login oversees many branches, each with its own menu, tables, tax and staff, fed by a central warehouse.",
     image: "/images/products/servesync-logo.png",
     brandColor: "#33BCA8",
     audience: "Restaurants, cafés, cloud kitchens and multi-branch food groups",
@@ -39,7 +39,8 @@ export const products: Product[] = [
       "Offline-first PWA — an outbox replays every sale on reconnect",
       "Central warehouse: branch demands → dispatch → goods received",
       "Foodpanda orders arrive as a first-class channel, not a re-key",
-      "Ten ranked roles from super-admin down to a kitchen kiosk login",
+      "An R&D Lab that costs a recipe before it reaches the menu",
+      "Eleven ranked roles, including a dedicated purchasing kiosk",
       "Five field apps: waiter pad, rider app, QR menu, display, tracking",
     ],
     moduleGroups: [
@@ -117,9 +118,19 @@ export const products: Product[] = [
               "Aggregator orders as a first-class channel through a secret-gated webhook, with accept/decline and SKU mapping.",
           },
           {
-            name: "Settings",
+            name: "R&D Lab",
             detail:
-              "Branches, tax rules, printers, subscription packages, OTP, branding, access control and integrations.",
+              "Recipe development kept off the live menu until it is ready, with its own purchasing and a costing engine that returns food-cost percentage, gross profit and a suggested price. Draws on the central warehouse, and is gated to the Premium package.",
+          },
+          {
+            name: "Purchasing & approvals",
+            detail:
+              "A dedicated purchaser role with its own kiosk — limited to demand, vendors and warehouse — plus an owner approval path, where only a purchaser or the owner can approve or reject a purchase order.",
+          },
+          {
+            name: "Settings & packages",
+            detail:
+              "Branches with quick rename, tax rules, printers, OTP, branding, access control and integrations — plus three subscription packages (Basic, Standard, Premium) whose module gating is enforced in the sidebar and again server-side.",
           },
         ],
       },
@@ -134,12 +145,12 @@ export const products: Product[] = [
           {
             name: "HR",
             detail:
-              "Attendance, payroll runs, advances and leaves across all branches.",
+              "Attendance, payroll runs, advances and leaves across all branches, with staff assigned to a specific branch so per-branch teams stay separate rather than merging into one list.",
           },
           {
             name: "Vendors & payables",
             detail:
-              "Supplier records and invoices with pay-now or pay-later terms and payment reminders.",
+              "Supplier records and invoices with pay-now or pay-later terms and payment reminders, plus warehouse purchase invoices for goods received in.",
           },
           {
             name: "Expenses",
@@ -211,17 +222,25 @@ export const products: Product[] = [
         caption: "Branch demands, dispatch and goods received",
       },
       {
-        src: "/images/products/screens/servesync-reports.png",
-        label: "Reports & BI",
-        caption: "Sales by channel, discounts, tax and forecast",
+        src: "/images/products/screens/servesync-customers.png",
+        label: "Customers & CRM",
+        caption: "Loyalty points, visits and lifetime spend",
       },
       {
-        src: "/images/products/screens/servesync-dashboard.png",
-        label: "Dashboard",
-        caption: "Revenue, average ticket, covers and low-stock alerts",
+        src: "/images/products/screens/servesync-packages.png",
+        label: "Packages",
+        caption: "Three plans, gated in the sidebar and server-side",
       },
     ],
-    stack: ["Node.js", "Express", "Socket.IO", "Vanilla JS PWA", "ESC/POS", "Stripe"],
+    stack: [
+      "Node.js",
+      "Express",
+      "Socket.IO",
+      "Vanilla JS PWA",
+      "ESC/POS",
+      "Stripe",
+      "Docker",
+    ],
     specs: [
       { label: "Live modules", value: "24" },
       { label: "REST endpoints", value: "189" },
@@ -430,20 +449,21 @@ export const products: Product[] = [
     category: "Mart & Retail",
     tagline: "Three ways to scan, one fast checkout",
     description:
-      "A retail and supermarket POS with 15 live modules covering selling, batch-and-expiry inventory, purchasing, customers and loyalty, promotions, gift cards, accounting and reporting. Scan with a USB or Bluetooth gun, the device camera, or a staff phone paired over Socket.IO — and unknown barcodes are looked up online and auto-categorised.",
+      "A retail and supermarket POS with 17 live modules covering selling, batch-and-expiry inventory, a central warehouse, purchasing, customers and loyalty, promotions, gift cards, accounting and reporting. Scan with a USB or Bluetooth gun, the device camera, or a staff phone paired over Socket.IO — unknown barcodes are looked up online and auto-categorised, and produce sold by weight gets its own printed scale label that scans straight into the cart at the printed price.",
     image: "/images/products/vendeez-logo.png",
     brandColor: "#005F73",
     audience: "Supermarkets, grocery stores, mini-marts and retail chains",
-    badge: "15 modules",
+    badge: "17 modules",
     features: [
       "USB, camera or phone-as-scanner — all three, live to the till",
       "Unknown barcodes looked up online and auto-categorised",
       "Batch and expiry inventory with FEFO allocation",
       "Promotions auto-applied at checkout: BOGO, combo, flash sales",
       "Loyalty tiers that upgrade themselves, plus gift cards and store credit",
-      "Split and multi-method payments with thermal or A4 invoices",
-      "Zero infrastructure — a JSON snapshot store with one swap-point for Postgres",
-      "Installable as a PWA on the till and on staff phones",
+      "Scale labels for produce — embedded-price barcodes that scan into the cart",
+      "A central warehouse behind the shop floor, with transfers and a movement log",
+      "Real PRA / FBR fiscal registration, with sandbox and live gateways",
+      "Two subscription plans, with Advanced-only modules locked on Basic",
     ],
     moduleGroups: [
       {
@@ -467,7 +487,7 @@ export const products: Product[] = [
           {
             name: "Auto product lookup",
             detail:
-              "An unknown barcode is queried against your catalogue, then Open Food Facts, then UPCitemdb — pre-filling name, brand and size, and auto-selecting the department.",
+              "An unknown barcode is queried against your catalogue, then Open Food Facts, then UPCitemdb — pre-filling name, brand, size and the product photo, and auto-selecting the department.",
           },
           {
             name: "Orders",
@@ -487,7 +507,17 @@ export const products: Product[] = [
           {
             name: "Inventory",
             detail:
-              "Every product tracks batches with expiry; sales allocate first-expiry-first-out, with low-stock, near-expiry and expired alerts, adjustments, transfers, aisle/shelf locations and Excel export.",
+              "Every product tracks batches with expiry; sales allocate first-expiry-first-out, with category and brand filters, low-stock, near-expiry and expired alerts, adjustments, transfers, aisle/shelf locations and Excel export.",
+          },
+          {
+            name: "Warehouse",
+            detail:
+              "Central stock held separately from the shop floor: receive goods, track per-SKU levels against a reorder point, transfer to the store (which creates a sellable batch) and read the full movement log.",
+          },
+          {
+            name: "Barcode Generator (weighed items)",
+            detail:
+              "Scale labels for produce sold by weight — an EAN-13 embedded-price barcode (in-store prefix 2, then the PLU and the price), a printable label, and a scan at the till that drops the item into the cart at the printed price, exactly as in a large supermarket.",
           },
           {
             name: "Purchases",
@@ -543,23 +573,49 @@ export const products: Product[] = [
               "Team records, roles and PINs with ranked permissions, and A4 salary slips itemising earnings, deductions and net pay.",
           },
           {
+            name: "Tax / Fiscal (PRA / FBR)",
+            detail:
+              "Real-time invoice registration with the tax authority over FBR Digital Invoicing or PRA POS: sandbox and live gateways, auto-fiscalise on payment or on demand, the official invoice number and QR printed on the receipt, plus a connection test and a fiscal log.",
+          },
+          {
+            name: "Scanner / Devices",
+            detail:
+              "Per-terminal setup rather than one global switch: USB and Bluetooth keyboard-wedge capture with its own end key and minimum length, camera facing, a beep toggle with a test, continuous scanning, and the scale-barcode prefix.",
+          },
+          {
+            name: "Subscription & packages",
+            detail:
+              "Two plans — Basic and Advanced — each listing its features on the billing screen. Only the vendor's super admin can switch a client's plan; the owner sees both read-only and can pay and renew against a printable invoice. Advanced-only modules are locked on Basic behind an upgrade prompt.",
+          },
+          {
             name: "Settings",
             detail:
-              "Store details, tax, receipt branding, theme switcher, layout, data reset, and subscription and billing.",
+              "Store details, tax, receipt branding, theme switcher, layout and data reset.",
           },
         ],
       },
     ],
+    /*
+      Gallery refreshed after the August update. The dashboard and reports
+      captures came out of a fresh demo database showing Rs 0.00 and no chart,
+      so they are replaced by the three screens the update actually added —
+      all of them populated.
+    */
     screens: [
-      {
-        src: "/images/products/screens/vendeez-dashboard.png",
-        label: "Dashboard",
-        caption: "Feature hub with live sales, profit and top products",
-      },
       {
         src: "/images/products/screens/vendeez-pos.png",
         label: "Sell",
         caption: "Scan-to-cart with department filters",
+      },
+      {
+        src: "/images/products/screens/vendeez-warehouse.png",
+        label: "Warehouse",
+        caption: "Central stock, reorder points and transfers to store",
+      },
+      {
+        src: "/images/products/screens/vendeez-barcode-generator.png",
+        label: "Scale Labels",
+        caption: "Embedded-price EAN-13 for produce sold by weight",
       },
       {
         src: "/images/products/screens/vendeez-inventory.png",
@@ -572,22 +628,17 @@ export const products: Product[] = [
         caption: "A paired phone scanning for sale or stock-in",
       },
       {
-        src: "/images/products/screens/vendeez-promotions.png",
-        label: "Promotions",
-        caption: "BOGO, combo and flash sales",
-      },
-      {
-        src: "/images/products/screens/vendeez-reports.png",
-        label: "Reports",
-        caption: "Valuation, profit, tax and demand forecast",
+        src: "/images/products/screens/vendeez-fiscal.png",
+        label: "Tax / Fiscal",
+        caption: "PRA / FBR registration, sandbox and live gateways",
       },
     ],
     stack: ["Node.js", "Express", "Socket.IO", "Vanilla JS PWA", "ZXing", "HTTPS"],
     specs: [
-      { label: "Live modules", value: "15" },
+      { label: "Live modules", value: "17" },
       { label: "Scan methods", value: "3" },
       { label: "Loyalty tiers", value: "4" },
-      { label: "Runs on port", value: "3200" },
+      { label: "Fiscal", value: "PRA / FBR" },
     ],
     payments: [
       "Cash",
@@ -947,6 +998,43 @@ export const products: Product[] = [
         ],
       },
     ],
+    /*
+      Real captures from the running console. Fleet Flow keeps its roadmap as
+      well as its gallery: the screens prove what works, and the roadmap is the
+      honest answer to what does not yet.
+    */
+    screens: [
+      {
+        src: "/images/products/screens/fleetflow-dashboard.png",
+        label: "Dashboard",
+        caption: "Utilisation, 30-day trip trend and six-month revenue",
+      },
+      {
+        src: "/images/products/screens/fleetflow-dispatch.png",
+        label: "Dispatch Board",
+        caption: "Drag a truck or driver onto a trip, by lane",
+      },
+      {
+        src: "/images/products/screens/fleetflow-trip-detail.png",
+        label: "Trip Detail",
+        caption: "Lifecycle actions generated from the transition map",
+      },
+      {
+        src: "/images/products/screens/fleetflow-vehicles.png",
+        label: "Vehicles",
+        caption: "Fleet register with document-expiry counts",
+      },
+      {
+        src: "/images/products/screens/fleetflow-drivers.png",
+        label: "Drivers",
+        caption: "Licence expiry and the truck currently assigned",
+      },
+      {
+        src: "/images/products/screens/fleetflow-platform.png",
+        label: "Platform Console",
+        caption: "Every tenant, its plan and its usage",
+      },
+    ],
     roadmap: [
       {
         label: "Phase 1",
@@ -966,7 +1054,7 @@ export const products: Product[] = [
         label: "Phase 3",
         title: "Dispatch & live tracking",
         detail:
-          "Route planning, GPS ingestion, geofencing and alerting over PostGIS.",
+          "The dispatch board and the live-tracking feed are in. GPS ingestion, the map layer, geofencing and alerting over PostGIS are what remain.",
         state: "next",
       },
       {
