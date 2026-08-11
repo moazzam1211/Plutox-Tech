@@ -53,7 +53,7 @@ ends with a prev/next pager rather than an endless scroll.
 | `/` | Intro — statement, product carousel, the five platforms, site index |
 | `/about` | The company, mission, delivery process, values, timeline |
 | `/services` | POS, cloud-kitchen and food-business consultancy, scratch-to-running stages, 16 build services |
-| `/projects` | Full detail on all five platforms, 106 capabilities, screenshots |
+| `/projects` | Full detail on all five platforms, 114 capabilities, screenshots |
 | `/reviews` | Client reviews and FAQs |
 | `/owner` | Founder profile |
 | `/contact` | Contact channels, enquiry form, location |

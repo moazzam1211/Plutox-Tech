@@ -874,13 +874,13 @@ export const products: Product[] = [
     status: "in-development",
     tagline: "Smart fleet. Real-time control.",
     description:
-      "A multi-tenant transport management platform for truck fleets: vehicles, drivers, customers, shipments and trips, with a trip lifecycle the software actually enforces rather than trusts. Built on a NestJS API and a Next.js console over PostgreSQL and PostGIS, with tenant isolation enforced at four layers so one company's data cannot leak into another's. Two of eight phases are delivered; live GPS tracking, maintenance, finance and the driver app follow.",
+      "A multi-tenant transport management platform for truck fleets: vehicles, drivers, customers, shipments and trips with a lifecycle the software enforces rather than trusts, a drag-and-drop dispatch board, a live-tracking feed, and the whole upkeep side — fuel, maintenance, workshop jobs, tyres and parts. Built on a NestJS API and a Next.js console over PostgreSQL and PostGIS, with tenant isolation enforced at four layers so one company's data cannot reach another's. Twenty-five API modules are in; the map layer, geofencing, invoicing, the customer portal and the driver app are what remain.",
     image: "/images/products/fleetflow-logo.png",
     logoLayout: "stacked",
     brandColor: "#FF7B56",
     audience:
       "Trucking companies, logistics operators and freight brokers running their own fleets — from a dozen trucks to several hundred across branches",
-    badge: "Phase 2 of 8",
+    badge: "25 modules",
     features: [
       "Multi-tenant by design — tenant isolation enforced at four layers",
       "Trip lifecycle validated against a transition map, not trusted",
@@ -888,6 +888,8 @@ export const products: Product[] = [
       "Driver assignment over a time window, so history survives reassignment",
       "Shipment totals derived from cargo lines, never typed twice",
       "190 granular permissions across 15 groups and nine seeded roles",
+      "A drag-and-drop dispatch board that refuses to double-book a truck",
+      "Fuel, maintenance, workshop, tyres and parts, all against the vehicle",
       "Per-tenant numbering that survives two concurrent dispatchers",
       "Vendor kill switch that revokes every live session for a company",
     ],
@@ -924,6 +926,51 @@ export const products: Product[] = [
             name: "Conflict detection",
             detail:
               "Dry-runs an assignment and reports overlapping trips, unavailable trucks, drivers on leave and licences expiring mid-trip. Conflicts block assignment unless an override reason is supplied — and the reason is recorded.",
+          },
+        ],
+      },
+      {
+        title: "Dispatch, tracking & upkeep",
+        items: [
+          {
+            name: "Dispatch board",
+            detail:
+              "Trips laid out in lanes — needs a truck, scheduled, at pickup, in transit — with trucks and drivers down the side. Drag one onto a trip, or select the trip and use the assign buttons, which keeps the whole board usable from the keyboard.",
+          },
+          {
+            name: "Live tracking",
+            detail:
+              "Position, speed, heading and staleness per truck, with a 15-minute silence threshold and filters for moving, idle and stale. The table is the feed the map draws from, so it stays useful before a Mapbox token is configured.",
+          },
+          {
+            name: "Fuel",
+            detail:
+              "Fill-ups logged against the vehicle and the trip, so consumption is measurable per truck rather than as one monthly invoice.",
+          },
+          {
+            name: "Maintenance",
+            detail:
+              "Service schedules and jobs by vehicle, tracked against odometer and date so a due service surfaces before it becomes a breakdown.",
+          },
+          {
+            name: "Workshop",
+            detail:
+              "Job cards through the workshop — what is in, what it needs, who is on it and what it cost.",
+          },
+          {
+            name: "Tyres",
+            detail:
+              "Tyre history per axle position, with a partial unique index enforcing one tyre per position so a fitting cannot be recorded twice.",
+          },
+          {
+            name: "Parts inventory",
+            detail:
+              "Stock levels for parts and consumables with reorder points, drawn down by workshop jobs rather than counted separately.",
+          },
+          {
+            name: "Running costs",
+            detail:
+              "Cost per kilometre assembled from fuel, maintenance, tyres and trip expenses — the figure that decides whether a rate is worth accepting.",
           },
         ],
       },
@@ -1025,9 +1072,9 @@ export const products: Product[] = [
         caption: "Fleet register with document-expiry counts",
       },
       {
-        src: "/images/products/screens/fleetflow-drivers.png",
-        label: "Drivers",
-        caption: "Licence expiry and the truck currently assigned",
+        src: "/images/products/screens/fleetflow-tracking.png",
+        label: "Live Tracking",
+        caption: "Position, speed, heading and staleness per truck",
       },
       {
         src: "/images/products/screens/fleetflow-platform.png",
@@ -1054,22 +1101,22 @@ export const products: Product[] = [
         label: "Phase 3",
         title: "Dispatch & live tracking",
         detail:
-          "The dispatch board and the live-tracking feed are in. GPS ingestion, the map layer, geofencing and alerting over PostGIS are what remain.",
+          "The dispatch board and the live-tracking feed are in. Route planning, the map layer, geofencing and alerting over PostGIS are what remain.",
         state: "next",
       },
       {
         label: "Phase 4",
         title: "Fleet upkeep",
         detail:
-          "Fuel, maintenance schedules, workshop jobs, tyre management and parts inventory.",
-        state: "planned",
+          "Fuel, maintenance schedules, workshop job cards, tyre positions and parts inventory — all five in, each tied to the vehicle rather than kept in a separate book.",
+        state: "done",
       },
       {
         label: "Phase 5",
         title: "Finance",
         detail:
-          "Expenses, invoicing, payments, driver payroll and double-entry accounting.",
-        state: "planned",
+          "Running costs and the costing engine are in. Invoicing, payments, driver payroll and double-entry accounting are in progress.",
+        state: "next",
       },
       {
         label: "Phase 6",
@@ -1104,9 +1151,9 @@ export const products: Product[] = [
     ],
     specs: [
       { label: "Prisma models", value: "68" },
-      { label: "API endpoints", value: "90" },
-      { label: "Permissions", value: "190" },
-      { label: "Phases shipped", value: "2 / 8" },
+      { label: "API endpoints", value: "136" },
+      { label: "API modules", value: "25" },
+      { label: "Phases shipped", value: "3 / 8" },
     ],
     metric: { label: "Tenant isolation layers", value: "4" },
     demoUrl: "/contact",
