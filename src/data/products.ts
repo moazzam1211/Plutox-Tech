@@ -207,6 +207,11 @@ export const products: Product[] = [
         caption: "Modifiers, add-ons, discounts and split tax",
       },
       {
+        src: "/images/products/screens/servesync-checkout-addons.png",
+        label: "Add-ons",
+        caption: "Per-item modifiers priced at the till",
+      },
+      {
         src: "/images/products/screens/servesync-kitchen.png",
         label: "Kitchen Display",
         caption: "Live tickets per station with bump and recall",
@@ -217,9 +222,44 @@ export const products: Product[] = [
         caption: "Table status with dwell-time escalation",
       },
       {
+        src: "/images/products/screens/servesync-orders.png",
+        label: "Orders",
+        caption: "Manage, void and refund behind a supervisor PIN",
+      },
+      {
+        src: "/images/products/screens/servesync-invoices.png",
+        label: "Invoices",
+        caption: "Pre-bill, customer bill and QR receipt",
+      },
+      {
+        src: "/images/products/screens/servesync-till-shift.png",
+        label: "Till & Shift",
+        caption: "Float, cash moves, X and Z reports",
+      },
+      {
+        src: "/images/products/screens/servesync-delivery.png",
+        label: "Delivery",
+        caption: "Zones, riders and the live map",
+      },
+      {
+        src: "/images/products/screens/servesync-foodpanda.png",
+        label: "Foodpanda",
+        caption: "Aggregator orders as a first-class channel",
+      },
+      {
+        src: "/images/products/screens/servesync-inventory.png",
+        label: "Inventory",
+        caption: "Menu and ingredient stock with makeable counts",
+      },
+      {
         src: "/images/products/screens/servesync-warehouse.png",
         label: "Warehouse",
         caption: "Branch demands, dispatch and goods received",
+      },
+      {
+        src: "/images/products/screens/servesync-demand.png",
+        label: "Demand Planning",
+        caption: "Branch requests against warehouse stock",
       },
       {
         src: "/images/products/screens/servesync-customers.png",
@@ -227,11 +267,31 @@ export const products: Product[] = [
         caption: "Loyalty points, visits and lifetime spend",
       },
       {
+        src: "/images/products/screens/servesync-hr.png",
+        label: "HR",
+        caption: "Attendance, payroll, advances and leaves",
+      },
+      {
+        src: "/images/products/screens/servesync-accounts.png",
+        label: "Accounts",
+        caption: "P&L, cash book, journal and payables",
+      },
+      {
+        src: "/images/products/screens/servesync-fiscal.png",
+        label: "PRA / FBR Fiscal",
+        caption: "Tax-authority invoicing with number and QR",
+      },
+      {
+        src: "/images/products/screens/servesync-waiter-pad.png",
+        label: "Waiter Pad",
+        caption: "Mobile order punching from the floor",
+      },
+      {
         src: "/images/products/screens/servesync-packages.png",
         label: "Packages",
         caption: "Three plans, gated in the sidebar and server-side",
-      },
-    ],
+      },    ],
+    languages: ["JavaScript", "HTML", "CSS"],
     stack: [
       "Node.js",
       "Express",
@@ -394,14 +454,24 @@ export const products: Product[] = [
         caption: "Scan or search, with a touch-friendly cart",
       },
       {
-        src: "/images/products/screens/pharmasync-inventory.svg",
-        label: "Inventory",
-        caption: "Medicine master with batch and schedule flags",
+        src: "/images/products/screens/pharmasync-pos-grid.svg",
+        label: "Grid View",
+        caption: "Tile layout for a busy counter",
       },
       {
-        src: "/images/products/screens/pharmasync-batches.svg",
-        label: "Batches (FEFO)",
-        caption: "Stock-in, write-off and expiry ordering",
+        src: "/images/products/screens/pharmasync-pack-loose.svg",
+        label: "Pack or Loose",
+        caption: "Sell a strip or single tablets",
+      },
+      {
+        src: "/images/products/screens/pharmasync-medicine-info.svg",
+        label: "Medicine Info",
+        caption: "Dosage and usage at one tap",
+      },
+      {
+        src: "/images/products/screens/pharmasync-prescriptions.svg",
+        label: "Prescriptions",
+        caption: "Rx recorded with an image and attached at the till",
       },
       {
         src: "/images/products/screens/pharmasync-controlled.svg",
@@ -409,11 +479,61 @@ export const products: Product[] = [
         caption: "Every controlled dispense, audit-ready",
       },
       {
+        src: "/images/products/screens/pharmasync-doctors.svg",
+        label: "Doctors",
+        caption: "Prescribers linked to their prescriptions",
+      },
+      {
+        src: "/images/products/screens/pharmasync-inventory.svg",
+        label: "Inventory",
+        caption: "Medicine master with schedule and cold-chain flags",
+      },
+      {
+        src: "/images/products/screens/pharmasync-batches.svg",
+        label: "Batches (FEFO)",
+        caption: "Stock-in, write-off and expiry ordering",
+      },
+      {
+        src: "/images/products/screens/pharmasync-expiry.svg",
+        label: "Expiry",
+        caption: "Near-expiry and expired stock at risk",
+      },
+      {
+        src: "/images/products/screens/pharmasync-purchases.svg",
+        label: "Purchasing",
+        caption: "PO to approval to receive, creating batches and GRN",
+      },
+      {
+        src: "/images/products/screens/pharmasync-suppliers.svg",
+        label: "Suppliers",
+        caption: "Terms, bills, partial payments and overdue",
+      },
+      {
+        src: "/images/products/screens/pharmasync-reports-sales.svg",
+        label: "Sales Report",
+        caption: "Revenue, margin and top sellers by period",
+      },
+      {
         src: "/images/products/screens/pharmasync-forecast.svg",
         label: "Demand Forecast",
         caption: "Projected demand and reorder suggestions",
       },
-    ],
+      {
+        src: "/images/products/screens/pharmasync-patients.svg",
+        label: "Patients",
+        caption: "Allergies, blood group and insurance",
+      },
+      {
+        src: "/images/products/screens/pharmasync-staff.svg",
+        label: "Staff",
+        caption: "PIN login, ranked roles and the audit log",
+      },
+      {
+        src: "/images/products/screens/pharmasync-receipt.svg",
+        label: "Receipt",
+        caption: "Thermal output with QR and logo watermark",
+      },    ],
+    languages: ["JavaScript", "CSS", "HTML"],
     stack: [
       "Node.js",
       "Express",
@@ -608,19 +728,19 @@ export const products: Product[] = [
         caption: "Scan-to-cart with department filters",
       },
       {
-        src: "/images/products/screens/vendeez-warehouse.png",
-        label: "Warehouse",
-        caption: "Central stock, reorder points and transfers to store",
+        src: "/images/products/screens/vendeez-pos-cart.png",
+        label: "Cart",
+        caption: "Line and cart discounts, hold and resume",
       },
       {
-        src: "/images/products/screens/vendeez-barcode-generator.png",
-        label: "Scale Labels",
-        caption: "Embedded-price EAN-13 for produce sold by weight",
+        src: "/images/products/screens/vendeez-checkout.png",
+        label: "Checkout",
+        caption: "Split and multi-method payments",
       },
       {
-        src: "/images/products/screens/vendeez-inventory.png",
-        label: "Inventory",
-        caption: "Batches, expiry alerts and FEFO allocation",
+        src: "/images/products/screens/vendeez-barcode-lookup.png",
+        label: "Barcode Lookup",
+        caption: "Unknown codes resolved online, then auto-categorised",
       },
       {
         src: "/images/products/screens/vendeez-phone-scanner.png",
@@ -628,11 +748,71 @@ export const products: Product[] = [
         caption: "A paired phone scanning for sale or stock-in",
       },
       {
+        src: "/images/products/screens/vendeez-barcode-generator.png",
+        label: "Scale Labels",
+        caption: "Embedded-price EAN-13 for produce sold by weight",
+      },
+      {
+        src: "/images/products/screens/vendeez-kiosk-weigh.png",
+        label: "Weigh Kiosk",
+        caption: "Self-service weighing that prints the label",
+      },
+      {
+        src: "/images/products/screens/vendeez-inventory.png",
+        label: "Inventory",
+        caption: "Batches, expiry alerts and FEFO allocation",
+      },
+      {
+        src: "/images/products/screens/vendeez-stock-in.png",
+        label: "Stock In",
+        caption: "Goods received against a purchase order",
+      },
+      {
+        src: "/images/products/screens/vendeez-warehouse.png",
+        label: "Warehouse",
+        caption: "Central stock, reorder points and transfers to store",
+      },
+      {
+        src: "/images/products/screens/vendeez-purchases.png",
+        label: "Purchases",
+        caption: "PO to GRN to payable",
+      },
+      {
+        src: "/images/products/screens/vendeez-suppliers.png",
+        label: "Suppliers",
+        caption: "Vendor ledger, payables and ageing",
+      },
+      {
+        src: "/images/products/screens/vendeez-customers.png",
+        label: "Customers & Loyalty",
+        caption: "Points, visits, tiers and store credit",
+      },
+      {
+        src: "/images/products/screens/vendeez-promotions.png",
+        label: "Promotions",
+        caption: "BOGO, combo and flash sales, applied automatically",
+      },
+      {
+        src: "/images/products/screens/vendeez-giftcards.png",
+        label: "Gift Cards",
+        caption: "Issue, top up and look up a balance",
+      },
+      {
+        src: "/images/products/screens/vendeez-till.png",
+        label: "Till",
+        caption: "Shift open and close with cash reconciliation",
+      },
+      {
+        src: "/images/products/screens/vendeez-a4-invoice.png",
+        label: "A4 Invoice",
+        caption: "Printable invoice alongside the thermal receipt",
+      },
+      {
         src: "/images/products/screens/vendeez-fiscal.png",
         label: "Tax / Fiscal",
         caption: "PRA / FBR registration, sandbox and live gateways",
-      },
-    ],
+      },    ],
+    languages: ["JavaScript", "HTML", "CSS"],
     stack: ["Node.js", "Express", "Socket.IO", "Vanilla JS PWA", "ZXing", "HTTPS"],
     specs: [
       { label: "Live modules", value: "17" },
@@ -812,9 +992,19 @@ export const products: Product[] = [
         caption: "Occupancy, ADR, RevPAR and revenue trend",
       },
       {
+        src: "/images/products/screens/staysync-portfolio.png",
+        label: "Portfolio",
+        caption: "Multi-property performance side by side",
+      },
+      {
         src: "/images/products/screens/staysync-reservations.png",
         label: "Reservations",
         caption: "Bookings against a live availability engine",
+      },
+      {
+        src: "/images/products/screens/staysync-frontdesk-arrivals.png",
+        label: "Front Desk",
+        caption: "Arrivals, departures and in-house",
       },
       {
         src: "/images/products/screens/staysync-room-rack.png",
@@ -822,21 +1012,71 @@ export const products: Product[] = [
         caption: "Occupancy and housekeeping status per room",
       },
       {
+        src: "/images/products/screens/staysync-rooms.png",
+        label: "Rooms",
+        caption: "Room types, rate plans and live status",
+      },
+      {
         src: "/images/products/screens/staysync-housekeeping.png",
         label: "Housekeeping",
         caption: "Kanban from pending through to verified",
       },
       {
-        src: "/images/products/screens/staysync-portfolio.png",
-        label: "Portfolio",
-        caption: "Multi-property performance comparison",
+        src: "/images/products/screens/staysync-billing.png",
+        label: "Billing & Folios",
+        caption: "Auto-posted charges, tax and split payments",
       },
       {
-        src: "/images/products/screens/staysync-reports.png",
-        label: "Reports & BI",
-        caption: "Trends and multi-property rollup",
+        src: "/images/products/screens/staysync-folio-detail.png",
+        label: "Folio Detail",
+        caption: "Every line on the guest account",
       },
-    ],
+      {
+        src: "/images/products/screens/staysync-room-service-pos.png",
+        label: "Room Service POS",
+        caption: "Menu and cart charged to the room",
+      },
+      {
+        src: "/images/products/screens/staysync-banquet.png",
+        label: "Banquet & Events",
+        caption: "Halls, packages and booking lifecycle",
+      },
+      {
+        src: "/images/products/screens/staysync-spa.png",
+        label: "Spa & Salon",
+        caption: "Services, therapists and appointments",
+      },
+      {
+        src: "/images/products/screens/staysync-laundry.png",
+        label: "Laundry",
+        caption: "Guest, linen and uniform orders",
+      },
+      {
+        src: "/images/products/screens/staysync-maintenance.png",
+        label: "Maintenance",
+        caption: "Work orders by area, category and priority",
+      },
+      {
+        src: "/images/products/screens/staysync-procurement.png",
+        label: "Procurement",
+        caption: "Vendors and purchase orders, approve then receive",
+      },
+      {
+        src: "/images/products/screens/staysync-finance.png",
+        label: "Finance",
+        caption: "P&L, expenses by category and the ledger",
+      },
+      {
+        src: "/images/products/screens/staysync-channel-manager.png",
+        label: "Channel Manager",
+        caption: "OTA rates, inventory sync and commission",
+      },
+      {
+        src: "/images/products/screens/staysync-iot.png",
+        label: "Smart Hotel",
+        caption: "Per-room locks, thermostats and energy meters",
+      },    ],
+    languages: ["TypeScript", "TSX", "SQL", "CSS"],
     stack: [
       "TypeScript",
       "Express",
@@ -1052,9 +1292,14 @@ export const products: Product[] = [
     */
     screens: [
       {
-        src: "/images/products/screens/fleetflow-dashboard.png",
+        src: "/images/products/screens/fleetflow-dashboard-trends.png",
         label: "Dashboard",
         caption: "Utilisation, 30-day trip trend and six-month revenue",
+      },
+      {
+        src: "/images/products/screens/fleetflow-dashboard-fleet-status.png",
+        label: "Fleet Status",
+        caption: "Available, on trip, loading, idle and maintenance",
       },
       {
         src: "/images/products/screens/fleetflow-dispatch.png",
@@ -1062,14 +1307,14 @@ export const products: Product[] = [
         caption: "Drag a truck or driver onto a trip, by lane",
       },
       {
+        src: "/images/products/screens/fleetflow-trips.png",
+        label: "Trips",
+        caption: "Execution side, with delayed trips badged",
+      },
+      {
         src: "/images/products/screens/fleetflow-trip-detail.png",
         label: "Trip Detail",
         caption: "Lifecycle actions generated from the transition map",
-      },
-      {
-        src: "/images/products/screens/fleetflow-vehicles.png",
-        label: "Vehicles",
-        caption: "Fleet register with document-expiry counts",
       },
       {
         src: "/images/products/screens/fleetflow-tracking.png",
@@ -1077,11 +1322,65 @@ export const products: Product[] = [
         caption: "Position, speed, heading and staleness per truck",
       },
       {
-        src: "/images/products/screens/fleetflow-platform.png",
+        src: "/images/products/screens/fleetflow-shipments.png",
+        label: "Shipments",
+        caption: "The commercial side of the load",
+      },
+      {
+        src: "/images/products/screens/fleetflow-vehicles.png",
+        label: "Vehicles",
+        caption: "Fleet register with document-expiry counts",
+      },
+      {
+        src: "/images/products/screens/fleetflow-drivers.png",
+        label: "Drivers",
+        caption: "Licence expiry and the truck currently assigned",
+      },
+      {
+        src: "/images/products/screens/fleetflow-fuel.png",
+        label: "Fuel",
+        caption: "Fill-ups against the vehicle and the trip",
+      },
+      {
+        src: "/images/products/screens/fleetflow-maintenance.png",
+        label: "Maintenance",
+        caption: "Service schedules by odometer and date",
+      },
+      {
+        src: "/images/products/screens/fleetflow-workshop.png",
+        label: "Workshop",
+        caption: "Job cards — what is in, who is on it, what it cost",
+      },
+      {
+        src: "/images/products/screens/fleetflow-tires.png",
+        label: "Tyres",
+        caption: "History per axle position, one tyre per position",
+      },
+      {
+        src: "/images/products/screens/fleetflow-inventory.png",
+        label: "Parts Inventory",
+        caption: "Stock and reorder points, drawn down by jobs",
+      },
+      {
+        src: "/images/products/screens/fleetflow-running-costs.png",
+        label: "Running Costs",
+        caption: "Cost per kilometre from fuel, upkeep and expenses",
+      },
+      {
+        src: "/images/products/screens/fleetflow-customers.png",
+        label: "Customers",
+        caption: "Credit limits and payment terms",
+      },
+      {
+        src: "/images/products/screens/fleetflow-platform-console.png",
         label: "Platform Console",
         caption: "Every tenant, its plan and its usage",
       },
-    ],
+      {
+        src: "/images/products/screens/fleetflow-settings.png",
+        label: "Settings",
+        caption: "Plan limits and usage against them",
+      },    ],
     roadmap: [
       {
         label: "Phase 1",
@@ -1139,6 +1438,7 @@ export const products: Product[] = [
         state: "planned",
       },
     ],
+    languages: ["TypeScript", "TSX", "SQL", "CSS"],
     stack: [
       "TypeScript",
       "NestJS",

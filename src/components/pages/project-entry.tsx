@@ -91,7 +91,13 @@ function ScreenGallery({
         </div>
       </div>
 
-      <ul className="grid grid-cols-6 gap-1.5">
+      {/*
+        Nine per row rather than six: the galleries carry eighteen screens each
+        now, and a single six-wide strip would run to three rows of very large
+        thumbnails. Six on the narrowest screens keeps each one big enough to
+        recognise on a phone.
+      */}
+      <ul className="grid grid-cols-6 gap-1.5 sm:grid-cols-9">
         {screens.map((screen, thumb) => (
           <li key={screen.src}>
             <button
@@ -379,8 +385,34 @@ export function ProjectEntry({ product }: { product: Product }) {
             </Panel>
           ) : null}
 
+          {/*
+            Languages and stack are listed separately, because they answer
+            different questions: what the source is written in, and what it runs
+            on. Collapsing "TypeScript" and "PostgreSQL" into one row of pills
+            tells a technical reader less than either list does alone.
+          */}
           <div className="mt-6">
-            <p className="eyebrow text-muted-foreground">Built with</p>
+            <p className="eyebrow text-muted-foreground">Languages</p>
+            <ul className="mt-3 flex flex-wrap gap-1.5">
+              {product.languages.map((language) => (
+                <li
+                  key={language}
+                  className="rounded border px-2 py-0.5 font-mono text-[0.625rem]"
+                  style={{
+                    color: product.brandColor,
+                    borderColor: `${product.brandColor}55`,
+                  }}
+                >
+                  {language}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="mt-5">
+            <p className="eyebrow text-muted-foreground">
+              Technologies & frameworks
+            </p>
             <ul className="mt-3 flex flex-wrap gap-1.5">
               {product.stack.map((tech) => (
                 <li

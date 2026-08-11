@@ -599,6 +599,9 @@ function SidebarMenuBadge({
   )
 }
 
+const SKELETON_WIDTHS = [72, 58, 84, 63, 90, 51, 77, 66]
+let skeletonIndex = 0
+
 function SidebarMenuSkeleton({
   className,
   showIcon = false,
@@ -606,10 +609,16 @@ function SidebarMenuSkeleton({
 }: React.ComponentProps<"div"> & {
   showIcon?: boolean
 }) {
-  // Random width between 50 to 90%.
-  const width = React.useMemo(() => {
-    return `${Math.floor(Math.random() * 40) + 50}%`
-  }, [])
+  /*
+   * Varied widths so a column of skeletons reads as text of differing lengths
+   * rather than a row of identical bars.
+   *
+   * A fixed cycle rather than `Math.random()`: calling an impure function during
+   * render is a React rule violation (`react-hooks/purity`) and it also makes the
+   * server and client markup disagree, which is a hydration mismatch. A counter
+   * gives the same visual variety and is deterministic.
+   */
+  const width = `${SKELETON_WIDTHS[skeletonIndex++ % SKELETON_WIDTHS.length]}%`
 
   return (
     <div

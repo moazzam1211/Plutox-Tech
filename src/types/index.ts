@@ -79,7 +79,14 @@ export interface Product {
   screens?: ProductScreen[];
   /** Delivery roadmap, shown in place of the gallery while in development. */
   roadmap?: ProductPhase[];
-  /** Technologies the product is actually built on. */
+  /**
+   * Programming languages the source is actually written in, ordered by share of
+   * the tree. Measured by counting files per extension in each repository rather
+   * than asserted — it is the one claim on this page a reader can check against
+   * GitHub's own language bar.
+   */
+  languages: string[];
+  /** Technologies, frameworks and services the product is built on. */
   stack: string[];
   /** Hard numbers about the build (modules, endpoints, etc.). */
   specs: { label: string; value: string }[];
