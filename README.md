@@ -53,8 +53,9 @@ ends with a prev/next pager rather than an endless scroll.
 | --- | --- |
 | `/` | Intro — statement, product carousel, the five platforms, site index |
 | `/about` | The company, mission, delivery process, values, timeline |
+| `/products` | The modules — 11 of them, each with its own page, screenshots and the systems running it |
 | `/services` | POS, cloud-kitchen and food-business consultancy, scratch-to-running stages, 16 build services |
-| `/projects` | Full detail on all five platforms, 120 capabilities, screenshots |
+| `/projects` | All five platforms, 120 capabilities, screenshots; `/projects/[slug]` gives each its own page with packages and pricing |
 | `/reviews` | Client reviews and FAQs |
 | `/owner` | Founder profile |
 | `/contact` | Contact channels, enquiry form, location |

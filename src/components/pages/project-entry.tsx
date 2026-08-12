@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import * as React from "react";
 
+import { PricingTable } from "@/components/pages/pricing-table";
 import { Panel } from "@/components/shared/page-shell";
 import { Reveal } from "@/components/shared/reveal";
 import { Button } from "@/components/ui/button";
@@ -24,11 +25,12 @@ import type { Product } from "@/types";
  * animation finishes, so if rAF stalls (backgrounded tab, heavy main-thread
  * work) the gallery silently stops advancing. A mount-only CSS fade cannot.
  */
-function ScreenGallery({
-  product,
+export function ScreenGallery({
+  name,
   screens,
 }: {
-  product: Product;
+  /** Used in the alt text and the button labels. */
+  name: string;
   screens: NonNullable<Product["screens"]>;
 }) {
   const [index, setIndex] = React.useState(0);
@@ -50,7 +52,7 @@ function ScreenGallery({
           >
             <Image
               src={active.src}
-              alt={`${product.name} — ${active.label}: ${active.caption}`}
+              alt={`${name} — ${active.label}: ${active.caption}`}
               fill
               sizes="(max-width: 1024px) 100vw, 44vw"
               className="object-contain"
@@ -74,7 +76,7 @@ function ScreenGallery({
             <button
               type="button"
               onClick={() => go(index - 1)}
-              aria-label={`Previous ${product.name} screenshot`}
+              aria-label={`Previous ${name} screenshot`}
               className="grid size-7 place-items-center rounded-md border border-border text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring outline-none"
             >
               <ChevronLeft className="size-3.5" />
@@ -82,7 +84,7 @@ function ScreenGallery({
             <button
               type="button"
               onClick={() => go(index + 1)}
-              aria-label={`Next ${product.name} screenshot`}
+              aria-label={`Next ${name} screenshot`}
               className="grid size-7 place-items-center rounded-md border border-border text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring outline-none"
             >
               <ChevronRight className="size-3.5" />
@@ -351,7 +353,7 @@ export function ProjectEntry({ product }: { product: Product }) {
         */}
         <Reveal preset="fadeUp" className="min-w-0">
           {product.screens?.length ? (
-            <ScreenGallery product={product} screens={product.screens} />
+            <ScreenGallery name={product.name} screens={product.screens} />
           ) : product.roadmap?.length ? (
             <Roadmap phases={product.roadmap} brandColor={product.brandColor} />
           ) : null}
@@ -515,6 +517,16 @@ export function ProjectEntry({ product }: { product: Product }) {
           ))}
         </div>
       </div>
+
+      {product.pricing ? (
+        <div className="border-t border-border py-8">
+          <PricingTable
+            pricing={product.pricing}
+            brandColor={product.brandColor}
+            productName={product.name}
+          />
+        </div>
+      ) : null}
 
       {/*
         Roadmap, for a product that has screens *and* is still shipping in

@@ -48,6 +48,18 @@ export interface ProductPhase {
   state: "done" | "next" | "planned";
 }
 
+/** One subscription tier of a product. */
+export interface ProductPlan {
+  name: string;
+  /** Formatted with its currency, because the products bill in PKR. */
+  price: string;
+  period: string;
+  summary: string;
+  includes: string[];
+  /** The tier to lead with. At most one per product. */
+  featured?: boolean;
+}
+
 export interface Product {
   slug: string;
   name: string;
@@ -96,6 +108,8 @@ export interface Product {
   audience: string;
   /** Where the demo CTA points — /contact, since there is no hosted demo. */
   demoUrl: string;
+  /** Subscription tiers, priced as the product itself bills them. */
+  pricing?: { note: string; plans: ProductPlan[] };
   /** Shown as a small metric row under the feature list. */
   metric?: { label: string; value: string };
   badge?: string;

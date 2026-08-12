@@ -1,4 +1,5 @@
 import {
+  Boxes,
   Briefcase,
   Building2,
   Home,
@@ -51,10 +52,17 @@ export const routes: Route[] = [
     icon: Wrench,
   },
   {
+    label: "Products",
+    href: "/products",
+    short: "Products",
+    summary: "The modules we build — ordering, KDS, inventory, analytics and more",
+    icon: Boxes,
+  },
+  {
     label: "Projects",
     href: "/projects",
     short: "Projects",
-    summary: "Four platforms, built and deployed",
+    summary: "Five platforms, four of them shipped",
     icon: Briefcase,
   },
   {

@@ -309,6 +309,48 @@ export const products: Product[] = [
     ],
     payments: ["Cash", "Card", "JazzCash", "EasyPaisa", "Bank transfer"],
     metric: { label: "Front-end apps & surfaces", value: "7" },
+    pricing: {
+      note: "Per branch, billed monthly. The package gates which modules a branch gets, enforced in the sidebar and again server-side.",
+      plans: [
+        {
+          name: "Basic",
+          price: "PKR 5,000",
+          period: "/ month",
+          summary: "Core POS to run a single shop",
+          includes: [
+            "Dashboard, POS, tables & floor plan",
+            "Kitchen display and orders",
+            "Invoices, customers & loyalty",
+            "Menu management, till & shift",
+          ],
+        },
+        {
+          name: "Standard",
+          price: "PKR 10,000",
+          period: "/ month",
+          summary: "Everything to run and grow one restaurant",
+          featured: true,
+          includes: [
+            "Everything in Basic",
+            "Inventory & stock, demand planning",
+            "Staff, vendors & payables, promos",
+            "Expenses, delivery, reports & analytics",
+          ],
+        },
+        {
+          name: "Premium",
+          price: "PKR 15,000",
+          period: "/ month",
+          summary: "The full suite — all modules and multi-branch",
+          includes: [
+            "Everything in Standard",
+            "Multi-branch command centre & transfers",
+            "Central warehouse, HR & payroll, accounting",
+            "Foodpanda, PRA / FBR fiscal, R&D Lab",
+          ],
+        },
+      ],
+    },
     demoUrl: "/contact",
   },
 
@@ -557,6 +599,24 @@ export const products: Product[] = [
       "Credit on account",
     ],
     metric: { label: "Dispensing rule", value: "FEFO" },
+    pricing: {
+      note: "One plan, billed monthly on a 30-day cycle. The POS locks if the fee lapses; the owner can pay and renew from inside the app.",
+      plans: [
+        {
+          name: "Monthly",
+          price: "PKR 5,000",
+          period: "/ month",
+          summary: "The whole product — no module gating",
+          featured: true,
+          includes: [
+            "Batch & expiry dispensing with FEFO",
+            "Prescriptions, controlled register, doctors",
+            "Purchasing, suppliers, patients & customers",
+            "Reports with demand forecasting, PRA / FBR fiscal",
+          ],
+        },
+      ],
+    },
     demoUrl: "/contact",
   },
 
@@ -831,6 +891,36 @@ export const products: Product[] = [
       "Store credit",
     ],
     metric: { label: "Ways to scan a product", value: "3" },
+    pricing: {
+      note: "Billed monthly. Advanced-only modules are locked on Basic behind an upgrade prompt, and only the vendor's super admin can switch a client's plan.",
+      plans: [
+        {
+          name: "Basic",
+          price: "Rs 7,000",
+          period: "/ month",
+          summary: "Sell, stock and report",
+          includes: [
+            "Sell, orders, invoices and till",
+            "Batch & expiry inventory with FEFO",
+            "Customers, loyalty and expenses",
+            "Reports, staff & payroll, settings",
+          ],
+        },
+        {
+          name: "Advanced",
+          price: "Rs 15,000",
+          period: "/ month",
+          summary: "The full retail suite",
+          featured: true,
+          includes: [
+            "Everything in Basic",
+            "Central warehouse and transfers",
+            "Barcode generator for weighed items",
+            "Purchases, suppliers, promotions, gift cards",
+          ],
+        },
+      ],
+    },
     demoUrl: "/contact",
   },
 
@@ -1102,6 +1192,24 @@ export const products: Product[] = [
       "City ledger",
     ],
     metric: { label: "Properties per login", value: "Unlimited" },
+    pricing: {
+      note: "Per property group, billed monthly. The vendor can enable or disable the whole system; the owner can pay and renew in-app.",
+      plans: [
+        {
+          name: "Group",
+          price: "PKR 75,000",
+          period: "/ month",
+          summary: "Every property under one licence",
+          featured: true,
+          includes: [
+            "Unlimited properties on one login",
+            "Full PMS, folios, housekeeping, room service",
+            "Banquet, spa, laundry, maintenance, channel manager",
+            "Finance, HR & payroll, procurement, assets, IoT",
+          ],
+        },
+      ],
+    },
     demoUrl: "/contact",
   },
 /* ------------------------------------------------------------------ */
@@ -1518,6 +1626,47 @@ export const products: Product[] = [
       { label: "Phases shipped", value: "4 / 8" },
     ],
     metric: { label: "Tenant isolation layers", value: "4" },
+    pricing: {
+      note: "Billed monthly per company. Limits are enforced server-side, so a plan is a real ceiling rather than a suggestion.",
+      plans: [
+        {
+          name: "Starter",
+          price: "PKR 15,000",
+          period: "/ month",
+          summary: "15 vehicles · 10 users · 1 branch",
+          includes: [
+            "Trips, tracking, fuel and maintenance",
+            "30 days of GPS retention",
+            "One branch",
+          ],
+        },
+        {
+          name: "Growth",
+          price: "PKR 55,000",
+          period: "/ month",
+          summary: "100 vehicles · 50 users · 5 branches",
+          featured: true,
+          includes: [
+            "Everything in Starter",
+            "Workshop, parts inventory and the finance tier",
+            "Customer portal",
+            "90 days of GPS retention",
+          ],
+        },
+        {
+          name: "Enterprise",
+          price: "PKR 180,000",
+          period: "/ month",
+          summary: "Effectively uncapped · 500 branches",
+          includes: [
+            "Everything in Growth",
+            "AI-assisted dispatch and the command centre",
+            "API access and white-labelling",
+            "365 days of GPS retention",
+          ],
+        },
+      ],
+    },
     demoUrl: "/contact",
   },
 ];

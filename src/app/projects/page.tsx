@@ -61,7 +61,7 @@ export default function ProjectsPage() {
           {products.map((product) => (
             <li key={product.slug}>
               <Link
-                href={`#${product.slug}`}
+                href={`/projects/${product.slug}`}
                 className="hover-lift inline-flex items-center rounded-md border border-border px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
               >
                 {product.name}

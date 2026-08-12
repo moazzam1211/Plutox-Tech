@@ -1,5 +1,7 @@
 import type { MetadataRoute } from "next";
 
+import { productModules } from "@/data/modules";
+import { products } from "@/data/products";
 import { siteConfig } from "@/lib/site";
 
 /**
@@ -19,6 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/", priority: 1, changeFrequency: "monthly" },
     { path: "/about", priority: 0.8, changeFrequency: "monthly" },
     { path: "/services", priority: 0.9, changeFrequency: "monthly" },
+    { path: "/products", priority: 0.9, changeFrequency: "monthly" },
     { path: "/projects", priority: 0.9, changeFrequency: "monthly" },
     { path: "/skills", priority: 0.7, changeFrequency: "monthly" },
     { path: "/reviews", priority: 0.6, changeFrequency: "monthly" },
@@ -28,7 +31,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/terms", priority: 0.2, changeFrequency: "yearly" },
   ];
 
-  return routes.map(({ path, priority, changeFrequency }) => ({
+  // One entry per module detail page.
+  const all = [
+    ...routes,
+    ...products.map((p) => ({
+      path: `/projects/${p.slug}`,
+      priority: 0.8,
+      changeFrequency: "monthly" as const,
+    })),
+    ...productModules.map((m) => ({
+      path: `/products/${m.slug}`,
+      priority: 0.6,
+      changeFrequency: "monthly" as const,
+    })),
+  ];
+
+  return all.map(({ path, priority, changeFrequency }) => ({
     url: `${siteConfig.url}${path}`,
     lastModified,
     changeFrequency,
