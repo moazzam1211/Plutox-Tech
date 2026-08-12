@@ -149,7 +149,10 @@ export function IntroDashboard() {
       {/* Accent glow pooled behind the frame. Decorative. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -inset-8 -z-10 rounded-[3rem] bg-[radial-gradient(60%_60%_at_60%_35%,color-mix(in_oklab,var(--primary)_38%,transparent),transparent_72%)] blur-2xl animate-breathe"
+        /* -inset-4 below sm: at 375px the frame is 327px wide, so an 8-unit
+           bleed on both sides makes the glow 391px and the document scrolls
+           sideways by 8px. The glow is decorative, so it gives way. */
+        className="pointer-events-none absolute -inset-4 -z-10 rounded-[3rem] sm:-inset-8 bg-[radial-gradient(60%_60%_at_60%_35%,color-mix(in_oklab,var(--primary)_38%,transparent),transparent_72%)] blur-2xl animate-breathe"
       />
 
       {/*
