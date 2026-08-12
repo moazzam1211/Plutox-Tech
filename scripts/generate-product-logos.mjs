@@ -26,13 +26,13 @@ const SRC = join(DIR, "_src");
 const TARGET_HEIGHT = 240;
 
 const LOGOS = [
-  { src: "servesync.png", out: "servesync-logo.png" },
-  { src: "pharmasync.png", out: "pharmasync-logo.png" },
-  { src: "vendeez.png", out: "vendeez-logo.png" },
-  { src: "staysync.png", out: "staysync-logo.png" },
+  { src: "servesync.png", out: "servesync-logo.webp" },
+  { src: "pharmasync.png", out: "pharmasync-logo.webp" },
+  { src: "vendeez.png", out: "vendeez-logo.webp" },
+  { src: "staysync.png", out: "staysync-logo.webp" },
   // Fleet Flow ships a stacked lock-up rather than a horizontal wordmark, so it
   // is trimmed to a taller target and rendered larger on the page.
-  { src: "fleetflow.png", out: "fleetflow-logo.png", height: 420 },
+  { src: "fleetflow.png", out: "fleetflow-logo.webp", height: 420 },
 ];
 
 async function prepare({ src, out, height = TARGET_HEIGHT }) {

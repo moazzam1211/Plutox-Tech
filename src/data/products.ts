@@ -28,7 +28,7 @@ export const products: Product[] = [
     tagline: "Run a whole restaurant chain from one codebase",
     description:
       "A multi-branch, offline-first restaurant POS with 24 live modules spanning point of sale, kitchen, floor, delivery, inventory, a central warehouse, an R&D lab, HR, accounting and fiscal compliance — all synced in real time across every terminal. One owner login oversees many branches, each with its own menu, tables, tax and staff, fed by a central warehouse.",
-    image: "/images/products/servesync-logo.png",
+    image: "/images/products/servesync-logo.webp",
     brandColor: "#33BCA8",
     audience: "Restaurants, cafés, cloud kitchens and multi-branch food groups",
     badge: "24 modules",
@@ -364,7 +364,7 @@ export const products: Product[] = [
     tagline: "Built around how a pharmacy actually works",
     description:
       "A pharmacy POS and ERP built on the premise that stock lives in batches. Every sale dispenses first-expiry-first and never sells expired stock, prescription-required and controlled medicines are gated, and every controlled dispense is written to an audit-ready register. Around that core sits purchasing, patients, doctors, demand forecasting and PRA/FBR fiscal printing.",
-    image: "/images/products/pharmasync-logo.png",
+    image: "/images/products/pharmasync-logo.webp",
     brandColor: "#004AAD",
     audience: "Retail pharmacies, medical stores and pharmacy chains",
     features: [
@@ -630,7 +630,7 @@ export const products: Product[] = [
     tagline: "Three ways to scan, one fast checkout",
     description:
       "A retail and supermarket POS with 17 live modules covering selling, batch-and-expiry inventory, a central warehouse, purchasing, customers and loyalty, promotions, gift cards, accounting and reporting. Scan with a USB or Bluetooth gun, the device camera, or a staff phone paired over Socket.IO — unknown barcodes are looked up online and auto-categorised, and produce sold by weight gets its own printed scale label that scans straight into the cart at the printed price.",
-    image: "/images/products/vendeez-logo.png",
+    image: "/images/products/vendeez-logo.webp",
     brandColor: "#005F73",
     audience: "Supermarkets, grocery stores, mini-marts and retail chains",
     badge: "17 modules",
@@ -934,7 +934,7 @@ export const products: Product[] = [
     tagline: "One login, every property",
     description:
       "A multi-property hotel ERP: a complete Property Management System — reservations through front desk, folio and checkout — surrounded by 21 live modules covering operations, revenue centres, supply chain, finance, HR and IoT. One login controls many hotels, resorts and villas with shared guests, loyalty and central reporting.",
-    image: "/images/products/staysync-logo.png",
+    image: "/images/products/staysync-logo.webp",
     brandColor: "#6F50E9",
     audience: "Hotel groups, resorts, serviced apartments and villa portfolios",
     badge: "21 modules",
@@ -1197,7 +1197,7 @@ export const products: Product[] = [
       plans: [
         {
           name: "Group",
-          price: "PKR 75,000",
+          price: "PKR 25,000",
           period: "/ month",
           summary: "Every property under one licence",
           featured: true,
@@ -1223,7 +1223,7 @@ export const products: Product[] = [
     tagline: "Smart fleet. Real-time control.",
     description:
       "A multi-tenant transport management platform for truck fleets: vehicles, drivers, customers, shipments and trips with a lifecycle the software enforces rather than trusts, a drag-and-drop dispatch board, a live-tracking feed, and the whole upkeep side — fuel, maintenance, workshop jobs, tyres and parts. Built on a NestJS API and a Next.js console over PostgreSQL and PostGIS, with tenant isolation enforced at four layers so one company's data cannot reach another's. Twenty-nine API modules are in, including a finance tier where every invoice, payment, expense and payroll run posts a balanced double-entry journal. The map layer, geofencing, reporting, the customer portal and the driver app are what remain.",
-    image: "/images/products/fleetflow-logo.png",
+    image: "/images/products/fleetflow-logo.webp",
     logoLayout: "stacked",
     brandColor: "#FF7B56",
     audience:

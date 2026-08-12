@@ -69,6 +69,7 @@ export function organizationJsonLd() {
         foundingDate: founded,
         logo: {
           "@type": "ImageObject",
+          // PNG for the same reason as the manifest icons — scrapers, not browsers.
           url: `${url}/images/brand/plutox-mark.png`,
           width: 512,
           height: 512,

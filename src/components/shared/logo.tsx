@@ -20,12 +20,12 @@ import { cn } from "@/lib/utils";
  *    turns that constraint into a deliberate app-icon treatment.
  */
 export const BRAND = {
-  mark: "/images/brand/plutox-mark.png",
-  markDark: "/images/brand/plutox-mark-dark.png",
-  lockup: "/images/brand/plutox-lockup.png",
-  lockupDark: "/images/brand/plutox-lockup-dark.png",
-  splash: "/images/brand/plutox-splash.png",
-  splashDark: "/images/brand/plutox-splash-dark.png",
+  mark: "/images/brand/plutox-mark.webp",
+  markDark: "/images/brand/plutox-mark-dark.webp",
+  lockup: "/images/brand/plutox-lockup.webp",
+  lockupDark: "/images/brand/plutox-lockup-dark.webp",
+  splash: "/images/brand/plutox-splash.webp",
+  splashDark: "/images/brand/plutox-splash-dark.webp",
 } as const;
 
 /**

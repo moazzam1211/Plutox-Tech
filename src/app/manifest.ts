@@ -14,7 +14,9 @@ export default function manifest(): MetadataRoute.Manifest {
     theme_color: "#1a1a1a",
     orientation: "portrait-primary",
     categories: ["business", "productivity", "developer"],
-    // Points at the supplied artwork; see public/images/brand/README.md.
+    // PNG deliberately, not the WebP the pages render: install prompts and some
+    // crawlers still handle PNG more reliably, and this is not a per-visit cost.
+    // See public/images/brand/README.md.
     icons: [
       {
         src: "/images/brand/plutox-mark.png",
