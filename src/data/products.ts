@@ -1067,7 +1067,12 @@ export const products: Product[] = [
           {
             name: "Super administration",
             detail:
-              "Hotel group and properties, users, roles and RBAC, a full audit log, and three subscription packages (Starter, Professional, Enterprise) whose module gating is enforced rather than merely hidden in the nav.",
+              "Hotel group and properties, a full audit log, and three subscription packages (Starter, Professional, Enterprise) whose module gating is enforced rather than merely hidden in the nav.",
+          },
+          {
+            name: "Staff & role management",
+            detail:
+              "Add and edit staff with their PIN, role, property access and active state, and build roles from department checkboxes plus a per-module None / Read / Full permission picker — so access is composed in the UI rather than requested from whoever has database access.",
           },
           {
             name: "BI dashboard & reports",
@@ -1261,13 +1266,13 @@ export const products: Product[] = [
     status: "in-development",
     tagline: "Smart fleet. Real-time control.",
     description:
-      "A multi-tenant transport management platform for truck fleets: vehicles, drivers, customers, shipments and trips with a lifecycle the software enforces rather than trusts, a drag-and-drop dispatch board, a live-tracking feed, and the whole upkeep side — fuel, maintenance, workshop jobs, tyres and parts. Built on a NestJS API and a Next.js console over PostgreSQL and PostGIS, with tenant isolation enforced at four layers so one company's data cannot reach another's. Thirty-six API modules are in — including a finance tier where every invoice, payment, expense and payroll run posts a balanced double-entry journal, a driver app and customer portal, public tracking, and a command centre with analytics and a plain-language assistant. Route planning and geofencing are what remain.",
+      "A multi-tenant transport management platform for truck fleets: vehicles, drivers, customers, shipments and trips with a lifecycle the software enforces rather than trusts, a drag-and-drop dispatch board, a live-tracking feed, and the whole upkeep side — fuel, maintenance, workshop jobs, tyres and parts. Built on a NestJS API and a Next.js console over PostgreSQL and PostGIS, with tenant isolation enforced at four layers so one company's data cannot reach another's. Thirty-six API modules are in — including a finance tier where every invoice, payment, expense and payroll run posts a balanced double-entry journal, a driver app and customer portal, public tracking, and a command centre with analytics and a plain-language assistant. Route planning is the only piece left.",
     image: "/images/products/fleetflow-logo.webp",
     logoLayout: "stacked",
     brandColor: "#FF7B56",
     audience:
       "Trucking companies, logistics operators and freight brokers running their own fleets — from a dozen trucks to several hundred across branches",
-    badge: "36 modules",
+    badge: "38 modules",
     features: [
       "Multi-tenant by design — tenant isolation enforced at four layers",
       "Trip lifecycle validated against a transition map, not trusted",
@@ -1280,6 +1285,7 @@ export const products: Product[] = [
       "Double-entry accounting where debits equal credits, enforced three ways",
       "A driver app with proof of delivery, and public tracking with no login",
       "A command centre and a plain-language assistant over live data",
+      "Postgres row-level security, verified across 59 tables, not just described",
       "Overdue is derived from today's date, never stored and never stale",
       "Per-tenant numbering that survives two concurrent dispatchers",
       "Vendor kill switch that revokes every live session for a company",
@@ -1509,6 +1515,21 @@ export const products: Product[] = [
               "A hand-authored SQL layer: check constraints (a geofence is a circle or a polygon, never both; a ledger line is a debit or a credit), partial unique indexes, and a deferred constraint trigger asserting that every journal balances.",
           },
           {
+            name: "Row-level security",
+            detail:
+              "The fourth tenancy layer, applied to every table carrying a tenantId and derived from the system catalogue rather than a hand-kept list — one forgotten entry would leave a table unprotected with nothing looking wrong. The API connects as the table owner, so behaviour is unchanged; what it stops is every other route in, psql and BI tools included, which see nothing until they declare a tenant. Verified across 59 tables rather than asserted.",
+          },
+          {
+            name: "Boot guard",
+            detail:
+              "The API refuses to start in production while any placeholder secret survives, and refuses if the two JWT secrets match — sharing one lets a stolen access token be replayed as a refresh token, turning a 15-minute exposure into a 30-day one. A warning in a log is not a control.",
+          },
+          {
+            name: "CI & verified backups",
+            detail:
+              "Typecheck, tests, lint and build on every push, then a real Postgres, migrate, seed, verify RLS and seven live smoke suites — because every defect this project has actually shipped was invisible to a typechecker. Backups run dump, restore and verify, the last restoring into a scratch database and counting rows, since an untested backup is a hope.",
+          },
+          {
             name: "Spatial & search indexes",
             detail:
               "PostGIS geography columns with GiST indexes for tracking, BRIN indexes for time-series telemetry, and trigram indexes so search stays fast as the tables grow.",
@@ -1706,7 +1727,7 @@ export const products: Product[] = [
         label: "Phase 3",
         title: "Dispatch & live tracking",
         detail:
-          "The dispatch board, live-tracking feed and alerting are in. Route planning and geofencing over PostGIS are what remain.",
+          "The dispatch board, live-tracking feed, geofences and alerting are all in. Route planning is the only piece left.",
         state: "next",
       },
       {
@@ -1740,8 +1761,9 @@ export const products: Product[] = [
       {
         label: "Phase 8",
         title: "Hardening & launch",
-        detail: "Performance, security review, billing and production rollout.",
-        state: "planned",
+        detail:
+          "Row-level security applied as the fourth tenancy layer and verified across 59 tables, a boot guard that refuses to start on placeholder secrets, CI that runs seven live smoke suites against a real Postgres, and backups whose restore is actually verified.",
+        state: "done",
       },
     ],
     languages: ["TypeScript", "TSX", "SQL", "CSS"],
@@ -1757,9 +1779,9 @@ export const products: Product[] = [
     ],
     specs: [
       { label: "Prisma models", value: "68" },
-      { label: "API endpoints", value: "190" },
-      { label: "API modules", value: "36" },
-      { label: "Phases shipped", value: "6 / 8" },
+      { label: "API endpoints", value: "195" },
+      { label: "API modules", value: "38" },
+      { label: "Phases shipped", value: "7 / 8" },
     ],
     metric: { label: "Tenant isolation layers", value: "4" },
     pricing: {

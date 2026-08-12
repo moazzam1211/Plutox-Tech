@@ -46,8 +46,8 @@ export default function ProjectsPage() {
           items={[
             { value: "5", label: "Platforms" },
             { value: "60+", label: "Live modules" },
-            { value: "479+", label: "REST endpoints" },
-            { value: "131", label: "Capabilities detailed" },
+            { value: "484+", label: "REST endpoints" },
+            { value: "135", label: "Capabilities detailed" },
           ]}
         />
       </PageHeader>
