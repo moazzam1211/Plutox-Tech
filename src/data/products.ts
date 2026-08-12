@@ -42,6 +42,7 @@ export const products: Product[] = [
       "An R&D Lab that costs a recipe before it reaches the menu",
       "Eleven ranked roles, including a dedicated purchasing kiosk",
       "Five field apps: waiter pad, rider app, QR menu, display, tracking",
+      "Ships as a standalone binary for Windows, macOS and Linux — no Node needed",
     ],
     moduleGroups: [
       {
@@ -376,6 +377,7 @@ export const products: Product[] = [
       "Purchase order → approval → receive creates batches, GRN and payable",
       "Patients and customers in one record set, two views",
       "Demand forecasting with reorder suggestions",
+      "Standalone binaries plus self-signed HTTPS, so LAN terminals get a secure context",
     ],
     moduleGroups: [
       {
@@ -457,6 +459,11 @@ export const products: Product[] = [
         title: "People, platform & compliance",
         items: [
           {
+            name: "Customer ledger",
+            detail:
+              "Credit sales tracked per customer, with a sales return or refund reversing the ledger rather than leaving a balance that no longer matches what was sold.",
+          },
+          {
             name: "Patients & customers",
             detail:
               "One record set with two views — Patients (allergies, blood group, insurance) and Customers (loyalty, spend, purchase history) — both exportable to Excel.",
@@ -479,7 +486,7 @@ export const products: Product[] = [
           {
             name: "Real-time & offline",
             detail:
-              "Multi-terminal sync over Socket.IO, installable as a PWA, and fully functional offline.",
+              "Multi-terminal sync over Socket.IO, installable as a PWA and fully functional offline. Ships as a standalone binary with automatic self-signed HTTPS, because a PWA needs a secure context and LAN terminals have no public certificate.",
           },
         ],
       },
@@ -937,7 +944,7 @@ export const products: Product[] = [
     image: "/images/products/staysync-logo.webp",
     brandColor: "#6F50E9",
     audience: "Hotel groups, resorts, serviced apartments and villa portfolios",
-    badge: "21 modules",
+    badge: "22 modules",
     features: [
       "One login across many properties with shared guests and CRM",
       "Full PMS: reservations, availability engine, check-in and check-out",
@@ -1060,7 +1067,7 @@ export const products: Product[] = [
           {
             name: "Super administration",
             detail:
-              "Hotel group and properties, users, roles and RBAC, subscription control and a full audit log.",
+              "Hotel group and properties, users, roles and RBAC, a full audit log, and three subscription packages (Starter, Professional, Enterprise) whose module gating is enforced rather than merely hidden in the nav.",
           },
           {
             name: "BI dashboard & reports",
@@ -1162,6 +1169,11 @@ export const products: Product[] = [
         caption: "OTA rates, inventory sync and commission",
       },
       {
+        src: "/images/products/screens/staysync-plan-upgrade.webp",
+        label: "Plan Upgrade",
+        caption: "Modules locked by plan, with the upgrade path",
+      },
+      {
         src: "/images/products/screens/staysync-iot.webp",
         label: "Smart Hotel",
         caption: "Per-room locks, thermostats and energy meters",
@@ -1178,7 +1190,7 @@ export const products: Product[] = [
       "Docker",
     ],
     specs: [
-      { label: "Live modules", value: "21" },
+      { label: "Live modules", value: "22" },
       { label: "Smoke-test checks", value: "66" },
       { label: "Seeded properties", value: "2" },
       { label: "Runs on port", value: "3300" },
@@ -1193,19 +1205,46 @@ export const products: Product[] = [
     ],
     metric: { label: "Properties per login", value: "Unlimited" },
     pricing: {
-      note: "Per property group, billed monthly. The vendor can enable or disable the whole system; the owner can pay and renew in-app.",
+      note: "Billed monthly. Each tier unlocks a set of navigation modules and is a superset of the one below; the vendor can enable or disable the whole system, and the owner can pay and renew in-app.",
       plans: [
         {
-          name: "Group",
+          name: "Starter",
+          price: "PKR 15,000",
+          period: "/ month",
+          summary: "Run the front desk",
+          includes: [
+            "Reservations & front desk",
+            "Room management & housekeeping",
+            "Guest CRM",
+            "Folio & billing plus invoices",
+            "Dashboard & reports",
+          ],
+        },
+        {
+          name: "Professional",
           price: "PKR 25,000",
           period: "/ month",
-          summary: "Every property under one licence",
+          summary: "Operations & revenue centres",
           featured: true,
           includes: [
-            "Unlimited properties on one login",
-            "Full PMS, folios, housekeeping, room service",
-            "Banquet, spa, laundry, maintenance, channel manager",
-            "Finance, HR & payroll, procurement, assets, IoT",
+            "Everything in Starter",
+            "Room-service POS & inventory",
+            "Maintenance & laundry",
+            "Banquet, events & spa",
+            "Loyalty, marketing & channel manager",
+          ],
+        },
+        {
+          name: "Enterprise",
+          price: "PKR 35,000",
+          period: "/ month",
+          summary: "Full multi-property ERP",
+          includes: [
+            "Everything in Professional",
+            "Multi-property portfolio",
+            "Finance & accounting",
+            "HR & payroll",
+            "Procurement, assets and Smart Hotel (IoT)",
           ],
         },
       ],
@@ -1222,13 +1261,13 @@ export const products: Product[] = [
     status: "in-development",
     tagline: "Smart fleet. Real-time control.",
     description:
-      "A multi-tenant transport management platform for truck fleets: vehicles, drivers, customers, shipments and trips with a lifecycle the software enforces rather than trusts, a drag-and-drop dispatch board, a live-tracking feed, and the whole upkeep side — fuel, maintenance, workshop jobs, tyres and parts. Built on a NestJS API and a Next.js console over PostgreSQL and PostGIS, with tenant isolation enforced at four layers so one company's data cannot reach another's. Twenty-nine API modules are in, including a finance tier where every invoice, payment, expense and payroll run posts a balanced double-entry journal. The map layer, geofencing, reporting, the customer portal and the driver app are what remain.",
+      "A multi-tenant transport management platform for truck fleets: vehicles, drivers, customers, shipments and trips with a lifecycle the software enforces rather than trusts, a drag-and-drop dispatch board, a live-tracking feed, and the whole upkeep side — fuel, maintenance, workshop jobs, tyres and parts. Built on a NestJS API and a Next.js console over PostgreSQL and PostGIS, with tenant isolation enforced at four layers so one company's data cannot reach another's. Thirty-six API modules are in — including a finance tier where every invoice, payment, expense and payroll run posts a balanced double-entry journal, a driver app and customer portal, public tracking, and a command centre with analytics and a plain-language assistant. Route planning and geofencing are what remain.",
     image: "/images/products/fleetflow-logo.webp",
     logoLayout: "stacked",
     brandColor: "#FF7B56",
     audience:
       "Trucking companies, logistics operators and freight brokers running their own fleets — from a dozen trucks to several hundred across branches",
-    badge: "29 modules",
+    badge: "36 modules",
     features: [
       "Multi-tenant by design — tenant isolation enforced at four layers",
       "Trip lifecycle validated against a transition map, not trusted",
@@ -1239,6 +1278,8 @@ export const products: Product[] = [
       "A drag-and-drop dispatch board that refuses to double-book a truck",
       "Fuel, maintenance, workshop, tyres and parts, all against the vehicle",
       "Double-entry accounting where debits equal credits, enforced three ways",
+      "A driver app with proof of delivery, and public tracking with no login",
+      "A command centre and a plain-language assistant over live data",
       "Overdue is derived from today's date, never stored and never stale",
       "Per-tenant numbering that survives two concurrent dispatchers",
       "Vendor kill switch that revokes every live session for a company",
@@ -1356,6 +1397,66 @@ export const products: Product[] = [
             name: "Accounting reports",
             detail:
               "Trial balance, profit and loss, and receivables ageing — checkable precisely because the ledger balances, so a wrong figure is a posting rule to fix rather than a number nobody can trace.",
+          },
+        ],
+      },
+      {
+        title: "Outside the office",
+        items: [
+          {
+            name: "Driver app",
+            detail:
+              "A driver's own trips on their phone, with status updates and proof of delivery captured where the handover actually happens rather than re-keyed at the depot that evening.",
+          },
+          {
+            name: "Customer portal",
+            detail:
+              "A customer signs in and sees their own shipments, documents and invoices — which removes the phone call that was previously the only way to answer \"where is my load\".",
+          },
+          {
+            name: "Public tracking",
+            detail:
+              "An opaque code minted at shipment creation opens a tracking page with no login at all, and an invalid code says so plainly rather than leaking whether it ever existed.",
+          },
+          {
+            name: "Proof of delivery",
+            detail:
+              "Signature and photo captured against the stop, attached to the trip and visible to the customer through the portal.",
+          },
+          {
+            name: "SOS",
+            detail:
+              "A driver-side panic path that reaches the operator immediately, because a truck in trouble cannot wait for the next status poll.",
+          },
+        ],
+      },
+      {
+        title: "Analytics & command centre",
+        items: [
+          {
+            name: "Command centre",
+            detail:
+              "The whole operation on one screen — trips in flight, exceptions, and what needs a decision now, rather than five tabs an operator has to correlate by hand.",
+          },
+          {
+            name: "Analytics",
+            detail:
+              "Utilisation, cost and margin sliced by vehicle, driver, customer and lane, so an unprofitable lane is visible before the quarter closes.",
+          },
+          {
+            name: "Reports",
+            detail:
+              "Operational and financial reports over the same figures the dashboard shows, exportable rather than screenshotted.",
+          },
+          {
+            name: "Assistant",
+            detail:
+              "Ask the fleet a question in plain words and get an answer drawn from live data, which is a shorter path than knowing which report holds it.",
+          },
+          {
+            name: "Alerts & notifications",
+            detail:
+              "Licences, vehicle documents and services falling due, surfaced before they expire rather than discovered at a checkpoint.",
           },
         ],
       },
@@ -1542,6 +1643,41 @@ export const products: Product[] = [
         caption: "Trial balance, P&L and receivables ageing",
       },
       {
+        src: "/images/products/screens/fleetflow-driver-my-trips.webp",
+        label: "Driver App",
+        caption: "A driver's own trips, on their phone",
+      },
+      {
+        src: "/images/products/screens/fleetflow-customer-portal.webp",
+        label: "Customer Portal",
+        caption: "A customer's shipments, without an account manager",
+      },
+      {
+        src: "/images/products/screens/fleetflow-public-tracking.webp",
+        label: "Public Tracking",
+        caption: "A tracking code anyone can open, no login",
+      },
+      {
+        src: "/images/products/screens/fleetflow-command-centre.webp",
+        label: "Command Centre",
+        caption: "The whole operation on one screen",
+      },
+      {
+        src: "/images/products/screens/fleetflow-analytics.webp",
+        label: "Analytics",
+        caption: "Utilisation, cost and margin by dimension",
+      },
+      {
+        src: "/images/products/screens/fleetflow-assistant.webp",
+        label: "Assistant",
+        caption: "Ask the fleet a question in plain words",
+      },
+      {
+        src: "/images/products/screens/fleetflow-alerts.webp",
+        label: "Alerts",
+        caption: "Licences, documents and services falling due",
+      },
+      {
         src: "/images/products/screens/fleetflow-platform-console.webp",
         label: "Platform Console",
         caption: "Every tenant, its plan and its usage",
@@ -1570,7 +1706,7 @@ export const products: Product[] = [
         label: "Phase 3",
         title: "Dispatch & live tracking",
         detail:
-          "The dispatch board and the live-tracking feed are in. Route planning, the map layer, geofencing and alerting over PostGIS are what remain.",
+          "The dispatch board, live-tracking feed and alerting are in. Route planning and geofencing over PostGIS are what remain.",
         state: "next",
       },
       {
@@ -1591,15 +1727,15 @@ export const products: Product[] = [
         label: "Phase 6",
         title: "Portals & driver app",
         detail:
-          "A customer portal, public shipment tracking, and a React Native app for drivers.",
-        state: "planned",
+          "Driver app with proof of delivery and SOS, a customer portal, and public tracking on an opaque code — all in.",
+        state: "done",
       },
       {
         label: "Phase 7",
         title: "Analytics & command centre",
         detail:
-          "Reporting, notifications, a live command centre and AI-assisted dispatch.",
-        state: "planned",
+          "Command centre, analytics, reports, notifications and a plain-language assistant over live data — all in.",
+        state: "done",
       },
       {
         label: "Phase 8",
@@ -1621,9 +1757,9 @@ export const products: Product[] = [
     ],
     specs: [
       { label: "Prisma models", value: "68" },
-      { label: "API endpoints", value: "160" },
-      { label: "API modules", value: "29" },
-      { label: "Phases shipped", value: "4 / 8" },
+      { label: "API endpoints", value: "190" },
+      { label: "API modules", value: "36" },
+      { label: "Phases shipped", value: "6 / 8" },
     ],
     metric: { label: "Tenant isolation layers", value: "4" },
     pricing: {

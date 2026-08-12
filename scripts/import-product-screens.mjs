@@ -153,6 +153,15 @@ const PRODUCTS = [
       ["47-expenses.png", "Expenses", "Costs against the trip, vehicle or the business"],
       ["48-payroll.png", "Payroll", "Gross expensed, advances recovered at a capped share"],
       ["49-accounting.png", "Accounting", "Trial balance, P&L and receivables ageing"],
+      // Phase 6 — outside the office.
+      ["50-driver-my-trips.png", "Driver App", "A driver's own trips, on their phone"],
+      ["51-customer-portal.png", "Customer Portal", "A customer's shipments, without an account manager"],
+      ["53-public-tracking.png", "Public Tracking", "A tracking code anyone can open, no login"],
+      // Phase 7 — analytics and the command centre.
+      ["55-command-centre.png", "Command Centre", "The whole operation on one screen"],
+      ["56-analytics.png", "Analytics", "Utilisation, cost and margin by dimension"],
+      ["58-assistant.png", "Assistant", "Ask the fleet a question in plain words"],
+      ["52-alerts.png", "Alerts", "Licences, documents and services falling due"],
       ["30-platform-console.png", "Platform Console", "Every tenant, its plan and its usage"],
       ["25-settings.png", "Settings", "Plan limits and usage against them"],
     ],
