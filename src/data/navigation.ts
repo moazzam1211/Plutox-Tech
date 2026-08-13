@@ -27,6 +27,17 @@ export interface Route {
   /** Shown in the mobile drawer and on the intro index. */
   summary: string;
   icon: LucideIcon;
+  /**
+   * Sub-destinations, shown in a hover panel on desktop and indented in the
+   * mobile drawer. Only three routes have any; the rest render as plain links.
+   *
+   * Written out here rather than derived from `products` and `consultancyPrograms`
+   * on purpose: the navbar is a client component, and importing those would pull
+   * every module description and price into the bundle that renders a menu. The
+   * cost is a handful of names to keep in step, and a wrong one is visible in the
+   * navbar immediately.
+   */
+  children?: { label: string; href: string; hint: string }[];
 }
 
 export const routes: Route[] = [
@@ -49,6 +60,11 @@ export const routes: Route[] = [
     href: "/services",
     short: "Services",
     summary: "Consultancy and build — from an idea to a running business",
+    children: [
+      { label: "POS System Consultancy", href: "/services#pos-consultancy", hint: "Audit to go-live" },
+      { label: "Cloud Kitchen Setup", href: "/services#cloud-kitchen", hint: "Idea to first order" },
+      { label: "Food Business Consultancy", href: "/services#food-business", hint: "Restaurants, cafés, QSR" },
+    ],
     icon: Wrench,
   },
   {
@@ -56,6 +72,14 @@ export const routes: Route[] = [
     href: "/products",
     short: "Products",
     summary: "The modules we build — ordering, KDS, inventory, analytics and more",
+    children: [
+      { label: "Restaurant", href: "/products#servesync-pos", hint: "ServeSync POS" },
+      { label: "Pharmacy", href: "/products#pharmasync-pos", hint: "PharmaSync POS" },
+      { label: "Mart & Retail", href: "/products#vendeez-pos", hint: "Vendeez POS" },
+      { label: "Hotel", href: "/products#staysync", hint: "StaySync Hotel ERP" },
+      { label: "Fleet", href: "/products#fleet-flow", hint: "Fleet Flow" },
+      { label: "All modules", href: "/products", hint: "Eleven shared modules" },
+    ],
     icon: Boxes,
   },
   {
@@ -63,6 +87,13 @@ export const routes: Route[] = [
     href: "/projects",
     short: "Projects",
     summary: "Five platforms, four of them shipped",
+    children: [
+      { label: "ServeSync POS", href: "/projects/servesync-pos", hint: "Restaurant" },
+      { label: "PharmaSync POS", href: "/projects/pharmasync-pos", hint: "Pharmacy" },
+      { label: "Vendeez POS", href: "/projects/vendeez-pos", hint: "Mart & retail" },
+      { label: "StaySync Hotel ERP", href: "/projects/staysync", hint: "Hospitality" },
+      { label: "Fleet Flow", href: "/projects/fleet-flow", hint: "Transport" },
+    ],
     icon: Briefcase,
   },
   {

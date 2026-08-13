@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight, Menu, X } from "lucide-react";
+import { ArrowUpRight, ChevronDown, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import * as React from "react";
@@ -98,14 +98,22 @@ export function FloatingNav() {
               const active = pathname === route.href;
 
               return (
-                <li key={route.href}>
+                /*
+                  `group/item` is the hover *and* focus scope for the panel below.
+                  Deliberately CSS-only: no open state, no outside-click handler, no
+                  dependency. `focus-within` is what makes it keyboard-reachable —
+                  a hover-only menu is unusable without a pointer, and the parent is
+                  a real link, so the panel is a shortcut rather than the only route
+                  in.
+                */
+                <li key={route.href} className="group/item relative">
                   <Link
                     href={route.href}
                     aria-current={active ? "page" : undefined}
                     className={cn(
                       // The pill marks the active page; the underline is the
                       // hover cue, so the two never read as the same state.
-                      "group/nl relative flex items-center rounded-md px-3.5 py-2 text-sm transition-colors duration-200",
+                      "group/nl relative flex items-center gap-1 rounded-md px-3.5 py-2 text-sm transition-colors duration-200",
                       active
                         ? "text-foreground"
                         : "text-muted-foreground hover:text-foreground",
@@ -114,6 +122,13 @@ export function FloatingNav() {
                     <span className="link-underline font-medium">
                       {route.short}
                     </span>
+
+                    {route.children ? (
+                      <ChevronDown
+                        aria-hidden
+                        className="size-3 opacity-50 transition-transform duration-200 group-hover/item:rotate-180 group-focus-within/item:rotate-180"
+                      />
+                    ) : null}
 
                     {/* Shared pill that slides between links via layoutId. */}
                     {active ? (
@@ -125,6 +140,38 @@ export function FloatingNav() {
                       />
                     ) : null}
                   </Link>
+
+                  {route.children ? (
+                    <div
+                      className={cn(
+                        "invisible absolute top-full left-1/2 z-10 w-64 -translate-x-1/2 pt-2 opacity-0",
+                        "transition-[opacity,transform] duration-200 ease-out",
+                        // The panel starts 4px high and settles — transform and
+                        // opacity only, so it stays on the compositor.
+                        "translate-y-1",
+                        "group-hover/item:visible group-hover/item:translate-y-0 group-hover/item:opacity-100",
+                        "group-focus-within/item:visible group-focus-within/item:translate-y-0 group-focus-within/item:opacity-100",
+                      )}
+                    >
+                      <ul className="overflow-hidden rounded-lg border border-border bg-popover p-1.5 shadow-[0_20px_50px_-24px_rgb(0_0_0/0.5)]">
+                        {route.children.map((child) => (
+                          <li key={child.href}>
+                            <Link
+                              href={child.href}
+                              className="group/ci flex flex-col gap-0.5 rounded-md px-2.5 py-2 transition-colors hover:bg-muted/60 focus-visible:bg-muted/60 focus-visible:outline-none"
+                            >
+                              <span className="text-[0.8125rem] font-medium transition-transform duration-200 group-hover/ci:translate-x-0.5">
+                                {child.label}
+                              </span>
+                              <span className="text-[0.6875rem] text-muted-foreground">
+                                {child.hint}
+                              </span>
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : null}
                 </li>
               );
             })}
@@ -221,6 +268,28 @@ export function FloatingNav() {
                           </span>
                         </span>
                       </Link>
+
+                      {/*
+                        The same sub-items, indented. The drawer has no hover, so
+                        without this the desktop panel would be the only way to
+                        reach them — which is the usual way a hover menu strands
+                        half its destinations on a phone.
+                      */}
+                      {route.children ? (
+                        <ul className="border-l-2 border-transparent pb-2 pl-4">
+                          {route.children.map((child) => (
+                            <li key={child.href}>
+                              <Link
+                                href={child.href}
+                                onClick={() => setOpen(false)}
+                                className="block py-1.5 pl-3 text-[0.8125rem] text-muted-foreground transition-colors hover:text-foreground"
+                              >
+                                {child.label}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      ) : null}
                     </li>
                   );
                 })}
