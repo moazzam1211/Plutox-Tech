@@ -29,6 +29,10 @@ export function PricingTable({
 }) {
   const { note, plans } = pricing;
 
+  // Text takes the theme-corrected variant; borders and ticks keep the raw brand
+  // colour, where contrast rules do not apply. See --product-ink in globals.css.
+  const ink = "var(--product-ink)";
+
   return (
     <div>
       <Reveal preset="fadeUp">
@@ -71,14 +75,14 @@ export function PricingTable({
               <div className="flex items-center justify-between gap-2">
                 <p
                   className="eyebrow"
-                  style={{ color: plan.featured ? brandColor : undefined }}
+                  style={{ color: plan.featured ? ink : undefined }}
                 >
                   {plan.name}
                 </p>
                 {plan.featured ? (
                   <span
                     className="rounded border px-1.5 py-0.5 font-mono text-[0.5625rem]"
-                    style={{ color: brandColor, borderColor: `${brandColor}55` }}
+                    style={{ color: ink, borderColor: `${brandColor}55` }}
                   >
                     most taken
                   </span>
@@ -106,7 +110,7 @@ export function PricingTable({
                   >
                     <Check
                       className="mt-0.5 size-3.5 shrink-0"
-                      style={{ color: brandColor }}
+                      style={{ color: ink }}
                     />
                     {item}
                   </li>

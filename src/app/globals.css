@@ -320,7 +320,34 @@
   }
 }
 
+
 /* ------------------------------------------------------------------ */
+/* Per-product theming                                                */
+/* ------------------------------------------------------------------ */
+/*
+ * Product pages set  to that product's own brand colour on a wrapper
+ * carrying . Those colours were each chosen for their own product's
+ * canvas, not for ours, and four of five fail 3:1 against one of our two
+ * backgrounds — ServeSync teal and Fleet Flow coral on paper, PharmaSync and
+ * Vendeez blue on ink.
+ *
+ * So text never uses  directly; it uses , the same hue
+ * pulled toward the opposite end of the current theme until it is readable. Fills,
+ * rules and washes keep the raw colour, where the brand matters and the contrast
+ * rule does not apply.
+ *
+ * The mix is declared on the wrapper, NOT on :root. A custom property resolves
+ * where it is declared, so a :root rule referencing  would never see a
+ * value set further down the tree — every product would come out the same violet.
+ */
+[data-product] {
+  --product-ink: color-mix(in oklab, var(--product) 72%, #0d0d0d);
+}
+
+.dark [data-product] {
+  --product-ink: color-mix(in oklab, var(--product) 80%, #ffffff);
+}
+
 /* 5. Custom utilities                                                */
 /* ------------------------------------------------------------------ */
 
