@@ -1,5 +1,6 @@
 import {
   Boxes,
+  Download,
   Briefcase,
   Building2,
   Home,
@@ -79,6 +80,7 @@ export const routes: Route[] = [
       { label: "Hotel", href: "/products#staysync", hint: "StaySync Hotel ERP" },
       { label: "Fleet", href: "/products#fleet-flow", hint: "Fleet Flow" },
       { label: "All modules", href: "/products", hint: "Eleven shared modules" },
+      { label: "Downloads", href: "/downloads", hint: "Installers & Android apps" },
     ],
     icon: Boxes,
   },
@@ -128,6 +130,13 @@ export const routes: Route[] = [
  * footer, the About page and the Owner profile, and it is still in the sitemap.
  */
 export const secondaryRoutes: Route[] = [
+  {
+    label: "Downloads",
+    href: "/downloads",
+    short: "Downloads",
+    summary: "Windows installers and Android apps, with a checksum for each",
+    icon: Download,
+  },
   {
     label: "Skills",
     href: "/skills",

@@ -66,6 +66,7 @@ export const productModules: ProductModule[] = [
       "Admin panel signed in with a POS PIN, validated on every request",
       "Four layouts and four palettes, plus reservations, gallery, journal and careers",
       "Installable PWA with an offline shell, Restaurant JSON-LD and a sitemap",
+      "Admin order list with a printable bill per order",
     ],
     shippedIn: [SERVESYNC_WEB],
     // No captures yet — the site has no screenshot set in its repo, and borrowing

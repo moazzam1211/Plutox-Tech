@@ -42,7 +42,7 @@ export const products: Product[] = [
       "An R&D Lab that costs a recipe before it reaches the menu",
       "Eleven ranked roles, including a dedicated purchasing kiosk",
       "Five field apps: waiter pad, rider app, QR menu, display, tracking",
-      "Ships as a standalone binary for Windows, macOS and Linux — no Node needed",
+      "A 2 MB Windows thin client that reloads the new UI when the server updates",
     ],
     moduleGroups: [
       {
@@ -173,6 +173,11 @@ export const products: Product[] = [
       {
         title: "Field & guest apps",
         items: [
+          {
+            name: "Windows desktop client",
+            detail:
+              "A 2 MB .NET and WebView2 shell that asks once for the POS server address and then loads it. Updating the server updates every till — no reinstall, no version drift across a floor of terminals. Ctrl+Shift+O repoints it, and a failed load returns to the setup screen rather than a blank window.",
+          },
           {
             name: "Waiter order pad",
             detail:
@@ -987,7 +992,7 @@ export const products: Product[] = [
           {
             name: "Room Service POS",
             detail:
-              "A menu and cart that charges straight to the room folio rather than taking a separate payment.",
+              "A menu and cart that charges straight to the room folio rather than taking a separate payment, with the menu editable in place — add, edit or remove a dish without a developer.",
           },
         ],
       },

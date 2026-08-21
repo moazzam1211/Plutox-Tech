@@ -40,13 +40,15 @@ npm run dev          # → http://localhost:3400
 | `npm run product-logos` | Trim and normalise the five product lock-ups |
 | `npm run product-screens` | Re-import the gallery screenshots per product as WebP |
 | `npm run brand-webp` | Convert served brand/logo PNGs to lossless WebP |
+| `npm run downloads` | Re-import client installers/APKs and regenerate `src/data/downloads.ts` |
 | `npm run portrait` | Crop + compress the founder portrait to a web-ready JPEG |
 
 ---
 
 ## Structure
 
-Seven pages in the navbar, plus Skills and two legal pages that are linked from
+Eight pages in the navbar, plus Downloads, Skills and two legal pages that are
+linked from
 the footer and indexed but kept out of the bar. Deliberately finite — every page
 ends with a prev/next pager rather than an endless scroll.
 
@@ -60,6 +62,7 @@ ends with a prev/next pager rather than an endless scroll.
 | `/reviews` | Client reviews and FAQs |
 | `/owner` | Founder profile |
 | `/contact` | Contact channels, enquiry form, location |
+| `/downloads` | Windows installers and Android apps per product, with the real size and SHA-256 of each build |
 | `/skills` | Skill matrix by discipline + the full stack (footer-linked, not in the bar) |
 | `/privacy-policy`, `/terms` | Legal |
 
