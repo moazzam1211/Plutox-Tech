@@ -99,8 +99,8 @@ export default function IntroPage() {
       {/* ---------------- The products ---------------- */}
       <Block
         label="What we've built"
-        title="Five platforms"
-        description="Each one designed and built by us — not resold, not white-labelled. Four are shipped and running; Fleet Flow is in build."
+        title="Three platforms"
+        description="Each one designed and built by us — not resold, not white-labelled. All three are shipped and running, and ServeSync alone covers restaurants, pharmacies and marts."
       >
         <RevealGroup stagger={0.07} className="flex flex-col">
           {products.map((product) => (

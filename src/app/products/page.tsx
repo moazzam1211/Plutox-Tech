@@ -19,7 +19,7 @@ import { cn } from "@/lib/utils";
 export const metadata = buildMetadata({
   title: "Products",
   description:
-    "Five management systems, each with its own modules: restaurant, pharmacy, mart and retail, hotel, and fleet. Plus the shared modules — online ordering, kitchen display, rider and staff management, inventory, warehouse, analytics, expenses, admin panel and PRA/FBR fiscal compliance.",
+    "Three management systems: ServeSync POS in restaurant, pharmacy and mart editions, StaySync for hotels and Fleet Flow for transport. Plus the shared modules — online ordering, kitchen display, rider and staff management, inventory, warehouse, analytics, expenses, admin panel and PRA/FBR fiscal compliance.",
   path: "/products",
   keywords: [
     "restaurant management system",
@@ -65,11 +65,11 @@ export default function ProductsPage() {
         eyebrow="Products"
         title={
           <>
-            Five management systems,{" "}
+            Three management systems,{" "}
             <span className="text-primary">each with its own modules</span>
           </>
         }
-        lede="A restaurant does not need a pharmacy's controlled-drug register, and a pharmacy has no use for a kitchen display. Each system below is its own product with its own module list — not one platform wearing five names. Every module named here exists in shipped software."
+        lede="A restaurant does not need a pharmacy's controlled-drug register, and a pharmacy has no use for a kitchen display — so ServeSync ships them as editions, hiding what does not apply and relabelling what does. Every module named here exists in shipped software."
       >
         <StatStrip
           className="max-w-2xl border-t pt-4"
@@ -77,12 +77,12 @@ export default function ProductsPage() {
             { value: String(products.length), label: "Management systems" },
             { value: String(totalModules), label: "Modules across them" },
             { value: String(productModules.length), label: "Shared modules" },
-            { value: "4", label: "In production" },
+            { value: "3", label: "POS editions" },
           ]}
         />
       </PageHeader>
 
-      {/* Jump links — five long sections. */}
+      {/* Jump links — the sections are long. */}
       <nav
         aria-label="Jump to a system"
         className="border-b border-border px-6 py-5 sm:px-10 lg:px-14"
@@ -255,9 +255,17 @@ export default function ProductsPage() {
                           {mod.name}
                         </span>
                         <span className="mt-1 block font-mono text-[0.625rem] text-muted-foreground">
-                          {mod.shippedIn.length === 1
-                            ? mod.shippedIn[0].name
-                            : `${mod.shippedIn.length} systems`}
+                          {/*
+                            Counted over distinct slugs, not entries: a module in
+                            all three ServeSync editions ships in one system, not
+                            three.
+                          */}
+                          {(() => {
+                            const systems = new Set(mod.shippedIn.map((p) => p.slug));
+                            return systems.size === 1
+                              ? mod.shippedIn[0].name
+                              : `${systems.size} systems`;
+                          })()}
                         </span>
                       </span>
                       <ArrowUpRight className="size-3.5 shrink-0 text-muted-foreground transition-all duration-200 group-hover/mod:-translate-y-0.5 group-hover/mod:translate-x-0.5 group-hover/mod:text-primary" />

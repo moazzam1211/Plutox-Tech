@@ -56,6 +56,9 @@ const PRODUCTS = [
     ],
   },
   {
+    // Still imported after the merge: the pharmacy build became ServeSync's
+    // pharmacy edition, and these captures are the only real ones of it. They are
+    // filed under ServeSync in products.ts, which says where they were taken.
     slug: "pharmasync",
     src: `${DL}/pharmacy-pos-full/docs/screenshots`,
     screens: [
@@ -162,6 +165,15 @@ const PRODUCTS = [
       ["56-analytics.png", "Analytics", "Utilisation, cost and margin by dimension"],
       ["58-assistant.png", "Assistant", "Ask the fleet a question in plain words"],
       ["52-alerts.png", "Alerts", "Licences, documents and services falling due"],
+      // Geofencing, the live map and route planning — the last of the console.
+      ["61-geofences.png", "Geofences", "Circular zones matched by haversine, no PostGIS round trip"],
+      ["62-geofence-crossings.png", "Geofence Crossings", "Entries and exits, counted in one query per sweep"],
+      ["63-tracking-map.png", "Tracking Map", "Every truck's last position, live"],
+      ["66-tracking-map-geofence.png", "Map & Zones", "Restricted zones drawn over the live fleet"],
+      ["67-routes.png", "Routes", "Planned lanes with distance and expected duration"],
+      ["68-routes-lane.png", "Route Lane", "One lane end to end, with its stops"],
+      ["57-reports.png", "Reports", "Exports built from the same queries as the screens"],
+      ["60-notifications.png", "Notifications", "SOS, breakdown and zone entry, routed to who is on call"],
       ["30-platform-console.png", "Platform Console", "Every tenant, its plan and its usage"],
       ["25-settings.png", "Settings", "Plan limits and usage against them"],
     ],

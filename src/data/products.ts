@@ -1,7 +1,11 @@
 import type { Product } from "@/types";
 
 /**
- * The products built by Plutox Tech — four shipped, one in build.
+ * The products built by Plutox Tech — three products, all shipped.
+ *
+ * ServeSync is one POS with three editions (restaurant / pharmacy / mart) chosen
+ * at first run. It used to be three separate products; PharmaSync and Vendeez were
+ * ported into it and retired, so they are no longer listed separately.
  *
  * Every capability, spec figure and technology listed here is taken from the
  * products' own documentation rather than written as marketing copy — the
@@ -19,49 +23,65 @@ import type { Product } from "@/types";
  */
 export const products: Product[] = [
   /* ------------------------------------------------------------------ */
-  /* ServeSync POS                                                      */
+  /* ServeSync POS — one product, three verticals                       */
   /* ------------------------------------------------------------------ */
   {
     slug: "servesync-pos",
     name: "ServeSync POS",
-    category: "Restaurant",
-    tagline: "Run a whole restaurant chain from one codebase",
+    category: "Multi-vertical POS",
+    tagline: "One POS for restaurants, pharmacies and marts",
     description:
-      "A multi-branch, offline-first restaurant POS with 24 live modules spanning point of sale, kitchen, floor, delivery, inventory, a central warehouse, an R&D lab, HR, accounting and fiscal compliance — all synced in real time across every terminal. One owner login oversees many branches, each with its own menu, tables, tax and staff, fed by a central warehouse.",
+      "One point-of-sale product that runs three different kinds of business. The superadmin picks the edition at first run — restaurant, pharmacy or mart — and that choice drives the theme, the terminology and which of the 33 modules appear: a pharmacy gets prescriptions, a controlled-drug register and expiry tracking but no floor plan; a mart gets promotions, gift cards and scale labels but no kitchen display. Underneath it is the same offline-first, multi-branch codebase, so a fix or a feature lands in all three at once. Previously three separate products (ServeSync, PharmaSync and Vendeez); the pharmacy and mart builds were ported into this one and retired. The pharmacy and mart captures in the gallery were taken in those standalone builds — the editions run the same shell, re-themed and re-labelled.",
     image: "/images/products/servesync-logo.webp",
     brandColor: "#33BCA8",
-    audience: "Restaurants, cafés, cloud kitchens and multi-branch food groups",
-    badge: "24 modules",
+    audience:
+      "Restaurants, cafés and cloud kitchens; retail pharmacies and medical stores; supermarkets, grocery stores and mini-marts",
+    badge: "3 editions",
     features: [
-      "Dine-in, takeaway, delivery and QR self-order in one till",
-      "Kitchen Display with bump, recall, 86-items and KOT notes",
-      "Live floor plan with dwell-time escalation, merge & transfer",
+      "Restaurant, pharmacy or mart — chosen at first run, themed and relabelled to match",
+      "33 modules, gated per edition: 26 shared, 4 pharmacy-only, 3 mart-only",
       "Offline-first PWA — an outbox replays every sale on reconnect",
-      "Central warehouse: branch demands → dispatch → goods received",
-      "Foodpanda orders arrive as a first-class channel, not a re-key",
-      "An R&D Lab that costs a recipe before it reaches the menu",
-      "Eleven ranked roles, including a dedicated purchasing kiosk",
-      "Five field apps: waiter pad, rider app, QR menu, display, tracking",
+      "Multi-branch by design: one owner login over many shops, one central warehouse",
+      "Pharmacy: batch stock with FEFO dispensing, Rx gating and a controlled register",
+      "Mart: barcode scanning three ways, promotions, gift cards and scale labels",
+      "Restaurant: kitchen display, live floor plan, delivery and Foodpanda",
+      "PRA / FBR fiscal invoicing shared by all three editions",
+      "Silent ESC/POS printing straight to the thermal printer, no browser dialog",
       "A 2 MB Windows thin client that reloads the new UI when the server updates",
     ],
     moduleGroups: [
       {
-        title: "Point of sale & floor",
+        title: "Editions — how one product becomes three",
         items: [
           {
-            name: "New Order (POS)",
+            name: "Edition picker at first run",
             detail:
-              "Dine-in / takeaway / delivery, modifiers and per-item add-ons, % or fixed discounts, surcharges, promo and loyalty redemption, split and method-based tax.",
+              "The superadmin chooses restaurant, pharmacy or mart on first launch, and can change it later in Setup. The choice is stored server-side and served pre-login, so even the splash and login screen are already themed for the business. Existing restaurant installs migrate to the restaurant edition and are never asked.",
           },
           {
-            name: "Floor plan & tables",
+            name: "Runtime theming, not separate builds",
             detail:
-              "Live table status with dwell-time colour escalation, waiter assignment, add-to and view occupied tables, merge and transfer.",
+              "Each edition carries its own name, accent and vocabulary — restaurant teal #33bca8, pharmacy blue #004aad, mart orange #f97316 — swapped into CSS custom properties at boot. One installer therefore ships all three editions; there is no per-vertical build to keep in step.",
           },
           {
-            name: "Kitchen Display (KDS)",
+            name: "Terminology that matches the trade",
             detail:
-              "Live tickets per station, bump and recall, 86-items, KOT notes, and a cross-branch view for the owner.",
+              "The same screens are relabelled per edition: Order becomes Sell, Menu becomes Medicines or Products, Customers becomes Patients, Vendors becomes Suppliers. Staff read their own language rather than restaurant jargon.",
+          },
+          {
+            name: "Module gating per edition",
+            detail:
+              "26 modules are shared. Four are pharmacy-only (Prescriptions, Doctors, Controlled, Expiry) and three are mart-only (Promotions, Gift Cards, Labels). Five restaurant modules — Tables, Kitchen, Delivery, Foodpanda, R&D — are hidden outside the restaurant edition. Gating is enforced in the sidebar and again server-side, on top of the package and role checks.",
+          },
+        ],
+      },
+      {
+        title: "Point of sale & floor (all editions)",
+        items: [
+          {
+            name: "Point of sale",
+            detail:
+              "Dine-in / takeaway / delivery for restaurants, scan-to-cart for marts and pharmacies. Modifiers and per-item add-ons, % or fixed discounts, surcharges, promo and loyalty redemption, split and method-based tax.",
           },
           {
             name: "Orders & invoices",
@@ -69,19 +89,29 @@ export const products: Product[] = [
               "The full order list with manage, void and refund behind a supervisor PIN, pre-bill and customer bill, and a QR code on every receipt.",
           },
           {
-            name: "Till & shift",
+            name: "Silent thermal printing",
             detail:
-              "Opening float, cash in/out, mid-shift X-report, Z-report with variance, and one-step cashier handover.",
+              "Raw ESC/POS spooled to the configured Windows or system printer, so Print and the kitchen ticket go straight to the thermal head with no browser dialog and no GDI garbage. Receipts, KOTs, pre-bills and warehouse transfer invoices all print direct, with a browser window only as a fallback.",
           },
           {
-            name: "Menu management",
+            name: "Receipt customisation",
             detail:
-              "Categories and sub-categories, recipes, modifier groups, custom add-ons and emoji items.",
+              "Font size, style and weight per line, separate controls for the title and thank-you text, a logo watermark, contact number, NTN and a QR that renders as a raster bitmap so it prints on thermal heads that never supported the native QR command.",
+          },
+          {
+            name: "Till & shift",
+            detail:
+              "Opening float, cash in/out, mid-shift X-report, Z-report with variance and order counts, and one-step cashier handover.",
+          },
+          {
+            name: "Catalogue management",
+            detail:
+              "Categories and sub-categories, recipes, modifier groups, custom add-ons — labelled Menu, Medicines or Products depending on the edition.",
           },
           {
             name: "Customers & CRM",
             detail:
-              "Guest profiles with order history, loyalty points and tiers, and Excel export.",
+              "Profiles with purchase history, loyalty points and tiers, credit on account, and Excel export. Shown as Patients in the pharmacy edition.",
           },
           {
             name: "Reports & BI",
@@ -91,22 +121,17 @@ export const products: Product[] = [
         ],
       },
       {
-        title: "Operations & supply chain",
+        title: "Restaurant edition",
         items: [
           {
-            name: "All-branches command centre",
+            name: "Floor plan & tables",
             detail:
-              "Every branch's live sales, open orders, tables, alerts and who's on shift — each card drilling into that branch's reports, stock, staff and demand.",
+              "Live table status with dwell-time colour escalation, waiter assignment, add-to and view occupied tables, merge and transfer — and a refusal to punch a new order onto a table that is already occupied.",
           },
           {
-            name: "Central warehouse",
+            name: "Kitchen Display (KDS)",
             detail:
-              "In-house and supply items filed by category and sub-category, branch demands → dispatch → receive, with goods-received notes.",
-          },
-          {
-            name: "Inventory",
-            detail:
-              "Two linked inventories (menu + ingredient) with live 'makeable' counts, FIFO/LIFO valuation, expiry flags and Excel export.",
+              "Live tickets per station, bump and recall, 86-items, KOT notes, and a cross-branch view for the owner. The KOT prints centred with a banner header, items left and add-ons right, and names whoever punched the order.",
           },
           {
             name: "Delivery",
@@ -116,12 +141,107 @@ export const products: Product[] = [
           {
             name: "Foodpanda channel",
             detail:
-              "Aggregator orders as a first-class channel through a secret-gated webhook, with accept/decline and SKU mapping.",
+              "Aggregator orders as a first-class channel through a secret-gated webhook, with accept/decline and SKU mapping — and the channel marked on the kitchen ticket.",
           },
           {
             name: "R&D Lab",
             detail:
-              "Recipe development kept off the live menu until it is ready, with its own purchasing and a costing engine that returns food-cost percentage, gross profit and a suggested price. Draws on the central warehouse, and is gated to the Premium package.",
+              "Recipe development kept off the live menu until it is ready, with its own purchasing and a costing engine returning food-cost percentage, gross profit and a suggested price. Gated to the Premium package.",
+          },
+        ],
+      },
+      {
+        title: "Pharmacy edition",
+        items: [
+          {
+            name: "Batch stock with FEFO dispensing",
+            detail:
+              "Medicines are stocked by batch with manufacture and expiry dates. A sale allocates first-expiry-first-out and records which batches it consumed; expired stock is excluded from sellable stock rather than merely flagged.",
+          },
+          {
+            name: "Expiry watch",
+            detail:
+              "An expiry report over every batch — what has expired, what is close — so slow movers are returned or discounted before they are worthless.",
+          },
+          {
+            name: "Prescriptions & doctors",
+            detail:
+              "Prescriber records and prescriptions with auto-numbered RX-n, patient, doctor, diagnosis, medicines and status. Dispensing a prescription at the till marks it dispensed and tags the order.",
+          },
+          {
+            name: "Rx enforcement at the counter",
+            detail:
+              "Items flagged Rx-required or controlled cannot be sold without a linked prescription — the payment is refused, not warned about — unless a manager overrides, and the override is recorded. Generic name and strength sit on the item so the cashier can match what was prescribed.",
+          },
+          {
+            name: "Controlled-drug register",
+            detail:
+              "Every controlled dispense writes to its own register with the medicine, batch, prescription, who dispensed it and when, readable as an audit trail rather than reconstructed from sales.",
+          },
+          {
+            name: "Manufacturers & suppliers",
+            detail:
+              "A manufacturer field on every medicine, and each batch linked to the supplier it came from, so a recall or a bad batch traces back to one vendor.",
+          },
+        ],
+      },
+      {
+        title: "Mart & retail edition",
+        items: [
+          {
+            name: "Barcode scanning, three ways",
+            detail:
+              "A USB or Bluetooth gun captured globally with no need to focus the search box, the device camera, or a staff phone paired over Socket.IO that streams its scans to the till. All three land in the same scan-to-cart path.",
+          },
+          {
+            name: "Barcode lookup",
+            detail:
+              "An unknown barcode is checked against the catalogue, then Open Food Facts, then UPCitemdb — so a new line can be created at the counter instead of set aside.",
+          },
+          {
+            name: "Weighed & pack/loose selling",
+            detail:
+              "Produce sold by weight with a price per kg and a PLU, and packaged goods sold as a full pack or loose units. Stock deducts in kilos for weighed items and as a fraction of a pack for loose ones.",
+          },
+          {
+            name: "Barcode & scale labels",
+            detail:
+              "An EAN-13 generator printing shelf labels and scale labels with the price embedded in the barcode, so the label scans at the till at exactly the price printed on it. Verified generate-then-scan, not just generated.",
+          },
+          {
+            name: "Promotions engine",
+            detail:
+              "Buy-X-Get-Y, category percentage off, combo pricing and flat discounts, computed into the cart total automatically rather than keyed in by the cashier.",
+          },
+          {
+            name: "Loyalty tiers",
+            detail:
+              "Silver, Gold and Platinum awarded on lifetime spend, with a tier bonus on points earned and the tier shown against the customer at the till.",
+          },
+          {
+            name: "Gift cards",
+            detail:
+              "Issue, top up, look up a balance and disable a card, plus a gift-card tender that caps at the balance, allows a partial payment and deducts with a history entry.",
+          },
+        ],
+      },
+      {
+        title: "Operations & supply chain (all editions)",
+        items: [
+          {
+            name: "All-branches command centre",
+            detail:
+              "Every branch's live sales, open orders, alerts and who's on shift — each card drilling into that branch's reports, stock, staff and demand.",
+          },
+          {
+            name: "Central warehouse",
+            detail:
+              "Stock held behind the shop floor: branch demands → dispatch → receive, with goods-received notes and a transfer invoice that prints direct to thermal.",
+          },
+          {
+            name: "Inventory",
+            detail:
+              "Two linked inventories with live 'makeable' counts for recipes, batch tracking where the edition needs it, FIFO/LIFO valuation, expiry flags and Excel export. Retail sales deduct stock on payment.",
           },
           {
             name: "Purchasing & approvals",
@@ -131,12 +251,12 @@ export const products: Product[] = [
           {
             name: "Settings & packages",
             detail:
-              "Branches with quick rename, tax rules, printers, OTP, branding, access control and integrations — plus three subscription packages (Basic, Standard, Premium) whose module gating is enforced in the sidebar and again server-side.",
+              "Branches with quick rename, tax rules, printers, OTP, branding, access control, integrations and the edition switch — plus three subscription packages whose module gating is enforced in the sidebar and again server-side.",
           },
         ],
       },
       {
-        title: "Back office & compliance",
+        title: "Back office & compliance (all editions)",
         items: [
           {
             name: "Accounts",
@@ -151,7 +271,7 @@ export const products: Product[] = [
           {
             name: "Vendors & payables",
             detail:
-              "Supplier records and invoices with pay-now or pay-later terms and payment reminders, plus warehouse purchase invoices for goods received in.",
+              "Supplier records and invoices with pay-now or pay-later terms and payment reminders, plus warehouse purchase invoices for goods received in. Labelled Suppliers in the pharmacy and mart editions.",
           },
           {
             name: "Expenses",
@@ -166,7 +286,7 @@ export const products: Product[] = [
           {
             name: "PRA / FBR fiscal",
             detail:
-              "Reports paid invoices to Punjab and Federal tax authorities, printing the official invoice number and QR on receipts.",
+              "Reports paid invoices to Punjab and Federal tax authorities, printing the official invoice number, QR and NTN on every receipt.",
           },
         ],
       },
@@ -176,12 +296,12 @@ export const products: Product[] = [
           {
             name: "Windows desktop client",
             detail:
-              "A 2 MB .NET and WebView2 shell that asks once for the POS server address and then loads it. Updating the server updates every till — no reinstall, no version drift across a floor of terminals. Ctrl+Shift+O repoints it, and a failed load returns to the setup screen rather than a blank window.",
+              "A .NET and WebView2 shell that asks once for the POS server address and then loads it. Updating the server updates every till — no reinstall, no version drift across a floor of terminals. Ctrl+Shift+O repoints it, and a failed load returns to the setup screen rather than a blank window. One installer carries all three editions.",
           },
           {
             name: "Waiter order pad",
             detail:
-              "Mobile dine-in and takeaway punching from the floor, table-aware, with PIN login.",
+              "Mobile dine-in and takeaway punching from the floor, table-aware, with PIN login. The login screen only offers the companion apps that the current edition actually uses.",
           },
           {
             name: "Rider delivery app",
@@ -189,9 +309,14 @@ export const products: Product[] = [
               "A phone-login field app listing assigned deliveries with navigate, call and status updates.",
           },
           {
-            name: "Customer QR self-order",
+            name: "Phone scanner",
             detail:
-              "A scan-to-order card menu with its own per-device theme, cart and checkout.",
+              "A staff phone paired by QR that becomes a scanner, relaying each scan to the till over Socket.IO for selling or stock-in.",
+          },
+          {
+            name: "Customer QR self-order & kiosk",
+            detail:
+              "A scan-to-order card menu with its own per-device theme, cart and checkout, which doubles as a self-service kiosk.",
           },
           {
             name: "Customer display",
@@ -206,6 +331,12 @@ export const products: Product[] = [
         ],
       },
     ],
+    /*
+      54 captures: 18 from the restaurant edition, 18 from the pharmacy build and
+      18 from the mart build. The pharmacy and mart sets were taken in the
+      standalone products those editions were ported from — said plainly in the
+      description rather than passed off as captures of the unified build.
+    */
     screens: [
       {
         src: "/images/products/screens/servesync-new-order.webp",
@@ -296,215 +427,15 @@ export const products: Product[] = [
         src: "/images/products/screens/servesync-packages.webp",
         label: "Packages",
         caption: "Three plans, gated in the sidebar and server-side",
-      },    ],
-    languages: ["JavaScript", "HTML", "CSS"],
-    stack: [
-      "Node.js",
-      "Express",
-      "Socket.IO",
-      "Vanilla JS PWA",
-      "ESC/POS",
-      "Stripe",
-      "Docker",
-    ],
-    specs: [
-      { label: "Live modules", value: "24" },
-      { label: "REST endpoints", value: "189" },
-      { label: "Lines of code", value: "~13,500" },
-      { label: "Runtime deps", value: "2" },
-    ],
-    payments: ["Cash", "Card", "JazzCash", "EasyPaisa", "Bank transfer"],
-    metric: { label: "Front-end apps & surfaces", value: "7" },
-    pricing: {
-      note: "Per branch, billed monthly. The package gates which modules a branch gets, enforced in the sidebar and again server-side.",
-      plans: [
-        {
-          name: "Basic",
-          price: "PKR 5,000",
-          period: "/ month",
-          summary: "Core POS to run a single shop",
-          includes: [
-            "Dashboard, POS, tables & floor plan",
-            "Kitchen display and orders",
-            "Invoices, customers & loyalty",
-            "Menu management, till & shift",
-          ],
-        },
-        {
-          name: "Standard",
-          price: "PKR 10,000",
-          period: "/ month",
-          summary: "Everything to run and grow one restaurant",
-          featured: true,
-          includes: [
-            "Everything in Basic",
-            "Inventory & stock, demand planning",
-            "Staff, vendors & payables, promos",
-            "Expenses, delivery, reports & analytics",
-          ],
-        },
-        {
-          name: "Premium",
-          price: "PKR 15,000",
-          period: "/ month",
-          summary: "The full suite — all modules and multi-branch",
-          includes: [
-            "Everything in Standard",
-            "Multi-branch command centre & transfers",
-            "Central warehouse, HR & payroll, accounting",
-            "Foodpanda, PRA / FBR fiscal, R&D Lab",
-          ],
-        },
-      ],
-    },
-    demoUrl: "/contact",
-  },
-
-  /* ------------------------------------------------------------------ */
-  /* PharmaSync POS                                                     */
-  /* ------------------------------------------------------------------ */
-  {
-    slug: "pharmasync-pos",
-    name: "PharmaSync POS",
-    category: "Pharmacy",
-    tagline: "Built around how a pharmacy actually works",
-    description:
-      "A pharmacy POS and ERP built on the premise that stock lives in batches. Every sale dispenses first-expiry-first and never sells expired stock, prescription-required and controlled medicines are gated, and every controlled dispense is written to an audit-ready register. Around that core sits purchasing, patients, doctors, demand forecasting and PRA/FBR fiscal printing.",
-    image: "/images/products/pharmasync-logo.webp",
-    brandColor: "#004AAD",
-    audience: "Retail pharmacies, medical stores and pharmacy chains",
-    features: [
-      "Batch and expiry tracking with strict FEFO dispensing",
-      "Sell a whole strip or individual tablets — stock deducts the exact fraction",
-      "Rx-required and controlled medicines gated at the counter",
-      "Controlled-drug register, exportable for audit",
-      "One-tap dosage and usage info for cashier and customer",
-      "Purchase order → approval → receive creates batches, GRN and payable",
-      "Patients and customers in one record set, two views",
-      "Demand forecasting with reorder suggestions",
-      "Standalone binaries plus self-signed HTTPS, so LAN terminals get a secure context",
-    ],
-    moduleGroups: [
-      {
-        title: "Dispensing & point of sale",
-        items: [
-          {
-            name: "Point of sale",
-            detail:
-              "Barcode and keyword search, list and grid views, touch cart, amount or % discounts, hold and resume, change calculation.",
-          },
-          {
-            name: "Pack or loose units",
-            detail:
-              "Sell a whole strip or bottle, or individual tablets — stock deducts the exact pack fraction and profit is reported per unit.",
-          },
-          {
-            name: "Batch & expiry (FEFO)",
-            detail:
-              "Every medicine is stocked by batch with manufacture and expiry dates; sales dispense first-expiry-first and expired stock can never be sold.",
-          },
-          {
-            name: "Prescriptions & doctors",
-            detail:
-              "Record an Rx with an image and attach it at the till; Rx-required and controlled medicines are gated without a valid prescription or a pharmacist override.",
-          },
-          {
-            name: "Controlled-drug register",
-            detail:
-              "Every controlled dispense is logged with medicine, batch, patient, doctor and dispenser, and the register exports to Excel for inspection.",
-          },
-          {
-            name: "Medicine info",
-            detail:
-              "One tap shows dosage and usage, so the cashier can answer the customer without reaching for the carton.",
-          },
-          {
-            name: "Receipt & bill",
-            detail:
-              "On-screen and thermal (ESC/POS) output with a QR code and logo watermark, and a fully customisable bill layout.",
-          },
-        ],
       },
-      {
-        title: "Stock & purchasing",
-        items: [
-          {
-            name: "Inventory",
-            detail:
-              "Medicine master covering generic, brand, manufacturer, strength, form, drug schedule, cold-chain flag and rack/shelf location, plus adjustments and write-offs.",
-          },
-          {
-            name: "Pharma companies",
-            detail:
-              "A managed manufacturer list with one-click filtering across the catalogue.",
-          },
-          {
-            name: "Purchasing",
-            detail:
-              "Purchase orders → approval → receive, which automatically creates batches, a goods-received note and a supplier payable.",
-          },
-          {
-            name: "Suppliers & payables",
-            detail:
-              "Vendors, credit terms, bills, partial payments and overdue tracking.",
-          },
-          {
-            name: "Expenses & petty cash",
-            detail:
-              "Operating costs by category and a petty-cash float, reconciled against the drawer.",
-          },
-          {
-            name: "Reports & forecasting",
-            detail:
-              "Sales, stock valuation, expiry, expenses and the controlled register, plus demand forecasting — filterable by day, week, month, quarter, year or a custom range, with Excel and thermal export.",
-          },
-        ],
-      },
-      {
-        title: "People, platform & compliance",
-        items: [
-          {
-            name: "Customer ledger",
-            detail:
-              "Credit sales tracked per customer, with a sales return or refund reversing the ledger rather than leaving a balance that no longer matches what was sold.",
-          },
-          {
-            name: "Patients & customers",
-            detail:
-              "One record set with two views — Patients (allergies, blood group, insurance) and Customers (loyalty, spend, purchase history) — both exportable to Excel.",
-          },
-          {
-            name: "Staff & salary slips",
-            detail:
-              "PIN login across six ranked roles, an audit log, and printable payslips with full history.",
-          },
-          {
-            name: "Subscription billing",
-            detail:
-              "A monthly plan that locks the POS when the fee lapses, with owner-side Pay & Renew and printable SUB-#### invoices.",
-          },
-          {
-            name: "PRA / FBR fiscal",
-            detail:
-              "Fiscalises invoices and prints the fiscal number and QR code on every receipt.",
-          },
-          {
-            name: "Real-time & offline",
-            detail:
-              "Multi-terminal sync over Socket.IO, installable as a PWA and fully functional offline. Ships as a standalone binary with automatic self-signed HTTPS, because a PWA needs a secure context and LAN terminals have no public certificate.",
-          },
-        ],
-      },
-    ],
-    screens: [
       {
         src: "/images/products/screens/pharmasync-dashboard.svg",
-        label: "Dashboard",
+        label: "Pharmacy Dashboard",
         caption: "Sales, profit, inventory value and cash drawer",
       },
       {
         src: "/images/products/screens/pharmasync-pos.svg",
-        label: "Sell",
+        label: "Sell (Pharmacy)",
         caption: "Scan or search, with a touch-friendly cart",
       },
       {
@@ -539,8 +470,8 @@ export const products: Product[] = [
       },
       {
         src: "/images/products/screens/pharmasync-inventory.svg",
-        label: "Inventory",
-        caption: "Medicine master with schedule and cold-chain flags",
+        label: "Medicine Master",
+        caption: "Schedule, strength and cold-chain flags",
       },
       {
         src: "/images/products/screens/pharmasync-batches.svg",
@@ -584,219 +515,12 @@ export const products: Product[] = [
       },
       {
         src: "/images/products/screens/pharmasync-receipt.svg",
-        label: "Receipt",
+        label: "Pharmacy Receipt",
         caption: "Thermal output with QR and logo watermark",
-      },    ],
-    languages: ["JavaScript", "CSS", "HTML"],
-    stack: [
-      "Node.js",
-      "Express",
-      "Socket.IO",
-      "Vanilla JS PWA",
-      "Prisma",
-      "PostgreSQL",
-    ],
-    specs: [
-      { label: "REST endpoints", value: "100" },
-      { label: "UI screens", value: "31" },
-      { label: "Lines of code", value: "~4,900" },
-      { label: "Fiscal", value: "PRA / FBR" },
-    ],
-    payments: [
-      "Cash",
-      "Card",
-      "JazzCash",
-      "EasyPaisa",
-      "Bank transfer",
-      "Credit on account",
-    ],
-    metric: { label: "Dispensing rule", value: "FEFO" },
-    pricing: {
-      note: "One plan, billed monthly on a 30-day cycle. The POS locks if the fee lapses; the owner can pay and renew from inside the app.",
-      plans: [
-        {
-          name: "Monthly",
-          price: "PKR 5,000",
-          period: "/ month",
-          summary: "The whole product — no module gating",
-          featured: true,
-          includes: [
-            "Batch & expiry dispensing with FEFO",
-            "Prescriptions, controlled register, doctors",
-            "Purchasing, suppliers, patients & customers",
-            "Reports with demand forecasting, PRA / FBR fiscal",
-          ],
-        },
-      ],
-    },
-    demoUrl: "/contact",
-  },
-
-  /* ------------------------------------------------------------------ */
-  /* Vendeez POS                                                        */
-  /* ------------------------------------------------------------------ */
-  {
-    slug: "vendeez-pos",
-    name: "Vendeez POS",
-    category: "Mart & Retail",
-    tagline: "Three ways to scan, one fast checkout",
-    description:
-      "A retail and supermarket POS with 17 live modules covering selling, batch-and-expiry inventory, a central warehouse, purchasing, customers and loyalty, promotions, gift cards, accounting and reporting. Scan with a USB or Bluetooth gun, the device camera, or a staff phone paired over Socket.IO — unknown barcodes are looked up online and auto-categorised, and produce sold by weight gets its own printed scale label that scans straight into the cart at the printed price.",
-    image: "/images/products/vendeez-logo.webp",
-    brandColor: "#005F73",
-    audience: "Supermarkets, grocery stores, mini-marts and retail chains",
-    badge: "17 modules",
-    features: [
-      "USB, camera or phone-as-scanner — all three, live to the till",
-      "Unknown barcodes looked up online and auto-categorised",
-      "Batch and expiry inventory with FEFO allocation",
-      "Promotions auto-applied at checkout: BOGO, combo, flash sales",
-      "Loyalty tiers that upgrade themselves, plus gift cards and store credit",
-      "Scale labels for produce — embedded-price barcodes that scan into the cart",
-      "A central warehouse behind the shop floor, with transfers and a movement log",
-      "Real PRA / FBR fiscal registration, with sandbox and live gateways",
-      "Two subscription plans, with Advanced-only modules locked on Basic",
-    ],
-    moduleGroups: [
-      {
-        title: "Checkout & scanning",
-        items: [
-          {
-            name: "Dashboard",
-            detail:
-              "A feature-card hub over live metrics: sales and profit by day, week, month or year, a seven-day chart, and top products and customers.",
-          },
-          {
-            name: "Sell (POS)",
-            detail:
-              "Scan-to-cart with keyboard-first operation, department filters, list and grid catalogues, pack or loose units, line and cart discounts, coupons, hold and resume.",
-          },
-          {
-            name: "Barcode scanning",
-            detail:
-              "USB and Bluetooth guns captured globally (no need to focus the search box), device-camera scanning via ZXing, and a phone paired by QR that streams scans over Socket.IO for both selling and stock-in.",
-          },
-          {
-            name: "Auto product lookup",
-            detail:
-              "An unknown barcode is queried against your catalogue, then Open Food Facts, then UPCitemdb — pre-filling name, brand, size and the product photo, and auto-selecting the department.",
-          },
-          {
-            name: "Orders",
-            detail:
-              "A daily order register, so the shift can be reviewed line by line.",
-          },
-          {
-            name: "Invoices",
-            detail:
-              "Three registers on one screen — Sales, Purchase and Supplies — with thermal or A4 reprints of any document.",
-          },
-        ],
       },
-      {
-        title: "Stock & supply chain",
-        items: [
-          {
-            name: "Inventory",
-            detail:
-              "Every product tracks batches with expiry; sales allocate first-expiry-first-out, with category and brand filters, low-stock, near-expiry and expired alerts, adjustments, transfers, aisle/shelf locations and Excel export.",
-          },
-          {
-            name: "Warehouse",
-            detail:
-              "Central stock held separately from the shop floor: receive goods, track per-SKU levels against a reorder point, transfer to the store (which creates a sellable batch) and read the full movement log.",
-          },
-          {
-            name: "Barcode Generator (weighed items)",
-            detail:
-              "Scale labels for produce sold by weight — an EAN-13 embedded-price barcode (in-store prefix 2, then the PLU and the price), a printable label, and a scan at the till that drops the item into the cart at the printed price, exactly as in a large supermarket.",
-          },
-          {
-            name: "Purchases",
-            detail:
-              "Purchase orders → goods-received note → automatic stock-in and supplier payable.",
-          },
-          {
-            name: "Suppliers",
-            detail: "Vendor ledger, bills, payables and ageing analysis.",
-          },
-          {
-            name: "Reports & forecasting",
-            detail:
-              "Sales, stock valuation, expiry, profit and tax with a period selector, plus a demand forecast with reorder suggestions.",
-          },
-        ],
-      },
-      {
-        title: "Customers & growth",
-        items: [
-          {
-            name: "Customers & loyalty",
-            detail:
-              "Points, visits and lifetime spend driving automatic tier upgrades from Silver through Gold and Platinum to VIP, plus store credit and Excel export.",
-          },
-          {
-            name: "Promotions",
-            detail:
-              "Buy-X-Get-Y, category percentage off, flash sales and combo pricing — all applied automatically at checkout rather than keyed in by the cashier.",
-          },
-          {
-            name: "Gift cards",
-            detail:
-              "Issue, top up, look up a balance, and enable or disable a card.",
-          },
-        ],
-      },
-      {
-        title: "Money, people & setup",
-        items: [
-          {
-            name: "Till",
-            detail:
-              "Open and close the shift with cash reconciliation and recorded drawer moves.",
-          },
-          {
-            name: "Expenses",
-            detail: "Costs by category and a petty-cash float.",
-          },
-          {
-            name: "Staff & payroll",
-            detail:
-              "Team records, roles and PINs with ranked permissions, and A4 salary slips itemising earnings, deductions and net pay.",
-          },
-          {
-            name: "Tax / Fiscal (PRA / FBR)",
-            detail:
-              "Real-time invoice registration with the tax authority over FBR Digital Invoicing or PRA POS: sandbox and live gateways, auto-fiscalise on payment or on demand, the official invoice number and QR printed on the receipt, plus a connection test and a fiscal log.",
-          },
-          {
-            name: "Scanner / Devices",
-            detail:
-              "Per-terminal setup rather than one global switch: USB and Bluetooth keyboard-wedge capture with its own end key and minimum length, camera facing, a beep toggle with a test, continuous scanning, and the scale-barcode prefix.",
-          },
-          {
-            name: "Subscription & packages",
-            detail:
-              "Two plans — Basic and Advanced — each listing its features on the billing screen. Only the vendor's super admin can switch a client's plan; the owner sees both read-only and can pay and renew against a printable invoice. Advanced-only modules are locked on Basic behind an upgrade prompt.",
-          },
-          {
-            name: "Settings",
-            detail:
-              "Store details, tax, receipt branding, theme switcher, layout and data reset.",
-          },
-        ],
-      },
-    ],
-    /*
-      Gallery refreshed after the August update. The dashboard and reports
-      captures came out of a fresh demo database showing Rs 0.00 and no chart,
-      so they are replaced by the three screens the update actually added —
-      all of them populated.
-    */
-    screens: [
       {
         src: "/images/products/screens/vendeez-pos.webp",
-        label: "Sell",
+        label: "Sell (Mart)",
         caption: "Scan-to-cart with department filters",
       },
       {
@@ -831,7 +555,7 @@ export const products: Product[] = [
       },
       {
         src: "/images/products/screens/vendeez-inventory.webp",
-        label: "Inventory",
+        label: "Retail Inventory",
         caption: "Batches, expiry alerts and FEFO allocation",
       },
       {
@@ -841,7 +565,7 @@ export const products: Product[] = [
       },
       {
         src: "/images/products/screens/vendeez-warehouse.webp",
-        label: "Warehouse",
+        label: "Retail Warehouse",
         caption: "Central stock, reorder points and transfers to store",
       },
       {
@@ -851,8 +575,8 @@ export const products: Product[] = [
       },
       {
         src: "/images/products/screens/vendeez-suppliers.webp",
-        label: "Suppliers",
-        caption: "Vendor ledger, payables and ageing",
+        label: "Vendor Ledger",
+        caption: "Bills, payables and ageing",
       },
       {
         src: "/images/products/screens/vendeez-customers.webp",
@@ -871,7 +595,7 @@ export const products: Product[] = [
       },
       {
         src: "/images/products/screens/vendeez-till.webp",
-        label: "Till",
+        label: "Retail Till",
         caption: "Shift open and close with cash reconciliation",
       },
       {
@@ -881,16 +605,27 @@ export const products: Product[] = [
       },
       {
         src: "/images/products/screens/vendeez-fiscal.webp",
-        label: "Tax / Fiscal",
-        caption: "PRA / FBR registration, sandbox and live gateways",
-      },    ],
-    languages: ["JavaScript", "HTML", "CSS"],
-    stack: ["Node.js", "Express", "Socket.IO", "Vanilla JS PWA", "ZXing", "HTTPS"],
+        label: "Fiscal Gateway",
+        caption: "PRA / FBR registration, sandbox and live",
+      },
+    ],
+    languages: ["JavaScript", "HTML", "CSS", "C#"],
+    stack: [
+      "Node.js",
+      "Express",
+      "Socket.IO",
+      "Vanilla JS PWA",
+      "ESC/POS",
+      "ZXing",
+      ".NET + WebView2",
+      "Electron",
+      "Docker",
+    ],
     specs: [
-      { label: "Live modules", value: "17" },
-      { label: "Scan methods", value: "3" },
-      { label: "Loyalty tiers", value: "4" },
-      { label: "Fiscal", value: "PRA / FBR" },
+      { label: "Modules", value: "33" },
+      { label: "Editions", value: "3" },
+      { label: "REST endpoints", value: "236" },
+      { label: "Runtime deps", value: "4" },
     ],
     payments: [
       "Cash",
@@ -900,35 +635,47 @@ export const products: Product[] = [
       "Raast",
       "Bank transfer",
       "Gift card",
-      "Store credit",
+      "Credit on account",
     ],
-    metric: { label: "Ways to scan a product", value: "3" },
+    metric: { label: "Verticals from one codebase", value: "3" },
     pricing: {
-      note: "Billed monthly. Advanced-only modules are locked on Basic behind an upgrade prompt, and only the vendor's super admin can switch a client's plan.",
+      note: "Per branch, billed monthly. The package gates which modules a branch gets, enforced in the sidebar and again server-side. Edition-specific modules — pharmacy dispensing, retail promotions — come with the edition, not with a higher tier.",
       plans: [
         {
           name: "Basic",
-          price: "Rs 7,000",
+          price: "PKR 5,000",
           period: "/ month",
-          summary: "Sell, stock and report",
+          summary: "Core POS to run a single shop",
           includes: [
-            "Sell, orders, invoices and till",
-            "Batch & expiry inventory with FEFO",
-            "Customers, loyalty and expenses",
-            "Reports, staff & payroll, settings",
+            "Point of sale and the edition's own modules",
+            "Tables and kitchen display (restaurant)",
+            "Invoices, customers & loyalty",
+            "Catalogue management, till & shift",
           ],
         },
         {
-          name: "Advanced",
-          price: "Rs 15,000",
+          name: "Standard",
+          price: "PKR 10,000",
           period: "/ month",
-          summary: "The full retail suite",
+          summary: "Everything to run and grow one location",
           featured: true,
           includes: [
             "Everything in Basic",
-            "Central warehouse and transfers",
-            "Barcode generator for weighed items",
-            "Purchases, suppliers, promotions, gift cards",
+            "Inventory & stock, demand planning",
+            "Staff, vendors & payables, promos",
+            "Expenses, delivery, reports & analytics",
+          ],
+        },
+        {
+          name: "Premium",
+          price: "PKR 15,000",
+          period: "/ month",
+          summary: "The full suite — all modules and multi-branch",
+          includes: [
+            "Everything in Standard",
+            "Multi-branch command centre & transfers",
+            "Central warehouse, HR & payroll, accounting",
+            "Foodpanda, PRA / FBR fiscal, R&D Lab",
           ],
         },
       ],
@@ -1261,17 +1008,17 @@ export const products: Product[] = [
     },
     demoUrl: "/contact",
   },
-/* ------------------------------------------------------------------ */
+
+  /* ------------------------------------------------------------------ */
   /* Fleet Flow TMS                                                     */
   /* ------------------------------------------------------------------ */
   {
     slug: "fleet-flow",
     name: "Fleet Flow",
     category: "Transport & Logistics",
-    status: "in-development",
     tagline: "Smart fleet. Real-time control.",
     description:
-      "A multi-tenant transport management platform for truck fleets: vehicles, drivers, customers, shipments and trips with a lifecycle the software enforces rather than trusts, a drag-and-drop dispatch board, a live-tracking feed, and the whole upkeep side — fuel, maintenance, workshop jobs, tyres and parts. Built on a NestJS API and a Next.js console over PostgreSQL and PostGIS, with tenant isolation enforced at four layers so one company's data cannot reach another's. Thirty-six API modules are in — including a finance tier where every invoice, payment, expense and payroll run posts a balanced double-entry journal, a driver app and customer portal, public tracking, and a command centre with analytics and a plain-language assistant. Route planning is the only piece left.",
+      "A multi-tenant transport management platform for truck fleets: vehicles, drivers, customers, shipments and trips with a lifecycle the software enforces rather than trusts, a drag-and-drop dispatch board, a live-tracking feed, and the whole upkeep side — fuel, maintenance, workshop jobs, tyres and parts. Built on a NestJS API and a Next.js console over PostgreSQL and PostGIS, with tenant isolation enforced at four layers so one company's data cannot reach another's. Thirty-six API modules are in — including a finance tier where every invoice, payment, expense and payroll run posts a balanced double-entry journal, a driver app and customer portal, public tracking, and a command centre with analytics and a plain-language assistant. Route planning was the last placeholder in the console and it is now in, alongside circular geofences matched by haversine, single-sign-on through Plutox ID, and three shells — a .NET desktop window for the office and driver and owner apps for background GPS and push — that wrap the same console rather than reimplementing it.",
     image: "/images/products/fleetflow-logo.webp",
     logoLayout: "stacked",
     brandColor: "#FF7B56",
@@ -1704,6 +1451,46 @@ export const products: Product[] = [
         caption: "Licences, documents and services falling due",
       },
       {
+        src: "/images/products/screens/fleetflow-geofences.webp",
+        label: "Geofences",
+        caption: "Circular zones matched by haversine, no PostGIS round trip",
+      },
+      {
+        src: "/images/products/screens/fleetflow-geofence-crossings.webp",
+        label: "Geofence Crossings",
+        caption: "Entries and exits, counted in one query per sweep",
+      },
+      {
+        src: "/images/products/screens/fleetflow-tracking-map.webp",
+        label: "Tracking Map",
+        caption: "Every truck's last position, live",
+      },
+      {
+        src: "/images/products/screens/fleetflow-tracking-map-geofence.webp",
+        label: "Map & Zones",
+        caption: "Restricted zones drawn over the live fleet",
+      },
+      {
+        src: "/images/products/screens/fleetflow-routes.webp",
+        label: "Routes",
+        caption: "Planned lanes with distance and expected duration",
+      },
+      {
+        src: "/images/products/screens/fleetflow-routes-lane.webp",
+        label: "Route Lane",
+        caption: "One lane end to end, with its stops",
+      },
+      {
+        src: "/images/products/screens/fleetflow-reports.webp",
+        label: "Reports",
+        caption: "Exports built from the same queries as the screens",
+      },
+      {
+        src: "/images/products/screens/fleetflow-notifications.webp",
+        label: "Notifications",
+        caption: "SOS, breakdown and zone entry, routed to who is on call",
+      },
+      {
         src: "/images/products/screens/fleetflow-platform-console.webp",
         label: "Platform Console",
         caption: "Every tenant, its plan and its usage",
@@ -1732,8 +1519,8 @@ export const products: Product[] = [
         label: "Phase 3",
         title: "Dispatch & live tracking",
         detail:
-          "The dispatch board, live-tracking feed, geofences and alerting are all in. Route planning is the only piece left.",
-        state: "next",
+          "Dispatch board, live-tracking feed, circular geofences with crossing detection, alerting and route planning with named lanes — all in.",
+        state: "done",
       },
       {
         label: "Phase 4",
@@ -1767,7 +1554,7 @@ export const products: Product[] = [
         label: "Phase 8",
         title: "Hardening & launch",
         detail:
-          "Row-level security applied as the fourth tenancy layer and verified across 59 tables, a boot guard that refuses to start on placeholder secrets, CI that runs seven live smoke suites against a real Postgres, and backups whose restore is actually verified.",
+          "Row-level security applied as the fourth tenancy layer and verified across 59 tables, a boot guard that refuses to start on placeholder secrets, CI that runs seven live smoke suites against a real Postgres, and backups whose restore is actually verified. The load test and a containerised deploy are the two items still outstanding.",
         state: "done",
       },
     ],
@@ -1786,7 +1573,7 @@ export const products: Product[] = [
       { label: "Prisma models", value: "68" },
       { label: "API endpoints", value: "195" },
       { label: "API modules", value: "38" },
-      { label: "Phases shipped", value: "7 / 8" },
+      { label: "Phases shipped", value: "8 / 8" },
     ],
     metric: { label: "Tenant isolation layers", value: "4" },
     pricing: {

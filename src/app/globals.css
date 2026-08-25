@@ -328,8 +328,8 @@
  * Product pages set  to that product's own brand colour on a wrapper
  * carrying . Those colours were each chosen for their own product's
  * canvas, not for ours, and four of five fail 3:1 against one of our two
- * backgrounds — ServeSync teal and Fleet Flow coral on paper, PharmaSync and
- * Vendeez blue on ink.
+ * backgrounds — ServeSync teal and Fleet Flow coral on paper, StaySync violet
+ * on ink.
  *
  * So text never uses  directly; it uses , the same hue
  * pulled toward the opposite end of the current theme until it is readable. Fills,

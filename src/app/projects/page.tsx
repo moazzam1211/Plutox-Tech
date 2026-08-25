@@ -9,7 +9,7 @@ import { breadcrumbJsonLd, buildMetadata } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "Projects",
   description:
-    "ServeSync POS, PharmaSync POS, Vendeez POS, StaySync Hotel ERP and Fleet Flow — five platforms designed and built by Plutox Tech, four of them shipped and running, with full module detail and screenshots from the running software.",
+    "ServeSync POS, StaySync Hotel ERP and Fleet Flow — three platforms designed and built by Plutox Tech, all shipped and running, with full module detail and screenshots from the running software. ServeSync alone runs restaurants, pharmacies and marts from one codebase.",
   path: "/projects",
   keywords: [
     "restaurant POS software",
@@ -20,6 +20,23 @@ export const metadata = buildMetadata({
     "transport management system",
   ],
 });
+
+/*
+  Counted off the product data rather than typed, so the header can never
+  disagree with the sections under it. Endpoints are a floor, not a total:
+  StaySync publishes a module count but not an endpoint count, so it contributes
+  nothing to the sum and the figure carries a "+".
+*/
+const specNumber = (product: (typeof products)[number], pattern: RegExp) => {
+  const spec = product.specs.find((entry) => pattern.test(entry.label));
+  return spec ? Number.parseInt(spec.value.replace(/[^0-9]/g, ""), 10) || 0 : 0;
+};
+const moduleTotal = products.reduce((n, p) => n + specNumber(p, /module/i), 0);
+const endpointTotal = products.reduce((n, p) => n + specNumber(p, /endpoint/i), 0);
+const capabilityTotal = products.reduce(
+  (n, p) => n + p.moduleGroups.reduce((m, group) => m + group.items.length, 0),
+  0,
+);
 
 export default function ProjectsPage() {
   return (
@@ -35,24 +52,24 @@ export default function ProjectsPage() {
         eyebrow="Projects"
         title={
           <>
-            Five platforms,{" "}
-            <span className="text-primary">four of them shipped</span>
+            Three platforms,{" "}
+            <span className="text-primary">all of them shipped</span>
           </>
         }
-        lede="Every figure below — module counts, endpoint counts, payment rails — comes from the products' own documentation, and every screenshot is from the running software. Nothing here is a mockup — and the one platform still in build carries its delivery roadmap alongside the screens, so what is not finished yet is on the page too."
+        lede="Every figure below — module counts, endpoint counts, payment rails — comes from the products' own documentation, and every screenshot is from the running software. Nothing here is a mockup. ServeSync is one of the three and runs all of restaurants, pharmacies and marts: the pharmacy and mart products were folded into it as editions rather than kept as separate codebases."
       >
         <StatStrip
           className="max-w-2xl border-t pt-4"
           items={[
-            { value: "5", label: "Platforms" },
-            { value: "60+", label: "Live modules" },
-            { value: "484+", label: "REST endpoints" },
-            { value: "135", label: "Capabilities detailed" },
+            { value: String(products.length), label: "Platforms" },
+            { value: String(moduleTotal), label: "Live modules" },
+            { value: endpointTotal + "+", label: "REST endpoints" },
+            { value: String(capabilityTotal), label: "Capabilities detailed" },
           ]}
         />
       </PageHeader>
 
-      {/* Jump links — with five long entries, an index at the top is worth it. */}
+      {/* Jump links — the entries are long, so an index at the top is worth it. */}
       <nav
         aria-label="Jump to a project"
         className="border-b border-border px-6 py-5 sm:px-10 lg:px-14"

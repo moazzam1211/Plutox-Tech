@@ -37,7 +37,7 @@ npm run dev          # → http://localhost:3400
 | `npm run lint` | ESLint |
 | `npm run assets` | Regenerate placeholder SVGs (review avatars, founder fallback, map) |
 | `npm run icons` | Rebuild the rounded favicon / Apple icon from the brand mark |
-| `npm run product-logos` | Trim and normalise the five product lock-ups |
+| `npm run product-logos` | Trim and normalise the product lock-ups |
 | `npm run product-screens` | Re-import the gallery screenshots per product as WebP |
 | `npm run brand-webp` | Convert served brand/logo PNGs to lossless WebP |
 | `npm run downloads` | Re-import client installers/APKs and regenerate `src/data/downloads.ts` |
@@ -54,11 +54,11 @@ ends with a prev/next pager rather than an endless scroll.
 
 | Route | Purpose |
 | --- | --- |
-| `/` | Intro — statement, product carousel, the five platforms, site index |
+| `/` | Intro — statement, product carousel, the three platforms, site index |
 | `/about` | The company, mission, delivery process, values, timeline |
-| `/products` | Five management systems, each with its own module list, plus 11 shared modules with their own pages |
+| `/products` | Three management systems — ServeSync in three editions, StaySync, Fleet Flow — each with its own module list, plus 11 shared modules with their own pages |
 | `/services` | POS, cloud-kitchen and food-business consultancy, scratch-to-running stages, 16 build services |
-| `/projects` | All five platforms, 120 capabilities, screenshots; `/projects/[slug]` gives each its own page with packages and pricing |
+| `/projects` | All three platforms, 115 capabilities, 111 screenshots; `/projects/[slug]` gives each its own page with packages and pricing |
 | `/reviews` | Client reviews and FAQs |
 | `/owner` | Founder profile |
 | `/contact` | Contact channels, enquiry form, location |

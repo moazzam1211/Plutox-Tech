@@ -19,6 +19,7 @@ import { cn } from "@/lib/utils";
  */
 type Slide = {
   product: string;
+  /** Target product page. No longer unique — three slides are ServeSync editions. */
   slug: string;
   screen: string;
   /** Route shown in the window chrome — the app's own path, not a hostname. */
@@ -32,22 +33,25 @@ type Slide = {
 };
 
 /**
- * The four slides, one per shipped product.
+ * Four slides: ServeSync's three editions plus StaySync.
  *
- * Chart-bearing dashboards lead: PharmaSync and StaySync both show a populated
- * seven-day chart, so the graph is the first thing a visitor sees. ServeSync and
- * Vendeez follow with their busiest populated screens — their own dashboards
- * ship with a zero-state demo dataset (`Rs 0.00`, "No sales yet"), which would
- * read as a broken product sitting next to the headline.
+ * Chart-bearing dashboards lead — the pharmacy edition and StaySync both show a
+ * populated seven-day chart, so the graph is the first thing a visitor sees. The
+ * restaurant and mart slides follow with their busiest populated screens; their
+ * own dashboards ship with a zero-state demo dataset (`Rs 0.00`, "No sales yet"),
+ * which would read as a broken product sitting next to the headline.
+ *
+ * Each slide carries its edition's real accent, the same three colours the POS
+ * swaps at runtime: teal, blue and orange.
  */
 const SLIDES: Slide[] = [
   {
-    product: "PharmaSync POS",
-    slug: "pharmasync-pos",
+    product: "ServeSync Pharmacy",
+    slug: "servesync-pos",
     screen: "Dashboard",
     path: "/dashboard",
     src: "/images/products/screens/pharmasync-dashboard.svg",
-    alt: "The PharmaSync POS dashboard: today's sales of Rs 24,850 across 18 invoices, Rs 9,120 profit at a 36.7% margin, Rs 1.50M inventory value, a seven-day sales bar chart from Wednesday to Tuesday, and expiry, stock and prescription alerts.",
+    alt: "The ServeSync pharmacy-edition dashboard: today's sales of Rs 24,850 across 18 invoices, Rs 9,120 profit at a 36.7% margin, Rs 1.50M inventory value, a seven-day sales bar chart from Wednesday to Tuesday, and expiry, stock and prescription alerts.",
     plate: "#eef3fb",
     brandColor: "#004AAD",
     figures: [
@@ -80,18 +84,18 @@ const SLIDES: Slide[] = [
     brandColor: "#33BCA8",
     figures: [
       { value: "4 tickets", label: "Live on the pass" },
-      { value: "24 modules", label: "One codebase" },
+      { value: "33 modules", label: "One codebase" },
     ],
   },
   {
-    product: "Vendeez POS",
-    slug: "vendeez-pos",
+    product: "ServeSync Mart",
+    slug: "servesync-pos",
     screen: "Checkout",
     path: "/sell",
     src: "/images/products/screens/vendeez-checkout.webp",
-    alt: "The Vendeez POS sell screen with a five-line cart — bananas, apples, potatoes, onions and tomatoes — totalling Rs 1,740.00, beside a department-filtered catalogue showing live stock per aisle.",
+    alt: "The ServeSync mart-edition sell screen with a five-line cart — bananas, apples, potatoes, onions and tomatoes — totalling Rs 1,740.00, beside a department-filtered catalogue showing live stock per aisle.",
     plate: "#ffffff",
-    brandColor: "#005F73",
+    brandColor: "#F97316",
     figures: [
       { value: "Rs 1,740", label: "5 lines in cart" },
       { value: "3 ways", label: "To scan an item" },
@@ -105,7 +109,7 @@ const INTERVAL_MS = 5200;
 /**
  * The product carousel on the intro hero.
  *
- * Shows real screens from all four shipped platforms rather than an invented
+ * Shows real screens from the shipped software rather than an invented
  * mockup, cycling so the hero carries the whole portfolio instead of one
  * product.
  *
@@ -200,7 +204,7 @@ export function IntroDashboard() {
             <span className="flex shrink-0 items-center gap-1" aria-hidden>
               {SLIDES.map((slide, position) => (
                 <span
-                  key={slide.slug}
+                  key={slide.product}
                   className={cn(
                     "block h-1 rounded-full transition-all duration-500",
                     position === index ? "w-4 bg-primary" : "w-1 bg-border",
@@ -351,7 +355,7 @@ export function IntroDashboard() {
       <p className="mt-6 text-center text-[0.6875rem] text-muted-foreground lg:text-left">
         Real screens from{" "}
         <Link href="/projects" className="link-underline font-medium text-foreground">
-          all four shipped platforms
+          the shipped platforms
         </Link>{" "}
         — captured from the running software, nothing mocked up
       </p>

@@ -27,8 +27,6 @@ const TARGET_HEIGHT = 240;
 
 const LOGOS = [
   { src: "servesync.png", out: "servesync-logo.webp" },
-  { src: "pharmasync.png", out: "pharmasync-logo.webp" },
-  { src: "vendeez.png", out: "vendeez-logo.webp" },
   { src: "staysync.png", out: "staysync-logo.webp" },
   // Fleet Flow ships a stacked lock-up rather than a horizontal wordmark, so it
   // is trimmed to a taller target and rendered larger on the page.

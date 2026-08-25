@@ -17,7 +17,7 @@ import { breadcrumbJsonLd, buildMetadata } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "Downloads",
   description:
-    "Windows installers and Android apps for ServeSync POS, PharmaSync POS and Vendeez POS — with the SHA-256 of every build so you can verify what you downloaded before you run it.",
+    "Windows installers and Android apps for ServeSync POS — restaurant, pharmacy and mart editions in one build — with the SHA-256 of every file so you can verify what you downloaded before you run it.",
   path: "/downloads",
   keywords: [
     "POS software download",
@@ -36,10 +36,11 @@ const mb = (bytes: number) =>
 /**
  * Client downloads.
  *
- * Two tiers, and the page says which is which rather than hiding it: small builds
- * are served from here, and the 48–96 MB desktop installers link to that product's
- * GitHub Releases. Serving a quarter of a gigabyte of binaries from a marketing
- * site would be slow for the client and permanent in git history.
+ * Two tiers, and the page says which is which rather than hiding it: the thin
+ * client and the four Android apps are served from here, and the two large
+ * desktop builds (~123 MB and ~73 MB) link to GitHub Releases. Serving 200 MB of
+ * binaries from a marketing site would be slow for the client and permanent in
+ * git history.
  *
  * Every size and checksum comes from `npm run downloads`, which reads the real
  * artefact. A hand-typed checksum is worse than none — it looks like assurance and
@@ -70,12 +71,12 @@ export default function DownloadsPage() {
             <span className="text-primary">with a checksum for each</span>
           </>
         }
-        lede="Windows builds and Android apps for the three shipped point-of-sale systems. Every entry carries its real size and SHA-256, read off the build itself — so you can verify a file before you run it on a till."
+        lede="Windows builds and Android apps for ServeSync — one POS that runs a restaurant, a pharmacy or a mart, with the edition chosen at first run. Every entry carries its real size and SHA-256, read off the build itself, so you can verify a file before you run it on a till."
       >
         <StatStrip
           className="max-w-2xl border-t pt-4"
           items={[
-            { value: String(downloadGroups.length), label: "Products" },
+            { value: "3", label: "Editions in one build" },
             {
               value: String(downloadGroups.flatMap((g) => g.files).length),
               label: "Builds",
@@ -264,17 +265,22 @@ export default function DownloadsPage() {
                   The Android apps are not on Play.
                 </span>{" "}
                 They install from the file, so Android asks you to allow
-                installing from an unknown source once. These builds are signed
-                with a development key rather than a release one, so Play
-                Protect may warn as well — ask us for a release-signed build if
-                you are rolling out to a whole team.
+                installing from an unknown source once. They are signed with our
+                own release key — certificate{" "}
+                <span className="font-mono text-[0.6875rem]">
+                  CN=ServeSync POS, O=Plutox Tech
+                </span>{" "}
+                — so an update replaces the app in place instead of refusing to
+                install over it.
               </li>
               <li>
                 <span className="font-medium text-foreground">
                   StaySync and Fleet Flow are not here.
                 </span>{" "}
                 They are server applications rather than desktop installs — we
-                deploy those for you.
+                deploy those for you. The old PharmaSync and Vendeez installers
+                are gone too: both are now editions of ServeSync, and one build
+                carries all three.
               </li>
             </ul>
 

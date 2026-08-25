@@ -12,7 +12,7 @@ import { products } from "@/data/products";
 import { breadcrumbJsonLd, buildMetadata } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
-/** Five products, fixed list — prerender them all. */
+/** Every product, fixed list — prerender them all. */
 export function generateStaticParams() {
   return products.map((product) => ({ slug: product.slug }));
 }
@@ -44,7 +44,7 @@ export async function generateMetadata({
  *
  * `/projects` is the comparison view and stays in the Plutox violet so five
  * products don't shout over each other. Here there is only one product, so the
- * page takes *its* palette: ServeSync is teal throughout, PharmaSync blue,
+ * page takes *its* palette: ServeSync is teal throughout,
  * Fleet Flow coral.
  *
  * The mechanism is one CSS custom property set on the wrapper. Every accent below

@@ -14,7 +14,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     quote:
-      "Our pharmacy audit used to take four days of pulling paper. PharmaSync produced the entire batch and narcotics trail in a single export — the inspector left in ninety minutes.",
+      "Our pharmacy audit used to take four days of pulling paper. ServeSync produced the entire batch and narcotics trail in a single export — the inspector left in ninety minutes.",
     author: "Dr. Ayesha Karim",
     role: "Chief Pharmacist",
     company: "CareWell Pharmacies",

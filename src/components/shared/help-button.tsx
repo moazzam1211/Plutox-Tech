@@ -15,7 +15,7 @@ const WHATSAPP_MESSAGE = "Hi Plutox Tech — I need some help.";
 /**
  * Floating Help & Support button.
  *
- * Mirrors the pattern used across the Plutox products (StaySync, PharmaSync,
+ * Mirrors the pattern used across the Plutox products (StaySync, ServeSync,
  * ServeSync): a circular question-mark FAB bottom-right with a hover tooltip,
  * opening a panel offering WhatsApp, phone, email and a short ticket form.
  * Keeping it consistent with the products means a client who has used one

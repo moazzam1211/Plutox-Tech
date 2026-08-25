@@ -3,12 +3,17 @@
  *
  * Two tiers, decided by size:
  *
- * - **Hosted here.** The ServeSync .NET thin client (2 MB) and the Android TWA
- *   shells (30–385 KB) are copied into `public/downloads` and served directly.
- * - **Linked to GitHub Releases.** The Electron and pkg installers are 48–96 MB.
- *   GitHub warns above 50 MB and refuses above 100 MB, git history keeps a blob
- *   forever, and a static host would be serving ~240 MB of binaries from the
- *   marketing site. Releases is what that mechanism is for.
+ * - **Hosted here.** The .NET thin client (~20 MB) and the four Android apps
+ *   (30 KB – 2 MB) are copied into `public/downloads` and served directly. The
+ *   thin client is the build most clients actually need, so it has to work the
+ *   moment the page loads rather than wait on a release upload.
+ * - **Linked to GitHub Releases.** The Electron installer (~123 MB) and the
+ *   single-file server (~73 MB). GitHub refuses a repo blob over 100 MB, git
+ *   history keeps a blob forever, and a marketing site has no business serving
+ *   200 MB of binaries. Releases is what that mechanism is for.
+ *
+ * One product now, not three: the pharmacy and mart builds became editions of
+ * ServeSync, and a single installer carries all three.
  *
  * Size and SHA-256 are read off the real file, never typed by hand — a checksum
  * nobody generated is worse than no checksum, because it looks like assurance.
@@ -33,15 +38,22 @@ const PRODUCTS = [
     files: [
       {
         from: `${DL}/restaurant-pos-full/desktop-dotnet/installer-out/ServeSync-POS-Setup-DotNet.exe`,
-        label: "Windows desktop (thin client)",
-        note: "A .NET shell that points at your server and updates itself from it, so a new release does not mean re-installing on every till.",
+        label: "Windows till (thin client)",
+        note: "The one to install on a till. Asks once for your server address, then loads the POS from it — restaurant, pharmacy or mart, whichever edition that server runs. Updating the server updates every till.",
         platform: "Windows",
         hosted: true,
       },
       {
         from: `${DL}/restaurant-pos-full/dist-desktop/ServeSync-POS-Setup.exe`,
-        label: "Windows desktop (standalone)",
-        note: "Bundles its own runtime and server. Use it where a till has no reliable connection to a central server.",
+        label: "Windows all-in-one (Electron)",
+        note: "Bundles the server and its own runtime, for a single shop with no separate server box. Carries all three editions; you pick one at first run.",
+        platform: "Windows",
+        hosted: false,
+      },
+      {
+        from: `${DL}/restaurant-pos-full/dist/servesync-pos-full-win.exe`,
+        label: "Windows server (single file)",
+        note: "The POS server as one executable — no install, no Node. Run it on the shop's PC and point every till and phone at it.",
         platform: "Windows",
         hosted: false,
       },
@@ -55,58 +67,21 @@ const PRODUCTS = [
       {
         from: `${DL}/restaurant-pos-full/android/apks/ServeSync-Waiter.apk`,
         label: "Waiter pad",
-        note: "Table-aware order punching from the floor, with PIN login.",
+        note: "Table-aware order punching from the floor, with PIN login. Restaurant edition.",
         platform: "Android",
         hosted: true,
       },
       {
         from: `${DL}/restaurant-pos-full/android/apks/ServeSync-Rider.apk`,
         label: "Rider app",
-        note: "Assigned deliveries with navigate, call and status updates.",
-        platform: "Android",
-        hosted: true,
-      },
-    ],
-  },
-  {
-    slug: "pharmasync-pos",
-    name: "PharmaSync POS",
-    repo: "moazzam1211/PharmaSync",
-    version: "1.0.0",
-    files: [
-      {
-        from: `${DL}/pharmacy-pos-full/dist/pharmasync-pos-full-win.exe`,
-        label: "Windows desktop",
-        note: "Standalone binary with automatic self-signed HTTPS, so LAN terminals get the secure context a PWA needs.",
-        platform: "Windows",
-        hosted: false,
-      },
-    ],
-  },
-  {
-    slug: "vendeez-pos",
-    name: "Vendeez POS",
-    repo: "moazzam1211/Vendeez-POS",
-    version: "1.3.0",
-    files: [
-      {
-        from: `${DL}/mart-pos-full/dist-desktop/Vendeez POS Setup 1.3.0.exe`,
-        label: "Windows desktop",
-        note: "Installer for the till, with the scanner pairing and fiscal integration built in.",
-        platform: "Windows",
-        hosted: false,
-      },
-      {
-        from: `${DL}/mart-pos-full/dist/Vendeez-Owner.apk`,
-        label: "Owner app",
-        note: "Sales, profit, stock and alerts for the store on a phone.",
+        note: "Assigned deliveries with navigate, call and status updates. Restaurant edition.",
         platform: "Android",
         hosted: true,
       },
       {
-        from: `${DL}/mart-pos-full/dist/Vendeez-Scanner.apk`,
+        from: `${DL}/restaurant-pos-full/android/apks/ServeSync-Scanner.apk`,
         label: "Scanner app",
-        note: "Turns a phone into a wireless barcode scanner, paired to the till over Socket.IO.",
+        note: "Turns a phone into a wireless barcode scanner paired to the till over Socket.IO, for selling and for stock-in. Mart and pharmacy editions.",
         platform: "Android",
         hosted: true,
       },

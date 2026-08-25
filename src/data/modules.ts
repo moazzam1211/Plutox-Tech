@@ -19,7 +19,8 @@ import { products } from "./products";
  * The modules we build, listed on /products.
  *
  * These are not aspirational: every one already ships inside at least one of the
- * five platforms on /projects, and `shippedIn` names them. That is the whole point
+ * platforms on /projects, and `shippedIn` names them — down to the ServeSync
+ * edition where a module is edition-specific. That is the whole point
  * of the page — a buyer wants a module list, and this one can be checked against
  * working software rather than taken on trust.
  */
@@ -46,8 +47,8 @@ export interface ProductModule {
 
 const SERVESYNC = { name: "ServeSync POS", slug: "servesync-pos" };
 const SERVESYNC_WEB = { name: "ServeSync Web", slug: "servesync-pos" };
-const PHARMASYNC = { name: "PharmaSync POS", slug: "pharmasync-pos" };
-const VENDEEZ = { name: "Vendeez POS", slug: "vendeez-pos" };
+const SERVESYNC_RX = { name: "ServeSync Pharmacy", slug: "servesync-pos" };
+const SERVESYNC_MART = { name: "ServeSync Mart", slug: "servesync-pos" };
 const STAYSYNC = { name: "StaySync Hotel ERP", slug: "staysync" };
 const FLEETFLOW = { name: "Fleet Flow", slug: "fleet-flow" };
 
@@ -153,10 +154,10 @@ export const productModules: ProductModule[] = [
       "Per-branch teams that stay separate instead of merging into one list",
       "Printable salary slips itemising earnings, deductions and net",
     ],
-    shippedIn: [SERVESYNC, PHARMASYNC, VENDEEZ, STAYSYNC, FLEETFLOW],
+    shippedIn: [SERVESYNC, SERVESYNC_RX, SERVESYNC_MART, STAYSYNC, FLEETFLOW],
     screens: [
       ["servesync-pos", "HR"],
-      ["pharmasync-pos", "Staff"],
+      ["servesync-pos", "Staff"],
       ["fleet-flow", "Payroll"],
       ["fleet-flow", "Settings"],
     ],
@@ -174,12 +175,12 @@ export const productModules: ProductModule[] = [
       "Low-stock, near-expiry and expired alerts with reorder points",
       "Aisle, shelf and rack locations, plus Excel export",
     ],
-    shippedIn: [SERVESYNC, PHARMASYNC, VENDEEZ, STAYSYNC, FLEETFLOW],
+    shippedIn: [SERVESYNC, SERVESYNC_RX, SERVESYNC_MART, STAYSYNC, FLEETFLOW],
     screens: [
-      ["pharmasync-pos", "Inventory"],
-      ["pharmasync-pos", "Batches (FEFO)"],
-      ["pharmasync-pos", "Expiry"],
-      ["vendeez-pos", "Inventory"],
+      ["servesync-pos", "Medicine Master"],
+      ["servesync-pos", "Batches (FEFO)"],
+      ["servesync-pos", "Expiry"],
+      ["servesync-pos", "Retail Inventory"],
       ["servesync-pos", "Inventory"],
       ["fleet-flow", "Parts Inventory"],
     ],
@@ -197,14 +198,14 @@ export const productModules: ProductModule[] = [
       "Per-SKU levels against a reorder point, with a full movement log",
       "Purchase orders → GRN → automatic stock-in and supplier payable",
     ],
-    shippedIn: [SERVESYNC, VENDEEZ, PHARMASYNC],
+    shippedIn: [SERVESYNC, SERVESYNC_MART, SERVESYNC_RX],
     screens: [
       ["servesync-pos", "Warehouse"],
       ["servesync-pos", "Demand Planning"],
-      ["vendeez-pos", "Warehouse"],
-      ["vendeez-pos", "Stock In"],
-      ["vendeez-pos", "Purchases"],
-      ["pharmasync-pos", "Purchasing"],
+      ["servesync-pos", "Retail Warehouse"],
+      ["servesync-pos", "Stock In"],
+      ["servesync-pos", "Purchases"],
+      ["servesync-pos", "Purchasing"],
     ],
   },
   {
@@ -220,10 +221,10 @@ export const productModules: ProductModule[] = [
       "Trial balance, profit and loss, and receivables ageing",
       "Excel and thermal export, and multi-branch rollup for the owner",
     ],
-    shippedIn: [SERVESYNC, PHARMASYNC, VENDEEZ, STAYSYNC, FLEETFLOW],
+    shippedIn: [SERVESYNC, SERVESYNC_RX, SERVESYNC_MART, STAYSYNC, FLEETFLOW],
     screens: [
-      ["pharmasync-pos", "Sales Report"],
-      ["pharmasync-pos", "Demand Forecast"],
+      ["servesync-pos", "Sales Report"],
+      ["servesync-pos", "Demand Forecast"],
       ["staysync", "Dashboard"],
       ["staysync", "Portfolio"],
       ["fleet-flow", "Dashboard"],
@@ -243,13 +244,13 @@ export const productModules: ProductModule[] = [
       "Costs booked against a trip or a vehicle, not just the month",
       "Double-entry journals where debits equal credits, enforced by the database",
     ],
-    shippedIn: [SERVESYNC, PHARMASYNC, VENDEEZ, STAYSYNC, FLEETFLOW],
+    shippedIn: [SERVESYNC, SERVESYNC_RX, SERVESYNC_MART, STAYSYNC, FLEETFLOW],
     screens: [
       ["fleet-flow", "Expenses"],
       ["fleet-flow", "Accounting"],
       ["servesync-pos", "Accounts"],
-      ["vendeez-pos", "Suppliers"],
-      ["pharmasync-pos", "Suppliers"],
+      ["servesync-pos", "Vendor Ledger"],
+      ["servesync-pos", "Suppliers"],
     ],
   },
   {
@@ -265,7 +266,7 @@ export const productModules: ProductModule[] = [
       "A vendor kill switch that revokes every live session for a client",
       "Append-only audit log, enforced by a database trigger",
     ],
-    shippedIn: [SERVESYNC, PHARMASYNC, VENDEEZ, STAYSYNC, FLEETFLOW],
+    shippedIn: [SERVESYNC, SERVESYNC_RX, SERVESYNC_MART, STAYSYNC, FLEETFLOW],
     screens: [
       ["servesync-pos", "Packages"],
       ["fleet-flow", "Platform Console"],
@@ -286,12 +287,12 @@ export const productModules: ProductModule[] = [
       "Controlled-drug register, exportable for inspection",
       "Tax credited to a liability rather than revenue",
     ],
-    shippedIn: [SERVESYNC, PHARMASYNC, VENDEEZ, FLEETFLOW],
+    shippedIn: [SERVESYNC, SERVESYNC_RX, SERVESYNC_MART, FLEETFLOW],
     screens: [
       ["servesync-pos", "PRA / FBR Fiscal"],
-      ["vendeez-pos", "Tax / Fiscal"],
-      ["pharmasync-pos", "Controlled Register"],
-      ["vendeez-pos", "A4 Invoice"],
+      ["servesync-pos", "Fiscal Gateway"],
+      ["servesync-pos", "Controlled Register"],
+      ["servesync-pos", "A4 Invoice"],
       ["fleet-flow", "Invoices"],
     ],
   },
