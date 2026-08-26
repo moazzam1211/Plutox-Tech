@@ -18,6 +18,14 @@ import type { Product } from "@/types";
  * the Plutox violet, so a page showing several products doesn't end up with five
  * identically-highlighted columns.
  */
+/**
+ * A product's pricing, one chart per edition.
+ *
+ * ServeSync prices three editions; the other products carry a single chart. The
+ * charts are stacked rather than tabbed: a tab hides two thirds of the pricing
+ * behind a click, and on a phone the tab strip itself costs more room than the
+ * heading it would save.
+ */
 export function PricingTable({
   pricing,
   brandColor,
@@ -27,7 +35,35 @@ export function PricingTable({
   brandColor: string;
   productName: string;
 }) {
-  const { note, plans } = pricing;
+  const multi = pricing.length > 1;
+
+  return (
+    <div className={cn(multi && "grid gap-12 sm:gap-14")}>
+      {pricing.map((chart) => (
+        <PricingChart
+          key={chart.edition ?? productName}
+          chart={chart}
+          brandColor={brandColor}
+          productName={productName}
+          showEdition={multi}
+        />
+      ))}
+    </div>
+  );
+}
+
+function PricingChart({
+  chart,
+  brandColor,
+  productName,
+  showEdition,
+}: {
+  chart: NonNullable<Product["pricing"]>[number];
+  brandColor: string;
+  productName: string;
+  showEdition: boolean;
+}) {
+  const { note, plans, edition, editionSummary } = chart;
 
   // Text takes the theme-corrected variant; borders and ticks keep the raw brand
   // colour, where contrast rules do not apply. See --product-ink in globals.css.
@@ -36,8 +72,35 @@ export function PricingTable({
   return (
     <div>
       <Reveal preset="fadeUp">
+        {showEdition && edition ? (
+          /*
+            The edition name is the heading when there is more than one chart —
+            without it, three identically-priced tables read as a mistake.
+          */
+          <div className="mb-4 flex flex-wrap items-center gap-x-3 gap-y-1.5 border-b border-border pb-3">
+            <span
+              aria-hidden
+              className="h-px w-6 shrink-0"
+              style={{ backgroundColor: brandColor }}
+            />
+            <h3
+              className="font-display text-base font-semibold tracking-tight"
+              style={{ color: ink }}
+            >
+              {edition}
+            </h3>
+            {editionSummary ? (
+              <p className="w-full text-[0.8125rem] leading-relaxed text-muted-foreground sm:w-auto sm:flex-1">
+                {editionSummary}
+              </p>
+            ) : null}
+          </div>
+        ) : null}
+
         <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-          <p className="eyebrow text-muted-foreground">Packages & pricing</p>
+          <p className="eyebrow text-muted-foreground">
+            {showEdition ? "Packages" : "Packages & pricing"}
+          </p>
           <p className="font-mono text-[0.6875rem] text-muted-foreground/70">
             {plans.length === 1 ? "one plan" : `${plans.length} plans`}
           </p>

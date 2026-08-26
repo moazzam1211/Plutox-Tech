@@ -60,6 +60,16 @@ export interface ProductPlan {
   featured?: boolean;
 }
 
+/** One pricing chart. A product with editions has one per edition. */
+export interface ProductPricing {
+  /** Edition name, when the product prices more than one. Omitted otherwise. */
+  edition?: string;
+  /** One line under the edition tab explaining who it is for. */
+  editionSummary?: string;
+  note: string;
+  plans: ProductPlan[];
+}
+
 export interface Product {
   slug: string;
   name: string;
@@ -108,8 +118,15 @@ export interface Product {
   audience: string;
   /** Where the demo CTA points — /contact, since there is no hosted demo. */
   demoUrl: string;
-  /** Subscription tiers, priced as the product itself bills them. */
-  pricing?: { note: string; plans: ProductPlan[] };
+  /**
+   * Subscription tiers, priced as the product itself bills them.
+   *
+   * An array because ServeSync prices its three editions separately: a pharmacy
+   * and a restaurant pay the same per tier but get different modules for it, so
+   * one shared chart would have listed a kitchen display to a pharmacist.
+   * Single-edition products carry a one-entry array.
+   */
+  pricing?: ProductPricing[];
   /** Shown as a small metric row under the feature list. */
   metric?: { label: string; value: string };
   badge?: string;

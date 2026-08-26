@@ -638,48 +638,156 @@ export const products: Product[] = [
       "Credit on account",
     ],
     metric: { label: "Verticals from one codebase", value: "3" },
-    pricing: {
-      note: "Per branch, billed monthly. The package gates which modules a branch gets, enforced in the sidebar and again server-side. Edition-specific modules — pharmacy dispensing, retail promotions — come with the edition, not with a higher tier.",
-      plans: [
-        {
-          name: "Basic",
-          price: "PKR 5,000",
-          period: "/ month",
-          summary: "Core POS to run a single shop",
-          includes: [
-            "Point of sale and the edition's own modules",
-            "Tables and kitchen display (restaurant)",
-            "Invoices, customers & loyalty",
-            "Catalogue management, till & shift",
-          ],
-        },
-        {
-          name: "Standard",
-          price: "PKR 10,000",
-          period: "/ month",
-          summary: "Everything to run and grow one location",
-          featured: true,
-          includes: [
-            "Everything in Basic",
-            "Inventory & stock, demand planning",
-            "Staff, vendors & payables, promos",
-            "Expenses, delivery, reports & analytics",
-          ],
-        },
-        {
-          name: "Premium",
-          price: "PKR 15,000",
-          period: "/ month",
-          summary: "The full suite — all modules and multi-branch",
-          includes: [
-            "Everything in Standard",
-            "Multi-branch command centre & transfers",
-            "Central warehouse, HR & payroll, accounting",
-            "Foodpanda, PRA / FBR fiscal, R&D Lab",
-          ],
-        },
-      ],
-    },
+    /*
+      Three charts, one per edition.
+
+      The prices are the same in all three because that is what the POS charges —
+      `PLAN_PRICING` in its own `routes.js` is a single table, and inventing
+      different numbers per vertical would be a marketing decision dressed up as a
+      fact. What differs is what each tier *contains*, and that is the whole point
+      of splitting the charts: the tiers gate by module id, five restaurant modules
+      are hidden outside the restaurant edition, and each vertical's own modules
+      are not in any tier list at all — so they come with the edition rather than
+      with a higher tier. A shared chart would have offered a kitchen display to a
+      pharmacist and left the controlled-drug register unmentioned.
+    */
+    pricing: [
+      {
+        edition: "Restaurant",
+        editionSummary:
+          "Dine-in, takeaway and delivery, with the floor and the kitchen on screen.",
+        note: "Per branch, billed monthly. The package gates which modules a branch gets, enforced in the sidebar and again server-side.",
+        plans: [
+          {
+            name: "Basic",
+            price: "PKR 5,000",
+            period: "/ month",
+            summary: "Core POS to run a single restaurant",
+            includes: [
+              "Order, Tables & Kitchen display",
+              "Orders, Invoices & QR receipts",
+              "Customers & loyalty",
+              "Menu, Till & shift, Setup",
+            ],
+          },
+          {
+            name: "Standard",
+            price: "PKR 10,000",
+            period: "/ month",
+            summary: "Everything to run and grow one restaurant",
+            featured: true,
+            includes: [
+              "Everything in Basic",
+              "Stock, Demand planning",
+              "Staff, Vendors, Promos, Expenses",
+              "Delivery & Reports",
+            ],
+          },
+          {
+            name: "Premium",
+            price: "PKR 15,000",
+            period: "/ month",
+            summary: "The full suite — every module, many branches",
+            includes: [
+              "Everything in Standard",
+              "Branches command centre & Warehouse",
+              "HR & payroll, Accounts",
+              "Foodpanda, PRA / FBR, R&D Lab",
+            ],
+          },
+        ],
+      },
+      {
+        edition: "Pharmacy",
+        editionSummary:
+          "Batch stock, prescriptions and the controlled register — no floor plan, no kitchen.",
+        note: "Per branch, billed monthly. Dispensing, prescriptions, the controlled register and expiry tracking come with the edition at every tier, not with a higher one.",
+        plans: [
+          {
+            name: "Basic",
+            price: "PKR 5,000",
+            period: "/ month",
+            summary: "Core counter for a single pharmacy",
+            includes: [
+              "Sell, Orders & Invoices",
+              "Prescriptions, Doctors & Controlled register",
+              "Batch stock with FEFO & Expiry watch",
+              "Patients, Medicines, Till & shift, Setup",
+            ],
+          },
+          {
+            name: "Standard",
+            price: "PKR 10,000",
+            period: "/ month",
+            summary: "Everything to run and grow one pharmacy",
+            featured: true,
+            includes: [
+              "Everything in Basic",
+              "Stock, Demand planning",
+              "Staff, Suppliers, Promos, Expenses",
+              "Reports & analytics",
+            ],
+          },
+          {
+            name: "Premium",
+            price: "PKR 15,000",
+            period: "/ month",
+            summary: "The full suite — every module, many branches",
+            includes: [
+              "Everything in Standard",
+              "Branches command centre & Warehouse",
+              "HR & payroll, Accounts",
+              "PRA / FBR fiscal invoicing",
+            ],
+          },
+        ],
+      },
+      {
+        edition: "Mart & Retail",
+        editionSummary:
+          "Three ways to scan, promotions and gift cards — no floor plan, no kitchen.",
+        note: "Per branch, billed monthly. Promotions, gift cards and barcode labels come with the edition at every tier, not with a higher one.",
+        plans: [
+          {
+            name: "Basic",
+            price: "PKR 5,000",
+            period: "/ month",
+            summary: "Core checkout for a single store",
+            includes: [
+              "Sell with USB, camera or phone scanning",
+              "Promotions, Gift cards & Barcode labels",
+              "Orders, Invoices & Customers",
+              "Products, Till & shift, Setup",
+            ],
+          },
+          {
+            name: "Standard",
+            price: "PKR 10,000",
+            period: "/ month",
+            summary: "Everything to run and grow one store",
+            featured: true,
+            includes: [
+              "Everything in Basic",
+              "Batch stock with FEFO, Demand planning",
+              "Staff, Suppliers, Promos, Expenses",
+              "Reports & analytics",
+            ],
+          },
+          {
+            name: "Premium",
+            price: "PKR 15,000",
+            period: "/ month",
+            summary: "The full suite — every module, many branches",
+            includes: [
+              "Everything in Standard",
+              "Branches command centre & Warehouse",
+              "HR & payroll, Accounts",
+              "PRA / FBR fiscal invoicing",
+            ],
+          },
+        ],
+      },
+    ],
     demoUrl: "/contact",
   },
 
@@ -961,51 +1069,53 @@ export const products: Product[] = [
       "City ledger",
     ],
     metric: { label: "Properties per login", value: "Unlimited" },
-    pricing: {
-      note: "Billed monthly. Each tier unlocks a set of navigation modules and is a superset of the one below; the vendor can enable or disable the whole system, and the owner can pay and renew in-app.",
-      plans: [
-        {
-          name: "Starter",
-          price: "PKR 15,000",
-          period: "/ month",
-          summary: "Run the front desk",
-          includes: [
-            "Reservations & front desk",
-            "Room management & housekeeping",
-            "Guest CRM",
-            "Folio & billing plus invoices",
-            "Dashboard & reports",
-          ],
-        },
-        {
-          name: "Professional",
-          price: "PKR 25,000",
-          period: "/ month",
-          summary: "Operations & revenue centres",
-          featured: true,
-          includes: [
-            "Everything in Starter",
-            "Room-service POS & inventory",
-            "Maintenance & laundry",
-            "Banquet, events & spa",
-            "Loyalty, marketing & channel manager",
-          ],
-        },
-        {
-          name: "Enterprise",
-          price: "PKR 35,000",
-          period: "/ month",
-          summary: "Full multi-property ERP",
-          includes: [
-            "Everything in Professional",
-            "Multi-property portfolio",
-            "Finance & accounting",
-            "HR & payroll",
-            "Procurement, assets and Smart Hotel (IoT)",
-          ],
-        },
-      ],
-    },
+    pricing: [
+      {
+        note: "Billed monthly. Each tier unlocks a set of navigation modules and is a superset of the one below; the vendor can enable or disable the whole system, and the owner can pay and renew in-app.",
+        plans: [
+          {
+            name: "Starter",
+            price: "PKR 15,000",
+            period: "/ month",
+            summary: "Run the front desk",
+            includes: [
+              "Reservations & front desk",
+              "Room management & housekeeping",
+              "Guest CRM",
+              "Folio & billing plus invoices",
+              "Dashboard & reports",
+            ],
+          },
+          {
+            name: "Professional",
+            price: "PKR 25,000",
+            period: "/ month",
+            summary: "Operations & revenue centres",
+            featured: true,
+            includes: [
+              "Everything in Starter",
+              "Room-service POS & inventory",
+              "Maintenance & laundry",
+              "Banquet, events & spa",
+              "Loyalty, marketing & channel manager",
+            ],
+          },
+          {
+            name: "Enterprise",
+            price: "PKR 35,000",
+            period: "/ month",
+            summary: "Full multi-property ERP",
+            includes: [
+              "Everything in Professional",
+              "Multi-property portfolio",
+              "Finance & accounting",
+              "HR & payroll",
+              "Procurement, assets and Smart Hotel (IoT)",
+            ],
+          },
+        ],
+      },
+    ],
     demoUrl: "/contact",
   },
 
@@ -1576,47 +1686,49 @@ export const products: Product[] = [
       { label: "Phases shipped", value: "8 / 8" },
     ],
     metric: { label: "Tenant isolation layers", value: "4" },
-    pricing: {
-      note: "Billed monthly per company. Limits are enforced server-side, so a plan is a real ceiling rather than a suggestion.",
-      plans: [
-        {
-          name: "Starter",
-          price: "PKR 15,000",
-          period: "/ month",
-          summary: "15 vehicles · 10 users · 1 branch",
-          includes: [
-            "Trips, tracking, fuel and maintenance",
-            "30 days of GPS retention",
-            "One branch",
-          ],
-        },
-        {
-          name: "Growth",
-          price: "PKR 55,000",
-          period: "/ month",
-          summary: "100 vehicles · 50 users · 5 branches",
-          featured: true,
-          includes: [
-            "Everything in Starter",
-            "Workshop, parts inventory and the finance tier",
-            "Customer portal",
-            "90 days of GPS retention",
-          ],
-        },
-        {
-          name: "Enterprise",
-          price: "PKR 180,000",
-          period: "/ month",
-          summary: "Effectively uncapped · 500 branches",
-          includes: [
-            "Everything in Growth",
-            "AI-assisted dispatch and the command centre",
-            "API access and white-labelling",
-            "365 days of GPS retention",
-          ],
-        },
-      ],
-    },
+    pricing: [
+      {
+        note: "Billed monthly per company. Limits are enforced server-side, so a plan is a real ceiling rather than a suggestion.",
+        plans: [
+          {
+            name: "Starter",
+            price: "PKR 15,000",
+            period: "/ month",
+            summary: "15 vehicles · 10 users · 1 branch",
+            includes: [
+              "Trips, tracking, fuel and maintenance",
+              "30 days of GPS retention",
+              "One branch",
+            ],
+          },
+          {
+            name: "Growth",
+            price: "PKR 55,000",
+            period: "/ month",
+            summary: "100 vehicles · 50 users · 5 branches",
+            featured: true,
+            includes: [
+              "Everything in Starter",
+              "Workshop, parts inventory and the finance tier",
+              "Customer portal",
+              "90 days of GPS retention",
+            ],
+          },
+          {
+            name: "Enterprise",
+            price: "PKR 180,000",
+            period: "/ month",
+            summary: "Effectively uncapped · 500 branches",
+            includes: [
+              "Everything in Growth",
+              "AI-assisted dispatch and the command centre",
+              "API access and white-labelling",
+              "365 days of GPS retention",
+            ],
+          },
+        ],
+      },
+    ],
     demoUrl: "/contact",
   },
 ];
