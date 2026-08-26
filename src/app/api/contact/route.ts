@@ -1,30 +1,25 @@
 import { NextResponse } from "next/server";
+import { Resend } from "resend";
 
 import {
   contactSchema,
   demoSchema,
   newsletterSchema,
 } from "@/lib/contact-schema";
+import { siteConfig } from "@/lib/site";
 
 /**
- * Contact + newsletter endpoint.
+ * Contact, demo-booking and newsletter endpoint.
  *
- * Validates with the same Zod schema the client form uses, then hands off to a
- * delivery function. Delivery is a deliberate no-op placeholder: wiring a
- * specific mail provider is an infrastructure decision, and the integration
- * point is isolated to one function so it is a five-line change.
+ * Validates with the same Zod schemas the client forms use, then delivers by
+ * email through Resend. Every submission routes by intent:
  *
- * To go live, install a provider and replace `deliver()` — for example:
+ *   demo booking → sales@   (buying intent — someone should chase it)
+ *   enquiry      → hello@   (general, could be anything)
+ *   newsletter   → hello@
  *
- *   import { Resend } from "resend";
- *   const resend = new Resend(process.env.RESEND_API_KEY);
- *   await resend.emails.send({
- *     from: "website@plutoxtech.com",
- *     to: siteConfig.contact.salesEmail,
- *     replyTo: payload.email,
- *     subject: `New enquiry — ${payload.service}`,
- *     text: body,
- *   });
+ * `replyTo` is the sender's own address, so hitting reply in the inbox answers
+ * the person rather than the website.
  */
 
 /** Never cache a mutation endpoint. */
@@ -65,10 +60,77 @@ function isRateLimited(key: string) {
   return false;
 }
 
-/** Replace with a real mail/CRM provider — see the note above. */
-async function deliver(subject: string, body: string) {
+/*
+  Resend needs a verified sending domain. Until plutoxtech.com is verified in
+  Resend, set MAIL_FROM to their sandbox sender (onboarding@resend.dev), which
+  delivers only to the account owner's own address — enough to prove the wiring
+  without pretending it is production-ready.
+*/
+const MAIL_FROM =
+  process.env.MAIL_FROM ?? "Plutox Tech <onboarding@resend.dev>";
+
+/*
+  Constructed lazily and only when a key exists. Instantiating Resend without a
+  key throws at import time, which would take the whole route down — including
+  the validation that is useful even when mail is not configured.
+*/
+const resend = process.env.RESEND_API_KEY
+  ? new Resend(process.env.RESEND_API_KEY)
+  : null;
+
+/** Thrown when the provider rejected the send, so the caller can say so. */
+class DeliveryError extends Error {}
+
+/**
+ * Send one submission by email.
+ *
+ * Always logs first. If Resend then fails — or is not configured at all — the
+ * submission is still recoverable from the server log rather than gone, which is
+ * the difference between a bad hour and a lost customer.
+ */
+async function deliver(
+  subject: string,
+  body: string,
+  options: { to: string; replyTo?: string },
+) {
   // Server-side only; never reaches the browser bundle.
   console.info(`[contact] ${subject}\n${body}`);
+
+  if (!resend) {
+    console.warn("[contact] RESEND_API_KEY is not set — logged only, not sent.");
+    return;
+  }
+
+  const { error } = await resend.emails.send({
+    from: MAIL_FROM,
+    to: options.to,
+    replyTo: options.replyTo,
+    subject,
+    text: body,
+  });
+
+  if (error) {
+    console.error(`[contact] Resend rejected the send: ${error.message}`);
+    throw new DeliveryError(error.message);
+  }
+}
+
+/**
+ * Turn a failed send into an answer the visitor can act on.
+ *
+ * Deliberately not a success response: telling someone we got their message when
+ * it never left the building is the one outcome worse than an error, because they
+ * will sit and wait for a call that is not coming. The WhatsApp number is in the
+ * message so the next step is obvious.
+ */
+function deliveryFailed() {
+  return NextResponse.json(
+    {
+      ok: false,
+      error: `We could not send that just now. Please WhatsApp us on ${siteConfig.contact.phone} and we will pick it up straight away.`,
+    },
+    { status: 502 },
+  );
 }
 
 export async function POST(request: Request) {
@@ -99,10 +161,15 @@ export async function POST(request: Request) {
   /* ---------------- Newsletter ---------------- */
   const newsletter = newsletterSchema.safeParse(json);
   if (newsletter.success) {
-    await deliver(
-      "Newsletter subscription",
-      `Email: ${newsletter.data.email}`,
-    );
+    try {
+      await deliver(
+        "Newsletter subscription",
+        `Email: ${newsletter.data.email}`,
+        { to: siteConfig.contact.email, replyTo: newsletter.data.email },
+      );
+    } catch {
+      return deliveryFailed();
+    }
     return NextResponse.json({ ok: true });
   }
 
@@ -114,21 +181,27 @@ export async function POST(request: Request) {
     // Honeypot tripped — answer as success so the bot learns nothing.
     if (booking.website) return NextResponse.json({ ok: true });
 
-    await deliver(
-      `Demo request — ${booking.business}${
-        booking.restaurantType ? ` (${booking.restaurantType})` : ""
-      }`,
-      [
-        `Name:     ${booking.name}`,
-        `Email:    ${booking.email}`,
-        `Phone:    ${booking.phone}`,
-        `Business: ${booking.business}`,
-        `Type:     ${booking.restaurantType || "—"}`,
-        `Outlets:  ${booking.outlets}`,
-        "",
-        booking.message || "(no note)",
-      ].join("\n"),
-    );
+    try {
+      await deliver(
+        `Demo request — ${booking.business}${
+          booking.restaurantType ? ` (${booking.restaurantType})` : ""
+        }`,
+        [
+          `Name:     ${booking.name}`,
+          `Email:    ${booking.email}`,
+          `Phone:    ${booking.phone}`,
+          `Business: ${booking.business}`,
+          `Type:     ${booking.restaurantType || "—"}`,
+          `Outlets:  ${booking.outlets}`,
+          "",
+          booking.message || "(no note)",
+        ].join("\n"),
+        // Buying intent — this one goes to whoever chases leads.
+        { to: siteConfig.contact.salesEmail, replyTo: booking.email },
+      );
+    } catch {
+      return deliveryFailed();
+    }
 
     return NextResponse.json({
       ok: true,
@@ -178,19 +251,24 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true });
   }
 
-  await deliver(
-    `New enquiry — ${payload.service}`,
-    [
-      `Name:     ${payload.name}`,
-      `Company:  ${payload.company || "—"}`,
-      `Email:    ${payload.email}`,
-      `Phone:    ${payload.phone}`,
-      `Service:  ${payload.service}`,
-      `Budget:   ${payload.budget}`,
-      "",
-      payload.message,
-    ].join("\n"),
-  );
+  try {
+    await deliver(
+      `New enquiry — ${payload.service}`,
+      [
+        `Name:     ${payload.name}`,
+        `Company:  ${payload.company || "—"}`,
+        `Email:    ${payload.email}`,
+        `Phone:    ${payload.phone}`,
+        `Service:  ${payload.service}`,
+        `Budget:   ${payload.budget}`,
+        "",
+        payload.message,
+      ].join("\n"),
+      { to: siteConfig.contact.email, replyTo: payload.email },
+    );
+  } catch {
+    return deliveryFailed();
+  }
 
   return NextResponse.json({
     ok: true,

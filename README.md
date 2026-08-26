@@ -42,6 +42,22 @@ npm run dev          # → http://localhost:3400
 | `npm run brand-webp` | Convert served brand/logo PNGs to lossless WebP |
 | `npm run portrait` | Crop + compress the founder portrait to a web-ready JPEG |
 
+### Environment
+
+Copy `.env.example` to `.env.local`. Nothing in it is needed to build — the site
+runs and the forms still accept submissions without any of it.
+
+| Variable | Effect if unset |
+| --- | --- |
+| `NEXT_PUBLIC_MAPBOX_TOKEN` | The `/contact` map falls back to a static SVG |
+| `RESEND_API_KEY` | Form submissions are logged server-side but **not emailed** |
+| `MAIL_FROM` | Falls back to Resend's sandbox sender, which only delivers to the Resend account owner |
+
+Where a submission goes is decided in `src/lib/site.ts`, not by env: demo
+bookings to `contact.salesEmail`, enquiries and newsletter to `contact.email`.
+Both only receive mail once `plutoxtech.com` has MX records — the cPanel mail
+stack is currently missing from the Cloudflare zone.
+
 ---
 
 ## Structure
