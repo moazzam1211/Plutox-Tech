@@ -21,6 +21,15 @@ export const siteConfig = {
   contact: {
     email: "hello@plutoxtech.com",
     salesEmail: "sales@plutoxtech.com",
+    /**
+     * Where the `/contact` project enquiry lands.
+     *
+     * Separate from `email` on purpose: `hello@` is the address printed on the
+     * page, in the footer and in the legal pages, so it is the one a person
+     * writes to directly. This is the one the form posts to, and keeping them
+     * apart means the routing can change without editing what visitors read.
+     */
+    enquiryEmail: "info@plutoxtech.com",
     careersEmail: "careers@plutoxtech.com",
     phone: "+92 344 024 4449",
     /**

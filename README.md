@@ -54,17 +54,17 @@ runs and the forms still accept submissions without any of it.
 | `MAIL_FROM` | Falls back to Resend's sandbox sender, which only delivers to the Resend account owner |
 
 Where a submission goes is decided in `src/lib/site.ts`, not by env: demo
-bookings to `contact.salesEmail`, enquiries and newsletter to `contact.email`.
-Both only receive mail once `plutoxtech.com` has MX records — the cPanel mail
-stack is currently missing from the Cloudflare zone.
+bookings to `contact.salesEmail` (sales@), project enquiries to
+`contact.enquiryEmail` (info@), newsletter to `contact.email` (hello@).
+None of them receive mail until `plutoxtech.com` has MX records again — the
+cPanel mail stack is currently missing from the Cloudflare zone.
 
 ---
 
 ## Structure
 
-Eight pages in the navbar, plus Skills and two legal pages that are linked
-from
-the footer and indexed but kept out of the bar. Deliberately finite — every page
+Eight pages in the navbar, plus Demo, Skills and two legal pages that are linked
+from the footer and indexed but kept out of the bar. Deliberately finite — every page
 ends with a prev/next pager rather than an endless scroll.
 
 | Route | Purpose |
@@ -77,6 +77,7 @@ ends with a prev/next pager rather than an endless scroll.
 | `/reviews` | Client reviews and FAQs |
 | `/owner` | Founder profile |
 | `/contact` | Contact channels, enquiry form, location |
+| `/demo` | Book a free demo — the navbar CTA points here (footer-linked, not in the bar) |
 | `/skills` | Skill matrix by discipline + the full stack (footer-linked, not in the bar) |
 | `/privacy-policy`, `/terms` | Legal |
 
@@ -138,16 +139,16 @@ variant of every lock-up, swapped with Tailwind's `dark:` variant. See
 
 - `siteConfig.url` in `src/lib/site.ts` must point at the production origin —
   canonical URLs, the sitemap and OG tags all derive from it.
-- `/api/contact` validates with Zod and rate-limits per IP, but `deliver()` is a
-  deliberate no-op. Wire a mail provider (Resend, SES) there; it is one function.
-  The in-memory rate limiter is per-process — use a shared store behind more than
-  one instance.
+- `/api/contact` validates with Zod, rate-limits per IP and delivers through
+  Resend. It needs `RESEND_API_KEY` in the deployment environment, and
+  `MAIL_FROM` on a domain verified in Resend, or submissions are logged and not
+  sent. The in-memory rate limiter is per-process — use a shared store behind
+  more than one instance.
 - Client names and reviews are illustrative placeholders.
-- Fleet Flow is marked `in-development`: it shows its screen gallery *and* an
-  eight-phase roadmap, so the page says which parts are not built yet. Flip
-  `status` to `shipped` in `src/data/products.ts` when it lands and the pill and
-  the roadmap section drop away on their own. A product with no screens at all
-  falls back to showing only the roadmap.
+- All three products are `shipped`. Setting `status: "in-development"` on one in
+  `src/data/products.ts` brings back its status pill and swaps the gallery for the
+  roadmap — a product with no screenshots shows only the roadmap, so an unfinished
+  build can never appear to have screens it does not have.
 - Of the social links in `src/lib/site.ts`, only Instagram and Dribbble are
   confirmed. Replace or remove the rest — each is also emitted as `sameAs` in the
   Organization structured data.

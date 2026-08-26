@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
+import { unitNoun } from "@/data/demo";
 import {
   contactSchema,
   demoSchema,
@@ -15,8 +16,12 @@ import { siteConfig } from "@/lib/site";
  * email through Resend. Every submission routes by intent:
  *
  *   demo booking → sales@   (buying intent — someone should chase it)
- *   enquiry      → hello@   (general, could be anything)
+ *   enquiry      → info@    (project enquiries, could be anything)
  *   newsletter   → hello@
+ *
+ * The addresses live in `siteConfig.contact`, not here, and are deliberately
+ * separate from the `hello@` printed on the contact page — where a form posts
+ * and what a visitor is invited to write to are two different decisions.
  *
  * `replyTo` is the sender's own address, so hitting reply in the inbox answers
  * the person rather than the website.
@@ -93,8 +98,10 @@ async function deliver(
   body: string,
   options: { to: string; replyTo?: string },
 ) {
-  // Server-side only; never reaches the browser bundle.
-  console.info(`[contact] ${subject}\n${body}`);
+  // Server-side only; never reaches the browser bundle. The recipient is logged
+  // too: when someone reports a lead never arrived, the first question is which
+  // inbox it was aimed at, and guessing from the code is slower than reading it.
+  console.info(`[contact] → ${options.to} · ${subject}\n${body}`);
 
   if (!resend) {
     console.warn("[contact] RESEND_API_KEY is not set — logged only, not sent.");
@@ -183,16 +190,20 @@ export async function POST(request: Request) {
 
     try {
       await deliver(
-        `Demo request — ${booking.business}${
-          booking.restaurantType ? ` (${booking.restaurantType})` : ""
-        }`,
+        [
+          `Demo request — ${booking.product}`,
+          booking.business ? ` · ${booking.business}` : "",
+          booking.restaurantType ? ` (${booking.restaurantType})` : "",
+        ].join(""),
         [
           `Name:     ${booking.name}`,
           `Email:    ${booking.email}`,
           `Phone:    ${booking.phone}`,
-          `Business: ${booking.business}`,
+          `Product:  ${booking.product}`,
+          `Edition:  ${booking.business || "—"}`,
           `Type:     ${booking.restaurantType || "—"}`,
-          `Outlets:  ${booking.outlets}`,
+          // The band carries no noun of its own, so it gets the product's.
+          `Size:     ${booking.outlets} ${unitNoun[booking.product]}`,
           "",
           booking.message || "(no note)",
         ].join("\n"),
@@ -264,7 +275,9 @@ export async function POST(request: Request) {
         "",
         payload.message,
       ].join("\n"),
-      { to: siteConfig.contact.email, replyTo: payload.email },
+      // Project enquiries go to info@, kept separate from the hello@ printed on
+      // the page so the routing and the published address can differ.
+      { to: siteConfig.contact.enquiryEmail, replyTo: payload.email },
     );
   } catch {
     return deliveryFailed();

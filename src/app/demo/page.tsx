@@ -12,13 +12,15 @@ import { toWhatsAppHref } from "@/lib/utils";
 export const metadata = buildMetadata({
   title: "Book a Free Demo",
   description:
-    "See ServeSync POS running on your own kind of business — restaurant, mart or pharmacy. Free demo, nothing to install, and our team calls you back within one business day.",
+    "See ServeSync POS, StaySync Hotel ERP or Fleet Flow running on your own kind of business. Free demo, nothing to install, and our team calls you back within one business day.",
   path: "/demo",
   keywords: [
     "free POS demo",
     "restaurant POS demo",
     "pharmacy POS demo",
     "supermarket POS demo",
+    "hotel ERP demo",
+    "fleet management demo",
     "book POS demo Pakistan",
   ],
 });
@@ -29,7 +31,7 @@ const PROMISES = [
     icon: MonitorPlay,
     title: "Your edition, not a generic tour",
     detail:
-      "We open the edition you picked — restaurant, mart or pharmacy — with the modules that apply to it and nothing that doesn't.",
+      "We open the product you picked — and for ServeSync, the edition too — with the modules that apply to it and nothing that doesn't.",
   },
   {
     icon: Clock,
@@ -80,12 +82,12 @@ export default function DemoPage() {
             <span className="text-primary">your kind of business</span>
           </>
         }
-        lede="Tell us what you run and how many outlets, and we will show you the ServeSync edition built for it — a restaurant floor, a pharmacy counter or a mart checkout. Thirty minutes, nothing to install, no cost."
+        lede="Pick a product and tell us how big you are, and we will show you the thing itself — a restaurant floor, a pharmacy counter, a mart checkout, a hotel front desk or a dispatch board. Thirty minutes, nothing to install, no cost."
       >
         <StatStrip
           className="max-w-2xl border-t pt-4"
           items={[
-            { value: "3", label: "Editions" },
+            { value: "3", label: "Products" },
             { value: moduleCount, label: "Modules" },
             { value: "30 min", label: "Typical demo" },
             { value: "Free", label: "Cost to you" },
@@ -99,7 +101,7 @@ export default function DemoPage() {
           <Reveal preset="fadeUp">
             <h2 className="eyebrow text-primary">Your details</h2>
             <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground">
-              Five fields. We only ask what changes what we show you.
+              A handful of fields. We only ask what changes what we show you.
             </p>
             <div className="mt-7 max-w-xl">
               <DemoForm />

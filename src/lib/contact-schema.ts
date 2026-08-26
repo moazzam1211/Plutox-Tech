@@ -3,6 +3,7 @@ import { z } from "zod";
 import {
   businessOptions,
   outletOptions,
+  productOptions,
   restaurantTypeOptions,
 } from "@/data/demo";
 import { budgetOptions, serviceOptions } from "@/data/enquiry";
@@ -56,9 +57,10 @@ export type ContactInput = z.infer<typeof contactSchema>;
  * Demo-booking payload from `/demo`, handled by the same endpoint.
  *
  * Shorter than the enquiry on purpose: this form's whole job is to get a call
- * booked, so it asks only what shapes the demo — who you are, which edition,
- * how many outlets, and for restaurants what kind of restaurant. `message` is
- * optional here, where the enquiry form insists on it.
+ * booked, so it asks only what shapes the demo — who you are, which product, how
+ * big, and then narrows: ServeSync asks which edition, and the restaurant edition
+ * asks what kind of restaurant. `message` is optional here, where the enquiry
+ * form insists on it.
  */
 export const demoSchema = z
   .object({
@@ -75,11 +77,13 @@ export const demoSchema = z
       .min(7, "Enter a reachable phone number.")
       .max(24, "That number looks too long.")
       .regex(/^[\d\s()+.-]+$/, "Use digits, spaces and + ( ) - only."),
-    business: z.enum(businessOptions, {
-      message: "Tell us which kind of business you run.",
+    product: z.enum(productOptions, {
+      message: "Which product would you like to see?",
     }),
+    /** Required when `product` is ServeSync — the other two have no editions. */
+    business: z.enum(businessOptions).optional().or(z.literal("")),
     outlets: z.enum(outletOptions, {
-      message: "Roughly how many outlets?",
+      message: "Roughly how many?",
     }),
     /** Required when `business` is Restaurant, ignored otherwise. */
     restaurantType: z.enum(restaurantTypeOptions).optional().or(z.literal("")),
@@ -93,11 +97,19 @@ export const demoSchema = z
     website: z.string().max(0).optional().or(z.literal("")),
   })
   /*
-    The conditional lives in the schema rather than only in the component, so a
-    restaurant submission without a type is rejected by the server too — a form
-    rule enforced on one side only is not a rule.
+    The conditionals live in the schema rather than only in the component, so a
+    ServeSync booking with no edition, or a restaurant with no type, is rejected
+    by the server too — a form rule enforced on one side only is not a rule.
   */
   .superRefine((value, ctx) => {
+    if (value.product === "ServeSync POS" && !value.business) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["business"],
+        message: "Which kind of business — restaurant, mart or pharmacy?",
+      });
+    }
+
     if (value.business === "Restaurant" && !value.restaurantType) {
       ctx.addIssue({
         code: "custom",

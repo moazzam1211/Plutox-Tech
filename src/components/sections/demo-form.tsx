@@ -11,7 +11,9 @@ import { Field, Input, Select, Textarea } from "@/components/ui/form-field";
 import {
   businessOptions,
   outletOptions,
+  productOptions,
   restaurantTypeOptions,
+  unitNoun,
 } from "@/data/demo";
 import { demoSchema, type DemoInput } from "@/lib/contact-schema";
 import { EASE_OUT } from "@/lib/motion";
@@ -50,6 +52,7 @@ export function DemoForm() {
       name: "",
       email: "",
       phone: "",
+      business: "",
       restaurantType: "",
       message: "",
       website: "",
@@ -59,16 +62,26 @@ export function DemoForm() {
   /*
     `useWatch` rather than `watch()`. The latter returns a new function on every
     render, which the React Compiler cannot memoize — it then skips optimising the
-    whole component and warns about it. This is a real hook subscribed to one field.
+    whole component and warns about it. These are real hooks, each subscribed to one
+    field.
+
+    Two levels of narrowing: the product decides whether an edition is asked at
+    all, and the edition decides whether a restaurant type is.
   */
+  const product = useWatch({ control, name: "product" });
   const business = useWatch({ control, name: "business" });
-  const isRestaurant = business === "Restaurant";
+  const isServeSync = product === "ServeSync POS";
+  const isRestaurant = isServeSync && business === "Restaurant";
 
   /*
-    Clear the restaurant type when the business moves away from Restaurant.
-    Without this, picking Restaurant → Café → Pharmacy would submit a pharmacy
-    that is somehow also a café.
+    Clear whatever no longer applies. Without this, picking ServeSync → Restaurant
+    → Café → StaySync would submit a hotel that is somehow also a café: hiding a
+    field does not unregister it, so the stale value would still be posted.
   */
+  React.useEffect(() => {
+    if (!isServeSync) resetField("business", { defaultValue: "" });
+  }, [isServeSync, resetField]);
+
   React.useEffect(() => {
     if (!isRestaurant) resetField("restaurantType", { defaultValue: "" });
   }, [isRestaurant, resetField]);
@@ -230,23 +243,23 @@ export function DemoForm() {
 
       <div className="grid gap-x-4 sm:grid-cols-2">
         <Field
-          label="What do you run?"
-          htmlFor="business"
+          label="Which product?"
+          htmlFor="product"
           required
-          error={errors.business?.message}
-          hint="This picks the ServeSync edition we'll show you."
+          error={errors.product?.message}
+          hint="ServeSync runs tills; StaySync runs hotels; Fleet Flow runs trucks."
         >
           <Select
-            id="business"
+            id="product"
             defaultValue=""
-            aria-invalid={Boolean(errors.business)}
-            aria-describedby="business-message"
-            {...register("business")}
+            aria-invalid={Boolean(errors.product)}
+            aria-describedby="product-message"
+            {...register("product")}
           >
             <option value="" disabled>
-              Select your business…
+              Select a product…
             </option>
-            {businessOptions.map((option) => (
+            {productOptions.map((option) => (
               <option key={option} value={option}>
                 {option}
               </option>
@@ -254,8 +267,12 @@ export function DemoForm() {
           </Select>
         </Field>
 
+        {/*
+          The noun follows the product — a hotel group counts properties, a
+          carrier counts vehicles. Only the noun changes; the bands are the same.
+        */}
         <Field
-          label="Number of outlets"
+          label={`How many ${product ? unitNoun[product] : "outlets"}?`}
           htmlFor="outlets"
           required
           error={errors.outlets?.message}
@@ -280,7 +297,40 @@ export function DemoForm() {
       </div>
 
       {/*
-        Restaurant type, revealed only for restaurants.
+        ServeSync's edition, asked only for ServeSync — StaySync and Fleet Flow
+        have no editions, and offering the question anyway would imply they do.
+      */}
+      {isServeSync ? (
+        <div className="animate-in fade-in slide-in-from-top-1 duration-300">
+          <Field
+            label="What do you run?"
+            htmlFor="business"
+            required
+            error={errors.business?.message}
+            hint="This picks the ServeSync edition we'll show you."
+          >
+            <Select
+              id="business"
+              defaultValue=""
+              aria-invalid={Boolean(errors.business)}
+              aria-describedby="business-message"
+              {...register("business")}
+            >
+              <option value="" disabled>
+                Select your business…
+              </option>
+              {businessOptions.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </Select>
+          </Field>
+        </div>
+      ) : null}
+
+      {/*
+        Restaurant type, revealed only for the restaurant edition.
 
         Mount-only animation, deliberately: an `AnimatePresence` exit here left
         the field on screen indefinitely whenever the tab wasn't compositing
