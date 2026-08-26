@@ -2,9 +2,12 @@ import { z } from "zod";
 
 import {
   businessOptions,
-  outletOptions,
   productOptions,
   restaurantTypeOptions,
+  siteOptions,
+  sizeFields,
+  userOptions,
+  vehicleOptions,
 } from "@/data/demo";
 import { budgetOptions, serviceOptions } from "@/data/enquiry";
 
@@ -82,9 +85,14 @@ export const demoSchema = z
     }),
     /** Required when `product` is ServeSync — the other two have no editions. */
     business: z.enum(businessOptions).optional().or(z.literal("")),
-    outlets: z.enum(outletOptions, {
-      message: "Roughly how many?",
-    }),
+    /*
+      Every size field is optional here and made required per product below, so
+      one schema covers all three without a discriminated union per product.
+    */
+    outlets: z.enum(siteOptions).optional().or(z.literal("")),
+    branches: z.enum(siteOptions).optional().or(z.literal("")),
+    vehicles: z.enum(vehicleOptions).optional().or(z.literal("")),
+    users: z.enum(userOptions).optional().or(z.literal("")),
     /** Required when `business` is Restaurant, ignored otherwise. */
     restaurantType: z.enum(restaurantTypeOptions).optional().or(z.literal("")),
     message: z
@@ -102,6 +110,23 @@ export const demoSchema = z
     by the server too — a form rule enforced on one side only is not a rule.
   */
   .superRefine((value, ctx) => {
+    /*
+      The size questions a product actually asks are required; the rest are left
+      alone. Driven off the same `sizeFields` table the form renders from, so the
+      two can never ask for different things.
+    */
+    if (value.product) {
+      for (const field of sizeFields[value.product]) {
+        if (!value[field.name]) {
+          ctx.addIssue({
+            code: "custom",
+            path: [field.name],
+            message: "Roughly how many?",
+          });
+        }
+      }
+    }
+
     if (value.product === "ServeSync POS" && !value.business) {
       ctx.addIssue({
         code: "custom",

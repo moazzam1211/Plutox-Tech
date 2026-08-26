@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
-import { unitNoun } from "@/data/demo";
+import { sizeFields } from "@/data/demo";
 import {
   contactSchema,
   demoSchema,
@@ -202,8 +202,14 @@ export async function POST(request: Request) {
           `Product:  ${booking.product}`,
           `Edition:  ${booking.business || "—"}`,
           `Type:     ${booking.restaurantType || "—"}`,
-          // The band carries no noun of its own, so it gets the product's.
-          `Size:     ${booking.outlets} ${unitNoun[booking.product]}`,
+          /*
+            Only the size questions this product asked, in its own words — a
+            hotel booking has no vehicle count and should not print an empty one.
+          */
+          ...sizeFields[booking.product].map(
+            (field) =>
+              `${(field.short + ":").padEnd(10)}${booking[field.name] || "—"}`,
+          ),
           "",
           booking.message || "(no note)",
         ].join("\n"),

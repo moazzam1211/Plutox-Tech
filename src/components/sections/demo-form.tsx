@@ -10,10 +10,9 @@ import { Button } from "@/components/ui/button";
 import { Field, Input, Select, Textarea } from "@/components/ui/form-field";
 import {
   businessOptions,
-  outletOptions,
   productOptions,
   restaurantTypeOptions,
-  unitNoun,
+  sizeFields,
 } from "@/data/demo";
 import { demoSchema, type DemoInput } from "@/lib/contact-schema";
 import { EASE_OUT } from "@/lib/motion";
@@ -53,6 +52,10 @@ export function DemoForm() {
       email: "",
       phone: "",
       business: "",
+      outlets: "",
+      branches: "",
+      vehicles: "",
+      users: "",
       restaurantType: "",
       message: "",
       website: "",
@@ -81,6 +84,18 @@ export function DemoForm() {
   React.useEffect(() => {
     if (!isServeSync) resetField("business", { defaultValue: "" });
   }, [isServeSync, resetField]);
+
+  /*
+    Same for the size fields. Switching Fleet Flow → StaySync must not leave a
+    vehicle count attached to a hotel booking.
+  */
+  React.useEffect(() => {
+    if (!product) return;
+    const asked = new Set(sizeFields[product].map((field) => field.name));
+    for (const name of ["outlets", "branches", "vehicles", "users"] as const) {
+      if (!asked.has(name)) resetField(name, { defaultValue: "" });
+    }
+  }, [product, resetField]);
 
   React.useEffect(() => {
     if (!isRestaurant) resetField("restaurantType", { defaultValue: "" });
@@ -268,32 +283,40 @@ export function DemoForm() {
         </Field>
 
         {/*
-          The noun follows the product — a hotel group counts properties, a
-          carrier counts vehicles. Only the noun changes; the bands are the same.
+          The size questions come from `sizeFields`, which the schema validates
+          against too. ServeSync asks for outlets, StaySync for hotel branches,
+          Fleet Flow for vehicles, users and branches — a carrier running a
+          hundred trucks with six staff is a different conversation from twenty
+          trucks with forty, and one generic "how many?" loses that.
         */}
-        <Field
-          label={`How many ${product ? unitNoun[product] : "outlets"}?`}
-          htmlFor="outlets"
-          required
-          error={errors.outlets?.message}
-        >
-          <Select
-            id="outlets"
-            defaultValue=""
-            aria-invalid={Boolean(errors.outlets)}
-            aria-describedby="outlets-message"
-            {...register("outlets")}
-          >
-            <option value="" disabled>
-              Select a range…
-            </option>
-            {outletOptions.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </Select>
-        </Field>
+        {(product ? sizeFields[product] : sizeFields["ServeSync POS"]).map(
+          (field) => (
+            <Field
+              key={field.name}
+              label={field.label}
+              htmlFor={field.name}
+              required
+              error={errors[field.name]?.message}
+            >
+              <Select
+                id={field.name}
+                defaultValue=""
+                aria-invalid={Boolean(errors[field.name])}
+                aria-describedby={`${field.name}-message`}
+                {...register(field.name)}
+              >
+                <option value="" disabled>
+                  Select a range…
+                </option>
+                {field.options.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </Select>
+            </Field>
+          ),
+        )}
       </div>
 
       {/*

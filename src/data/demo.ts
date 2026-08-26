@@ -43,18 +43,52 @@ export const restaurantTypeOptions = [
   "Other",
 ] as const;
 
-/**
- * Size bands rather than a free number — nobody counts precisely at this stage.
- *
- * The values carry no noun because what is being counted depends on the product;
- * `unitNoun` supplies it, so a hotel is asked about properties rather than
- * outlets.
- */
-export const outletOptions = ["1", "2–5", "6–10", "11–25", "26+"] as const;
+/* ------------------------------------------------------------------ */
+/* How big are you — asked in each product's own terms                */
+/* ------------------------------------------------------------------ */
 
-/** What each product's size band is actually counting. */
-export const unitNoun: Record<ProductOption, string> = {
-  "ServeSync POS": "outlets",
-  "StaySync Hotel ERP": "properties",
-  "Fleet Flow": "vehicles",
+/** Sites: outlets for a POS client, branches for a hotel group or a carrier. */
+export const siteOptions = ["1", "2–5", "6–10", "11–25", "26+"] as const;
+
+/** Vehicles. A fleet of six is a different product conversation from sixty. */
+export const vehicleOptions = ["1–5", "6–20", "21–50", "51–100", "100+"] as const;
+
+/** Named users — drivers, dispatchers and office staff who will each sign in. */
+export const userOptions = ["1–5", "6–20", "21–50", "51+"] as const;
+
+/** One size question: which field it fills, what it asks, and its bands. */
+export interface SizeField {
+  name: "outlets" | "branches" | "vehicles" | "users";
+  /** The question, as the form asks it. */
+  label: string;
+  /** Noun phrase for the email body, where a question mark reads oddly. */
+  short: string;
+  options: readonly string[];
+}
+
+/**
+ * The size questions each product actually needs.
+ *
+ * A POS client is sized by outlets and nothing else. A hotel group is sized by
+ * branches. A carrier needs three numbers, because a hundred trucks run by six
+ * people is a different quote from twenty trucks run by forty — one generic
+ * "how many?" would have flattened all of that into a number nobody can price.
+ */
+export const sizeFields: Record<ProductOption, SizeField[]> = {
+  "ServeSync POS": [
+    { name: "outlets", label: "How many outlets?", short: "Outlets", options: siteOptions },
+  ],
+  "StaySync Hotel ERP": [
+    {
+      name: "branches",
+      label: "How many hotel branches?",
+      short: "Branches",
+      options: siteOptions,
+    },
+  ],
+  "Fleet Flow": [
+    { name: "vehicles", label: "How many vehicles?", short: "Vehicles", options: vehicleOptions },
+    { name: "users", label: "How many users?", short: "Users", options: userOptions },
+    { name: "branches", label: "How many branches?", short: "Branches", options: siteOptions },
+  ],
 };
