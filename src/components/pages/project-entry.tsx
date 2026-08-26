@@ -64,13 +64,13 @@ export function ScreenGallery({
         <div className="flex items-center justify-between gap-3 border-t border-border bg-background px-4 py-2.5">
           <div className="min-w-0">
             <p className="truncate text-xs font-semibold">{active.label}</p>
-            <p className="truncate text-[0.6875rem] text-muted-foreground">
+            <p className="truncate text-[0.75rem] text-muted-foreground">
               {active.caption}
             </p>
           </div>
 
           <div className="flex shrink-0 items-center gap-1">
-            <span className="mr-1 font-mono text-[0.6875rem] text-muted-foreground">
+            <span className="mr-1 font-mono text-[0.75rem] text-muted-foreground">
               {index + 1}/{count}
             </span>
             <button
@@ -156,7 +156,7 @@ function Roadmap({
     <Panel className="p-5">
       <div className="flex items-baseline justify-between gap-3 border-b border-border pb-3">
         <p className="eyebrow text-muted-foreground">Delivery roadmap</p>
-        <p className="font-mono text-[0.6875rem] text-muted-foreground">
+        <p className="font-mono text-[0.75rem] text-muted-foreground">
           {shipped} of {phases.length} shipped
         </p>
       </div>
@@ -204,13 +204,13 @@ function Roadmap({
 
             <div className="min-w-0">
               <p className="flex flex-wrap items-baseline gap-2">
-                <span className="font-mono text-[0.6875rem] text-muted-foreground">
+                <span className="font-mono text-[0.75rem] text-muted-foreground">
                   {phase.label}
                 </span>
                 <span className="text-sm font-semibold">{phase.title}</span>
                 {phase.state === "next" ? (
                   <span
-                    className="rounded border px-1.5 py-0.5 font-mono text-[0.6875rem]"
+                    className="rounded border px-1.5 py-0.5 font-mono text-[0.75rem]"
                     style={{
                       color: brandColor,
                       borderColor: `${brandColor}55`,
@@ -260,7 +260,7 @@ export function ProjectEntry({ product }: { product: Product }) {
                 {product.category}
               </span>
               {product.badge ? (
-                <span className="rounded border border-border px-2 py-0.5 font-mono text-[0.6875rem] text-muted-foreground">
+                <span className="rounded border border-border px-2 py-0.5 font-mono text-[0.75rem] text-muted-foreground">
                   {product.badge}
                 </span>
               ) : null}
@@ -273,7 +273,7 @@ export function ProjectEntry({ product }: { product: Product }) {
               */}
               {product.status === "in-development" ? (
                 <span
-                  className="rounded border px-2 py-0.5 font-mono text-[0.6875rem]"
+                  className="rounded border px-2 py-0.5 font-mono text-[0.75rem]"
                   style={{
                     color: product.brandColor,
                     borderColor: `${product.brandColor}55`,
@@ -334,7 +334,7 @@ export function ProjectEntry({ product }: { product: Product }) {
                 <dd className="font-mono text-lg leading-none font-medium">
                   {spec.value}
                 </dd>
-                <dt className="mt-1.5 text-[0.6875rem] leading-tight text-muted-foreground">
+                <dt className="mt-1.5 text-[0.75rem] leading-tight text-muted-foreground">
                   {spec.label}
                 </dt>
               </div>
@@ -399,7 +399,7 @@ export function ProjectEntry({ product }: { product: Product }) {
               {product.languages.map((language) => (
                 <li
                   key={language}
-                  className="rounded border px-2 py-0.5 font-mono text-[0.6875rem]"
+                  className="rounded border px-2 py-0.5 font-mono text-[0.75rem]"
                   style={{
                     color: product.brandColor,
                     borderColor: `${product.brandColor}55`,
@@ -419,7 +419,7 @@ export function ProjectEntry({ product }: { product: Product }) {
               {product.stack.map((tech) => (
                 <li
                   key={tech}
-                  className="rounded border border-border px-2 py-0.5 font-mono text-[0.6875rem] text-muted-foreground"
+                  className="rounded border border-border px-2 py-0.5 font-mono text-[0.75rem] text-muted-foreground"
                 >
                   {tech}
                 </li>
@@ -466,7 +466,7 @@ export function ProjectEntry({ product }: { product: Product }) {
               instance — so this figure is deliberately not the same number as
               the module count in the badge and specs.
             */}
-            <p className="font-mono text-[0.6875rem] text-muted-foreground/70">
+            <p className="font-mono text-[0.75rem] text-muted-foreground/70">
               {moduleCount} capabilities across {product.moduleGroups.length}{" "}
               areas
             </p>
@@ -498,7 +498,7 @@ export function ProjectEntry({ product }: { product: Product }) {
                   }}
                 >
                   {group.title}
-                  <span className="font-mono text-[0.6875rem] opacity-60">
+                  <span className="font-mono text-[0.75rem] opacity-60">
                     {group.items.length}
                   </span>
                 </h3>

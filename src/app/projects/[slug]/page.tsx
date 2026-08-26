@@ -122,7 +122,7 @@ export default async function ProductPage({
               </span>
               {product.badge ? (
                 <span
-                  className="rounded border px-2 py-0.5 font-mono text-[0.6875rem]"
+                  className="rounded border px-2 py-0.5 font-mono text-[0.75rem]"
                   style={{
                     color: "var(--product-ink)",
                     borderColor: "var(--product-line)",
@@ -133,7 +133,7 @@ export default async function ProductPage({
               ) : null}
               {product.status === "in-development" ? (
                 <span
-                  className="rounded border px-2 py-0.5 font-mono text-[0.6875rem]"
+                  className="rounded border px-2 py-0.5 font-mono text-[0.75rem]"
                   style={{
                     color: "var(--product-ink)",
                     borderColor: "var(--product-line)",
@@ -216,7 +216,7 @@ export default async function ProductPage({
                     >
                       {spec.value}
                     </dd>
-                    <dt className="mt-1.5 text-[0.6875rem] leading-tight text-muted-foreground">
+                    <dt className="mt-1.5 text-[0.75rem] leading-tight text-muted-foreground">
                       {spec.label}
                     </dt>
                   </div>
@@ -228,7 +228,7 @@ export default async function ProductPage({
                   >
                     {capabilities}
                   </dd>
-                  <dt className="mt-1.5 text-[0.6875rem] leading-tight text-muted-foreground">
+                  <dt className="mt-1.5 text-[0.75rem] leading-tight text-muted-foreground">
                     Capabilities
                   </dt>
                 </div>
@@ -301,7 +301,7 @@ export default async function ProductPage({
             <h2 className="eyebrow" style={{ color: "var(--product-ink)" }}>
               Every module, in detail
             </h2>
-            <p className="font-mono text-[0.6875rem] text-muted-foreground/70">
+            <p className="font-mono text-[0.75rem] text-muted-foreground/70">
               {capabilities} capabilities across {product.moduleGroups.length}{" "}
               areas
             </p>
@@ -327,7 +327,7 @@ export default async function ProductPage({
                   }}
                 >
                   {group.title}
-                  <span className="font-mono text-[0.6875rem] opacity-60">
+                  <span className="font-mono text-[0.75rem] opacity-60">
                     {group.items.length}
                   </span>
                 </h3>
@@ -357,7 +357,7 @@ export default async function ProductPage({
               <h2 className="eyebrow" style={{ color: "var(--product-ink)" }}>
                 Delivery roadmap
               </h2>
-              <p className="font-mono text-[0.6875rem] text-muted-foreground/70">
+              <p className="font-mono text-[0.75rem] text-muted-foreground/70">
                 {product.roadmap.filter((phase) => phase.state === "done").length}{" "}
                 of {product.roadmap.length} shipped
               </p>
@@ -384,7 +384,7 @@ export default async function ProductPage({
                   }}
                 >
                   <div className="flex items-center justify-between gap-2">
-                    <span className="font-mono text-[0.6875rem] text-muted-foreground">
+                    <span className="font-mono text-[0.75rem] text-muted-foreground">
                       {phase.label}
                     </span>
                     {phase.state === "done" ? (
@@ -395,7 +395,7 @@ export default async function ProductPage({
                       />
                     ) : phase.state === "next" ? (
                       <span
-                        className="rounded border px-1.5 py-0.5 font-mono text-[0.6875rem]"
+                        className="rounded border px-1.5 py-0.5 font-mono text-[0.75rem]"
                         style={{
                           color: "var(--product-ink)",
                           borderColor: "var(--product-line)",
@@ -404,7 +404,7 @@ export default async function ProductPage({
                         in progress
                       </span>
                     ) : (
-                      <span className="font-mono text-[0.6875rem] text-muted-foreground/60">
+                      <span className="font-mono text-[0.75rem] text-muted-foreground/60">
                         planned
                       </span>
                     )}
@@ -439,7 +439,7 @@ export default async function ProductPage({
                   {block.items.map((item) => (
                     <li
                       key={item}
-                      className="rounded border border-border px-2 py-0.5 font-mono text-[0.6875rem] text-muted-foreground"
+                      className="rounded border border-border px-2 py-0.5 font-mono text-[0.75rem] text-muted-foreground"
                     >
                       {item}
                     </li>
@@ -514,7 +514,7 @@ export default async function ProductPage({
           >
             <ArrowLeft className="size-4 shrink-0 text-muted-foreground transition-transform duration-300 group-hover/pg:-translate-x-1" />
             <span className="min-w-0">
-              <span className="block text-[0.6875rem] text-muted-foreground">
+              <span className="block text-[0.75rem] text-muted-foreground">
                 Previous
               </span>
               <span className="block truncate font-display text-base font-semibold">
@@ -532,7 +532,7 @@ export default async function ProductPage({
             className="group/pg sheen-on-hover flex items-center justify-end gap-4 px-6 py-8 text-right transition-colors hover:bg-muted/40 sm:px-10 lg:px-14"
           >
             <span className="min-w-0">
-              <span className="block text-[0.6875rem] text-muted-foreground">
+              <span className="block text-[0.75rem] text-muted-foreground">
                 Next
               </span>
               <span className="block truncate font-display text-base font-semibold">

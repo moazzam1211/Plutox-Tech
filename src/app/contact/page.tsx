@@ -70,7 +70,7 @@ function Channel({
         <Icon className="size-4" />
       </span>
       <span className="min-w-0">
-        <span className="block text-[0.6875rem] text-muted-foreground">
+        <span className="block text-[0.75rem] text-muted-foreground">
           {label}
         </span>
         <span className="block text-sm leading-relaxed font-medium">
@@ -182,7 +182,7 @@ export default function ContactPage() {
               <Channel label="Hours" value={contact.hours} icon={Clock} />
 
               <div>
-                <p className="text-[0.6875rem] text-muted-foreground">
+                <p className="text-[0.75rem] text-muted-foreground">
                   Follow along
                 </p>
                 <ul className="mt-3 flex flex-wrap gap-2">

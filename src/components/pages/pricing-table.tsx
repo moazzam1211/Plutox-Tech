@@ -101,7 +101,7 @@ function PricingChart({
           <p className="eyebrow text-muted-foreground">
             {showEdition ? "Packages" : "Packages & pricing"}
           </p>
-          <p className="font-mono text-[0.6875rem] text-muted-foreground/70">
+          <p className="font-mono text-[0.75rem] text-muted-foreground/70">
             {plans.length === 1 ? "one plan" : `${plans.length} plans`}
           </p>
         </div>
@@ -144,7 +144,7 @@ function PricingChart({
                 </p>
                 {plan.featured ? (
                   <span
-                    className="rounded border px-1.5 py-0.5 font-mono text-[0.6875rem]"
+                    className="rounded border px-1.5 py-0.5 font-mono text-[0.75rem]"
                     style={{ color: ink, borderColor: `${brandColor}55` }}
                   >
                     most taken

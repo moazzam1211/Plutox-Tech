@@ -113,11 +113,11 @@ export default function ReviewsPage() {
                     <cite className="block text-xs font-semibold not-italic">
                       {item.author}
                     </cite>
-                    <span className="block text-[0.6875rem] text-muted-foreground">
+                    <span className="block text-[0.75rem] text-muted-foreground">
                       {item.role} · {item.company}
                     </span>
                   </div>
-                  <span className="ml-auto grid size-7 shrink-0 place-items-center rounded border border-border font-mono text-[0.6875rem] text-muted-foreground">
+                  <span className="ml-auto grid size-7 shrink-0 place-items-center rounded border border-border font-mono text-[0.75rem] text-muted-foreground">
                     {item.companyMark}
                   </span>
                 </footer>

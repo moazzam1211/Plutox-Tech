@@ -185,16 +185,16 @@
   --radius-3xl: calc(var(--radius) + 26px);
 
   /* Fluid display scale — clamps keep headlines proportional everywhere. */
-  --text-display-sm: clamp(1.75rem, 1.35rem + 1.9vw, 2.5rem);
+  --text-display-sm: clamp(1.625rem, 1.3rem + 1.6vw, 2.25rem);
   --text-display-sm--line-height: 1.12;
   --text-display-sm--letter-spacing: -0.02em;
-  --text-display-md: clamp(2.25rem, 1.6rem + 3vw, 3.5rem);
+  --text-display-md: clamp(2rem, 1.5rem + 2.4vw, 3rem);
   --text-display-md--line-height: 1.06;
   --text-display-md--letter-spacing: -0.028em;
-  --text-display-lg: clamp(2.75rem, 1.7rem + 4.6vw, 5rem);
+  --text-display-lg: clamp(2.375rem, 1.6rem + 3.6vw, 4rem);
   --text-display-lg--line-height: 1.02;
   --text-display-lg--letter-spacing: -0.034em;
-  --text-display-xl: clamp(3rem, 1.6rem + 6.2vw, 6rem);
+  --text-display-xl: clamp(2.5rem, 1.5rem + 4.8vw, 4.5rem);
   --text-display-xl--line-height: 0.98;
   --text-display-xl--letter-spacing: -0.04em;
 
@@ -251,7 +251,7 @@
   */
   @media (min-width: 48rem) {
     html {
-      font-size: 93.75%;
+      font-size: 90%;
     }
   }
 
@@ -805,4 +805,95 @@
     transform: scale(1.9);
     opacity: 0;
   }
+}
+
+/* ------------------------------------------------------------------ */
+/* Intro dashboard illustration                                       */
+/* ------------------------------------------------------------------ */
+/*
+ * The one place on the site that loops. The design rule elsewhere is that motion
+ * is feedback and nothing repeats in the viewport; a hero illustration whose
+ * whole job is to look alive is the deliberate exception, so it is kept slow and
+ * low-contrast rather than made an attention-grab.
+ *
+ * Every animation is transform / opacity / stroke-dashoffset only, so it runs on
+ * the compositor. Each element's *resting* CSS is its finished state and the
+ * keyframes animate from a displaced start — which is what makes the global
+ * `prefers-reduced-motion` reset (duration 0.01ms, one iteration) leave a
+ * complete, still composition rather than a half-drawn one.
+ */
+@keyframes dash-rise-kf {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+@keyframes dash-grow-kf {
+  from {
+    transform: scaleX(0);
+  }
+}
+@keyframes dash-bar-kf {
+  from {
+    transform: scaleY(0);
+  }
+}
+@keyframes dash-draw-kf {
+  from {
+    stroke-dashoffset: 340;
+  }
+}
+@keyframes dash-ring-kf {
+  from {
+    stroke-dashoffset: 107;
+  }
+}
+@keyframes dash-pulse-kf {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(1.35);
+  }
+}
+
+@utility dash-rise {
+  animation: dash-rise-kf 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@utility dash-grow {
+  transform-origin: left center;
+  animation: dash-grow-kf 800ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@utility dash-bar {
+  transform-origin: bottom center;
+  animation: dash-bar-kf 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@utility dash-fade {
+  animation: dash-rise-kf 1.4s ease-out both;
+}
+
+/* 340 comfortably exceeds the path length, so the line wipes in cleanly. */
+@utility dash-draw {
+  stroke-dasharray: 340;
+  animation: dash-draw-kf 2.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* 2πr for r=17, so the arc sweeps to roughly three quarters and stops. */
+@utility dash-ring {
+  stroke-dasharray: 80 27;
+  animation: dash-ring-kf 1.8s cubic-bezier(0.22, 1, 0.36, 1) 300ms both;
+}
+
+@utility dash-dot {
+  animation: dash-rise-kf 2.4s ease-out both;
+}
+
+@utility dash-pulse {
+  animation: dash-pulse-kf 2.6s ease-in-out infinite;
 }

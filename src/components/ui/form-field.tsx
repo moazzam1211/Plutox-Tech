@@ -54,7 +54,7 @@ export function Field({
         id={`${htmlFor}-message`}
         aria-live="polite"
         className={cn(
-          "min-h-4 text-[0.6875rem] leading-tight",
+          "min-h-4 text-[0.75rem] leading-tight",
           error ? "text-destructive" : "text-muted-foreground/70",
         )}
       >

@@ -166,7 +166,7 @@ export default function AboutPage() {
                     {step.deliverables.map((item) => (
                       <li
                         key={item}
-                        className="rounded border border-border px-1.5 py-0.5 font-mono text-[0.6875rem] text-muted-foreground"
+                        className="rounded border border-border px-1.5 py-0.5 font-mono text-[0.75rem] text-muted-foreground"
                       >
                         {item}
                       </li>
@@ -212,12 +212,12 @@ export default function AboutPage() {
           {timeline.map((entry) => (
             <RevealItem key={`${entry.year}-${entry.title}`}>
               <div className="grid gap-2 border-b border-border py-5 last:border-0 sm:grid-cols-[3rem_11rem_minmax(0,1fr)] sm:gap-6">
-                <span className="font-mono text-[0.6875rem] text-primary">
+                <span className="font-mono text-[0.75rem] text-primary">
                   {entry.year}
                 </span>
                 <div>
                   <h3 className="text-sm font-semibold">{entry.title}</h3>
-                  <p className="mt-1.5 text-[0.6875rem] text-muted-foreground">
+                  <p className="mt-1.5 text-[0.75rem] text-muted-foreground">
                     {entry.milestone}
                   </p>
                 </div>

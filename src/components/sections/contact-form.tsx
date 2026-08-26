@@ -280,7 +280,7 @@ export function ContactForm() {
         )}
       </Button>
 
-      <p className="mt-3 text-[0.6875rem] leading-relaxed text-muted-foreground/70">
+      <p className="mt-3 text-[0.75rem] leading-relaxed text-muted-foreground/70">
         We use your details only to reply to this enquiry. No lists, no
         third-party sharing — see our{" "}
         <a href="/privacy-policy" className="text-primary underline-offset-2 hover:underline">

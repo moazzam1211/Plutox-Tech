@@ -31,7 +31,7 @@ export const products: Product[] = [
     category: "Multi-vertical POS",
     tagline: "One POS for restaurants, pharmacies and marts",
     description:
-      "One point-of-sale product that runs three different kinds of business. The superadmin picks the edition at first run — restaurant, pharmacy or mart — and that choice drives the theme, the terminology and which of the 33 modules appear: a pharmacy gets prescriptions, a controlled-drug register and expiry tracking but no floor plan; a mart gets promotions, gift cards and scale labels but no kitchen display. Underneath it is the same offline-first, multi-branch codebase, so a fix or a feature lands in all three at once. Previously three separate products (ServeSync, PharmaSync and Vendeez); the pharmacy and mart builds were ported into this one and retired. The pharmacy and mart captures in the gallery were taken in those standalone builds — the editions run the same shell, re-themed and re-labelled.",
+      "One POS that runs three kinds of business. The edition is picked at first run — restaurant, pharmacy or mart — and it decides the theme, the vocabulary and which of the 33 modules appear: a pharmacy gets prescriptions and a controlled register but no floor plan; a mart gets promotions and scale labels but no kitchen display. Same offline-first, multi-branch codebase underneath, so a fix lands in all three at once. The pharmacy and mart captures below were taken in the standalone builds those editions were ported from.",
     image: "/images/products/servesync-logo.webp",
     brandColor: "#33BCA8",
     audience:
@@ -1128,7 +1128,7 @@ export const products: Product[] = [
     category: "Transport & Logistics",
     tagline: "Smart fleet. Real-time control.",
     description:
-      "A multi-tenant transport management platform for truck fleets: vehicles, drivers, customers, shipments and trips with a lifecycle the software enforces rather than trusts, a drag-and-drop dispatch board, a live-tracking feed, and the whole upkeep side — fuel, maintenance, workshop jobs, tyres and parts. Built on a NestJS API and a Next.js console over PostgreSQL and PostGIS, with tenant isolation enforced at four layers so one company's data cannot reach another's. Thirty-six API modules are in — including a finance tier where every invoice, payment, expense and payroll run posts a balanced double-entry journal, a driver app and customer portal, public tracking, and a command centre with analytics and a plain-language assistant. Route planning was the last placeholder in the console and it is now in, alongside circular geofences matched by haversine, single-sign-on through Plutox ID, and three shells — a .NET desktop window for the office and driver and owner apps for background GPS and push — that wrap the same console rather than reimplementing it.",
+      "A multi-tenant transport platform for truck fleets: vehicles, drivers, shipments and trips with a lifecycle the software enforces rather than trusts, a drag-and-drop dispatch board, live tracking, geofences and route planning — plus the upkeep side and a finance tier where every invoice, payment and payroll run posts a balanced double-entry journal. NestJS and Next.js over PostgreSQL and PostGIS, with tenant isolation enforced at four layers so one company's data cannot reach another's.",
     image: "/images/products/fleetflow-logo.webp",
     logoLayout: "stacked",
     brandColor: "#FF7B56",

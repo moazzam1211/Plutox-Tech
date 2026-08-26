@@ -117,7 +117,7 @@ export default async function ModulePage({
                 <li key={product.name}>
                   <Link
                     href={`/projects#${product.slug}`}
-                    className="hover-lift inline-flex rounded border border-border px-2 py-1 font-mono text-[0.6875rem] text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
+                    className="hover-lift inline-flex rounded border border-border px-2 py-1 font-mono text-[0.75rem] text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
                   >
                     {product.name}
                   </Link>
@@ -164,7 +164,7 @@ export default async function ModulePage({
                 <ArrowLeft className="size-4 shrink-0 text-muted-foreground transition-transform duration-300 group-hover/pg:-translate-x-1 group-hover/pg:text-primary" />
               ) : null}
               <span className="min-w-0">
-                <span className="block text-[0.6875rem] text-muted-foreground">
+                <span className="block text-[0.75rem] text-muted-foreground">
                   {step === -1 ? "Previous" : "Next"}
                 </span>
                 <span className="block truncate font-display text-base font-semibold">

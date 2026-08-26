@@ -38,7 +38,7 @@ export function LegalLayout({
   return (
     <>
       <PageHeader eyebrow={eyebrow} title={title} lede={description}>
-        <p className="inline-flex rounded-md border border-border px-3 py-1.5 font-mono text-[0.6875rem] text-muted-foreground">
+        <p className="inline-flex rounded-md border border-border px-3 py-1.5 font-mono text-[0.75rem] text-muted-foreground">
           Last updated: {lastUpdated}
         </p>
       </PageHeader>

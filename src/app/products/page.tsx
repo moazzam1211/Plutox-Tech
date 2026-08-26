@@ -127,7 +127,7 @@ export default function ProductsPage() {
                     </span>
                     {product.status === "in-development" ? (
                       <span
-                        className="rounded border px-2 py-0.5 font-mono text-[0.6875rem]"
+                        className="rounded border px-2 py-0.5 font-mono text-[0.75rem]"
                         style={{
                           color: product.brandColor,
                           borderColor: `${product.brandColor}55`,
@@ -159,7 +159,7 @@ export default function ProductsPage() {
                 </div>
 
                 <div className="flex shrink-0 flex-col items-start gap-3 sm:items-end">
-                  <p className="font-mono text-[0.6875rem] text-muted-foreground">
+                  <p className="font-mono text-[0.75rem] text-muted-foreground">
                     {moduleCount} modules
                   </p>
                   <Button asChild variant="outline" size="sm">
@@ -189,7 +189,7 @@ export default function ProductsPage() {
                       }}
                     >
                       {group.title}
-                      <span className="font-mono text-[0.6875rem] opacity-60">
+                      <span className="font-mono text-[0.75rem] opacity-60">
                         {group.items.length}
                       </span>
                     </h3>
@@ -254,7 +254,7 @@ export default function ProductsPage() {
                         <span className="block text-sm font-semibold">
                           {mod.name}
                         </span>
-                        <span className="mt-1 block font-mono text-[0.6875rem] text-muted-foreground">
+                        <span className="mt-1 block font-mono text-[0.75rem] text-muted-foreground">
                           {/*
                             Counted over distinct slugs, not entries: a module in
                             all three ServeSync editions ships in one system, not

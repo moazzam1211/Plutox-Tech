@@ -40,7 +40,21 @@ export function PageHeader({
   children,
 }: PageHeaderProps) {
   return (
-    <header className="border-b border-border">
+    <header className="relative isolate overflow-hidden border-b border-border">
+      {/*
+        A hairline grid behind every page header, faded out radially so it never
+        competes with the headline — the pattern is there to give the flat layout
+        some texture, not to be looked at. `bg-grid` and the mask already existed
+        in globals.css and were used nowhere; this is what they were written for.
+
+        `isolate` on the header plus `-z-10` here keeps it behind the content
+        without escaping into the page's stacking context.
+      */}
+      <div
+        aria-hidden
+        className="bg-grid mask-radial-faded pointer-events-none absolute inset-0 -z-10 opacity-70"
+      />
+
       <div className="px-6 py-14 sm:px-10 lg:px-14 lg:py-20">
         <Reveal preset="fadeUp">
           <div className="flex items-center gap-4">
@@ -238,7 +252,7 @@ export function Pager({ current }: { current: string }) {
         >
           <ArrowLeft className="size-4 shrink-0 text-muted-foreground transition-transform duration-300 group-hover/pg:-translate-x-1 group-hover/pg:text-primary" />
           <span className="min-w-0">
-            <span className="block text-[0.6875rem] text-muted-foreground">
+            <span className="block text-[0.75rem] text-muted-foreground">
               Previous
             </span>
             <span className="block truncate font-display text-base font-semibold">
@@ -256,7 +270,7 @@ export function Pager({ current }: { current: string }) {
           className="group/pg sheen-on-hover flex items-center justify-end gap-4 px-6 py-8 text-right transition-colors hover:bg-muted/40 sm:px-10 lg:px-14"
         >
           <span className="min-w-0">
-            <span className="block text-[0.6875rem] text-muted-foreground">
+            <span className="block text-[0.75rem] text-muted-foreground">
               Next
             </span>
             <span className="block truncate font-display text-base font-semibold">

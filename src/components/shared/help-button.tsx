@@ -176,7 +176,7 @@ export function HelpButton() {
 
           {/* Ticket form */}
           <form onSubmit={handleSubmit} className="flex flex-col gap-2 p-3">
-            <p className="text-[0.6875rem] text-muted-foreground">
+            <p className="text-[0.75rem] text-muted-foreground">
               Or raise a ticket
             </p>
 
@@ -245,7 +245,7 @@ export function HelpButton() {
             <p
               aria-live="polite"
               className={cn(
-                "min-h-4 text-[0.6875rem] leading-tight",
+                "min-h-4 text-[0.75rem] leading-tight",
                 state === "error" ? "text-destructive" : "text-muted-foreground",
               )}
             >

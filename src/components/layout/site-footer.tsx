@@ -136,7 +136,7 @@ export function SiteFooter() {
             © {new Date().getFullYear()} {siteConfig.legalName}. All rights
             reserved.
           </p>
-          <p className="font-mono text-[0.6875rem] text-muted-foreground/70">
+          <p className="font-mono text-[0.75rem] text-muted-foreground/70">
             {siteConfig.tagline}
           </p>
         </div>

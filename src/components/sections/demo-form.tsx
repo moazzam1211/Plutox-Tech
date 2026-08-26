@@ -439,7 +439,7 @@ export function DemoForm() {
         )}
       </Button>
 
-      <p className="mt-3 text-[0.6875rem] leading-relaxed text-muted-foreground/70">
+      <p className="mt-3 text-[0.75rem] leading-relaxed text-muted-foreground/70">
         The demo is free and there is nothing to install. We use your details
         only to arrange it — see our{" "}
         <a

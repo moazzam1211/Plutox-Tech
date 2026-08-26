@@ -56,7 +56,7 @@ export default function ProjectsPage() {
             <span className="text-primary">all of them shipped</span>
           </>
         }
-        lede="Every figure below — module counts, endpoint counts, payment rails — comes from the products' own documentation, and every screenshot is from the running software. Nothing here is a mockup. ServeSync is one of the three and runs all of restaurants, pharmacies and marts: the pharmacy and mart products were folded into it as editions rather than kept as separate codebases."
+        lede="Every figure below comes from the products' own documentation, and every screenshot is from the running software — nothing here is a mockup. ServeSync alone runs restaurants, pharmacies and marts, as three editions of one codebase."
       >
         <StatStrip
           className="max-w-2xl border-t pt-4"

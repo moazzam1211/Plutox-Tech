@@ -2,7 +2,7 @@ import { ArrowRight, ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { IntroDashboard } from "@/components/pages/intro-dashboard";
+import { IntroDashboardAnimated } from "@/components/pages/intro-dashboard-animated";
 import {
   Block,
   Pager,
@@ -28,7 +28,17 @@ export default function IntroPage() {
   return (
     <>
       {/* ---------------- Statement ---------------- */}
-      <section className="border-b border-border">
+      <section className="relative isolate overflow-hidden border-b border-border">
+        {/*
+          A dot field rather than the grid used on every other page header, so the
+          intro reads as its own place. Masked from the bottom so it dissolves
+          into the section below instead of stopping at a hard edge.
+        */}
+        <div
+          aria-hidden
+          className="bg-dots mask-fade-b pointer-events-none absolute inset-0 -z-10 opacity-80"
+        />
+
         <div className="grid items-center gap-14 px-6 py-20 sm:px-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.92fr)] lg:gap-16 lg:px-14 lg:py-28">
           {/* ---- Copy column ---- */}
           <div>
@@ -54,11 +64,9 @@ export default function IntroPage() {
           </Reveal>
 
           <Reveal preset="fadeUp" delay={0.12}>
-            <p className="mt-8 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-              A founder-led software house building point-of-sale, ERP,
-              hospitality and logistics platforms — four already built, deployed
-              and running real businesses, with a fifth in build.{" "}
-              {siteConfig.tagline}
+            <p className="mt-8 max-w-xl text-base leading-relaxed text-muted-foreground">
+              A founder-led software house in Lahore. Three platforms built,
+              deployed and running real businesses. {siteConfig.tagline}
             </p>
           </Reveal>
 
@@ -80,10 +88,10 @@ export default function IntroPage() {
             <StatStrip
               className="mt-14 border-t pt-4"
               items={[
-                { value: "4", label: "Products built & deployed" },
-                { value: "60+", label: "Live modules across them" },
-                { value: "2022", label: "Founded in Lahore" },
-                { value: "24/7", label: "Support availability" },
+                { value: "3", label: "Platforms shipped" },
+                { value: "93", label: "Live modules" },
+                { value: "2022", label: "Founded" },
+                { value: "24/7", label: "Support" },
               ]}
             />
           </Reveal>
@@ -91,7 +99,7 @@ export default function IntroPage() {
 
           {/* ---- Dashboard column ---- */}
           <Reveal preset="fadeUp" delay={0.3} className="lg:pl-4">
-            <IntroDashboard />
+            <IntroDashboardAnimated />
           </Reveal>
         </div>
       </section>
@@ -143,7 +151,7 @@ export default function IntroPage() {
                     {product.status === "in-development" ? (
                       <>
                         {" "}
-                        <span className="rounded border border-border px-1.5 py-0.5 align-middle font-mono text-[0.6875rem] font-normal text-muted-foreground">
+                        <span className="rounded border border-border px-1.5 py-0.5 align-middle font-mono text-[0.75rem] font-normal text-muted-foreground">
                           in development
                         </span>
                       </>

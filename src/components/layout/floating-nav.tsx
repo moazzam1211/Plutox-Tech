@@ -163,7 +163,7 @@ export function FloatingNav() {
                               <span className="text-[0.8125rem] font-medium transition-transform duration-200 group-hover/ci:translate-x-0.5">
                                 {child.label}
                               </span>
-                              <span className="text-[0.6875rem] text-muted-foreground">
+                              <span className="text-[0.75rem] text-muted-foreground">
                                 {child.hint}
                               </span>
                             </Link>
@@ -289,7 +289,7 @@ export function FloatingNav() {
                           <span className="block text-sm font-medium transition-transform duration-300 group-hover/dr:translate-x-1">
                             {route.label}
                           </span>
-                          <span className="mt-0.5 block text-[0.6875rem] leading-tight text-muted-foreground/80">
+                          <span className="mt-0.5 block text-[0.75rem] leading-tight text-muted-foreground/80">
                             {route.summary}
                           </span>
                         </span>
