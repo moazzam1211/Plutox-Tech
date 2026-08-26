@@ -115,29 +115,6 @@ export interface Product {
   badge?: string;
 }
 
-/** One downloadable build of a product. */
-export interface DownloadFile {
-  label: string;
-  note: string;
-  platform: string;
-  filename: string;
-  bytes: number;
-  /** Read off the real file by the importer, never typed. */
-  sha256: string;
-  /** A local /downloads path when hosted here, a Releases URL when not. */
-  href: string;
-  hosted: boolean;
-}
-
-export interface DownloadGroup {
-  slug: string;
-  name: string;
-  /** owner/repo, for the Releases link on files too large to host here. */
-  repo: string;
-  version: string;
-  files: DownloadFile[];
-}
-
 export interface Feature {
   title: string;
   description: string;

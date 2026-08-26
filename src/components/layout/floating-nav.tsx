@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight, ChevronDown, Menu, X } from "lucide-react";
+import { ArrowUpRight, CalendarCheck, ChevronDown, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import * as React from "react";
@@ -193,6 +193,20 @@ export function FloatingNav() {
             navbar was redundant.
           */}
           <div className="flex shrink-0 items-center gap-2">
+            {/*
+              The one CTA in the bar, and the only accent-coloured thing in it.
+              Hidden below `lg` because the bar has no room there — the drawer
+              carries it instead, at the top where it is the first thing read.
+            */}
+            <Link
+              href="/demo"
+              aria-current={pathname === "/demo" ? "page" : undefined}
+              className="hidden h-9 shrink-0 items-center gap-1.5 rounded-md bg-primary px-3.5 text-xs font-semibold text-primary-foreground transition-[filter,box-shadow,transform] duration-300 hover:brightness-110 hover:shadow-[0_10px_28px_-12px_rgb(139_92_246/0.85)] active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-ring outline-none lg:inline-flex"
+            >
+              <CalendarCheck className="size-3.5 shrink-0" aria-hidden />
+              Book a free demo
+            </Link>
+
             <ThemeToggle />
 
             <button
@@ -239,6 +253,18 @@ export function FloatingNav() {
               >
                 <X className="size-[1.125rem]" />
               </button>
+            </div>
+
+            {/* The CTA the desktop bar shows, first in the drawer rather than buried. */}
+            <div className="border-b border-border p-4">
+              <Link
+                href="/demo"
+                onClick={() => setOpen(false)}
+                className="flex h-11 items-center justify-center gap-2 rounded-md bg-primary text-sm font-semibold text-primary-foreground"
+              >
+                <CalendarCheck className="size-4 shrink-0" aria-hidden />
+                Book a free demo
+              </Link>
             </div>
 
             <nav aria-label="Mobile" className="flex-1 overflow-y-auto py-2">

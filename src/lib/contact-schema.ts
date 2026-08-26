@@ -1,5 +1,10 @@
 import { z } from "zod";
 
+import {
+  businessOptions,
+  outletOptions,
+  restaurantTypeOptions,
+} from "@/data/demo";
 import { budgetOptions, serviceOptions } from "@/data/enquiry";
 
 /**
@@ -46,6 +51,63 @@ export const contactSchema = z.object({
 });
 
 export type ContactInput = z.infer<typeof contactSchema>;
+
+/**
+ * Demo-booking payload from `/demo`, handled by the same endpoint.
+ *
+ * Shorter than the enquiry on purpose: this form's whole job is to get a call
+ * booked, so it asks only what shapes the demo — who you are, which edition,
+ * how many outlets, and for restaurants what kind of restaurant. `message` is
+ * optional here, where the enquiry form insists on it.
+ */
+export const demoSchema = z
+  .object({
+    intent: z.literal("demo"),
+    name: z
+      .string()
+      .trim()
+      .min(2, "Please enter your full name.")
+      .max(80, "That name is longer than we can store."),
+    email: z.string().trim().toLowerCase().email("Enter a valid email address."),
+    phone: z
+      .string()
+      .trim()
+      .min(7, "Enter a reachable phone number.")
+      .max(24, "That number looks too long.")
+      .regex(/^[\d\s()+.-]+$/, "Use digits, spaces and + ( ) - only."),
+    business: z.enum(businessOptions, {
+      message: "Tell us which kind of business you run.",
+    }),
+    outlets: z.enum(outletOptions, {
+      message: "Roughly how many outlets?",
+    }),
+    /** Required when `business` is Restaurant, ignored otherwise. */
+    restaurantType: z.enum(restaurantTypeOptions).optional().or(z.literal("")),
+    message: z
+      .string()
+      .trim()
+      .max(2000, "Please keep it under 2000 characters.")
+      .optional()
+      .or(z.literal("")),
+    /** Honeypot — must stay empty. Bots fill every field they find. */
+    website: z.string().max(0).optional().or(z.literal("")),
+  })
+  /*
+    The conditional lives in the schema rather than only in the component, so a
+    restaurant submission without a type is rejected by the server too — a form
+    rule enforced on one side only is not a rule.
+  */
+  .superRefine((value, ctx) => {
+    if (value.business === "Restaurant" && !value.restaurantType) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["restaurantType"],
+        message: "Which kind of restaurant?",
+      });
+    }
+  });
+
+export type DemoInput = z.infer<typeof demoSchema>;
 
 /** Newsletter subscribe payload, handled by the same endpoint. */
 export const newsletterSchema = z.object({

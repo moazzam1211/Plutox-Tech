@@ -1,6 +1,10 @@
 import { NextResponse } from "next/server";
 
-import { contactSchema, newsletterSchema } from "@/lib/contact-schema";
+import {
+  contactSchema,
+  demoSchema,
+  newsletterSchema,
+} from "@/lib/contact-schema";
 
 /**
  * Contact + newsletter endpoint.
@@ -100,6 +104,57 @@ export async function POST(request: Request) {
       `Email: ${newsletter.data.email}`,
     );
     return NextResponse.json({ ok: true });
+  }
+
+  /* ---------------- Demo booking ---------------- */
+  const demo = demoSchema.safeParse(json);
+  if (demo.success) {
+    const booking = demo.data;
+
+    // Honeypot tripped — answer as success so the bot learns nothing.
+    if (booking.website) return NextResponse.json({ ok: true });
+
+    await deliver(
+      `Demo request — ${booking.business}${
+        booking.restaurantType ? ` (${booking.restaurantType})` : ""
+      }`,
+      [
+        `Name:     ${booking.name}`,
+        `Email:    ${booking.email}`,
+        `Phone:    ${booking.phone}`,
+        `Business: ${booking.business}`,
+        `Type:     ${booking.restaurantType || "—"}`,
+        `Outlets:  ${booking.outlets}`,
+        "",
+        booking.message || "(no note)",
+      ].join("\n"),
+    );
+
+    return NextResponse.json({
+      ok: true,
+      message:
+        "Our team will contact you soon! Thanks for choosing ServeSync by Plutox.",
+    });
+  }
+
+  /*
+    A demo payload that failed validation must not fall through to the enquiry
+    schema below — that would report the wrong field errors entirely. The intent
+    literal is what separates them, so key off it.
+  */
+  if (
+    typeof json === "object" &&
+    json !== null &&
+    (json as { intent?: unknown }).intent === "demo"
+  ) {
+    return NextResponse.json(
+      {
+        ok: false,
+        error: "Please check the highlighted fields.",
+        issues: demo.error.flatten().fieldErrors,
+      },
+      { status: 422 },
+    );
   }
 
   /* ---------------- Full enquiry ---------------- */

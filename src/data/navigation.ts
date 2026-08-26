@@ -1,7 +1,7 @@
 import {
   Boxes,
-  Download,
   Briefcase,
+  CalendarCheck,
   Building2,
   Home,
   Mail,
@@ -78,7 +78,6 @@ export const routes: Route[] = [
       { label: "StaySync Hotel ERP", href: "/products#staysync", hint: "Hospitality" },
       { label: "Fleet Flow", href: "/products#fleet-flow", hint: "Transport" },
       { label: "All modules", href: "/products", hint: "Eleven shared modules" },
-      { label: "Downloads", href: "/downloads", hint: "Installers & Android apps" },
     ],
     icon: Boxes,
   },
@@ -127,11 +126,11 @@ export const routes: Route[] = [
  */
 export const secondaryRoutes: Route[] = [
   {
-    label: "Downloads",
-    href: "/downloads",
-    short: "Downloads",
-    summary: "Windows installers and Android apps, with a checksum for each",
-    icon: Download,
+    label: "Book a Free Demo",
+    href: "/demo",
+    short: "Demo",
+    summary: "See your edition running — 30 minutes, free, nothing to install",
+    icon: CalendarCheck,
   },
   {
     label: "Skills",

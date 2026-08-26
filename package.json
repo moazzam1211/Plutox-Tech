@@ -13,8 +13,7 @@
     "product-logos": "node scripts/generate-product-logos.mjs",
     "portrait": "node scripts/optimize-portrait.mjs",
     "product-screens": "node scripts/import-product-screens.mjs",
-    "brand-webp": "node scripts/brand-to-webp.mjs",
-    "downloads": "node scripts/import-downloads.mjs"
+    "brand-webp": "node scripts/brand-to-webp.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.7.1",
