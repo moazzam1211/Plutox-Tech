@@ -650,6 +650,21 @@ export const products: Product[] = [
       are not in any tier list at all — so they come with the edition rather than
       with a higher tier. A shared chart would have offered a kitchen display to a
       pharmacist and left the controlled-drug register unmentioned.
+    /*
+      Three charts, and three genuinely different package structures — read out
+      of each vertical's own code, not assumed from the restaurant's:
+
+        restaurant  `PLAN_PRICING` in the unified POS routes.js
+                    → three tiers, 5,000 / 10,000 / 15,000, gated by module id
+        mart        `SUB_PLANS()` in mart-pos-full/src/store.js
+                    → two tiers, Basic 7,000 / Advanced 15,000, with their own
+                      module and feature lists
+        pharmacy    the subscription seed in pharmacy-pos-full/src/store.js
+                    → one plan, 5,000, no module gating at all
+
+      An earlier version of this page gave all three the restaurant's table. It
+      was tidy and it was wrong: a mart client pays 7,000 to start, not 5,000, and
+      a pharmacy was never sold tiers to choose between.
     */
     pricing: [
       {
@@ -678,7 +693,7 @@ export const products: Product[] = [
             featured: true,
             includes: [
               "Everything in Basic",
-              "Stock, Demand planning",
+              "Stock & demand planning",
               "Staff, Vendors, Promos, Expenses",
               "Delivery & Reports",
             ],
@@ -701,43 +716,19 @@ export const products: Product[] = [
         edition: "Pharmacy",
         editionSummary:
           "Batch stock, prescriptions and the controlled register — no floor plan, no kitchen.",
-        note: "Per branch, billed monthly. Dispensing, prescriptions, the controlled register and expiry tracking come with the edition at every tier, not with a higher one.",
+        note: "One plan, billed monthly on a 30-day cycle — the pharmacy build was never sold as tiers, so there is nothing to gate and nothing withheld. The POS locks if the fee lapses, and the owner can pay and renew from inside the app.",
         plans: [
           {
-            name: "Basic",
+            name: "Monthly",
             price: "PKR 5,000",
             period: "/ month",
-            summary: "Core counter for a single pharmacy",
-            includes: [
-              "Sell, Orders & Invoices",
-              "Prescriptions, Doctors & Controlled register",
-              "Batch stock with FEFO & Expiry watch",
-              "Patients, Medicines, Till & shift, Setup",
-            ],
-          },
-          {
-            name: "Standard",
-            price: "PKR 10,000",
-            period: "/ month",
-            summary: "Everything to run and grow one pharmacy",
+            summary: "The whole product — no module gating",
             featured: true,
             includes: [
-              "Everything in Basic",
-              "Stock, Demand planning",
-              "Staff, Suppliers, Promos, Expenses",
-              "Reports & analytics",
-            ],
-          },
-          {
-            name: "Premium",
-            price: "PKR 15,000",
-            period: "/ month",
-            summary: "The full suite — every module, many branches",
-            includes: [
-              "Everything in Standard",
-              "Branches command centre & Warehouse",
-              "HR & payroll, Accounts",
-              "PRA / FBR fiscal invoicing",
+              "Batch stock with FEFO dispensing & expiry watch",
+              "Prescriptions, doctors & the controlled register",
+              "Purchasing, suppliers, patients & customers",
+              "Reports with demand forecasting, PRA / FBR fiscal",
             ],
           },
         ],
@@ -746,43 +737,38 @@ export const products: Product[] = [
         edition: "Mart & Retail",
         editionSummary:
           "Three ways to scan, promotions and gift cards — no floor plan, no kitchen.",
-        note: "Per branch, billed monthly. Promotions, gift cards and barcode labels come with the edition at every tier, not with a higher one.",
+        note: "Two packages, billed monthly. Advanced-only modules are locked on Basic behind an upgrade prompt, and only the vendor's super admin can switch a client's plan — the owner sees both read-only.",
         plans: [
           {
             name: "Basic",
-            price: "PKR 5,000",
+            price: "Rs 7,000",
             period: "/ month",
-            summary: "Core checkout for a single store",
+            summary: "Sell, stock and report from one terminal",
             includes: [
-              "Sell with USB, camera or phone scanning",
-              "Promotions, Gift cards & Barcode labels",
-              "Orders, Invoices & Customers",
-              "Products, Till & shift, Setup",
+              "Point of sale & barcode billing",
+              "Inventory — batches & expiry",
+              "Customers & loyalty",
+              "Thermal receipts, invoices & daily reports",
+              "Cash till & shifts, staff",
+              "Single terminal",
             ],
           },
           {
-            name: "Standard",
-            price: "PKR 10,000",
+            name: "Advanced",
+            price: "Rs 15,000",
             period: "/ month",
-            summary: "Everything to run and grow one store",
+            summary: "The full retail suite",
             featured: true,
             includes: [
               "Everything in Basic",
-              "Batch stock with FEFO, Demand planning",
-              "Staff, Suppliers, Promos, Expenses",
-              "Reports & analytics",
-            ],
-          },
-          {
-            name: "Premium",
-            price: "PKR 15,000",
-            period: "/ month",
-            summary: "The full suite — every module, many branches",
-            includes: [
-              "Everything in Standard",
-              "Branches command centre & Warehouse",
-              "HR & payroll, Accounts",
-              "PRA / FBR fiscal invoicing",
+              "Warehouse & stock transfers",
+              "Barcode generator for weighed items",
+              "Purchases & suppliers",
+              "Promotions, gift cards & coupons",
+              "PRA / FBR fiscal integration",
+              "A4 invoices & salary slips",
+              "Phone scanner & multi-terminal",
+              "Demand forecasting & priority support",
             ],
           },
         ],
