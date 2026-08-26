@@ -122,7 +122,7 @@ export default async function ProductPage({
               </span>
               {product.badge ? (
                 <span
-                  className="rounded border px-2 py-0.5 font-mono text-[0.625rem]"
+                  className="rounded border px-2 py-0.5 font-mono text-[0.6875rem]"
                   style={{
                     color: "var(--product-ink)",
                     borderColor: "var(--product-line)",
@@ -133,7 +133,7 @@ export default async function ProductPage({
               ) : null}
               {product.status === "in-development" ? (
                 <span
-                  className="rounded border px-2 py-0.5 font-mono text-[0.625rem]"
+                  className="rounded border px-2 py-0.5 font-mono text-[0.6875rem]"
                   style={{
                     color: "var(--product-ink)",
                     borderColor: "var(--product-line)",
@@ -216,7 +216,7 @@ export default async function ProductPage({
                     >
                       {spec.value}
                     </dd>
-                    <dt className="mt-1.5 text-[0.625rem] leading-tight text-muted-foreground">
+                    <dt className="mt-1.5 text-[0.6875rem] leading-tight text-muted-foreground">
                       {spec.label}
                     </dt>
                   </div>
@@ -228,7 +228,7 @@ export default async function ProductPage({
                   >
                     {capabilities}
                   </dd>
-                  <dt className="mt-1.5 text-[0.625rem] leading-tight text-muted-foreground">
+                  <dt className="mt-1.5 text-[0.6875rem] leading-tight text-muted-foreground">
                     Capabilities
                   </dt>
                 </div>
@@ -327,7 +327,7 @@ export default async function ProductPage({
                   }}
                 >
                   {group.title}
-                  <span className="font-mono text-[0.625rem] opacity-60">
+                  <span className="font-mono text-[0.6875rem] opacity-60">
                     {group.items.length}
                   </span>
                 </h3>
@@ -384,7 +384,7 @@ export default async function ProductPage({
                   }}
                 >
                   <div className="flex items-center justify-between gap-2">
-                    <span className="font-mono text-[0.625rem] text-muted-foreground">
+                    <span className="font-mono text-[0.6875rem] text-muted-foreground">
                       {phase.label}
                     </span>
                     {phase.state === "done" ? (
@@ -395,7 +395,7 @@ export default async function ProductPage({
                       />
                     ) : phase.state === "next" ? (
                       <span
-                        className="rounded border px-1.5 py-0.5 font-mono text-[0.5625rem]"
+                        className="rounded border px-1.5 py-0.5 font-mono text-[0.6875rem]"
                         style={{
                           color: "var(--product-ink)",
                           borderColor: "var(--product-line)",
@@ -404,7 +404,7 @@ export default async function ProductPage({
                         in progress
                       </span>
                     ) : (
-                      <span className="font-mono text-[0.5625rem] text-muted-foreground/60">
+                      <span className="font-mono text-[0.6875rem] text-muted-foreground/60">
                         planned
                       </span>
                     )}
@@ -439,7 +439,7 @@ export default async function ProductPage({
                   {block.items.map((item) => (
                     <li
                       key={item}
-                      className="rounded border border-border px-2 py-0.5 font-mono text-[0.625rem] text-muted-foreground"
+                      className="rounded border border-border px-2 py-0.5 font-mono text-[0.6875rem] text-muted-foreground"
                     >
                       {item}
                     </li>

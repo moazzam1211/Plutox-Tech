@@ -117,7 +117,7 @@ export default async function ModulePage({
                 <li key={product.name}>
                   <Link
                     href={`/projects#${product.slug}`}
-                    className="hover-lift inline-flex rounded border border-border px-2 py-1 font-mono text-[0.625rem] text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
+                    className="hover-lift inline-flex rounded border border-border px-2 py-1 font-mono text-[0.6875rem] text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
                   >
                     {product.name}
                   </Link>

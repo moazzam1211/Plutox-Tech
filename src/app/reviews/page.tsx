@@ -117,7 +117,7 @@ export default function ReviewsPage() {
                       {item.role} · {item.company}
                     </span>
                   </div>
-                  <span className="ml-auto grid size-7 shrink-0 place-items-center rounded border border-border font-mono text-[0.5625rem] text-muted-foreground">
+                  <span className="ml-auto grid size-7 shrink-0 place-items-center rounded border border-border font-mono text-[0.6875rem] text-muted-foreground">
                     {item.companyMark}
                   </span>
                 </footer>

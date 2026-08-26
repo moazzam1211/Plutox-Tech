@@ -143,7 +143,7 @@ export default function IntroPage() {
                     {product.status === "in-development" ? (
                       <>
                         {" "}
-                        <span className="rounded border border-border px-1.5 py-0.5 align-middle font-mono text-[0.5625rem] font-normal text-muted-foreground">
+                        <span className="rounded border border-border px-1.5 py-0.5 align-middle font-mono text-[0.6875rem] font-normal text-muted-foreground">
                           in development
                         </span>
                       </>

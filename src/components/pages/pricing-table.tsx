@@ -81,7 +81,7 @@ export function PricingTable({
                 </p>
                 {plan.featured ? (
                   <span
-                    className="rounded border px-1.5 py-0.5 font-mono text-[0.5625rem]"
+                    className="rounded border px-1.5 py-0.5 font-mono text-[0.6875rem]"
                     style={{ color: ink, borderColor: `${brandColor}55` }}
                   >
                     most taken

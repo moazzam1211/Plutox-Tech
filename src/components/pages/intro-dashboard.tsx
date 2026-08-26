@@ -193,7 +193,7 @@ export function IntroDashboard() {
                 className="size-1.5 shrink-0 rounded-full"
                 style={{ backgroundColor: active.brandColor }}
               />
-              <span className="truncate font-mono text-[0.5625rem] text-muted-foreground">
+              <span className="truncate font-mono text-[0.6875rem] text-muted-foreground">
                 {active.product}
                 <span className="opacity-50"> · {active.path}</span>
               </span>
@@ -312,7 +312,7 @@ export function IntroDashboard() {
           <div className="flex items-center justify-between gap-3 border-t border-border bg-background px-3 py-2.5">
             <div className="min-w-0">
               <p className="truncate text-xs font-semibold">{active.screen}</p>
-              <p className="truncate text-[0.625rem] text-muted-foreground">
+              <p className="truncate text-[0.6875rem] text-muted-foreground">
                 {active.product}
               </p>
             </div>
@@ -320,7 +320,7 @@ export function IntroDashboard() {
             {/* No NN/NN counter: the dots in the chrome already show position,
                 and the site prints no index numbers anywhere else. */}
             <p
-              className="shrink-0 font-mono text-[0.625rem]"
+              className="shrink-0 font-mono text-[0.6875rem]"
               style={{ color: active.brandColor }}
             >
               {active.path}
@@ -334,7 +334,7 @@ export function IntroDashboard() {
         <p className="font-mono text-sm leading-none font-medium">
           {active.figures[0].value}
         </p>
-        <p className="mt-1 text-[0.625rem] text-muted-foreground">
+        <p className="mt-1 text-[0.6875rem] text-muted-foreground">
           {active.figures[0].label}
         </p>
       </div>
@@ -346,7 +346,7 @@ export function IntroDashboard() {
         >
           {active.figures[1].value}
         </p>
-        <p className="mt-1 text-[0.625rem] text-muted-foreground">
+        <p className="mt-1 text-[0.6875rem] text-muted-foreground">
           {active.figures[1].label}
         </p>
       </div>

@@ -98,7 +98,7 @@ export default function SkillsPage() {
                     <h3 className="font-display text-sm font-semibold tracking-tight">
                       {group.label}
                     </h3>
-                    <span className="ml-auto font-mono text-[0.625rem] whitespace-nowrap text-muted-foreground">
+                    <span className="ml-auto font-mono text-[0.6875rem] whitespace-nowrap text-muted-foreground">
                       {group.skills.length} skills
                     </span>
                   </div>
@@ -139,7 +139,7 @@ export default function SkillsPage() {
                   <div className="flex items-center gap-4">
                     <p className="eyebrow text-muted-foreground">{category}</p>
                     <span className="h-px flex-1 bg-border" />
-                    <span className="font-mono text-[0.625rem] whitespace-nowrap text-muted-foreground/70">
+                    <span className="font-mono text-[0.6875rem] whitespace-nowrap text-muted-foreground/70">
                       {items.length} tools
                     </span>
                   </div>
@@ -151,7 +151,7 @@ export default function SkillsPage() {
                         className="group/tech flex items-center gap-2 rounded-md border border-border px-3 py-2 transition-colors hover:border-primary/40"
                       >
                         <span
-                          className="grid size-6 shrink-0 place-items-center rounded font-mono text-[0.5625rem] font-medium"
+                          className="grid size-6 shrink-0 place-items-center rounded font-mono text-[0.6875rem] font-medium"
                           style={{
                             color: tech.color,
                             backgroundColor: `${tech.color}1f`,

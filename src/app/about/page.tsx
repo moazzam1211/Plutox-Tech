@@ -166,7 +166,7 @@ export default function AboutPage() {
                     {step.deliverables.map((item) => (
                       <li
                         key={item}
-                        className="rounded border border-border px-1.5 py-0.5 font-mono text-[0.5625rem] text-muted-foreground"
+                        className="rounded border border-border px-1.5 py-0.5 font-mono text-[0.6875rem] text-muted-foreground"
                       >
                         {item}
                       </li>

@@ -235,6 +235,26 @@
     scrollbar-gutter: stable;
   }
 
+  /*
+    Scale the whole design down a notch on wide screens.
+
+    The type ramp, spacing, radii and container widths are all in rem, so moving
+    the root size moves everything together — the alternative, `zoom` or a
+    `transform: scale()` on the body, would break the fixed navbar and every
+    sticky offset.
+
+    Only from `md` up, and only to 93.75% (15px). Below that the layout is
+    already single-column and its 0.8125rem small print would drop under 12px,
+    which is where it stops being readable rather than merely compact. Because
+    this is a percentage rather than a pixel value, a reader who raises their
+    browser's default font size still gets a proportionally larger site.
+  */
+  @media (min-width: 48rem) {
+    html {
+      font-size: 93.75%;
+    }
+  }
+
   body {
     background-color: var(--background);
     color: var(--foreground);

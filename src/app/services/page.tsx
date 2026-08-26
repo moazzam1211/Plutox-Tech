@@ -174,7 +174,7 @@ export default function ServicesPage() {
                           {phase.deliverables.map((item) => (
                             <li
                               key={item}
-                              className="rounded border border-border px-2 py-0.5 font-mono text-[0.5625rem] text-muted-foreground"
+                              className="rounded border border-border px-2 py-0.5 font-mono text-[0.6875rem] text-muted-foreground"
                             >
                               {item}
                             </li>
@@ -275,7 +275,7 @@ export default function ServicesPage() {
                     The one place on the page that says what we do *not* do.
                     Rendered as data rather than a footnote so it can't be lost.
                   */}
-                  <span className="justify-self-start rounded border border-border px-2 py-0.5 font-mono text-[0.5625rem] whitespace-nowrap text-muted-foreground sm:justify-self-end">
+                  <span className="justify-self-start rounded border border-border px-2 py-0.5 font-mono text-[0.6875rem] whitespace-nowrap text-muted-foreground sm:justify-self-end">
                     {stage.owner}
                   </span>
                 </div>
