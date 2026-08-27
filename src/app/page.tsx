@@ -59,7 +59,7 @@ export default function IntroPage() {
           className="bg-dots mask-fade-b pointer-events-none absolute inset-0 -z-10 opacity-80"
         />
 
-        <div className="grid items-center gap-14 px-6 py-20 sm:px-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.92fr)] lg:gap-16 lg:px-14 lg:py-28">
+        <div className="grid items-center gap-10 px-6 py-12 sm:gap-14 sm:px-10 sm:py-20 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.92fr)] lg:gap-16 lg:px-14 lg:py-28">
           {/* ---- Copy column ---- */}
           <div>
           <Reveal preset="fadeUp">
@@ -74,7 +74,7 @@ export default function IntroPage() {
           </Reveal>
 
           <Reveal preset="fadeUp" delay={0.06}>
-            <h1 className="mt-10 max-w-4xl text-display-xl font-semibold">
+            <h1 className="mt-6 max-w-4xl text-display-xl font-semibold sm:mt-10">
               Software that runs{" "}
               {/* Explicit space before the break so `h1.textContent` reads as a
                   sentence for crawlers and copy-paste, not "runsyour". */}
@@ -84,7 +84,7 @@ export default function IntroPage() {
           </Reveal>
 
           <Reveal preset="fadeUp" delay={0.12}>
-            <p className="mt-8 max-w-xl text-base leading-relaxed text-muted-foreground">
+            <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground sm:mt-8">
               We design and build POS, ERP, hospitality, logistics, AI and custom
               business platforms — from first idea to daily operations. Five of
               them are ours, built here in Lahore and running real businesses.
@@ -92,7 +92,7 @@ export default function IntroPage() {
           </Reveal>
 
           <Reveal preset="fadeUp" delay={0.18}>
-            <div className="mt-10 flex flex-wrap items-center gap-3">
+            <div className="mt-7 flex flex-wrap items-center gap-3 sm:mt-10">
               <Button asChild variant="accent" size="lg">
                 <Link href="/products">
                   Explore our products
@@ -107,7 +107,7 @@ export default function IntroPage() {
 
           <Reveal preset="fadeUp" delay={0.24}>
             <StatStrip
-              className="mt-14 border-t pt-4"
+              className="mt-9 border-t pt-4 sm:mt-14"
               items={[
                 { value: String(products.length), label: "Platforms built" },
                 { value: String(moduleTotal), label: "Live modules" },

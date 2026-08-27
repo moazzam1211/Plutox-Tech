@@ -122,7 +122,12 @@ export function IntroDashboardAnimated() {
           </div>
 
           {/* ---- Column chart + donut ---- */}
-          <div className="grid gap-2.5 sm:grid-cols-[minmax(0,1fr)_auto]">
+          {/*
+            Side by side at every width, not just `sm` and up. Stacked, this row
+            added ~90px and left the whole mock rendering portrait — a shape no
+            real dashboard has, which undercut the one thing the visual is for.
+          */}
+          <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-2.5">
             <div className="rounded-lg border border-border bg-background/60 p-3">
               <span className="block h-1.5 w-10 rounded-full bg-muted-foreground/25" />
               <div className="mt-3 flex h-16 items-end gap-1.5" aria-hidden>
