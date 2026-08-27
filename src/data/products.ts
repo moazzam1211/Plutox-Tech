@@ -1725,7 +1725,8 @@ export const products: Product[] = [
     slug: "onvee",
     name: "ONVEE",
     category: "Marketplace & Logistics",
-    tagline: "Verified people. Connected journeys. Delivered safely.",
+    // The product's own `BRAND.tagline`, not the README's headline line.
+    tagline: "Your parcel. Their journey.",
     description:
       "An international peer-to-peer parcel and luggage platform. Senders post what needs to move; identity-verified travellers already flying that route make offers. The platform holds the money, authenticates the handover with a QR code, a one-time code and a weight check, tracks the journey, verifies the recipient and only then releases payment — and settles the disputes when something goes wrong. It is a trust platform with a logistics workflow underneath, not a listings site: 19 service modules behind a single API, with a web product, an operations console and an Android app all speaking to it.",
     image: "/images/products/onvee-logo.svg",

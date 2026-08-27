@@ -1,7 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 240" width="500" height="240" role="img" aria-label="ONVEE">
-  <text x="250" y="150" fill="#E5B02C"
-        font-family="'Space Grotesk','Inter',system-ui,sans-serif"
-        font-size="120" font-weight="700"
-        letter-spacing="8" text-anchor="middle">ONVEE</text>
-  <rect x="48" y="184" width="404" height="4" rx="2" fill="#E5B02C" opacity="0.35"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="21.5 21.5 546.2 117" width="546.2" height="117" role="img" aria-label="ONVEE">
+  <g transform="translate(0 0) scale(5)">
+    <path d="M21.7 24.2A10 10 0 1 1 25.4 12.6" fill="none" stroke="#F5C542" stroke-width="3.4" stroke-linecap="round"/>
+    <circle cx="25.4" cy="12.6" r="3.6" fill="#F5C542"/>
+  </g>
+  <text x="205.7" y="112.3" textLength="362.0" lengthAdjust="spacing"
+        fill="#111111" font-family="'Space Grotesk','Inter',system-ui,sans-serif"
+        font-size="89.6" font-weight="700">ONVEE</text>
 </svg>
