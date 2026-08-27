@@ -12,6 +12,12 @@ import {
 import { Reveal, RevealGroup, RevealItem } from "@/components/shared/reveal";
 import { Button } from "@/components/ui/button";
 import { routes, secondaryRoutes } from "@/data/navigation";
+import {
+  buildCategories,
+  differentiators,
+  industries,
+  technologies,
+} from "@/data/positioning";
 import { products } from "@/data/products";
 import { siteConfig } from "@/lib/site";
 import { cn } from "@/lib/utils";
@@ -24,6 +30,20 @@ import { cn } from "@/lib/utils";
  * that used to be crammed into an eighteen-section landing page now has its own
  * page, which is the whole point of the restructure.
  */
+/*
+  Counted from the product data rather than typed. The strip used to say "3
+  platforms / 93 modules" and both went stale the moment a product was added,
+  which is exactly the kind of number a visitor checks against the page below it.
+*/
+const moduleTotal = products.reduce((total, product) => {
+  const spec = product.specs.find((entry) => /module/i.test(entry.label));
+  return total + (spec ? Number.parseInt(spec.value.replace(/[^0-9]/g, ""), 10) || 0 : 0);
+}, 0);
+const screenTotal = products.reduce(
+  (total, product) => total + (product.screens?.length ?? 0),
+  0,
+);
+
 export default function IntroPage() {
   return (
     <>
@@ -55,31 +75,32 @@ export default function IntroPage() {
 
           <Reveal preset="fadeUp" delay={0.06}>
             <h1 className="mt-10 max-w-4xl text-display-xl font-semibold">
-              We build the software{" "}
+              Software that runs{" "}
               {/* Explicit space before the break so `h1.textContent` reads as a
-                  sentence for crawlers and copy-paste, not "softwarebusinesses". */}
+                  sentence for crawlers and copy-paste, not "runsyour". */}
               <br />
-              businesses actually run on.
+              your business.
             </h1>
           </Reveal>
 
           <Reveal preset="fadeUp" delay={0.12}>
             <p className="mt-8 max-w-xl text-base leading-relaxed text-muted-foreground">
-              A founder-led software house in Lahore. Five platforms built,
-              deployed and running real businesses. {siteConfig.tagline}
+              We design and build POS, ERP, hospitality, logistics, AI and custom
+              business platforms — from first idea to daily operations. Five of
+              them are ours, built here in Lahore and running real businesses.
             </p>
           </Reveal>
 
           <Reveal preset="fadeUp" delay={0.18}>
             <div className="mt-10 flex flex-wrap items-center gap-3">
               <Button asChild variant="accent" size="lg">
-                <Link href="/projects">
-                  See the platforms
+                <Link href="/products">
+                  Explore our products
                   <ArrowRight />
                 </Link>
               </Button>
               <Button asChild variant="outline" size="lg">
-                <Link href="/contact">Start a conversation</Link>
+                <Link href="/demo">Book a free consultation</Link>
               </Button>
             </div>
           </Reveal>
@@ -88,10 +109,10 @@ export default function IntroPage() {
             <StatStrip
               className="mt-14 border-t pt-4"
               items={[
-                { value: "3", label: "Platforms shipped" },
-                { value: "93", label: "Live modules" },
-                { value: "2022", label: "Founded" },
-                { value: "24/7", label: "Support" },
+                { value: String(products.length), label: "Platforms built" },
+                { value: String(moduleTotal), label: "Live modules" },
+                { value: String(screenTotal), label: "Real screenshots" },
+                { value: siteConfig.founded, label: "Founded" },
               ]}
             />
           </Reveal>
@@ -169,6 +190,159 @@ export default function IntroPage() {
         </RevealGroup>
       </Block>
 
+      {/* ---------------- Industries ---------------- */}
+      <Block
+        label="Who it is for"
+        title="Six trades, one company"
+        description="Every card names the products that serve it, because an industry list nobody has shipped into is decoration."
+      >
+        <RevealGroup stagger={0.06} className="grid gap-3 sm:grid-cols-2">
+          {industries.map(({ name, icon: Icon, problem, answer, served }) => (
+            <RevealItem key={name}>
+              <Panel className="group/ind flex h-full flex-col p-5">
+                <div className="flex items-center gap-3">
+                  <span className="grid size-9 shrink-0 place-items-center rounded-md border border-border text-primary transition-colors duration-300 group-hover/ind:border-primary/40">
+                    <Icon className="size-4" />
+                  </span>
+                  <h3 className="font-display text-sm font-semibold tracking-tight">
+                    {name}
+                  </h3>
+                </div>
+
+                <p className="mt-4 text-[0.8125rem] leading-relaxed text-muted-foreground">
+                  {problem}
+                </p>
+                <p className="mt-2.5 border-l-2 border-primary/30 pl-3 text-[0.8125rem] leading-relaxed">
+                  {answer}
+                </p>
+
+                <div className="mt-auto flex flex-wrap gap-1.5 pt-4">
+                  {served.map((slug) => {
+                    const product = products.find((p) => p.slug === slug);
+                    if (!product) return null;
+                    return (
+                      <Link
+                        key={slug}
+                        href={`/projects/${slug}`}
+                        className="hover-lift inline-flex rounded border border-border px-2 py-1 font-mono text-[0.6875rem] text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
+                      >
+                        {product.name}
+                      </Link>
+                    );
+                  })}
+                </div>
+              </Panel>
+            </RevealItem>
+          ))}
+        </RevealGroup>
+      </Block>
+
+      {/* ---------------- What we build ---------------- */}
+      <Block
+        label="What we build"
+        title="Four kinds of work"
+        description="Business software first. The rest exists because a platform needs a phone app, an integration and somewhere to run."
+      >
+        <RevealGroup stagger={0.06} className="grid gap-3 sm:grid-cols-2">
+          {buildCategories.map(({ name, blurb, items }) => (
+            <RevealItem key={name}>
+              <Panel className="flex h-full flex-col p-5">
+                <h3 className="font-display text-sm font-semibold tracking-tight">
+                  {name}
+                </h3>
+                <p className="mt-2 text-[0.8125rem] leading-relaxed text-muted-foreground">
+                  {blurb}
+                </p>
+                <ul className="mt-4 grid gap-1.5">
+                  {items.map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-start gap-2 text-[0.8125rem] text-muted-foreground"
+                    >
+                      <span
+                        aria-hidden
+                        className="mt-1.5 size-1 shrink-0 rounded-full bg-primary/60"
+                      />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </Panel>
+            </RevealItem>
+          ))}
+        </RevealGroup>
+
+        <Reveal preset="fadeUp" delay={0.1}>
+          <div className="mt-6">
+            <Button asChild variant="outline" size="md">
+              <Link href="/services">
+                Consultancy and delivery
+                <ArrowRight />
+              </Link>
+            </Button>
+          </div>
+        </Reveal>
+      </Block>
+
+      {/* ---------------- Why Plutox ---------------- */}
+      <Block
+        label="Why us"
+        title="Not just developers"
+        description="Your technology partner — which mostly means we are still reachable after the invoice."
+      >
+        <RevealGroup stagger={0.06} className="flex flex-col">
+          {differentiators.map(({ title, detail, icon: Icon }) => (
+            <RevealItem key={title}>
+              <div className="group/why grid gap-3 border-b border-border py-5 transition-colors first:border-t hover:bg-muted/30 sm:grid-cols-[2.5rem_minmax(0,1fr)] sm:gap-5">
+                <span className="grid size-9 shrink-0 place-items-center rounded-md border border-border text-primary transition-[transform,border-color] duration-300 group-hover/why:-translate-y-0.5 group-hover/why:border-primary/40">
+                  <Icon className="size-4" />
+                </span>
+                <div className="min-w-0">
+                  <h3 className="text-sm font-semibold">{title}</h3>
+                  <p className="mt-1.5 max-w-2xl text-[0.8125rem] leading-relaxed text-muted-foreground">
+                    {detail}
+                  </p>
+                </div>
+              </div>
+            </RevealItem>
+          ))}
+        </RevealGroup>
+      </Block>
+
+      {/* ---------------- Technology ---------------- */}
+      <Block
+        label="Technology"
+        title="What it runs on"
+        description="Counted from the products themselves — the number beside each is how many of the five are built with it. Nothing on this list is here for decoration."
+      >
+        <RevealGroup stagger={0.02} className="flex flex-wrap gap-2">
+          {technologies.map(({ name, usedBy }) => (
+            <RevealItem key={name}>
+              <span
+                title={`Used in ${usedBy.join(", ")}`}
+                className="hover-lift inline-flex items-center gap-2 rounded-md border border-border px-3 py-2 text-[0.8125rem] transition-colors duration-300 hover:border-primary/40"
+              >
+                {name}
+                <span className="font-mono text-[0.6875rem] text-muted-foreground">
+                  {usedBy.length}
+                </span>
+              </span>
+            </RevealItem>
+          ))}
+        </RevealGroup>
+
+        <Reveal preset="fadeUp" delay={0.1}>
+          <div className="mt-6">
+            <Button asChild variant="outline" size="md">
+              <Link href="/skills">
+                The stack in detail
+                <ArrowRight />
+              </Link>
+            </Button>
+          </div>
+        </Reveal>
+      </Block>
+
       {/* ---------------- Site index ---------------- */}
       <Block
         label="This site"
@@ -199,6 +373,37 @@ export default function IntroPage() {
           ))}
         </RevealGroup>
       </Block>
+
+      {/* ---------------- Closing CTA ---------------- */}
+      <section className="relative isolate overflow-hidden border-b border-border px-6 py-16 sm:px-10 lg:px-14 lg:py-20">
+        <div
+          aria-hidden
+          className="bg-dots mask-fade-t pointer-events-none absolute inset-0 -z-10 opacity-70"
+        />
+        <Reveal preset="fadeUp">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="font-display text-display-sm font-semibold tracking-tight">
+              Have a business problem that software can solve?
+            </h2>
+            <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-muted-foreground">
+              Tell us what the day looks like now and where it breaks. Thirty
+              minutes, free, and you will get an honest answer about whether we
+              are the right people for it.
+            </p>
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+              <Button asChild variant="accent" size="lg">
+                <Link href="/demo">
+                  Book a free consultation
+                  <ArrowRight />
+                </Link>
+              </Button>
+              <Button asChild variant="outline" size="lg">
+                <Link href="/projects">Explore our work</Link>
+              </Button>
+            </div>
+          </div>
+        </Reveal>
+      </section>
 
       <Pager current="/" />
     </>

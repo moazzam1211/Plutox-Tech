@@ -7,7 +7,7 @@
  * name, set in the same display face the site uses, in its own accent colour.
  * It reads as a deliberate typographic lock-up rather than a missing asset, and
  * it is replaced the moment real art exists: drop a PNG into
- * `public/images/products/_src` and add it to `generate-product-logos.mjs`.
+ * `assets/product-logos` and add it to `generate-product-logos.mjs`.
  *
  * SVG rather than raster: a few hundred bytes, crisp at any density, and the
  * accent colour stays editable.

@@ -116,17 +116,22 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             <FloatingNav />
 
             {/*
-              The floating navbar is `fixed`, so it takes no layout space —
-              hence the explicit top padding. Content is capped at 90rem and
-              centred: with no side rail, an uncapped layout would run headings
-              to 1900px on a wide monitor.
+              The navbar is `fixed`, so it takes no layout space — hence the
+              explicit top padding, which matches the bar's own height (h-16,
+              condensing to h-14 on scroll) rather than the taller clearance the
+              old inset pill needed.
+
+              The shell is full-bleed: no 90rem cap, no centring. Each section
+              owns its own horizontal padding, so content still keeps its
+              distance from the glass while the rules, borders and background
+              patterns run the whole width.
 
               `min-w-0` matters — without it a wide child (a screenshot
               gallery, a long row) can stretch the grid and reintroduce
               horizontal page scroll.
             */}
-            <div className="min-w-0 pt-20 sm:pt-24">
-              <main id="main" className="relative mx-auto max-w-[90rem]">
+            <div className="min-w-0 pt-(--nav-h)">
+              <main id="main" className="relative">
                 {/*
                   Organisation / WebSite / ProfessionalService structured data.
                   Rendered inside <main>: in <head> or as the first child of

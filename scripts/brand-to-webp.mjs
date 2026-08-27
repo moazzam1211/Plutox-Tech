@@ -7,7 +7,8 @@
  * wordmarks are flat colour on transparency, where lossless usually beats lossy
  * anyway, so there is nothing to trade.
  *
- * Some PNGs stay: `plutox-mark.png` feeds `generate-icons.mjs`, `_src/*` feed
+ * Some PNGs stay: `plutox-mark.png` feeds `generate-icons.mjs`, and the logo
+ * sources now live outside `public/` in `assets/product-logos`, which feed
  * `generate-product-logos.mjs`, and `src/app/icon.png` / `apple-icon.png` are
  * Next's file-based icons, which want PNG.
  *

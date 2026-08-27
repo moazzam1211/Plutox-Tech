@@ -233,6 +233,16 @@
   html {
     -webkit-tap-highlight-color: transparent;
     scrollbar-gutter: stable;
+
+    /*
+      The fixed navbar's height, in one place. The bar sets its own height from
+      this and the content shell pads itself by the same value, so they cannot
+      drift — which they did when both were spelled "16" in different units.
+      Absolute px on purpose: this is a chrome measurement, not part of the type
+      scale, so it should not shrink when the root font size does.
+    */
+    --nav-h: 64px;
+    --nav-h-scrolled: 56px;
   }
 
   /*
@@ -467,6 +477,16 @@
 @utility mask-fade-b {
   -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent);
   mask-image: linear-gradient(to bottom, #000 55%, transparent);
+}
+
+/**
+ * The same fade from the other end, for a pattern that sits under a closing
+ * section: it dissolves upward into the content above instead of starting at a
+ * hard horizontal edge.
+ */
+@utility mask-fade-t {
+  -webkit-mask-image: linear-gradient(to top, #000 55%, transparent);
+  mask-image: linear-gradient(to top, #000 55%, transparent);
 }
 
 /** Consistent vertical rhythm for every top-level <section>. */

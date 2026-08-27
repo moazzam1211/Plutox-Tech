@@ -16,11 +16,12 @@ import { siteConfig } from "@/lib/site";
 import { cn, toWhatsAppHref } from "@/lib/utils";
 
 /**
- * Floating navigation bar.
+ * Primary navigation bar.
  *
- * Detached from the viewport edges rather than pinned flush to the top: the
- * inset plus a border makes it read as an object over the page, which suits the
- * flat, panel-based layout better than a full-width bar would.
+ * Pinned flush to the top and running the full width, with a bottom rule and a
+ * blurred backdrop. It was an inset floating pill until the shell went
+ * full-bleed; a rounded bar with no margin around it reads as a mistake rather
+ * than a decision, so it became a bar.
  *
  * Links show their names only. The site used to print a two-digit index here and
  * on every page header and pager; it is gone everywhere, because the number never
@@ -79,15 +80,15 @@ export function FloatingNav() {
         Skip to main content
       </a>
 
-      <div className="pointer-events-none fixed inset-x-0 top-0 z-70 flex justify-center px-3 pt-3 sm:px-5 sm:pt-5">
+      <div className="pointer-events-none fixed inset-x-0 top-0 z-70 flex justify-center">
         <nav
           aria-label="Primary"
           className={cn(
-            "pointer-events-auto flex w-full max-w-6xl items-center gap-3 rounded-xl border border-border px-3 transition-all duration-300 ease-out",
+            "pointer-events-auto flex w-full items-center gap-3 border-b border-border px-4 transition-all duration-300 ease-out sm:px-6 lg:px-10",
             // Condense and gain a backdrop once the page scrolls.
             scrolled
-              ? "h-14 bg-background/85 shadow-[0_10px_30px_-18px_rgb(0_0_0/0.6)] backdrop-blur-md"
-              : "h-16 bg-background/70 backdrop-blur-sm",
+              ? "h-(--nav-h-scrolled) bg-background/85 shadow-[0_10px_30px_-18px_rgb(0_0_0/0.6)] backdrop-blur-md"
+              : "h-(--nav-h) bg-background/70 backdrop-blur-sm",
           )}
         >
           <Logo className="shrink-0" />

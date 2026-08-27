@@ -37,7 +37,7 @@ export function SiteFooter() {
 
   return (
     <footer className="border-t border-border">
-      <div className="mx-auto grid max-w-[90rem] gap-10 px-6 py-14 sm:px-10 lg:grid-cols-[1.2fr_1fr_1fr] lg:px-14">
+      <div className="grid gap-10 px-6 py-14 sm:px-10 lg:grid-cols-[1.2fr_1fr_1fr] lg:px-14">
         {/* Brand + contact */}
         <div>
           <Logo />
@@ -49,7 +49,7 @@ export function SiteFooter() {
             <li>
               <a
                 href={toTelHref(contact.phone)}
-                className="inline-flex items-center gap-2.5 text-muted-foreground transition-colors hover:text-primary"
+                className="inline-flex items-center gap-2.5 py-1 text-muted-foreground transition-colors hover:text-primary"
               >
                 <Phone className="size-3.5 shrink-0 text-primary" />
                 {contact.phone}
@@ -58,7 +58,7 @@ export function SiteFooter() {
             <li>
               <a
                 href={`mailto:${contact.email}`}
-                className="inline-flex items-center gap-2.5 text-muted-foreground transition-colors hover:text-primary"
+                className="inline-flex items-center gap-2.5 py-1 text-muted-foreground transition-colors hover:text-primary"
               >
                 <Mail className="size-3.5 shrink-0 text-primary" />
                 {contact.email}
@@ -86,7 +86,7 @@ export function SiteFooter() {
               <li key={route.href}>
                 <Link
                   href={route.href}
-                  className="group/f inline-flex text-sm text-muted-foreground transition-colors hover:text-foreground"
+                  className="group/f -my-1 inline-flex py-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
                 >
                   <span className="link-underline">{route.label}</span>
                 </Link>
@@ -103,7 +103,7 @@ export function SiteFooter() {
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="link-underline text-sm text-muted-foreground transition-colors hover:text-foreground"
+                  className="link-underline -my-1 inline-block py-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
                 >
                   {item.label}
                 </Link>
@@ -131,7 +131,7 @@ export function SiteFooter() {
       </div>
 
       <div className="border-t border-border">
-        <div className="mx-auto flex max-w-[90rem] flex-col gap-2 px-6 py-6 sm:flex-row sm:items-center sm:justify-between sm:px-10 lg:px-14">
+        <div className="flex flex-col gap-2 px-6 py-6 sm:flex-row sm:items-center sm:justify-between sm:px-10 lg:px-14">
           <p className="text-xs text-muted-foreground">
             © {new Date().getFullYear()} {siteConfig.legalName}. All rights
             reserved.

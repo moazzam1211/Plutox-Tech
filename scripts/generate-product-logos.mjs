@@ -10,7 +10,8 @@
  * cards present their logos at a consistent visual weight. The artwork itself is
  * untouched — only the surrounding empty margin is removed.
  *
- * Sources live in `_src/`; the trimmed results are what the app references.
+ * Sources live in `assets/product-logos/` (outside `public/`, so they are not
+ * served); the trimmed results in `public/` are what the app references.
  *
  * Run with:  npm run product-logos
  */
@@ -20,7 +21,13 @@ import { join } from "node:path";
 import sharp from "sharp";
 
 const DIR = join(process.cwd(), "public", "images", "products");
-const SRC = join(DIR, "_src");
+/*
+  Sources live outside `public/` deliberately: they are build input, not assets.
+  Left under `public/images/products/_src` they were deployed and served — 432 KB
+  of PNGs no page references, including a 187 KB source for a product that is not
+  on the site any more.
+*/
+const SRC = join(process.cwd(), "assets", "product-logos");
 
 /** Target cap height for every trimmed wordmark, in pixels. */
 const TARGET_HEIGHT = 240;
