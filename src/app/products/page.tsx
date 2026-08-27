@@ -19,7 +19,7 @@ import { cn } from "@/lib/utils";
 export const metadata = buildMetadata({
   title: "Products",
   description:
-    "Three management systems: ServeSync POS in restaurant, pharmacy and mart editions, StaySync for hotels and Fleet Flow for transport. Plus the shared modules — online ordering, kitchen display, rider and staff management, inventory, warehouse, analytics, expenses, admin panel and PRA/FBR fiscal compliance.",
+    "Five platforms: ServeSync POS in restaurant, pharmacy and mart editions, StaySync for hotels, Fleet Flow for transport, ONVEE for cross-border delivery and Plutox ID for passwordless sign-in. Plus the shared modules — online ordering, kitchen display, rider and staff management, inventory, warehouse, analytics, expenses, admin panel and PRA/FBR fiscal compliance.",
   path: "/products",
   keywords: [
     "restaurant management system",
@@ -65,11 +65,11 @@ export default function ProductsPage() {
         eyebrow="Products"
         title={
           <>
-            Three management systems,{" "}
+            Five platforms,{" "}
             <span className="text-primary">each with its own modules</span>
           </>
         }
-        lede="A restaurant does not need a pharmacy's controlled-drug register, and a pharmacy has no use for a kitchen display — so ServeSync ships them as editions, hiding what does not apply and relabelling what does. Every module named here exists in shipped software."
+        lede="A restaurant does not need a pharmacy's controlled-drug register, and a pharmacy has no use for a kitchen display — so ServeSync ships them as editions, hiding what does not apply and relabelling what does. Every module named here exists in software we have built."
       >
         <StatStrip
           className="max-w-2xl border-t pt-4"

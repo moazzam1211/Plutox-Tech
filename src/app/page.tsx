@@ -65,7 +65,7 @@ export default function IntroPage() {
 
           <Reveal preset="fadeUp" delay={0.12}>
             <p className="mt-8 max-w-xl text-base leading-relaxed text-muted-foreground">
-              A founder-led software house in Lahore. Three platforms built,
+              A founder-led software house in Lahore. Five platforms built,
               deployed and running real businesses. {siteConfig.tagline}
             </p>
           </Reveal>
@@ -107,8 +107,8 @@ export default function IntroPage() {
       {/* ---------------- The products ---------------- */}
       <Block
         label="What we've built"
-        title="Three platforms"
-        description="Each one designed and built by us — not resold, not white-labelled. All three are shipped and running, and ServeSync alone covers restaurants, pharmacies and marts."
+        title="Five platforms"
+        description="Each one designed and built by us — not resold, not white-labelled. Four are shipped and running; Plutox ID is live inside Fleet Flow with key rotation still to come."
       >
         <RevealGroup stagger={0.07} className="flex flex-col">
           {products.map((product) => (

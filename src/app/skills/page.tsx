@@ -65,7 +65,7 @@ export default function SkillsPage() {
             <span className="text-primary">the full delivery stack</span>
           </>
         }
-        lede="Not a list of things learned once and delegated since. Every one of these is used on live client work — all three shipped products are built with them."
+        lede="Not a list of things learned once and delegated since. Every one of these is used on live client work — every one of the five platforms is built with them."
       >
         <StatStrip
           className="max-w-2xl border-t pt-4"

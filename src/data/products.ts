@@ -1,7 +1,7 @@
 import type { Product } from "@/types";
 
 /**
- * The products built by Plutox Tech — three products, all shipped.
+ * The products built by Plutox Tech — five, four of them shipped.
  *
  * ServeSync is one POS with three editions (restaurant / pharmacy / mart) chosen
  * at first run. It used to be three separate products; PharmaSync and Vendeez were
@@ -1715,6 +1715,524 @@ export const products: Product[] = [
         ],
       },
     ],
+    demoUrl: "/contact",
+  },
+
+  /* ------------------------------------------------------------------ */
+  /* ONVEE — peer-to-peer parcel & luggage delivery                     */
+  /* ------------------------------------------------------------------ */
+  {
+    slug: "onvee",
+    name: "ONVEE",
+    category: "Marketplace & Logistics",
+    tagline: "Verified people. Connected journeys. Delivered safely.",
+    description:
+      "An international peer-to-peer parcel and luggage platform. Senders post what needs to move; identity-verified travellers already flying that route make offers. The platform holds the money, authenticates the handover with a QR code, a one-time code and a weight check, tracks the journey, verifies the recipient and only then releases payment — and settles the disputes when something goes wrong. It is a trust platform with a logistics workflow underneath, not a listings site: 19 service modules behind a single API, with a web product, an operations console and an Android app all speaking to it.",
+    image: "/images/products/onvee-logo.svg",
+    brandColor: "#E5B02C",
+    audience:
+      "People shipping between countries, travellers with spare luggage allowance, and the operations team moderating both",
+    badge: "19 modules",
+    features: [
+      "Identity verification before anyone carries anything",
+      "Payment held by the platform until delivery is confirmed",
+      "Handover authenticated three ways: QR, one-time code and weight",
+      "Journey tracking from handover to recipient signature",
+      "Disputes raised, evidenced and ruled on inside the platform",
+      "One API, three clients — web, ops console and Android",
+      "Sign-in that cannot be used to enumerate accounts",
+      "Prohibited-items policy stated on the page, not buried",
+      "Ratings both ways once the money has moved",
+    ],
+    moduleGroups: [
+      {
+        title: "The marketplace",
+        items: [
+          {
+            name: "Requests",
+            detail:
+              "A sender posts what is moving, from where to where, and by when. Size, weight and category are structured rather than free text, so travellers can filter and the rules engine can refuse what may not be carried.",
+          },
+          {
+            name: "Trips",
+            detail:
+              "A traveller lists a route they are already flying and the space they have. Matching runs against both sides rather than making either browse the whole board.",
+          },
+          {
+            name: "Matching",
+            detail:
+              "Requests and trips paired on route, date window and capacity, so a sender sees travellers who can actually take the parcel.",
+          },
+          {
+            name: "Offers",
+            detail:
+              "A traveller names their price for a specific parcel; the sender accepts one. Accepting is what creates the booking — nothing is committed before money is secured.",
+          },
+          {
+            name: "Bookings",
+            detail:
+              "The agreement itself: who is carrying what, for how much, under which terms. Every later event — handover, transit, delivery — hangs off it.",
+          },
+          {
+            name: "Messaging",
+            detail:
+              "One thread per booking between sender and traveller, so the conversation stays attached to the parcel it is about.",
+          },
+        ],
+      },
+      {
+        title: "Trust & safety",
+        items: [
+          {
+            name: "Identity verification",
+            detail:
+              "KYC documents submitted by the user and decided by a human in the console. Nobody carries anything before the check clears.",
+          },
+          {
+            name: "Authenticated handover",
+            detail:
+              "Three checks at the moment the parcel changes hands: a QR code scanned, a one-time code entered, and the weight confirmed against what was declared. A parcel that has grown between posting and handover does not pass.",
+          },
+          {
+            name: "Recipient verification",
+            detail:
+              "Delivery is confirmed by a one-time code held by the recipient, not by the traveller asserting they dropped it off.",
+          },
+          {
+            name: "Disputes",
+            detail:
+              "Either side can raise one, both attach evidence, and an operator rules. Held funds are the lever — the money has not moved yet, which is what makes a ruling enforceable.",
+          },
+          {
+            name: "Security",
+            detail:
+              "Opaque session tokens stored as SHA-256 digests, sign-in rate-limited per email and per network, and an identical error for an unknown email and a wrong password so the form cannot be used to discover who has an account. A password change revokes every other session.",
+          },
+          {
+            name: "Audit log",
+            detail:
+              "Who did what, when, and to whom — written as operators work rather than reconstructed afterwards.",
+          },
+        ],
+      },
+      {
+        title: "Money & operations",
+        items: [
+          {
+            name: "Payments & wallet",
+            detail:
+              "Funds secured at acceptance, held while the parcel travels, released when delivery is verified. The wallet shows held, available and paid out separately, because to a traveller those are three different numbers.",
+          },
+          {
+            name: "Journeys & tracking",
+            detail:
+              "The parcel's own timeline — handover, in transit, arrived, delivered — each step authenticated rather than self-reported.",
+          },
+          {
+            name: "Shipments console",
+            detail:
+              "The operations view of every parcel in the system, with one screen per shipment carrying its full trail.",
+          },
+          {
+            name: "Platform rules",
+            detail:
+              "Fees, limits and prohibited categories configured rather than hard-coded, so policy changes without a deploy.",
+          },
+          {
+            name: "Notifications",
+            detail:
+              "Offers, handovers, deliveries and payouts pushed to whoever is waiting on them.",
+          },
+          {
+            name: "Ratings",
+            detail:
+              "Both sides rate each other once the money has moved, so a rating reflects a completed delivery rather than an intention.",
+          },
+        ],
+      },
+      {
+        title: "Platform",
+        items: [
+          {
+            name: "One API, three clients",
+            detail:
+              "The web app's route handlers are the only HTTP surface. The browser and the Android app both speak to it, and the operations console calls the same services in-process — so a rule cannot be enforced in one client and forgotten in another.",
+          },
+          {
+            name: "Shared domain layer",
+            detail:
+              "Types, Zod schemas and domain logic in a package with no I/O, so the same validation runs in the browser, on the server and in the app.",
+          },
+          {
+            name: "Android app",
+            detail:
+              "Expo and React Native, covering the sender and traveller journeys end to end — post, find, offer, track, wallet and identity check.",
+          },
+          {
+            name: "Operations console",
+            detail:
+              "A separate Next.js app for the work only staff do: KYC decisions, dispute rulings, user standing, platform rules and security review.",
+          },
+        ],
+      },
+    ],
+    /*
+      37 captures of the running application against seeded demo data — the
+      repo's own screenshot script produces them, so they refresh rather than
+      rot. Web product, operations console and the Android app.
+    */
+    screens: [
+      {
+        src: "/images/products/screens/onvee-web-landing.webp",
+        label: "Landing",
+        caption: "The promise in one screen: verified people, connected journeys",
+      },
+      {
+        src: "/images/products/screens/onvee-web-dashboard.webp",
+        label: "Dashboard",
+        caption: "Requests, offers and journeys in flight",
+      },
+      {
+        src: "/images/products/screens/onvee-web-request-new.webp",
+        label: "Post a Request",
+        caption: "What is moving, where to, and by when",
+      },
+      {
+        src: "/images/products/screens/onvee-web-requests.webp",
+        label: "My Requests",
+        caption: "Every parcel posted, and where each one stands",
+      },
+      {
+        src: "/images/products/screens/onvee-web-find-travelers.webp",
+        label: "Find Travellers",
+        caption: "Verified travellers already flying the route",
+      },
+      {
+        src: "/images/products/screens/onvee-web-offers.webp",
+        label: "Offers",
+        caption: "What each traveller wants to carry it for",
+      },
+      {
+        src: "/images/products/screens/onvee-web-request-detail.webp",
+        label: "Request Detail",
+        caption: "One parcel end to end, with its offers",
+      },
+      {
+        src: "/images/products/screens/onvee-web-trip-new.webp",
+        label: "Post a Trip",
+        caption: "A traveller lists the route and the space they have",
+      },
+      {
+        src: "/images/products/screens/onvee-web-trips.webp",
+        label: "Trips",
+        caption: "Routes offered, and what has been matched to them",
+      },
+      {
+        src: "/images/products/screens/onvee-web-trip-detail.webp",
+        label: "Trip Detail",
+        caption: "One journey with its cargo and its handovers",
+      },
+      {
+        src: "/images/products/screens/onvee-web-tracking.webp",
+        label: "Tracking",
+        caption: "Where every active parcel is right now",
+      },
+      {
+        src: "/images/products/screens/onvee-web-tracking-detail.webp",
+        label: "Journey Detail",
+        caption: "Handover, transit and delivery, each authenticated",
+      },
+      {
+        src: "/images/products/screens/onvee-web-verify.webp",
+        label: "Identity Verification",
+        caption: "KYC before anyone carries anything",
+      },
+      {
+        src: "/images/products/screens/onvee-web-wallet.webp",
+        label: "Wallet",
+        caption: "Money held by the platform until delivery is confirmed",
+      },
+      {
+        src: "/images/products/screens/onvee-web-messages.webp",
+        label: "Messages",
+        caption: "Sender and traveller, in one thread per booking",
+      },
+      {
+        src: "/images/products/screens/onvee-web-conversation.webp",
+        label: "Conversation",
+        caption: "The thread itself, tied to the booking",
+      },
+      {
+        src: "/images/products/screens/onvee-web-disputes.webp",
+        label: "Disputes",
+        caption: "Raised, evidenced and settled inside the platform",
+      },
+      {
+        src: "/images/products/screens/onvee-web-notifications.webp",
+        label: "Notifications",
+        caption: "Offers, handovers and payouts as they happen",
+      },
+      {
+        src: "/images/products/screens/onvee-web-settings.webp",
+        label: "Settings",
+        caption: "Profile, addresses and the roles you hold",
+      },
+      {
+        src: "/images/products/screens/onvee-web-dashboard-dark.webp",
+        label: "Dashboard (Dark)",
+        caption: "The same screen in the dark theme",
+      },
+      {
+        src: "/images/products/screens/onvee-web-legal-prohibited.webp",
+        label: "Prohibited Items",
+        caption: "What may never be carried, stated plainly",
+      },
+      {
+        src: "/images/products/screens/onvee-admin-overview.webp",
+        label: "Admin Overview",
+        caption: "The whole marketplace on one screen",
+      },
+      {
+        src: "/images/products/screens/onvee-admin-kyc.webp",
+        label: "KYC Queue",
+        caption: "Identity documents waiting on a human decision",
+      },
+      {
+        src: "/images/products/screens/onvee-admin-kyc-detail.webp",
+        label: "KYC Review",
+        caption: "One applicant, their documents and the decision",
+      },
+      {
+        src: "/images/products/screens/onvee-admin-users.webp",
+        label: "Users",
+        caption: "Every account, its roles and its standing",
+      },
+      {
+        src: "/images/products/screens/onvee-admin-shipments.webp",
+        label: "Shipments",
+        caption: "Operations view of every parcel in the system",
+      },
+      {
+        src: "/images/products/screens/onvee-admin-shipment-detail.webp",
+        label: "Shipment Detail",
+        caption: "One parcel's full audit trail",
+      },
+      {
+        src: "/images/products/screens/onvee-admin-disputes.webp",
+        label: "Dispute Resolution",
+        caption: "Evidence from both sides, and the ruling",
+      },
+      {
+        src: "/images/products/screens/onvee-admin-rules.webp",
+        label: "Platform Rules",
+        caption: "Fees, limits and prohibited categories",
+      },
+      {
+        src: "/images/products/screens/onvee-admin-security.webp",
+        label: "Security",
+        caption: "Sessions, lockouts and suspicious activity",
+      },
+      {
+        src: "/images/products/screens/onvee-admin-audit.webp",
+        label: "Audit Log",
+        caption: "Who did what, when, and to whom",
+      },
+      {
+        src: "/images/products/screens/onvee-mobile-dashboard.webp",
+        label: "Android Dashboard",
+        caption: "The product in a pocket",
+      },
+      {
+        src: "/images/products/screens/onvee-mobile-request-new.webp",
+        label: "Android — Post",
+        caption: "Posting a parcel from a phone",
+      },
+      {
+        src: "/images/products/screens/onvee-mobile-find-travelers.webp",
+        label: "Android — Find",
+        caption: "Travellers on your route",
+      },
+      {
+        src: "/images/products/screens/onvee-mobile-tracking.webp",
+        label: "Android — Tracking",
+        caption: "Live journeys on the phone",
+      },
+      {
+        src: "/images/products/screens/onvee-mobile-wallet.webp",
+        label: "Android — Wallet",
+        caption: "Held funds and payouts",
+      },
+      {
+        src: "/images/products/screens/onvee-mobile-verify.webp",
+        label: "Android — Verify",
+        caption: "Identity check with the phone camera",
+      },
+    ],
+    languages: ["TypeScript", "TSX", "CSS", "SQL"],
+    stack: [
+      "TypeScript",
+      "Next.js 15",
+      "React Native",
+      "Expo",
+      "Prisma",
+      "PostgreSQL",
+      "Zod",
+    ],
+    specs: [
+      { label: "Service modules", value: "19" },
+      { label: "API routes", value: "51" },
+      { label: "Prisma models", value: "38" },
+      { label: "Clients", value: "3" },
+    ],
+    payments: ["Card", "Platform-held escrow", "Traveller payout"],
+    metric: { label: "Checks at handover", value: "3" },
+    demoUrl: "/contact",
+  },
+
+  /* ------------------------------------------------------------------ */
+  /* Plutox ID — passwordless identity provider                         */
+  /* ------------------------------------------------------------------ */
+  {
+    slug: "plutox-id",
+    name: "Plutox ID",
+    category: "Identity & Access",
+    tagline: "One sign-in for every Plutox product. No passwords.",
+    description:
+      "The identity provider the rest of the estate signs in through. Passkeys (WebAuthn/FIDO2) are the primary method and an emailed one-time code is the fallback — there are no passwords to phish, reuse or reset, and no biometric data ever reaches the server, only a cryptographic assertion. Other applications delegate sign-in to it over OAuth 2.0 Authorization Code with PKCE and OpenID Connect, so \"Login with Plutox ID\" is a standards-based flow rather than a shared session hack. Fleet Flow already signs in through it.",
+    image: "/images/products/plutox-id-logo.svg",
+    brandColor: "#8B5CF6",
+    audience:
+      "Every Plutox product and its users — and the administrators who need to see and revoke what is signed in",
+    badge: "Passwordless",
+    features: [
+      "Passkeys as the primary sign-in — WebAuthn/FIDO2, no password to steal",
+      "Emailed one-time code as the fallback, single-use and expiring",
+      "OAuth 2.0 Authorization Code + PKCE, and OpenID Connect discovery",
+      "No raw biometric data server-side, only WebAuthn assertions",
+      "Admin console over users, registered apps, sessions and security activity",
+      "Short-lived access tokens — 15 minutes, no long-lived bearer left lying around",
+      "Live in Fleet Flow, which signs in through it today",
+    ],
+    moduleGroups: [
+      {
+        title: "Authentication",
+        items: [
+          {
+            name: "Passkeys (WebAuthn/FIDO2)",
+            detail:
+              "Registration and assertion against the platform authenticator — Windows Hello, Touch ID, a phone or a hardware key. The server stores a public key and a counter; the private key never leaves the device and no fingerprint or face template is ever transmitted.",
+          },
+          {
+            name: "Email one-time code",
+            detail:
+              "The fallback for a device with no authenticator, or a user who has lost theirs. Codes are single-use and expiring, which keeps the fallback from becoming the weak path everybody takes.",
+          },
+          {
+            name: "Sessions",
+            detail:
+              "Issued on successful authentication and revocable individually or wholesale from the admin console, so a lost laptop is one action rather than a password reset email.",
+          },
+        ],
+      },
+      {
+        title: "Single sign-on",
+        items: [
+          {
+            name: "OAuth 2.0 + PKCE",
+            detail:
+              "Authorization Code with PKCE, which is the flow a public client should use — no client secret shipped in a browser bundle, and an intercepted code is useless without the verifier.",
+          },
+          {
+            name: "OpenID Connect",
+            detail:
+              "ID tokens and a discovery document, so an application integrates against the standard rather than against bespoke endpoints that drift.",
+          },
+          {
+            name: "Registered applications",
+            detail:
+              "Each product registered with its own client id and redirect URIs, managed in the console rather than configured by hand on both sides.",
+          },
+          {
+            name: "Fleet Flow integration",
+            detail:
+              "Already wired: Fleet Flow's login delegates to Plutox ID over the authorization-code flow and clears its own cookies before redirecting, so a sign-out actually signs out.",
+          },
+        ],
+      },
+      {
+        title: "Administration",
+        items: [
+          {
+            name: "Users",
+            detail:
+              "Accounts, their registered authenticators and their standing, with the ability to revoke a credential without deleting the person.",
+          },
+          {
+            name: "Sessions & security activity",
+            detail:
+              "What is signed in, from where, and what has been attempted — the view you need at the moment something looks wrong.",
+          },
+          {
+            name: "Four applications",
+            detail:
+              "A user-facing web app (login, register, authorize, security settings), an Express API carrying the auth and OIDC endpoints, an admin console, and a dashboard — separated so the admin surface is not reachable from the login surface.",
+          },
+        ],
+      },
+    ],
+    /*
+      No gallery: the repository ships no screenshots, and this page's whole
+      claim is that its images are captures of running software. A roadmap that
+      names what is missing is worth more than an invented screen.
+    */
+    roadmap: [
+      {
+        label: "Built",
+        title: "Passwordless authentication",
+        detail:
+          "WebAuthn passkey registration and assertion, email OTP fallback, sessions, and the user-facing web app for login, registration and security settings.",
+        state: "done",
+      },
+      {
+        label: "Built",
+        title: "Standards-based SSO",
+        detail:
+          "OAuth 2.0 Authorization Code with PKCE and OpenID Connect, registered applications with their own client ids and redirect URIs, and a working Fleet Flow integration.",
+        state: "done",
+      },
+      {
+        label: "Built",
+        title: "Administration",
+        detail:
+          "Admin console over users, registered applications, active sessions and security activity, across a four-app split (web, API, admin, dashboard).",
+        state: "done",
+      },
+      {
+        label: "Next",
+        title: "Key rotation and refresh tokens",
+        detail:
+          "Two things the repository is explicit about not having yet: a single long-lived signing key with no rotation and no multi-`kid` JWKS, and no refresh-token flow — access tokens are 15 minutes with no renewal, so a long session means re-authenticating. Both are the difference between working and operable.",
+        state: "next",
+      },
+    ],
+    languages: ["TypeScript", "TSX", "SQL"],
+    stack: [
+      "TypeScript",
+      "Next.js",
+      "Express",
+      "Prisma",
+      "PostgreSQL",
+      "WebAuthn / FIDO2",
+      "OAuth 2.0 / OIDC",
+      "Docker",
+    ],
+    specs: [
+      { label: "API endpoints", value: "62" },
+      { label: "Prisma models", value: "17" },
+      { label: "Applications", value: "4" },
+      { label: "Passwords stored", value: "0" },
+    ],
+    metric: { label: "Primary sign-in method", value: "Passkey" },
     demoUrl: "/contact",
   },
 ];
