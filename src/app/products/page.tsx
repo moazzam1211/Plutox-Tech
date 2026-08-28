@@ -19,7 +19,7 @@ import { cn } from "@/lib/utils";
 export const metadata = buildMetadata({
   title: "Products",
   description:
-    "Five platforms: ServeSync POS in restaurant, pharmacy and mart editions, StaySync for hotels, Fleet Flow for transport, ONVEE for cross-border delivery and Plutox ID for passwordless sign-in. Plus the shared modules — online ordering, kitchen display, rider and staff management, inventory, warehouse, analytics, expenses, admin panel and PRA/FBR fiscal compliance.",
+    "Five platforms and eleven shared modules: POS for restaurants, pharmacies and marts, hotel ERP, fleet management, delivery and passwordless sign-in.",
   path: "/products",
   keywords: [
     "restaurant management system",

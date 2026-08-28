@@ -18,12 +18,12 @@ import {
   launchJourney,
 } from "@/data/consultancy";
 import { services } from "@/data/services";
-import { breadcrumbJsonLd, buildMetadata } from "@/lib/seo";
+import { breadcrumbJsonLd, buildMetadata, serviceJsonLd } from "@/lib/seo";
 
 export const metadata = buildMetadata({
   title: "Services",
   description:
-    "POS system consultancy, cloud kitchen setup and food business consultancy in Lahore — for restaurants, cafés, QSR, bakeries and multi-outlet groups. Feasibility, licensing, site selection, kitchen layout, equipment, menu costing, POS and aggregator setup, hiring, training and launch. Everything needed to take a food business from scratch to running smoothly, plus sixteen software services.",
+    "POS consultancy, cloud-kitchen setup and food-business consultancy in Lahore — feasibility and licensing through kitchen layout, menu costing and launch.",
   path: "/services",
   keywords: [
     "POS consultancy Pakistan",
@@ -62,6 +62,10 @@ export default function ServicesPage() {
           { name: "Services", path: "/services" },
         ])}
       />
+
+      {/* One Service node per consultancy programme, provider linked back to the
+          organisation. No prices — these are scoped per engagement. */}
+      <JsonLd data={serviceJsonLd(consultancyPrograms)} />
 
       <PageHeader
         eyebrow="Services"

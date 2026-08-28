@@ -7,8 +7,10 @@ export const siteConfig = {
   name: "Plutox Tech",
   legalName: "Plutox Tech (Pvt.) Ltd.",
   tagline: "Smart Software. Smarter Business.",
+  /* The home page's search snippet. Kept under 158 characters — see
+     `clampDescription` in lib/seo.ts for why. */
   description:
-    "Plutox Tech is a premium software house building custom POS systems, ERP solutions, hotel and pharmacy management software, web platforms, mobile apps, AI automation and cloud infrastructure for businesses worldwide.",
+    "Plutox Tech builds the software businesses run on — POS, ERP, hospitality, logistics and custom platforms. A founder-led software house in Lahore.",
   shortDescription:
     "Custom POS, ERP, hotel & pharmacy software, web, mobile, AI automation and cloud solutions.",
 

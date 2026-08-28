@@ -15,7 +15,7 @@ import { breadcrumbJsonLd, buildMetadata } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "Skills",
   description:
-    "The technical skills behind Plutox Tech — Laravel, PHP, Vue.js, Node.js, Express, .NET and TypeScript on the web; Java, Kotlin and Android SDK on mobile; Firebase Authentication, Firestore and Realtime Database; SQL and MongoDB; POS, ERP and CRM systems; Claude and AI prompt engineering; Selenium for QA.",
+    "The skills behind Plutox Tech — TypeScript, Node, .NET and Vue on the web, Kotlin and Android on mobile, SQL and Firebase for data, POS, ERP and CRM.",
   path: "/skills",
   keywords: [
     "Laravel developer",

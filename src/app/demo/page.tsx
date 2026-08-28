@@ -12,7 +12,7 @@ import { toWhatsAppHref } from "@/lib/utils";
 export const metadata = buildMetadata({
   title: "Book a Free Demo",
   description:
-    "See ServeSync POS, StaySync Hotel ERP or Fleet Flow running on your own kind of business. Free demo, nothing to install, and our team calls you back within one business day.",
+    "See ServeSync POS, StaySync or Fleet Flow running on your kind of business. Free 30-minute demo, nothing to install, and we call you back next day.",
   path: "/demo",
   keywords: [
     "free POS demo",

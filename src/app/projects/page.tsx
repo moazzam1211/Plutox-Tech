@@ -9,7 +9,7 @@ import { breadcrumbJsonLd, buildMetadata } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "Projects",
   description:
-    "ServeSync POS, StaySync Hotel ERP, Fleet Flow, ONVEE and Plutox ID — five platforms designed and built by Plutox Tech, with full module detail and screenshots from the running software. ServeSync alone runs restaurants, pharmacies and marts from one codebase.",
+    "Five platforms built by Plutox Tech — POS, hotel ERP, fleet management, cross-border delivery and identity — with module detail and real screenshots.",
   path: "/projects",
   keywords: [
     "restaurant POS software",

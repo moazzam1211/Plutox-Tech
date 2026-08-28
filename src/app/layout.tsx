@@ -10,7 +10,7 @@ import { BackToTop } from "@/components/shared/back-to-top";
 import { HelpButton } from "@/components/shared/help-button";
 import { JsonLd } from "@/components/shared/json-ld";
 import { SplashScreen } from "@/components/shared/splash-screen";
-import { organizationJsonLd } from "@/lib/seo";
+import { clampDescription, organizationJsonLd } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
 
 /* ------------------------------------------------------------------ */
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     default: `${siteConfig.name} — ${siteConfig.tagline}`,
     template: `%s | ${siteConfig.name}`,
   },
-  description: siteConfig.description,
+  description: clampDescription(siteConfig.description),
   keywords: [...siteConfig.keywords],
   applicationName: siteConfig.name,
   authors: [{ name: siteConfig.name, url: siteConfig.url }],
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
     url: siteConfig.url,
     siteName: siteConfig.name,
     title: `${siteConfig.name} — ${siteConfig.tagline}`,
-    description: siteConfig.description,
+    description: clampDescription(siteConfig.description),
     locale: siteConfig.locale,
   },
   // No `site`/`creator` handle: there is no X account to attribute to. The

@@ -9,7 +9,11 @@ import { JsonLd } from "@/components/shared/json-ld";
 import { Reveal } from "@/components/shared/reveal";
 import { Button } from "@/components/ui/button";
 import { products } from "@/data/products";
-import { breadcrumbJsonLd, buildMetadata } from "@/lib/seo";
+import {
+  breadcrumbJsonLd,
+  buildMetadata,
+  softwareApplicationJsonLd,
+} from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
 /** Every product, fixed list — prerender them all. */
@@ -26,9 +30,20 @@ export async function generateMetadata({
   const product = products.find((entry) => entry.slug === slug);
   if (!product) return {};
 
+  /*
+    The tagline and the headline specs, not `product.description` — that is a
+    body paragraph and ran to 599 characters on ONVEE, four times what Google
+    renders. This composes a complete sentence that fits, from fields that are
+    already short by design.
+  */
+  const specs = product.specs
+    .slice(0, 2)
+    .map((spec) => `${spec.value} ${spec.label.toLowerCase()}`)
+    .join(", ");
+
   return buildMetadata({
     title: `${product.name} — ${product.category}`,
-    description: product.description,
+    description: `${product.name}: ${product.tagline} ${specs ? `${specs}. ` : ""}Designed and built by Plutox Tech in Lahore.`,
     path: `/projects/${product.slug}`,
     keywords: [
       `${product.category.toLowerCase()} software`,
@@ -93,6 +108,13 @@ export default async function ProductPage({
           { name: product.name, path: `/projects/${product.slug}` },
         ])}
       />
+
+      {/*
+        The page is a software product page, so it says so in the vocabulary a
+        crawler reads. Prices come from the same data the pricing charts render,
+        and there is no rating — we have none that is verified.
+      */}
+      <JsonLd data={softwareApplicationJsonLd(product)} />
 
       {/* ---------------- Themed hero ---------------- */}
       <header className="relative overflow-hidden border-b border-border">
