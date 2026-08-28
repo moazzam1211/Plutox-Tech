@@ -7,8 +7,8 @@ import { JsonLd } from "@/components/shared/json-ld";
 import { PageHeader, Panel } from "@/components/shared/page-shell";
 import { Reveal } from "@/components/shared/reveal";
 import { Button } from "@/components/ui/button";
-import { moduleScreens, productModules } from "@/data/modules";
-import { breadcrumbJsonLd, buildMetadata } from "@/lib/seo";
+import { moduleScreens, productModules, moduleDetail } from "@/data/modules";
+import { breadcrumbJsonLd, buildMetadata, faqJsonLd } from "@/lib/seo";
 
 /** Prerender all of them — the list is short and fixed. */
 export function generateStaticParams() {
@@ -44,6 +44,7 @@ export default async function ModulePage({
 
   const screens = moduleScreens(mod);
   const Icon = mod.icon;
+  const detail = moduleDetail(mod.slug);
 
   return (
     <>
@@ -54,6 +55,10 @@ export default async function ModulePage({
           { name: mod.name, path: `/products/${mod.slug}` },
         ])}
       />
+
+      {/* Marked up because the answers are visible on this page — the condition
+          Google actually enforces for FAQ rich results. */}
+      <JsonLd data={faqJsonLd(detail.faqs)} />
 
       <PageHeader eyebrow="Module" title={mod.name} lede={mod.summary}>
         <div className="flex flex-wrap items-center gap-3">
@@ -139,6 +144,88 @@ export default async function ModulePage({
           </div>
         </Reveal>
       </div>
+
+      {/* ---------------- Why it exists ---------------- */}
+      <section className="border-t border-border px-6 py-12 sm:px-10 lg:px-14">
+        <div className="grid gap-10 lg:grid-cols-[13rem_minmax(0,1fr)] lg:gap-14">
+          <Reveal preset="fadeUp">
+            <p className="eyebrow text-primary">The problem</p>
+          </Reveal>
+          <Reveal preset="fadeUp" delay={0.05}>
+            <p className="max-w-3xl text-base leading-relaxed">{detail.problem}</p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ---------------- How it works ---------------- */}
+      <section className="border-t border-border px-6 py-12 sm:px-10 lg:px-14">
+        <div className="grid gap-10 lg:grid-cols-[13rem_minmax(0,1fr)] lg:gap-14">
+          <Reveal preset="fadeUp">
+            <p className="eyebrow text-primary">How it works</p>
+            <p className="mt-3 text-[0.8125rem] leading-relaxed text-muted-foreground">
+              Mechanism, not benefits. Everything here exists in the software.
+            </p>
+          </Reveal>
+
+          <div className="flex flex-col">
+            {detail.how.map(({ title, detail: body }, index) => (
+              <Reveal
+                key={title}
+                preset="fadeUp"
+                delay={Math.min(index, 4) * 0.05}
+              >
+                <div className="grid gap-2 border-b border-border py-5 first:border-t sm:grid-cols-[13rem_minmax(0,1fr)] sm:gap-6">
+                  <h2 className="text-sm font-semibold">{title}</h2>
+                  <p className="max-w-2xl text-[0.875rem] leading-relaxed text-muted-foreground">
+                    {body}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ---------------- Who it is for, and the questions ---------------- */}
+      <section className="border-t border-border px-6 py-12 sm:px-10 lg:px-14">
+        <div className="grid gap-10 lg:grid-cols-[13rem_minmax(0,1fr)] lg:gap-14">
+          <Reveal preset="fadeUp">
+            <p className="eyebrow text-primary">Who it is for</p>
+          </Reveal>
+
+          <div className="min-w-0">
+            <Reveal preset="fadeUp" delay={0.05}>
+              <ul className="grid gap-2.5">
+                {detail.forWho.map((who) => (
+                  <li
+                    key={who}
+                    className="flex items-start gap-2.5 text-sm leading-relaxed"
+                  >
+                    <Check className="mt-0.5 size-3.5 shrink-0 text-primary" />
+                    {who}
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+
+            <Reveal preset="fadeUp" delay={0.1}>
+              <h2 className="eyebrow mt-10 text-muted-foreground">
+                Common questions
+              </h2>
+              <dl className="mt-4 flex flex-col">
+                {detail.faqs.map(({ question, answer }) => (
+                  <div key={question} className="border-b border-border py-4 first:border-t">
+                    <dt className="text-sm font-semibold">{question}</dt>
+                    <dd className="mt-1.5 max-w-2xl text-[0.875rem] leading-relaxed text-muted-foreground">
+                      {answer}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </Reveal>
+          </div>
+        </div>
+      </section>
 
       {/* Prev / next through the module list, same idea as the page pager. */}
       <nav
