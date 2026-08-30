@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Plutox Tech — Business Card · Moazzam Naveed</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* ---- Print geometry ---- */
+  :root {
+    --trim-w: 85mm;  --trim-h: 55mm;
+    --bleed: 3mm;    --safe: 5mm;
+    --ink: #1a1a1a; --violet: #8b5cf6; --paper: #f3ffff;
+  }
+
+  @page { size: 91mm 61mm; margin: 0; }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: Inter, system-ui, sans-serif;
+    background: #6b7280;
+    display: flex; flex-wrap: wrap; gap: 12mm;
+    padding: 12mm; justify-content: center; align-items: flex-start;
+  }
+
+  /* The page is trim + bleed; the card fills it and the design bleeds to the edge. */
+  .card {
+    position: relative; overflow: hidden;
+    /*
+      flex: 0 0 auto is load-bearing, not tidying. As a flex item the card
+      shrinks below its declared width on a narrow viewport — it rendered 16mm
+      wide instead of 91mm — and a card that squashes on screen prints squashed
+      too. A physical object needs a fixed size.
+    */
+    flex: 0 0 auto;
+    width: calc(var(--trim-w) + var(--bleed) * 2);
+    height: calc(var(--trim-h) + var(--bleed) * 2);
+    padding: calc(var(--bleed) + var(--safe));
+    break-inside: avoid; page-break-inside: avoid;
+    box-shadow: 0 6mm 18mm -8mm rgb(0 0 0 / 0.55);
+  }
+
+  /* ---- FRONT: ink, with the accent doing one job ---- */
+  .front { background: var(--ink); color: var(--paper); display: flex; flex-direction: column; }
+  /* A single violet arc bleeding off the right edge. One gesture, not a pattern. */
+  .front::after {
+    content: ""; position: absolute; right: -26mm; top: -20mm;
+    width: 62mm; height: 62mm; border-radius: 50%;
+    border: 0.9mm solid var(--violet); opacity: 0.5;
+  }
+  .front::before {
+    content: ""; position: absolute; right: -14mm; bottom: -30mm;
+    width: 46mm; height: 46mm; border-radius: 50%;
+    background: radial-gradient(circle, #8b5cf62e, transparent 68%);
+  }
+
+  .brandline { display: flex; align-items: center; gap: 2.6mm; position: relative; z-index: 1; }
+  .brandline img { width: 7.6mm; height: 7.6mm; display: block; }
+  .brandname { font-family: Sora, system-ui, sans-serif; font-weight: 700; font-size: 4.1mm; letter-spacing: -0.02em; }
+
+  .who { margin-top: auto; position: relative; z-index: 1; }
+  .who h1 {
+    font-family: Sora, system-ui, sans-serif; font-weight: 700;
+    font-size: 6.4mm; line-height: 1.05; letter-spacing: -0.03em;
+  }
+  .who .role {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 2.5mm; letter-spacing: 0.13em; text-transform: uppercase;
+    color: var(--violet); margin-top: 1.8mm;
+  }
+  .rule { width: 13mm; height: 0.5mm; background: var(--violet); margin-top: 3mm; }
+
+  /* ---- BACK: paper, the details, the QR ---- */
+  .back { background: var(--paper); color: var(--ink); display: flex; flex-direction: column; }
+  .back .pitch {
+    font-family: Sora, system-ui, sans-serif; font-weight: 600;
+    font-size: 4.2mm; line-height: 1.15; letter-spacing: -0.02em; max-width: 52mm;
+  }
+  .back .pitch span { color: #6d28d9; }
+
+  .details { margin-top: auto; display: flex; align-items: flex-end; gap: 4mm; }
+  .details dl { flex: 1; display: grid; gap: 1.5mm; }
+  .row { display: flex; align-items: baseline; gap: 2mm; }
+  .row dt {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 2.1mm; letter-spacing: 0.1em; text-transform: uppercase;
+    color: #6d28d9; width: 8mm; flex-shrink: 0;
+  }
+  .row dd { font-size: 2.9mm; line-height: 1.25; }
+  .row dd.addr { font-size: 2.5mm; color: #4b5563; }
+
+  /* No plate behind it any more: the modules are ink, so the card's own paper is
+     the quiet zone. The 4-module margin is built into the SVG viewBox. */
+  .qr { width: 18.5mm; height: 18.5mm; flex-shrink: 0; }
+  .qr svg { width: 100%; height: 100%; display: block; }
+
+  /* ---- Screen-only helpers: labels and the trim guide ---- */
+  .tag {
+    width: 100%; text-align: center; color: #fff; font-size: 3.2mm;
+    font-family: 'JetBrains Mono', monospace; letter-spacing: 0.08em; opacity: 0.85;
+  }
+  .guide {
+    position: absolute; inset: var(--bleed);
+    outline: 0.2mm dashed rgb(255 0 0 / 0.55); pointer-events: none; z-index: 5;
+  }
+
+  @media print {
+    body { background: none; padding: 0; gap: 0; display: block; }
+    .card { box-shadow: none; }
+    .card + .card { page-break-before: always; }
+    .tag, .guide { display: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<p class="tag">FRONT — 85 × 55 mm trim · 3 mm bleed · red dashes = cut line (screen only)</p>
+
+<section class="card front">
+  <div class="guide"></div>
+  <div class="brandline">
+    <img src="data:image/png;base64,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" alt="">
+    <span class="brandname">Plutox Tech</span>
+  </div>
+  <div class="who">
+    <h1>Moazzam Naveed</h1>
+    <p class="role">Founder · CEO</p>
+    <div class="rule"></div>
+  </div>
+</section>
+
+<p class="tag">BACK</p>
+
+<section class="card back">
+  <div class="guide"></div>
+  <p class="pitch">Software that runs<br><span>your business.</span></p>
+  <div class="details">
+    <dl>
+      <div class="row"><dt>Call</dt><dd>+92 344 024 4449</dd></div>
+      <div class="row"><dt>Mail</dt><dd>moazzam@plutoxtech.com</dd></div>
+      <div class="row"><dt>Web</dt><dd>plutoxtech.com</dd></div>
+      <div class="row"><dt>At</dt><dd class="addr">Central Park Housing Scheme<br>Ferozepur Road, Lahore</dd></div>
+    </dl>
+    <div class="qr" title="https://plutoxtech.com/demo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 41 41" role="img" aria-label="Scan to book a free demo at plutoxtech.com/demo">
+<rect width="41" height="41" rx="2.5" fill="#1a1a1a"/>
+<rect x="4.5" y="4.5" width="6" height="6" rx="1.9" fill="none" stroke="#f2ffff" stroke-width="1"/>
+<rect x="6" y="6" width="3" height="3" rx="1" fill="#f2ffff"/>
+<rect x="30.5" y="4.5" width="6" height="6" rx="1.9" fill="none" stroke="#f2ffff" stroke-width="1"/>
+<rect x="32" y="6" width="3" height="3" rx="1" fill="#f2ffff"/>
+<rect x="4.5" y="30.5" width="6" height="6" rx="1.9" fill="none" stroke="#f2ffff" stroke-width="1"/>
+<rect x="6" y="32" width="3" height="3" rx="1" fill="#f2ffff"/>
+<circle cx="15.5" cy="4.5" r="0.41" fill="#f2ffff"/>
+<circle cx="20.5" cy="4.5" r="0.41" fill="#f2ffff"/>
+<circle cx="21.5" cy="4.5" r="0.41" fill="#f2ffff"/>
+<circle cx="23.5" cy="4.5" r="0.41" fill="#f2ffff"/>
+<circle cx="24.5" cy="4.5" r="0.41" fill="#f2ffff"/>
+<circle cx="25.5" cy="4.5" r="0.41" fill="#f2ffff"/>
+<circle cx="26.5" cy="4.5" r="0.41" fill="#f2ffff"/>
+<circle cx="28.5" cy="4.5" r="0.41" fill="#f2ffff"/>
+<circle cx="13.5" cy="5.5" r="0.41" fill="#f2ffff"/>
+<circle cx="15.5" cy="5.5" r="0.41" fill="#f2ffff"/>
+<circle cx="19.5" cy="5.5" r="0.41" fill="#f2ffff"/>
+<circle cx="20.5" cy="5.5" r="0.41" fill="#f2ffff"/>
+<circle cx="21.5" cy="5.5" r="0.41" fill="#f2ffff"/>
+<circle cx="22.5" cy="5.5" r="0.41" fill="#f2ffff"/>
+<circle cx="24.5" cy="5.5" r="0.41" fill="#f2ffff"/>
+<circle cx="26.5" cy="5.5" r="0.41" fill="#f2ffff"/>
+<circle cx="28.5" cy="5.5" r="0.41" fill="#f2ffff"/>
+<circle cx="12.5" cy="6.5" r="0.41" fill="#f2ffff"/>
+<circle cx="13.5" cy="6.5" r="0.41" fill="#f2ffff"/>
+<circle cx="14.5" cy="6.5" r="0.41" fill="#f2ffff"/>
+<circle cx="15.5" cy="6.5" r="0.41" fill="#f2ffff"/>
+<circle cx="16.5" cy="6.5" r="0.41" fill="#f2ffff"/>
+<circle cx="17.5" cy="6.5" r="0.41" fill="#f2ffff"/>
+<circle cx="19.5" cy="6.5" r="0.41" fill="#f2ffff"/>
+<circle cx="21.5" cy="6.5" r="0.41" fill="#f2ffff"/>
+<circle cx="22.5" cy="6.5" r="0.41" fill="#f2ffff"/>
+<circle cx="23.5" cy="6.5" r="0.41" fill="#f2ffff"/>
+<circle cx="25.5" cy="6.5" r="0.41" fill="#f2ffff"/>
+<circle cx="26.5" cy="6.5" r="0.41" fill="#f2ffff"/>
+<circle cx="27.5" cy="6.5" r="0.41" fill="#f2ffff"/>
+<circle cx="28.5" cy="6.5" r="0.41" fill="#f2ffff"/>
+<circle cx="12.5" cy="7.5" r="0.41" fill="#f2ffff"/>
+<circle cx="14.5" cy="7.5" r="0.41" fill="#f2ffff"/>
+<circle cx="16.5" cy="7.5" r="0.41" fill="#f2ffff"/>
+<circle cx="18.5" cy="7.5" r="0.41" fill="#f2ffff"/>
+<circle cx="19.5" cy="7.5" r="0.41" fill="#f2ffff"/>
+<circle cx="21.5" cy="7.5" r="0.41" fill="#f2ffff"/>
+<circle cx="24.5" cy="7.5" r="0.41" fill="#f2ffff"/>
+<circle cx="25.5" cy="7.5" r="0.41" fill="#f2ffff"/>
+<circle cx="27.5" cy="7.5" r="0.41" fill="#f2ffff"/>
+<circle cx="28.5" cy="7.5" r="0.41" fill="#f2ffff"/>
+<circle cx="13.5" cy="8.5" r="0.41" fill="#f2ffff"/>
+<circle cx="17.5" cy="8.5" r="0.41" fill="#f2ffff"/>
+<circle cx="18.5" cy="8.5" r="0.41" fill="#f2ffff"/>
+<circle cx="19.5" cy="8.5" r="0.41" fill="#f2ffff"/>
+<circle cx="21.5" cy="8.5" r="0.41" fill="#f2ffff"/>
+<circle cx="23.5" cy="8.5" r="0.41" fill="#f2ffff"/>
+<circle cx="24.5" cy="8.5" r="0.41" fill="#f2ffff"/>
+<circle cx="25.5" cy="8.5" r="0.41" fill="#f2ffff"/>
+<circle cx="27.5" cy="8.5" r="0.41" fill="#f2ffff"/>
+<circle cx="13.5" cy="9.5" r="0.41" fill="#f2ffff"/>
+<circle cx="14.5" cy="9.5" r="0.41" fill="#f2ffff"/>
+<circle cx="15.5" cy="9.5" r="0.41" fill="#f2ffff"/>
+<circle cx="16.5" cy="9.5" r="0.41" fill="#f2ffff"/>
+<circle cx="21.5" cy="9.5" r="0.41" fill="#f2ffff"/>
+<circle cx="24.5" cy="9.5" r="0.41" fill="#f2ffff"/>
+<circle cx="28.5" cy="9.5" r="0.41" fill="#f2ffff"/>
+<circle cx="12.5" cy="10.5" r="0.41" fill="#f2ffff"/>
+<circle cx="14.5" cy="10.5" r="0.41" fill="#f2ffff"/>
+<circle cx="16.5" cy="10.5" r="0.41" fill="#f2ffff"/>
+<circle cx="18.5" cy="10.5" r="0.41" fill="#f2ffff"/>
+<circle cx="20.5" cy="10.5" r="0.41" fill="#f2ffff"/>
+<circle cx="22.5" cy="10.5" r="0.41" fill="#f2ffff"/>
+<circle cx="24.5" cy="10.5" r="0.41" fill="#f2ffff"/>
+<circle cx="26.5" cy="10.5" r="0.41" fill="#f2ffff"/>
+<circle cx="28.5" cy="10.5" r="0.41" fill="#f2ffff"/>
+<circle cx="17.5" cy="11.5" r="0.41" fill="#f2ffff"/>
+<circle cx="19.5" cy="11.5" r="0.41" fill="#f2ffff"/>
+<circle cx="24.5" cy="11.5" r="0.41" fill="#f2ffff"/>
+<circle cx="27.5" cy="11.5" r="0.41" fill="#f2ffff"/>
+<circle cx="7.5" cy="12.5" r="0.41" fill="#f2ffff"/>
+<circle cx="8.5" cy="12.5" r="0.41" fill="#f2ffff"/>
+<circle cx="10.5" cy="12.5" r="0.41" fill="#f2ffff"/>
+<circle cx="11.5" cy="12.5" r="0.41" fill="#f2ffff"/>
+<circle cx="14.5" cy="12.5" r="0.41" fill="#f2ffff"/>
+<circle cx="15.5" cy="12.5" r="0.41" fill="#f2ffff"/>
+<circle cx="16.5" cy="12.5" r="0.41" fill="#f2ffff"/>
+<circle cx="17.5" cy="12.5" r="0.41" fill="#f2ffff"/>
+<circle cx="18.5" cy="12.5" r="0.41" fill="#f2ffff"/>
+<circle cx="19.5" cy="12.5" r="0.41" fill="#f2ffff"/>
+<circle cx="20.5" cy="12.5" r="0.41" fill="#f2ffff"/>
+<circle cx="21.5" cy="12.5" r="0.41" fill="#f2ffff"/>
+<circle cx="23.5" cy="12.5" r="0.41" fill="#f2ffff"/>
+<circle cx="27.5" cy="12.5" r="0.41" fill="#f2ffff"/>
+<circle cx="28.5" cy="12.5" r="0.41" fill="#f2ffff"/>
+<circle cx="33.5" cy="12.5" r="0.41" fill="#f2ffff"/>
+<circle cx="34.5" cy="12.5" r="0.41" fill="#f2ffff"/>
+<circle cx="4.5" cy="13.5" r="0.41" fill="#f2ffff"/>
+<circle cx="5.5" cy="13.5" r="0.41" fill="#f2ffff"/>
+<circle cx="7.5" cy="13.5" r="0.41" fill="#f2ffff"/>
+<circle cx="9.5" cy="13.5" r="0.41" fill="#f2ffff"/>
+<circle cx="12.5" cy="13.5" r="0.41" fill="#f2ffff"/>
+<circle cx="13.5" cy="13.5" r="0.41" fill="#f2ffff"/>
+<circle cx="14.5" cy="13.5" r="0.41" fill="#f2ffff"/>
+<circle cx="19.5" cy="13.5" r="0.41" fill="#f2ffff"/>
+<circle cx="21.5" cy="13.5" r="0.41" fill="#f2ffff"/>
+<circle cx="22.5" cy="13.5" r="0.41" fill="#f2ffff"/>
+<circle cx="26.5" cy="13.5" r="0.41" fill="#f2ffff"/>
+<circle cx="27.5" cy="13.5" r="0.41" fill="#f2ffff"/>
+<circle cx="29.5" cy="13.5" r="0.41" fill="#f2ffff"/>
+<circle cx="31.5" cy="13.5" r="0.41" fill="#f2ffff"/>
+<circle cx="32.5" cy="13.5" r="0.41" fill="#f2ffff"/>
+<circle cx="7.5" cy="14.5" r="0.41" fill="#f2ffff"/>
+<circle cx="8.5" cy="14.5" r="0.41" fill="#f2ffff"/>
+<circle cx="10.5" cy="14.5" r="0.41" fill="#f2ffff"/>
+<circle cx="12.5" cy="14.5" r="0.41" fill="#f2ffff"/>
+<circle cx="13.5" cy="14.5" r="0.41" fill="#f2ffff"/>
+<circle cx="14.5" cy="14.5" r="0.41" fill="#f2ffff"/>
+<circle cx="17.5" cy="14.5" r="0.41" fill="#f2ffff"/>
+<circle cx="21.5" cy="14.5" r="0.41" fill="#f2ffff"/>
+<circle cx="25.5" cy="14.5" r="0.41" fill="#f2ffff"/>
+<circle cx="27.5" cy="14.5" r="0.41" fill="#f2ffff"/>
+<circle cx="29.5" cy="14.5" r="0.41" fill="#f2ffff"/>
+<circle cx="30.5" cy="14.5" r="0.41" fill="#f2ffff"/>
+<circle cx="31.5" cy="14.5" r="0.41" fill="#f2ffff"/>
+<circle cx="33.5" cy="14.5" r="0.41" fill="#f2ffff"/>
+<circle cx="34.5" cy="14.5" r="0.41" fill="#f2ffff"/>
+<circle cx="35.5" cy="14.5" r="0.41" fill="#f2ffff"/>
+<circle cx="36.5" cy="14.5" r="0.41" fill="#f2ffff"/>
+<circle cx="6.5" cy="15.5" r="0.41" fill="#f2ffff"/>
+<circle cx="7.5" cy="15.5" r="0.41" fill="#f2ffff"/>
+<circle cx="8.5" cy="15.5" r="0.41" fill="#f2ffff"/>
+<circle cx="14.5" cy="15.5" r="0.41" fill="#f2ffff"/>
+<circle cx="17.5" cy="15.5" r="0.41" fill="#f2ffff"/>
+<circle cx="23.5" cy="15.5" r="0.41" fill="#f2ffff"/>
+<circle cx="31.5" cy="15.5" r="0.41" fill="#f2ffff"/>
+<circle cx="32.5" cy="15.5" r="0.41" fill="#f2ffff"/>
+<circle cx="33.5" cy="15.5" r="0.41" fill="#f2ffff"/>
+<circle cx="34.5" cy="15.5" r="0.41" fill="#f2ffff"/>
+<circle cx="4.5" cy="16.5" r="0.41" fill="#f2ffff"/>
+<circle cx="7.5" cy="16.5" r="0.41" fill="#f2ffff"/>
+<circle cx="9.5" cy="16.5" r="0.41" fill="#f2ffff"/>
+<circle cx="10.5" cy="16.5" r="0.41" fill="#f2ffff"/>
+<circle cx="12.5" cy="16.5" r="0.41" fill="#f2ffff"/>
+<circle cx="13.5" cy="16.5" r="0.41" fill="#f2ffff"/>
+<circle cx="15.5" cy="16.5" r="0.41" fill="#f2ffff"/>
+<circle cx="20.5" cy="16.5" r="0.41" fill="#f2ffff"/>
+<circle cx="21.5" cy="16.5" r="0.41" fill="#f2ffff"/>
+<circle cx="24.5" cy="16.5" r="0.41" fill="#f2ffff"/>
+<circle cx="25.5" cy="16.5" r="0.41" fill="#f2ffff"/>
+<circle cx="26.5" cy="16.5" r="0.41" fill="#f2ffff"/>
+<circle cx="30.5" cy="16.5" r="0.41" fill="#f2ffff"/>
+<circle cx="32.5" cy="16.5" r="0.41" fill="#f2ffff"/>
+<circle cx="33.5" cy="16.5" r="0.41" fill="#f2ffff"/>
+<circle cx="35.5" cy="16.5" r="0.41" fill="#f2ffff"/>
+<circle cx="36.5" cy="16.5" r="0.41" fill="#f2ffff"/>
+<circle cx="4.5" cy="17.5" r="0.41" fill="#f2ffff"/>
+<circle cx="7.5" cy="17.5" r="0.41" fill="#f2ffff"/>
+<circle cx="9.5" cy="17.5" r="0.41" fill="#f2ffff"/>
+<circle cx="12.5" cy="17.5" r="0.41" fill="#f2ffff"/>
+<circle cx="13.5" cy="17.5" r="0.41" fill="#f2ffff"/>
+<circle cx="24.5" cy="17.5" r="0.41" fill="#f2ffff"/>
+<circle cx="25.5" cy="17.5" r="0.41" fill="#f2ffff"/>
+<circle cx="26.5" cy="17.5" r="0.41" fill="#f2ffff"/>
+<circle cx="27.5" cy="17.5" r="0.41" fill="#f2ffff"/>
+<circle cx="29.5" cy="17.5" r="0.41" fill="#f2ffff"/>
+<circle cx="33.5" cy="17.5" r="0.41" fill="#f2ffff"/>
+<circle cx="35.5" cy="17.5" r="0.41" fill="#f2ffff"/>
+<circle cx="5.5" cy="18.5" r="0.41" fill="#f2ffff"/>
+<circle cx="6.5" cy="18.5" r="0.41" fill="#f2ffff"/>
+<circle cx="9.5" cy="18.5" r="0.41" fill="#f2ffff"/>
+<circle cx="10.5" cy="18.5" r="0.41" fill="#f2ffff"/>
+<circle cx="12.5" cy="18.5" r="0.41" fill="#f2ffff"/>
+<circle cx="14.5" cy="18.5" r="0.41" fill="#f2ffff"/>
+<circle cx="15.5" cy="18.5" r="0.41" fill="#f2ffff"/>
+<circle cx="24.5" cy="18.5" r="0.41" fill="#f2ffff"/>
+<circle cx="28.5" cy="18.5" r="0.41" fill="#f2ffff"/>
+<circle cx="30.5" cy="18.5" r="0.41" fill="#f2ffff"/>
+<circle cx="32.5" cy="18.5" r="0.41" fill="#f2ffff"/>
+<circle cx="33.5" cy="18.5" r="0.41" fill="#f2ffff"/>
+<circle cx="4.5" cy="19.5" r="0.41" fill="#f2ffff"/>
+<circle cx="6.5" cy="19.5" r="0.41" fill="#f2ffff"/>
+<circle cx="7.5" cy="19.5" r="0.41" fill="#f2ffff"/>
+<circle cx="12.5" cy="19.5" r="0.41" fill="#f2ffff"/>
+<circle cx="13.5" cy="19.5" r="0.41" fill="#f2ffff"/>
+<circle cx="24.5" cy="19.5" r="0.41" fill="#f2ffff"/>
+<circle cx="28.5" cy="19.5" r="0.41" fill="#f2ffff"/>
+<circle cx="29.5" cy="19.5" r="0.41" fill="#f2ffff"/>
+<circle cx="32.5" cy="19.5" r="0.41" fill="#f2ffff"/>
+<circle cx="34.5" cy="19.5" r="0.41" fill="#f2ffff"/>
+<circle cx="35.5" cy="19.5" r="0.41" fill="#f2ffff"/>
+<circle cx="4.5" cy="20.5" r="0.41" fill="#f2ffff"/>
+<circle cx="10.5" cy="20.5" r="0.41" fill="#f2ffff"/>
+<circle cx="11.5" cy="20.5" r="0.41" fill="#f2ffff"/>
+<circle cx="13.5" cy="20.5" r="0.41" fill="#f2ffff"/>
+<circle cx="14.5" cy="20.5" r="0.41" fill="#f2ffff"/>
+<circle cx="16.5" cy="20.5" r="0.41" fill="#f2ffff"/>
+<circle cx="29.5" cy="20.5" r="0.41" fill="#f2ffff"/>
+<circle cx="30.5" cy="20.5" r="0.41" fill="#f2ffff"/>
+<circle cx="31.5" cy="20.5" r="0.41" fill="#f2ffff"/>
+<circle cx="32.5" cy="20.5" r="0.41" fill="#f2ffff"/>
+<circle cx="33.5" cy="20.5" r="0.41" fill="#f2ffff"/>
+<circle cx="34.5" cy="20.5" r="0.41" fill="#f2ffff"/>
+<circle cx="5.5" cy="21.5" r="0.41" fill="#f2ffff"/>
+<circle cx="7.5" cy="21.5" r="0.41" fill="#f2ffff"/>
+<circle cx="9.5" cy="21.5" r="0.41" fill="#f2ffff"/>
+<circle cx="12.5" cy="21.5" r="0.41" fill="#f2ffff"/>
+<circle cx="13.5" cy="21.5" r="0.41" fill="#f2ffff"/>
+<circle cx="14.5" cy="21.5" r="0.41" fill="#f2ffff"/>
+<circle cx="16.5" cy="21.5" r="0.41" fill="#f2ffff"/>
+<circle cx="24.5" cy="21.5" r="0.41" fill="#f2ffff"/>
+<circle cx="26.5" cy="21.5" r="0.41" fill="#f2ffff"/>
+<circle cx="28.5" cy="21.5" r="0.41" fill="#f2ffff"/>
+<circle cx="30.5" cy="21.5" r="0.41" fill="#f2ffff"/>
+<circle cx="31.5" cy="21.5" r="0.41" fill="#f2ffff"/>
+<circle cx="32.5" cy="21.5" r="0.41" fill="#f2ffff"/>
+<circle cx="33.5" cy="21.5" r="0.41" fill="#f2ffff"/>
+<circle cx="36.5" cy="21.5" r="0.41" fill="#f2ffff"/>
+<circle cx="4.5" cy="22.5" r="0.41" fill="#f2ffff"/>
+<circle cx="6.5" cy="22.5" r="0.41" fill="#f2ffff"/>
+<circle cx="7.5" cy="22.5" r="0.41" fill="#f2ffff"/>
+<circle cx="10.5" cy="22.5" r="0.41" fill="#f2ffff"/>
+<circle cx="11.5" cy="22.5" r="0.41" fill="#f2ffff"/>
+<circle cx="13.5" cy="22.5" r="0.41" fill="#f2ffff"/>
+<circle cx="14.5" cy="22.5" r="0.41" fill="#f2ffff"/>
+<circle cx="25.5" cy="22.5" r="0.41" fill="#f2ffff"/>
+<circle cx="27.5" cy="22.5" r="0.41" fill="#f2ffff"/>
+<circle cx="33.5" cy="22.5" r="0.41" fill="#f2ffff"/>
+<circle cx="34.5" cy="22.5" r="0.41" fill="#f2ffff"/>
+<circle cx="36.5" cy="22.5" r="0.41" fill="#f2ffff"/>
+<circle cx="5.5" cy="23.5" r="0.41" fill="#f2ffff"/>
+<circle cx="9.5" cy="23.5" r="0.41" fill="#f2ffff"/>
+<circle cx="11.5" cy="23.5" r="0.41" fill="#f2ffff"/>
+<circle cx="13.5" cy="23.5" r="0.41" fill="#f2ffff"/>
+<circle cx="14.5" cy="23.5" r="0.41" fill="#f2ffff"/>
+<circle cx="16.5" cy="23.5" r="0.41" fill="#f2ffff"/>
+<circle cx="24.5" cy="23.5" r="0.41" fill="#f2ffff"/>
+<circle cx="26.5" cy="23.5" r="0.41" fill="#f2ffff"/>
+<circle cx="27.5" cy="23.5" r="0.41" fill="#f2ffff"/>
+<circle cx="28.5" cy="23.5" r="0.41" fill="#f2ffff"/>
+<circle cx="29.5" cy="23.5" r="0.41" fill="#f2ffff"/>
+<circle cx="33.5" cy="23.5" r="0.41" fill="#f2ffff"/>
+<circle cx="34.5" cy="23.5" r="0.41" fill="#f2ffff"/>
+<circle cx="36.5" cy="23.5" r="0.41" fill="#f2ffff"/>
+<circle cx="4.5" cy="24.5" r="0.41" fill="#f2ffff"/>
+<circle cx="5.5" cy="24.5" r="0.41" fill="#f2ffff"/>
+<circle cx="6.5" cy="24.5" r="0.41" fill="#f2ffff"/>
+<circle cx="8.5" cy="24.5" r="0.41" fill="#f2ffff"/>
+<circle cx="9.5" cy="24.5" r="0.41" fill="#f2ffff"/>
+<circle cx="10.5" cy="24.5" r="0.41" fill="#f2ffff"/>
+<circle cx="11.5" cy="24.5" r="0.41" fill="#f2ffff"/>
+<circle cx="13.5" cy="24.5" r="0.41" fill="#f2ffff"/>
+<circle cx="14.5" cy="24.5" r="0.41" fill="#f2ffff"/>
+<circle cx="19.5" cy="24.5" r="0.41" fill="#f2ffff"/>
+<circle cx="20.5" cy="24.5" r="0.41" fill="#f2ffff"/>
+<circle cx="21.5" cy="24.5" r="0.41" fill="#f2ffff"/>
+<circle cx="30.5" cy="24.5" r="0.41" fill="#f2ffff"/>
+<circle cx="33.5" cy="24.5" r="0.41" fill="#f2ffff"/>
+<circle cx="36.5" cy="24.5" r="0.41" fill="#f2ffff"/>
+<circle cx="4.5" cy="25.5" r="0.41" fill="#f2ffff"/>
+<circle cx="5.5" cy="25.5" r="0.41" fill="#f2ffff"/>
+<circle cx="6.5" cy="25.5" r="0.41" fill="#f2ffff"/>
+<circle cx="9.5" cy="25.5" r="0.41" fill="#f2ffff"/>
+<circle cx="12.5" cy="25.5" r="0.41" fill="#f2ffff"/>
+<circle cx="13.5" cy="25.5" r="0.41" fill="#f2ffff"/>
+<circle cx="14.5" cy="25.5" r="0.41" fill="#f2ffff"/>
+<circle cx="16.5" cy="25.5" r="0.41" fill="#f2ffff"/>
+<circle cx="18.5" cy="25.5" r="0.41" fill="#f2ffff"/>
+<circle cx="19.5" cy="25.5" r="0.41" fill="#f2ffff"/>
+<circle cx="21.5" cy="25.5" r="0.41" fill="#f2ffff"/>
+<circle cx="26.5" cy="25.5" r="0.41" fill="#f2ffff"/>
+<circle cx="28.5" cy="25.5" r="0.41" fill="#f2ffff"/>
+<circle cx="30.5" cy="25.5" r="0.41" fill="#f2ffff"/>
+<circle cx="31.5" cy="25.5" r="0.41" fill="#f2ffff"/>
+<circle cx="32.5" cy="25.5" r="0.41" fill="#f2ffff"/>
+<circle cx="33.5" cy="25.5" r="0.41" fill="#f2ffff"/>
+<circle cx="4.5" cy="26.5" r="0.41" fill="#f2ffff"/>
+<circle cx="7.5" cy="26.5" r="0.41" fill="#f2ffff"/>
+<circle cx="9.5" cy="26.5" r="0.41" fill="#f2ffff"/>
+<circle cx="10.5" cy="26.5" r="0.41" fill="#f2ffff"/>
+<circle cx="14.5" cy="26.5" r="0.41" fill="#f2ffff"/>
+<circle cx="15.5" cy="26.5" r="0.41" fill="#f2ffff"/>
+<circle cx="16.5" cy="26.5" r="0.41" fill="#f2ffff"/>
+<circle cx="17.5" cy="26.5" r="0.41" fill="#f2ffff"/>
+<circle cx="21.5" cy="26.5" r="0.41" fill="#f2ffff"/>
+<circle cx="22.5" cy="26.5" r="0.41" fill="#f2ffff"/>
+<circle cx="25.5" cy="26.5" r="0.41" fill="#f2ffff"/>
+<circle cx="26.5" cy="26.5" r="0.41" fill="#f2ffff"/>
+<circle cx="27.5" cy="26.5" r="0.41" fill="#f2ffff"/>
+<circle cx="30.5" cy="26.5" r="0.41" fill="#f2ffff"/>
+<circle cx="33.5" cy="26.5" r="0.41" fill="#f2ffff"/>
+<circle cx="34.5" cy="26.5" r="0.41" fill="#f2ffff"/>
+<circle cx="35.5" cy="26.5" r="0.41" fill="#f2ffff"/>
+<circle cx="36.5" cy="26.5" r="0.41" fill="#f2ffff"/>
+<circle cx="4.5" cy="27.5" r="0.41" fill="#f2ffff"/>
+<circle cx="6.5" cy="27.5" r="0.41" fill="#f2ffff"/>
+<circle cx="7.5" cy="27.5" r="0.41" fill="#f2ffff"/>
+<circle cx="8.5" cy="27.5" r="0.41" fill="#f2ffff"/>
+<circle cx="13.5" cy="27.5" r="0.41" fill="#f2ffff"/>
+<circle cx="14.5" cy="27.5" r="0.41" fill="#f2ffff"/>
+<circle cx="16.5" cy="27.5" r="0.41" fill="#f2ffff"/>
+<circle cx="17.5" cy="27.5" r="0.41" fill="#f2ffff"/>
+<circle cx="19.5" cy="27.5" r="0.41" fill="#f2ffff"/>
+<circle cx="23.5" cy="27.5" r="0.41" fill="#f2ffff"/>
+<circle cx="27.5" cy="27.5" r="0.41" fill="#f2ffff"/>
+<circle cx="28.5" cy="27.5" r="0.41" fill="#f2ffff"/>
+<circle cx="31.5" cy="27.5" r="0.41" fill="#f2ffff"/>
+<circle cx="32.5" cy="27.5" r="0.41" fill="#f2ffff"/>
+<circle cx="34.5" cy="27.5" r="0.41" fill="#f2ffff"/>
+<circle cx="35.5" cy="27.5" r="0.41" fill="#f2ffff"/>
+<circle cx="36.5" cy="27.5" r="0.41" fill="#f2ffff"/>
+<circle cx="4.5" cy="28.5" r="0.41" fill="#f2ffff"/>
+<circle cx="5.5" cy="28.5" r="0.41" fill="#f2ffff"/>
+<circle cx="9.5" cy="28.5" r="0.41" fill="#f2ffff"/>
+<circle cx="10.5" cy="28.5" r="0.41" fill="#f2ffff"/>
+<circle cx="12.5" cy="28.5" r="0.41" fill="#f2ffff"/>
+<circle cx="15.5" cy="28.5" r="0.41" fill="#f2ffff"/>
+<circle cx="20.5" cy="28.5" r="0.41" fill="#f2ffff"/>
+<circle cx="22.5" cy="28.5" r="0.41" fill="#f2ffff"/>
+<circle cx="27.5" cy="28.5" r="0.41" fill="#f2ffff"/>
+<circle cx="28.5" cy="28.5" r="0.41" fill="#f2ffff"/>
+<circle cx="29.5" cy="28.5" r="0.41" fill="#f2ffff"/>
+<circle cx="30.5" cy="28.5" r="0.41" fill="#f2ffff"/>
+<circle cx="31.5" cy="28.5" r="0.41" fill="#f2ffff"/>
+<circle cx="32.5" cy="28.5" r="0.41" fill="#f2ffff"/>
+<circle cx="35.5" cy="28.5" r="0.41" fill="#f2ffff"/>
+<circle cx="36.5" cy="28.5" r="0.41" fill="#f2ffff"/>
+<circle cx="12.5" cy="29.5" r="0.41" fill="#f2ffff"/>
+<circle cx="13.5" cy="29.5" r="0.41" fill="#f2ffff"/>
+<circle cx="14.5" cy="29.5" r="0.41" fill="#f2ffff"/>
+<circle cx="18.5" cy="29.5" r="0.41" fill="#f2ffff"/>
+<circle cx="21.5" cy="29.5" r="0.41" fill="#f2ffff"/>
+<circle cx="24.5" cy="29.5" r="0.41" fill="#f2ffff"/>
+<circle cx="25.5" cy="29.5" r="0.41" fill="#f2ffff"/>
+<circle cx="28.5" cy="29.5" r="0.41" fill="#f2ffff"/>
+<circle cx="32.5" cy="29.5" r="0.41" fill="#f2ffff"/>
+<circle cx="33.5" cy="29.5" r="0.41" fill="#f2ffff"/>
+<circle cx="12.5" cy="30.5" r="0.41" fill="#f2ffff"/>
+<circle cx="13.5" cy="30.5" r="0.41" fill="#f2ffff"/>
+<circle cx="15.5" cy="30.5" r="0.41" fill="#f2ffff"/>
+<circle cx="20.5" cy="30.5" r="0.41" fill="#f2ffff"/>
+<circle cx="21.5" cy="30.5" r="0.41" fill="#f2ffff"/>
+<circle cx="23.5" cy="30.5" r="0.41" fill="#f2ffff"/>
+<circle cx="24.5" cy="30.5" r="0.41" fill="#f2ffff"/>
+<circle cx="27.5" cy="30.5" r="0.41" fill="#f2ffff"/>
+<circle cx="28.5" cy="30.5" r="0.41" fill="#f2ffff"/>
+<circle cx="30.5" cy="30.5" r="0.41" fill="#f2ffff"/>
+<circle cx="32.5" cy="30.5" r="0.41" fill="#f2ffff"/>
+<circle cx="17.5" cy="31.5" r="0.41" fill="#f2ffff"/>
+<circle cx="19.5" cy="31.5" r="0.41" fill="#f2ffff"/>
+<circle cx="21.5" cy="31.5" r="0.41" fill="#f2ffff"/>
+<circle cx="22.5" cy="31.5" r="0.41" fill="#f2ffff"/>
+<circle cx="25.5" cy="31.5" r="0.41" fill="#f2ffff"/>
+<circle cx="26.5" cy="31.5" r="0.41" fill="#f2ffff"/>
+<circle cx="28.5" cy="31.5" r="0.41" fill="#f2ffff"/>
+<circle cx="32.5" cy="31.5" r="0.41" fill="#f2ffff"/>
+<circle cx="33.5" cy="31.5" r="0.41" fill="#f2ffff"/>
+<circle cx="34.5" cy="31.5" r="0.41" fill="#f2ffff"/>
+<circle cx="35.5" cy="31.5" r="0.41" fill="#f2ffff"/>
+<circle cx="12.5" cy="32.5" r="0.41" fill="#f2ffff"/>
+<circle cx="16.5" cy="32.5" r="0.41" fill="#f2ffff"/>
+<circle cx="18.5" cy="32.5" r="0.41" fill="#f2ffff"/>
+<circle cx="19.5" cy="32.5" r="0.41" fill="#f2ffff"/>
+<circle cx="21.5" cy="32.5" r="0.41" fill="#f2ffff"/>
+<circle cx="25.5" cy="32.5" r="0.41" fill="#f2ffff"/>
+<circle cx="26.5" cy="32.5" r="0.41" fill="#f2ffff"/>
+<circle cx="27.5" cy="32.5" r="0.41" fill="#f2ffff"/>
+<circle cx="28.5" cy="32.5" r="0.41" fill="#f2ffff"/>
+<circle cx="29.5" cy="32.5" r="0.41" fill="#f2ffff"/>
+<circle cx="30.5" cy="32.5" r="0.41" fill="#f2ffff"/>
+<circle cx="31.5" cy="32.5" r="0.41" fill="#f2ffff"/>
+<circle cx="32.5" cy="32.5" r="0.41" fill="#f2ffff"/>
+<circle cx="33.5" cy="32.5" r="0.41" fill="#f2ffff"/>
+<circle cx="35.5" cy="32.5" r="0.41" fill="#f2ffff"/>
+<circle cx="12.5" cy="33.5" r="0.41" fill="#f2ffff"/>
+<circle cx="13.5" cy="33.5" r="0.41" fill="#f2ffff"/>
+<circle cx="15.5" cy="33.5" r="0.41" fill="#f2ffff"/>
+<circle cx="18.5" cy="33.5" r="0.41" fill="#f2ffff"/>
+<circle cx="19.5" cy="33.5" r="0.41" fill="#f2ffff"/>
+<circle cx="21.5" cy="33.5" r="0.41" fill="#f2ffff"/>
+<circle cx="23.5" cy="33.5" r="0.41" fill="#f2ffff"/>
+<circle cx="25.5" cy="33.5" r="0.41" fill="#f2ffff"/>
+<circle cx="26.5" cy="33.5" r="0.41" fill="#f2ffff"/>
+<circle cx="28.5" cy="33.5" r="0.41" fill="#f2ffff"/>
+<circle cx="29.5" cy="33.5" r="0.41" fill="#f2ffff"/>
+<circle cx="31.5" cy="33.5" r="0.41" fill="#f2ffff"/>
+<circle cx="35.5" cy="33.5" r="0.41" fill="#f2ffff"/>
+<circle cx="14.5" cy="34.5" r="0.41" fill="#f2ffff"/>
+<circle cx="18.5" cy="34.5" r="0.41" fill="#f2ffff"/>
+<circle cx="21.5" cy="34.5" r="0.41" fill="#f2ffff"/>
+<circle cx="23.5" cy="34.5" r="0.41" fill="#f2ffff"/>
+<circle cx="24.5" cy="34.5" r="0.41" fill="#f2ffff"/>
+<circle cx="32.5" cy="34.5" r="0.41" fill="#f2ffff"/>
+<circle cx="33.5" cy="34.5" r="0.41" fill="#f2ffff"/>
+<circle cx="35.5" cy="34.5" r="0.41" fill="#f2ffff"/>
+<circle cx="36.5" cy="34.5" r="0.41" fill="#f2ffff"/>
+<circle cx="13.5" cy="35.5" r="0.41" fill="#f2ffff"/>
+<circle cx="17.5" cy="35.5" r="0.41" fill="#f2ffff"/>
+<circle cx="18.5" cy="35.5" r="0.41" fill="#f2ffff"/>
+<circle cx="19.5" cy="35.5" r="0.41" fill="#f2ffff"/>
+<circle cx="20.5" cy="35.5" r="0.41" fill="#f2ffff"/>
+<circle cx="21.5" cy="35.5" r="0.41" fill="#f2ffff"/>
+<circle cx="22.5" cy="35.5" r="0.41" fill="#f2ffff"/>
+<circle cx="23.5" cy="35.5" r="0.41" fill="#f2ffff"/>
+<circle cx="26.5" cy="35.5" r="0.41" fill="#f2ffff"/>
+<circle cx="27.5" cy="35.5" r="0.41" fill="#f2ffff"/>
+<circle cx="33.5" cy="35.5" r="0.41" fill="#f2ffff"/>
+<circle cx="35.5" cy="35.5" r="0.41" fill="#f2ffff"/>
+<circle cx="36.5" cy="35.5" r="0.41" fill="#f2ffff"/>
+<circle cx="13.5" cy="36.5" r="0.41" fill="#f2ffff"/>
+<circle cx="14.5" cy="36.5" r="0.41" fill="#f2ffff"/>
+<circle cx="16.5" cy="36.5" r="0.41" fill="#f2ffff"/>
+<circle cx="17.5" cy="36.5" r="0.41" fill="#f2ffff"/>
+<circle cx="18.5" cy="36.5" r="0.41" fill="#f2ffff"/>
+<circle cx="19.5" cy="36.5" r="0.41" fill="#f2ffff"/>
+<circle cx="24.5" cy="36.5" r="0.41" fill="#f2ffff"/>
+<circle cx="27.5" cy="36.5" r="0.41" fill="#f2ffff"/>
+<circle cx="28.5" cy="36.5" r="0.41" fill="#f2ffff"/>
+<circle cx="30.5" cy="36.5" r="0.41" fill="#f2ffff"/>
+<circle cx="32.5" cy="36.5" r="0.41" fill="#f2ffff"/>
+<circle cx="34.5" cy="36.5" r="0.41" fill="#f2ffff"/>
+<rect x="16.55" y="16.55" width="7.9" height="7.9" rx="1.7" fill="#1a1a1a"/>
+<clipPath id="markClip"><rect x="17.55" y="17.55" width="5.9" height="5.9" rx="1.25"/></clipPath>
+<image href="data:image/png;base64,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" x="17.55" y="17.55" width="5.9" height="5.9" clip-path="url(#markClip)" preserveAspectRatio="xMidYMid slice"/>
+</svg>
+</div>
+  </div>
+</section>
+
+</body>
+</html>

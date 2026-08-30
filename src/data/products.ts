@@ -29,19 +29,21 @@ export const products: Product[] = [
     slug: "servesync-pos",
     name: "ServeSync POS",
     category: "Multi-vertical POS",
-    tagline: "One POS for restaurants, pharmacies and marts",
+    tagline: "One POS, 62 kinds of business",
     description:
-      "One POS that runs three kinds of business. The edition is picked at first run — restaurant, pharmacy or mart — and it decides the theme, the vocabulary and which of the 33 modules appear: a pharmacy gets prescriptions and a controlled register but no floor plan; a mart gets promotions and scale labels but no kitchen display. Same offline-first, multi-branch codebase underneath, so a fix lands in all three at once. The pharmacy and mart captures below were taken in the standalone builds those editions were ported from.",
+      "One POS that runs 62 kinds of business. The type is picked at first run — grocery, mart, restaurant, cafe, bakery, pharmacy, salon, gym and fifty-four more — and resolves to one of three engines, which decides the theme, the vocabulary and which of the 33 modules appear: a pharmacy gets prescriptions and a controlled register but no floor plan; a mart gets promotions and scale labels but no kitchen display. Same offline-first, multi-branch codebase underneath, so a fix lands in every type at once. The pharmacy and mart captures below were taken in the standalone builds those engines were ported from.",
     image: "/images/products/servesync-logo.webp",
     brandColor: "#33BCA8",
     audience:
       "Restaurants, cafés and cloud kitchens; retail pharmacies and medical stores; supermarkets, grocery stores and mini-marts",
-    badge: "3 editions",
+    badge: "62 business types",
     features: [
-      "Restaurant, pharmacy or mart — chosen at first run, themed and relabelled to match",
+      "62 business types across retail, food, services, health and home trades",
+      "Three engines underneath — restaurant, pharmacy, mart — picked for you by type",
       "33 modules, gated per edition: 26 shared, 4 pharmacy-only, 3 mart-only",
       "Offline-first PWA — an outbox replays every sale on reconnect",
-      "Multi-branch by design: one owner login over many shops, one central warehouse",
+      "Multi-branch by design: one owner login over many shops and warehouses",
+      "Multiple warehouses, each with its own code, category and staff",
       "Pharmacy: batch stock with FEFO dispensing, Rx gating and a controlled register",
       "Mart: barcode scanning three ways, promotions, gift cards and scale labels",
       "Restaurant: kitchen display, live floor plan, delivery and Foodpanda",
@@ -51,12 +53,12 @@ export const products: Product[] = [
     ],
     moduleGroups: [
       {
-        title: "Editions — how one product becomes three",
+        title: "Business types — how one product becomes sixty-two",
         items: [
           {
-            name: "Edition picker at first run",
+            name: "Business-type picker at first run",
             detail:
-              "The superadmin chooses restaurant, pharmacy or mart on first launch, and can change it later in Setup. The choice is stored server-side and served pre-login, so even the splash and login screen are already themed for the business. Existing restaurant installs migrate to the restaurant edition and are never asked.",
+              "The superadmin searches 62 types — 20 retail, 13 food, 12 services, 9 health and beauty, 7 home and micro — and picks the match. Each resolves to an engine: 45 run the mart engine, 15 the restaurant engine, 2 the pharmacy engine. It can be changed later in Setup. The choice is stored server-side and served pre-login, so even the splash and login screen are already themed for the business. Existing restaurant installs migrate to the restaurant edition and are never asked.",
           },
           {
             name: "Runtime theming, not separate builds",
@@ -623,7 +625,7 @@ export const products: Product[] = [
     ],
     specs: [
       { label: "Modules", value: "33" },
-      { label: "Editions", value: "3" },
+      { label: "Business types", value: "62" },
       { label: "REST endpoints", value: "236" },
       { label: "Runtime deps", value: "4" },
     ],
@@ -637,7 +639,7 @@ export const products: Product[] = [
       "Gift card",
       "Credit on account",
     ],
-    metric: { label: "Verticals from one codebase", value: "3" },
+    metric: { label: "Business types from one codebase", value: "62" },
     /*
       Three charts, one per edition.
 
@@ -1805,6 +1807,11 @@ export const products: Product[] = [
               "Either side can raise one, both attach evidence, and an operator rules. Held funds are the lever — the money has not moved yet, which is what makes a ruling enforceable.",
           },
           {
+            name: "Account recovery",
+            detail:
+              "A password-reset flow that gives a locked-out member somewhere to go rather than a dead end, working on a phone as well as a desktop — the sign-in screen was rebuilt around it.",
+          },
+          {
             name: "Security",
             detail:
               "Opaque session tokens stored as SHA-256 digests, sign-in rate-limited per email and per network, and an identical error for an unknown email and a wrong password so the form cannot be used to discover who has an account. A password change revokes every other session.",
@@ -2081,8 +2088,8 @@ export const products: Product[] = [
     ],
     specs: [
       { label: "Service modules", value: "19" },
-      { label: "API routes", value: "51" },
-      { label: "Prisma models", value: "38" },
+      { label: "API routes", value: "57" },
+      { label: "Prisma models", value: "39" },
       { label: "Clients", value: "3" },
     ],
     payments: ["Card", "Platform-held escrow", "Traveller payout"],
