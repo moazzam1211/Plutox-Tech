@@ -678,6 +678,10 @@ export const products: Product[] = [
       ladder starting at PKR 15,000, with its own tier names. Quoting a client the
       old numbers would have been a real problem.
 
+      The restaurant chart stops at Premium by choice — the POS does sell a
+      fourth Enterprise tier for it, but it is not advertised here. Pharmacy and
+      mart still show theirs.
+
       Enterprise runs exactly the same modules as Premium. What it sells is scale:
       it lifts the branch ceiling carried in the signed licence. The module list
       is deliberately identical so a Premium client can never lose a screen on the
@@ -726,18 +730,6 @@ export const products: Product[] = [
               "Branches command centre, Warehouse",
               "HR, Accounts, R&D Lab",
               "Foodpanda, PRA / FBR fiscal",
-            ],
-          },
-          {
-            name: "Enterprise",
-            price: "PKR 25,000",
-            period: "/ month",
-            summary: "Premium, across unlimited branches",
-            includes: [
-              "Every module Premium has — no more, no fewer",
-              "Lifts the branch ceiling in the licence",
-              "For groups past what Premium's licence covers",
-              "No screen is lost on the way up",
             ],
           },
         ],
