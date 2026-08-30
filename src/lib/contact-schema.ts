@@ -127,7 +127,7 @@ export const demoSchema = z
       }
     }
 
-    if (value.product === "ServeSync POS" && !value.business) {
+    if (value.product === "ServeSync ERP" && !value.business) {
       ctx.addIssue({
         code: "custom",
         path: ["business"],

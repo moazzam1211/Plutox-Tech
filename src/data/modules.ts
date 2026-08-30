@@ -45,7 +45,7 @@ export interface ProductModule {
   screens: [string, string][];
 }
 
-const SERVESYNC = { name: "ServeSync POS", slug: "servesync-pos" };
+const SERVESYNC = { name: "ServeSync ERP", slug: "servesync-pos" };
 const SERVESYNC_WEB = { name: "ServeSync Web", slug: "servesync-pos" };
 const SERVESYNC_RX = { name: "ServeSync Pharmacy", slug: "servesync-pos" };
 const SERVESYNC_MART = { name: "ServeSync Mart", slug: "servesync-pos" };

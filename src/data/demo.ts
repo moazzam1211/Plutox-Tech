@@ -8,7 +8,7 @@
 
 /** The three platforms, matching the `slug`s in `products.ts`. */
 export const productOptions = [
-  "ServeSync POS",
+  "ServeSync ERP",
   "StaySync Hotel ERP",
   "Fleet Flow",
 ] as const;
@@ -75,7 +75,7 @@ export interface SizeField {
  * "how many?" would have flattened all of that into a number nobody can price.
  */
 export const sizeFields: Record<ProductOption, SizeField[]> = {
-  "ServeSync POS": [
+  "ServeSync ERP": [
     { name: "outlets", label: "How many outlets?", short: "Outlets", options: siteOptions },
   ],
   "StaySync Hotel ERP": [

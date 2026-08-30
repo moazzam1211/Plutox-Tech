@@ -73,7 +73,7 @@ export function DemoForm() {
   */
   const product = useWatch({ control, name: "product" });
   const business = useWatch({ control, name: "business" });
-  const isServeSync = product === "ServeSync POS";
+  const isServeSync = product === "ServeSync ERP";
   const isRestaurant = isServeSync && business === "Restaurant";
 
   /*
@@ -289,7 +289,7 @@ export function DemoForm() {
           hundred trucks with six staff is a different conversation from twenty
           trucks with forty, and one generic "how many?" loses that.
         */}
-        {(product ? sizeFields[product] : sizeFields["ServeSync POS"]).map(
+        {(product ? sizeFields[product] : sizeFields["ServeSync ERP"]).map(
           (field) => (
             <Field
               key={field.name}

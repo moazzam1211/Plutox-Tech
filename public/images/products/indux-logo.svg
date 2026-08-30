@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 240" width="500" height="240" role="img" aria-label="INDUX">
-  <text x="250" y="150" fill="#0F766E"
-        font-family="'Space Grotesk','Inter',system-ui,sans-serif"
-        font-size="120" font-weight="700"
-        letter-spacing="8" text-anchor="middle">INDUX</text>
-  <rect x="48" y="184" width="404" height="4" rx="2" fill="#0F766E" opacity="0.35"/>
-</svg>

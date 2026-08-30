@@ -74,7 +74,7 @@ export const routes: Route[] = [
     short: "Products",
     summary: "The modules we build — ordering, KDS, inventory, analytics and more",
     children: [
-      { label: "ServeSync POS", href: "/products#servesync-pos", hint: "Restaurant · pharmacy · mart" },
+      { label: "ServeSync ERP", href: "/products#servesync-pos", hint: "Restaurant · pharmacy · mart" },
       { label: "StaySync Hotel ERP", href: "/products#staysync", hint: "Hospitality" },
       { label: "Fleet Flow", href: "/products#fleet-flow", hint: "Transport & logistics" },
       { label: "ONVEE", href: "/products#onvee", hint: "Cross-border delivery" },
@@ -90,7 +90,7 @@ export const routes: Route[] = [
     short: "Projects",
     summary: "Six platforms, built here",
     children: [
-      { label: "ServeSync POS", href: "/projects/servesync-pos", hint: "Restaurant · pharmacy · mart" },
+      { label: "ServeSync ERP", href: "/projects/servesync-pos", hint: "Restaurant · pharmacy · mart" },
       { label: "StaySync Hotel ERP", href: "/projects/staysync", hint: "Hospitality" },
       { label: "Fleet Flow", href: "/projects/fleet-flow", hint: "Transport & logistics" },
       { label: "ONVEE", href: "/projects/onvee", hint: "Cross-border delivery" },

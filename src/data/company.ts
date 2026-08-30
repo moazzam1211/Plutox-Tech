@@ -72,7 +72,7 @@ export const timeline: TimelineEntry[] = [
   },
   {
     year: "2023",
-    title: "ServeSync POS launches",
+    title: "ServeSync ERP launches",
     description:
       "The restaurant work was productised. Twelve venues went live in the first quarter after release.",
     milestone: "First product",

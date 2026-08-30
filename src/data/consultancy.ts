@@ -224,7 +224,7 @@ export const consultancyPrograms: ConsultancyProgram[] = [
       {
         title: "Systems & aggregator onboarding",
         detail:
-          "ServeSync POS configured for a delivery-only operation — kitchen display, rider dispatch, zones and a QR menu for direct orders — plus Foodpanda connected as a first-class channel so aggregator orders land in the same queue instead of being re-keyed off a tablet.",
+          "ServeSync ERP configured for a delivery-only operation — kitchen display, rider dispatch, zones and a QR menu for direct orders — plus Foodpanda connected as a first-class channel so aggregator orders land in the same queue instead of being re-keyed off a tablet.",
         deliverables: [
           "Configured POS, KDS and rider app",
           "Foodpanda channel integration and SKU mapping",
@@ -277,7 +277,7 @@ export const consultancyPrograms: ConsultancyProgram[] = [
       "Licensing checklist and document pack",
       "Kitchen layout and costed equipment schedule",
       "Recipes costed to the gram, loaded into the system",
-      "ServeSync POS, kitchen display, rider app and QR menu",
+      "ServeSync ERP, kitchen display, rider app and QR menu",
       "Foodpanda integration so aggregator orders skip the tablet",
       "Soft launch, full launch and a monthly review after it",
     ],
@@ -373,7 +373,7 @@ export const consultancyPrograms: ConsultancyProgram[] = [
       {
         title: "Systems & channels",
         detail:
-          "ServeSync POS configured for your format — live floor plan and table service for dine-in, a fast counter flow for QSR, kitchen display, QR self-order, delivery zones and riders, loyalty, and Foodpanda arriving in the same queue instead of on a separate tablet.",
+          "ServeSync ERP configured for your format — live floor plan and table service for dine-in, a fast counter flow for QSR, kitchen display, QR self-order, delivery zones and riders, loyalty, and Foodpanda arriving in the same queue instead of on a separate tablet.",
         deliverables: [
           "Configured POS, floor plan and kitchen display",
           "Delivery, QR ordering and aggregator setup",
@@ -419,7 +419,7 @@ export const consultancyPrograms: ConsultancyProgram[] = [
       "Seating plan, kitchen layout and a fit-out scope for your contractor",
       "Costed equipment schedule and the POS hardware alongside it",
       "Recipes costed to the gram and loaded into the system",
-      "ServeSync POS configured for your format, with delivery and Foodpanda",
+      "ServeSync ERP configured for your format, with delivery and Foodpanda",
       "Role-based hiring, rosters and staff training",
       "Soft launch, full launch, and a monthly review after it",
     ],

@@ -164,7 +164,7 @@ export default function IntroPage() {
                   <span className="block text-sm font-semibold">
                     {product.name}
                     {/* Explicit space: `ml-2` puts a visual gap here but leaves
-                        textContent reading "ServeSync POSRestaurant" for
+                        textContent reading "ServeSync ERPRestaurant" for
                         crawlers, screen readers and copy-paste. */}{" "}
                     <span className="font-normal text-muted-foreground">
                       {product.category}

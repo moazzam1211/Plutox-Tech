@@ -23,11 +23,11 @@ import type { Product } from "@/types";
  */
 export const products: Product[] = [
   /* ------------------------------------------------------------------ */
-  /* ServeSync POS — one product, three verticals                       */
+  /* ServeSync ERP — one product, three verticals                       */
   /* ------------------------------------------------------------------ */
   {
     slug: "servesync-pos",
-    name: "ServeSync POS",
+    name: "ServeSync ERP",
     category: "Multi-vertical POS",
     tagline: "One POS, 62 kinds of business",
     description:
@@ -678,9 +678,9 @@ export const products: Product[] = [
       ladder starting at PKR 15,000, with its own tier names. Quoting a client the
       old numbers would have been a real problem.
 
-      The restaurant chart stops at Premium by choice — the POS does sell a
-      fourth Enterprise tier for it, but it is not advertised here. Pharmacy and
-      mart still show theirs.
+      Restaurant and pharmacy stop at Premium by choice. The POS does sell a
+      fourth Enterprise tier on that ladder, but it is not advertised here. Mart
+      still shows its four.
 
       Enterprise runs exactly the same modules as Premium. What it sells is scale:
       it lifts the branch ceiling carried in the signed licence. The module list
@@ -738,31 +738,18 @@ export const products: Product[] = [
         edition: "Pharmacy",
         editionSummary:
           "Batch stock, prescriptions and the controlled register — no floor plan, no kitchen.",
-        note: "The pharmacy engine bills on the same ladder as the restaurant. Modules that do not apply — tables, kitchen, delivery, Foodpanda, R&D — are hidden by the engine rather than sold back to you, and prescriptions, doctors, the controlled register and expiry come with the type.",
+        note: "Two plans, billed monthly per branch. Modules that do not apply to a pharmacy — tables, kitchen, delivery, Foodpanda, R&D — are hidden by the engine rather than sold back to you, and prescriptions, doctors, the controlled register and expiry come with the type rather than with a tier.",
         plans: [
           {
             name: "Basic",
-            price: "PKR 5,000",
+            price: "PKR 7,000",
             period: "/ month",
             summary: "Core dispensing for a single counter",
             includes: [
-              "Sell, Orders, Invoices",
-              "Patients, Medicines",
+              "Sell, Orders, Invoices, Patients",
+              "Medicines with batch stock and expiry",
+              "Prescriptions, doctors, controlled register",
               "Till & shift, Setup",
-              "Prescriptions and the controlled register",
-            ],
-          },
-          {
-            name: "Standard",
-            price: "PKR 10,000",
-            period: "/ month",
-            summary: "Everything to run and grow one pharmacy",
-            featured: true,
-            includes: [
-              "Everything in Basic",
-              "Batch stock, expiry, demand planning",
-              "Staff, Suppliers, Expenses",
-              "Reports",
             ],
           },
           {
@@ -770,23 +757,12 @@ export const products: Product[] = [
             price: "PKR 15,000",
             period: "/ month",
             summary: "The full suite — every module, multi-branch",
+            featured: true,
             includes: [
-              "Everything in Standard",
+              "Everything in Basic",
               "Branches command centre, Warehouse",
-              "HR, Accounts",
-              "PRA / FBR fiscal",
-            ],
-          },
-          {
-            name: "Enterprise",
-            price: "PKR 25,000",
-            period: "/ month",
-            summary: "Premium, across unlimited branches",
-            includes: [
-              "Every module Premium has",
-              "Lifts the branch ceiling in the licence",
-              "For chains past what Premium covers",
-              "No screen is lost on the way up",
+              "Staff, Suppliers, Expenses, HR, Accounts",
+              "Reports, demand planning, PRA / FBR fiscal",
             ],
           },
         ],
@@ -2327,7 +2303,7 @@ export const products: Product[] = [
     tagline: "A routing, a BOM and a station are data, not code.",
     description:
       "A configurable manufacturing ERP running procurement, inventory, MRP, production, quality, maintenance, workforce, sales, dispatch and double-entry finance, with an offline-capable terminal for the factory floor and an append-only audit trail over all of it. Nothing is hardcoded to one industry — the seed ships two plants on the same engines, a food factory and a textile unit, which is the proof that the routing and the bill of materials are configuration rather than a fork. Nine shared engines do the enforcing; nineteen route modules and twenty-nine console screens sit on top of them.",
-    image: "/images/products/indux-logo.svg",
+    image: "/images/products/indux-logo.webp",
     brandColor: "#0F766E",
     audience:
       "Manufacturers running more than one plant, product line or process — food, textile and any industry whose routings differ but whose rules do not",
@@ -2481,9 +2457,146 @@ export const products: Product[] = [
       },
     ],
     /*
-      No gallery: the repository ships no screenshots, and this page's claim is
-      that its images are captures of running software. The roadmap says what is
-      built and what is next instead of borrowing a screen from another product.
+      26 captures of the running console, taken headlessly against the real
+      server with a signed-in owner session. The repo shipped no screenshot
+      tooling, so scripts/screenshots.mjs was written for it — the shots refresh
+      rather than rot.
+    */
+    screens: [
+      {
+        src: "/images/products/screens/indux-dashboard.webp",
+        label: "Dashboard",
+        caption: "The plant's day: output, orders and what needs attention",
+      },
+      {
+        src: "/images/products/screens/indux-portfolio.webp",
+        label: "Group Portfolio",
+        caption: "Both plants side by side — food and textile on one engine",
+      },
+      {
+        src: "/images/products/screens/indux-production.webp",
+        label: "Production Orders",
+        caption: "Orders against real routings and stations",
+      },
+      {
+        src: "/images/products/screens/indux-station.webp",
+        label: "Station Terminal",
+        caption: "The floor terminal, built to keep working offline",
+      },
+      {
+        src: "/images/products/screens/indux-mrp.webp",
+        label: "MRP Planning",
+        caption: "Requirements from BOMs and demand, before the line stops",
+      },
+      {
+        src: "/images/products/screens/indux-quality.webp",
+        label: "Quality Control",
+        caption: "Checks bound to the process, not filed beside it",
+      },
+      {
+        src: "/images/products/screens/indux-consignments.webp",
+        label: "Consignments",
+        caption: "Material through production, QC, packaging and dispatch",
+      },
+      {
+        src: "/images/products/screens/indux-trace.webp",
+        label: "Traceability",
+        caption: "Genealogy read back from a delivery to its lots",
+      },
+      {
+        src: "/images/products/screens/indux-inventory.webp",
+        label: "Inventory",
+        caption: "Every movement written to the shared stock ledger",
+      },
+      {
+        src: "/images/products/screens/indux-warehouse.webp",
+        label: "Warehouse",
+        caption: "Locations for material, packaging and finished goods",
+      },
+      {
+        src: "/images/products/screens/indux-procurement.webp",
+        label: "Procurement",
+        caption: "Requisition to purchase order to receipt",
+      },
+      {
+        src: "/images/products/screens/indux-suppliers.webp",
+        label: "Suppliers",
+        caption: "Vendors, terms and what is owed",
+      },
+      {
+        src: "/images/products/screens/indux-items.webp",
+        label: "Products & Materials",
+        caption: "The item master both plants share",
+      },
+      {
+        src: "/images/products/screens/indux-bom.webp",
+        label: "BOM & Recipes",
+        caption: "Bills of materials as data, not code",
+      },
+      {
+        src: "/images/products/screens/indux-routings.webp",
+        label: "Workflows",
+        caption: "Routings and the stations they run through",
+      },
+      {
+        src: "/images/products/screens/indux-machines.webp",
+        label: "Machines",
+        caption: "Assets on the floor and their state",
+      },
+      {
+        src: "/images/products/screens/indux-maintenance.webp",
+        label: "Maintenance",
+        caption: "Upkeep against the asset, turning downtime into a schedule",
+      },
+      {
+        src: "/images/products/screens/indux-workforce.webp",
+        label: "Workforce & HR",
+        caption: "People, departments and shift-level attribution",
+      },
+      {
+        src: "/images/products/screens/indux-sales.webp",
+        label: "Sales & Dispatch",
+        caption: "Orders through to what left the gate",
+      },
+      {
+        src: "/images/products/screens/indux-finance.webp",
+        label: "Finance",
+        caption: "Statements built from posted journals",
+      },
+      {
+        src: "/images/products/screens/indux-departments.webp",
+        label: "Department Accounts",
+        caption: "Cost carried by the department that incurred it",
+      },
+      {
+        src: "/images/products/screens/indux-reports.webp",
+        label: "Reports",
+        caption: "Reporting across both plants",
+      },
+      {
+        src: "/images/products/screens/indux-approvals.webp",
+        label: "Approvals",
+        caption: "Threshold rules resolved to an ordered role chain",
+      },
+      {
+        src: "/images/products/screens/indux-audit.webp",
+        label: "Audit Trail",
+        caption: "Who, what, when, where, before, after and why",
+      },
+      {
+        src: "/images/products/screens/indux-license.webp",
+        label: "Licence & Packages",
+        caption: "Signed offline activation and the tier's module set",
+      },
+      {
+        src: "/images/products/screens/indux-assistant.webp",
+        label: "AI Assistant",
+        caption: "Questions answered from queried data",
+      },
+    ],
+    /*
+      The roadmap stays alongside the gallery rather than being replaced by it:
+      the screens show what works, the roadmap names what does not.
     */
     roadmap: [
       {
@@ -2522,6 +2635,65 @@ export const products: Product[] = [
       { label: "Route modules", value: "19" },
       { label: "Console screens", value: "29" },
       { label: "API handlers", value: "227" },
+    ],
+    /*
+      Read out of `server/src/core/packages.ts` — the same table the Licence &
+      Packages screen renders and the licence check enforces, so the page and the
+      product cannot disagree. Tiers are supersets: each unlocks the nav keys of
+      the one below it plus its own.
+    */
+    pricing: [
+      {
+        edition: "Per factory",
+        editionSummary:
+          "Billed monthly per plant. A tier unlocks modules; the signed licence sets how many plants and terminals it covers.",
+        note: "Modules are gated by nav key, checked against the licence rather than hidden in the sidebar alone. Licences are signed and verified offline — no server call at activation, which matters on a factory network.",
+        plans: [
+          {
+            name: "Starter",
+            price: "PKR 15,000",
+            period: "/ month",
+            summary: "Run one production line",
+            includes: [
+              "Products, BOM / recipes and routings",
+              "Inventory, warehouse and batch lots",
+              "Procurement: requisition → PO → receipt",
+              "Production orders and the station terminal",
+              "Reports, approvals and the audit trail",
+              "Users, roles and factory setup",
+            ],
+          },
+          {
+            name: "Professional",
+            price: "PKR 30,000",
+            period: "/ month",
+            summary: "The whole factory floor",
+            featured: true,
+            includes: [
+              "Everything in Starter",
+              "Quality control and rejection analysis",
+              "Machines, maintenance and downtime",
+              "MRP and multi-level planning",
+              "Batch traceability, end to end",
+              "Workforce, attendance and sales dispatch",
+            ],
+          },
+          {
+            name: "Enterprise",
+            price: "PKR 45,000",
+            period: "/ month",
+            summary: "Multi-factory ERP with full books",
+            includes: [
+              "Everything in Professional",
+              "Multi-factory group portfolio",
+              "Finance, double-entry accounting and AP/AR",
+              "Manufacturing costing and margins",
+              "AI management assistant",
+              "Priority support",
+            ],
+          },
+        ],
+      },
     ],
     metric: { label: "Industries on one build", value: "2" },
     demoUrl: "/contact",
