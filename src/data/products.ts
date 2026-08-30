@@ -1,7 +1,7 @@
 import type { Product } from "@/types";
 
 /**
- * The products built by Plutox Tech — five, four of them shipped.
+ * The products built by Plutox Tech — six platforms.
  *
  * ServeSync is one POS with three editions (restaurant / pharmacy / mart) chosen
  * at first run. It used to be three separate products; PharmaSync and Vendeez were
@@ -667,24 +667,40 @@ export const products: Product[] = [
       An earlier version of this page gave all three the restaurant's table. It
       was tidy and it was wrong: a mart client pays 7,000 to start, not 5,000, and
       a pharmacy was never sold tiers to choose between.
+    /*
+      Three ladders, read out of `PRICING` and the tier table in the running POS
+      rather than from the retired standalone builds.
+
+      Two things this corrects. The site had no Enterprise tier at all — the POS
+      has sold one for a while, and it is the tier a multi-branch buyer actually
+      lands on. And the mart figures came from the old Vendeez build at Rs 7,000
+      and Rs 15,000; the live POS sells mart as **ServeSync Mart Plus** on its own
+      ladder starting at PKR 15,000, with its own tier names. Quoting a client the
+      old numbers would have been a real problem.
+
+      Enterprise runs exactly the same modules as Premium. What it sells is scale:
+      it lifts the branch ceiling carried in the signed licence. The module list
+      is deliberately identical so a Premium client can never lose a screen on the
+      way up — which is worth saying, because "Enterprise" usually implies more
+      features and here it does not.
     */
     pricing: [
       {
         edition: "Restaurant",
         editionSummary:
           "Dine-in, takeaway and delivery, with the floor and the kitchen on screen.",
-        note: "Per branch, billed monthly. The package gates which modules a branch gets, enforced in the sidebar and again server-side.",
+        note: "Per branch, billed monthly. The package gates which of the 33 modules a branch gets, enforced in the sidebar and again server-side. Paid plans get a three-day grace period after the due date; the POS keeps working with an overdue warning and locks once that runs out. Free trials get no grace.",
         plans: [
           {
             name: "Basic",
             price: "PKR 5,000",
             period: "/ month",
-            summary: "Core POS to run a single restaurant",
+            summary: "Core POS to run a single shop",
             includes: [
-              "Order, Tables & Kitchen display",
-              "Orders, Invoices & QR receipts",
-              "Customers & loyalty",
-              "Menu, Till & shift, Setup",
+              "Order, Tables, Kitchen display",
+              "Orders, Invoices, Customers",
+              "Menu, Till & shift",
+              "Setup — ten modules in all",
             ],
           },
           {
@@ -694,22 +710,34 @@ export const products: Product[] = [
             summary: "Everything to run and grow one restaurant",
             featured: true,
             includes: [
-              "Everything in Basic",
-              "Stock & demand planning",
+              "Everything in Basic, plus eight more",
+              "Stock, Demand planning, Reports",
               "Staff, Vendors, Promos, Expenses",
-              "Delivery & Reports",
+              "Delivery",
             ],
           },
           {
             name: "Premium",
             price: "PKR 15,000",
             period: "/ month",
-            summary: "The full suite — every module, many branches",
+            summary: "The full suite — every module, multi-branch",
             includes: [
-              "Everything in Standard",
-              "Branches command centre & Warehouse",
-              "HR & payroll, Accounts",
-              "Foodpanda, PRA / FBR, R&D Lab",
+              "Everything in Standard, plus seven more",
+              "Branches command centre, Warehouse",
+              "HR, Accounts, R&D Lab",
+              "Foodpanda, PRA / FBR fiscal",
+            ],
+          },
+          {
+            name: "Enterprise",
+            price: "PKR 25,000",
+            period: "/ month",
+            summary: "Premium, across unlimited branches",
+            includes: [
+              "Every module Premium has — no more, no fewer",
+              "Lifts the branch ceiling in the licence",
+              "For groups past what Premium's licence covers",
+              "No screen is lost on the way up",
             ],
           },
         ],
@@ -718,19 +746,55 @@ export const products: Product[] = [
         edition: "Pharmacy",
         editionSummary:
           "Batch stock, prescriptions and the controlled register — no floor plan, no kitchen.",
-        note: "One plan, billed monthly on a 30-day cycle — the pharmacy build was never sold as tiers, so there is nothing to gate and nothing withheld. The POS locks if the fee lapses, and the owner can pay and renew from inside the app.",
+        note: "The pharmacy engine bills on the same ladder as the restaurant. Modules that do not apply — tables, kitchen, delivery, Foodpanda, R&D — are hidden by the engine rather than sold back to you, and prescriptions, doctors, the controlled register and expiry come with the type.",
         plans: [
           {
-            name: "Monthly",
+            name: "Basic",
             price: "PKR 5,000",
             period: "/ month",
-            summary: "The whole product — no module gating",
+            summary: "Core dispensing for a single counter",
+            includes: [
+              "Sell, Orders, Invoices",
+              "Patients, Medicines",
+              "Till & shift, Setup",
+              "Prescriptions and the controlled register",
+            ],
+          },
+          {
+            name: "Standard",
+            price: "PKR 10,000",
+            period: "/ month",
+            summary: "Everything to run and grow one pharmacy",
             featured: true,
             includes: [
-              "Batch stock with FEFO dispensing & expiry watch",
-              "Prescriptions, doctors & the controlled register",
-              "Purchasing, suppliers, patients & customers",
-              "Reports with demand forecasting, PRA / FBR fiscal",
+              "Everything in Basic",
+              "Batch stock, expiry, demand planning",
+              "Staff, Suppliers, Expenses",
+              "Reports",
+            ],
+          },
+          {
+            name: "Premium",
+            price: "PKR 15,000",
+            period: "/ month",
+            summary: "The full suite — every module, multi-branch",
+            includes: [
+              "Everything in Standard",
+              "Branches command centre, Warehouse",
+              "HR, Accounts",
+              "PRA / FBR fiscal",
+            ],
+          },
+          {
+            name: "Enterprise",
+            price: "PKR 25,000",
+            period: "/ month",
+            summary: "Premium, across unlimited branches",
+            includes: [
+              "Every module Premium has",
+              "Lifts the branch ceiling in the licence",
+              "For chains past what Premium covers",
+              "No screen is lost on the way up",
             ],
           },
         ],
@@ -738,39 +802,56 @@ export const products: Product[] = [
       {
         edition: "Mart & Retail",
         editionSummary:
-          "Three ways to scan, promotions and gift cards — no floor plan, no kitchen.",
-        note: "Two packages, billed monthly. Advanced-only modules are locked on Basic behind an upgrade prompt, and only the vendor's super admin can switch a client's plan — the owner sees both read-only.",
+          "Sold as ServeSync Mart Plus — three ways to scan, promotions, gift cards and scale labels.",
+        note: "The mart engine sells on its own ladder with its own tier names, starting higher than the restaurant and pharmacy plans. Billed monthly per branch, same three-day grace period, same server-side module gating.",
         plans: [
           {
-            name: "Basic",
-            price: "Rs 7,000",
+            name: "Starter",
+            price: "PKR 15,000",
             period: "/ month",
-            summary: "Sell, stock and report from one terminal",
+            summary: "Core POS, stock and purchasing for a single mart",
             includes: [
-              "Point of sale & barcode billing",
-              "Inventory — batches & expiry",
-              "Customers & loyalty",
-              "Thermal receipts, invoices & daily reports",
-              "Cash till & shifts, staff",
-              "Single terminal",
+              "Sell with barcode scanning three ways",
+              "Batch stock with expiry and FEFO",
+              "Purchasing, Customers, Invoices",
+              "Till & shift, Setup",
             ],
           },
           {
-            name: "Advanced",
-            price: "Rs 15,000",
+            name: "Business",
+            price: "PKR 20,000",
             period: "/ month",
-            summary: "The full retail suite",
+            summary: "Ledgers, expenses, promotions and full reporting",
             featured: true,
             includes: [
-              "Everything in Basic",
-              "Warehouse & stock transfers",
-              "Barcode generator for weighed items",
-              "Purchases & suppliers",
-              "Promotions, gift cards & coupons",
-              "PRA / FBR fiscal integration",
-              "A4 invoices & salary slips",
-              "Phone scanner & multi-terminal",
-              "Demand forecasting & priority support",
+              "Everything in Starter",
+              "Promotions, gift cards, loyalty tiers",
+              "Staff, Suppliers, Expenses",
+              "Full reporting and demand planning",
+            ],
+          },
+          {
+            name: "Professional",
+            price: "PKR 25,000",
+            period: "/ month",
+            summary: "The full suite — warehouse, accounts and branches",
+            includes: [
+              "Everything in Business",
+              "Branches command centre, Warehouse",
+              "HR, Accounts",
+              "Scale labels, PRA / FBR fiscal",
+            ],
+          },
+          {
+            name: "Enterprise",
+            price: "PKR 35,000",
+            period: "/ month",
+            summary: "Professional, across unlimited branches",
+            includes: [
+              "Every module Professional has",
+              "Lifts the branch ceiling in the licence",
+              "For retail groups past that ceiling",
+              "No screen is lost on the way up",
             ],
           },
         ],
@@ -2241,6 +2322,216 @@ export const products: Product[] = [
       { label: "Passwords stored", value: "0" },
     ],
     metric: { label: "Primary sign-in method", value: "Passkey" },
+    demoUrl: "/contact",
+  },
+
+  /* ------------------------------------------------------------------ */
+  /* INDUX — industrial ERP & smart factory OS                          */
+  /* ------------------------------------------------------------------ */
+  {
+    slug: "indux",
+    name: "INDUX",
+    category: "Manufacturing ERP",
+    tagline: "A routing, a BOM and a station are data, not code.",
+    description:
+      "A configurable manufacturing ERP running procurement, inventory, MRP, production, quality, maintenance, workforce, sales, dispatch and double-entry finance, with an offline-capable terminal for the factory floor and an append-only audit trail over all of it. Nothing is hardcoded to one industry — the seed ships two plants on the same engines, a food factory and a textile unit, which is the proof that the routing and the bill of materials are configuration rather than a fork. Nine shared engines do the enforcing; nineteen route modules and twenty-nine console screens sit on top of them.",
+    image: "/images/products/indux-logo.svg",
+    brandColor: "#0F766E",
+    audience:
+      "Manufacturers running more than one plant, product line or process — food, textile and any industry whose routings differ but whose rules do not",
+    badge: "9 engines",
+    features: [
+      "Two plants on one engine set — food and textile, from the same seed",
+      "Every quantity change goes through one stock ledger, with lot genealogy",
+      "Double-entry finance: balanced journals, trial balance, P&L, balance sheet",
+      "MRP and production orders driven by real BOMs and routings",
+      "Approval chains resolved from threshold rules, not hardcoded per document",
+      "Append-only audit: who, what, when, where, before, after and why",
+      "Offline-capable factory-floor station that syncs when the network returns",
+      "Consignment tracking with QR, from material through dispatch",
+      "Signed offline licences — Starter, Professional and Enterprise",
+    ],
+    moduleGroups: [
+      {
+        title: "The engines — what every module is built on",
+        items: [
+          {
+            name: "Stock ledger",
+            detail:
+              "Every quantity change in the factory goes through one ledger, which owns lot picking, idempotency and genealogy. That is what makes a finished pallet traceable back to the specific material lots that made it, rather than to a date and a hope.",
+          },
+          {
+            name: "Accounting",
+            detail:
+              "Balanced journals, trial balance, P&L, balance sheet and cash flow, posted by the engine rather than by each feature. A financial act that would not balance does not post.",
+          },
+          {
+            name: "Approvals",
+            detail:
+              "Threshold rules resolve to an ordered chain of roles, so a purchase over a limit routes itself. The rule is data, which is why adding a tier does not mean touching a document type.",
+          },
+          {
+            name: "Permissions",
+            detail:
+              "Grants shaped as `module:action` with wildcard support and factory scoping — so a supervisor at one plant is not a supervisor at the other.",
+          },
+          {
+            name: "Workflow",
+            detail:
+              "One state machine every document shares. A purchase order, a production order and a dispatch note move through the same vocabulary, which is why the audit trail reads consistently.",
+          },
+          {
+            name: "Audit",
+            detail:
+              "Append-only, capturing who, what, when, where, before, after and why. Written as work happens rather than reconstructed from other tables afterwards.",
+          },
+          {
+            name: "Notifications",
+            detail:
+              "One alert pipeline with a dedupe window and pluggable channels, so a failing machine does not generate two hundred identical messages.",
+          },
+        ],
+      },
+      {
+        title: "Make",
+        items: [
+          {
+            name: "Production",
+            detail:
+              "Orders against real routings and stations, with the shop floor reporting progress rather than a planner guessing it.",
+          },
+          {
+            name: "MRP",
+            detail:
+              "Requirements planned from BOMs and demand, so shortages surface before the line stops rather than when it does.",
+          },
+          {
+            name: "BOM & master data",
+            detail:
+              "Bills of materials, routings, stations and items as configuration — the reason two industries run the same build.",
+          },
+          {
+            name: "Quality",
+            detail:
+              "Checks bound to the process rather than filed beside it, so a batch that failed QC cannot quietly move on.",
+          },
+          {
+            name: "Maintenance",
+            detail:
+              "Machine upkeep tracked against the asset, which is what turns unplanned downtime into a schedule.",
+          },
+          {
+            name: "Factory-floor station",
+            detail:
+              "A terminal built for the floor and able to keep working offline, syncing when the network returns. A line does not stop because the office switch did.",
+          },
+        ],
+      },
+      {
+        title: "Move & sell",
+        items: [
+          {
+            name: "Procurement",
+            detail:
+              "Purchase orders through the approval chain to goods received, posting to the ledger and the accounts in one step.",
+          },
+          {
+            name: "Inventory & warehouse",
+            detail:
+              "Material, packaging, finished goods and their locations, every movement written to the shared ledger.",
+          },
+          {
+            name: "Consignment tracking",
+            detail:
+              "Consignments followed from material through production, QC, packaging, warehouse and dispatch to delivery, with QR at the handover points.",
+          },
+          {
+            name: "Sales & dispatch",
+            detail:
+              "Orders through to what physically left the gate, reconciled against what was produced.",
+          },
+          {
+            name: "Trace",
+            detail:
+              "The genealogy read back: from a delivered consignment to the lots, the run and the shift behind it.",
+          },
+        ],
+      },
+      {
+        title: "Run the business",
+        items: [
+          {
+            name: "Finance",
+            detail:
+              "The reporting side of the accounting engine — statements built from posted journals rather than assembled in a spreadsheet.",
+          },
+          {
+            name: "HR & workforce",
+            detail:
+              "People, departments and the shift-level attribution that makes a production figure mean something.",
+          },
+          {
+            name: "Reports & assistant",
+            detail:
+              "Reporting across the plants, with an in-product assistant answering from queried data.",
+          },
+          {
+            name: "Licensing",
+            detail:
+              "Signed offline licences activated in the first-run wizard or in Admin — Starter at one plant and two terminals, Professional at two and ten, Enterprise unlimited. Perpetual or expiring, verified against the vendor key rather than a server call.",
+          },
+          {
+            name: "Onboarding & setup",
+            detail:
+              "A first-run wizard that configures the plant, its stations and its people, so a new site is a setup task rather than an implementation project.",
+          },
+        ],
+      },
+    ],
+    /*
+      No gallery: the repository ships no screenshots, and this page's claim is
+      that its images are captures of running software. The roadmap says what is
+      built and what is next instead of borrowing a screen from another product.
+    */
+    roadmap: [
+      {
+        label: "Built",
+        title: "The engine layer",
+        detail:
+          "Nine shared engines — permissions, stock ledger, accounting, approvals, notifications, workflow, audit, CRUD and persistence — with domain services composing them and route files doing nothing but parse, call and return.",
+        state: "done",
+      },
+      {
+        label: "Built",
+        title: "The factory, end to end",
+        detail:
+          "Nineteen route modules and twenty-nine console screens covering procurement, inventory, MRP, production, quality, maintenance, workforce, sales, dispatch, finance, consignment tracking and trace — proven against two seeded plants in different industries.",
+        state: "done",
+      },
+      {
+        label: "Built",
+        title: "Licensing and the desktop build",
+        detail:
+          "Signed offline licences across three tiers with plant and terminal ceilings, activated in the first-run wizard, plus a packaged desktop console.",
+        state: "done",
+      },
+      {
+        label: "Next",
+        title: "Prisma persistence",
+        detail:
+          "Persistence sits behind a `Repository` interface and runs on memory plus JSON today, with Prisma as the stated next step. The seam exists precisely so that swap does not touch the engines — but until it lands, this is the honest limit on how large a deployment should get.",
+        state: "next",
+      },
+    ],
+    languages: ["TypeScript", "TSX", "CSS"],
+    stack: ["TypeScript", "Node.js", "Express", "Socket.IO", "React", "Electron"],
+    specs: [
+      { label: "Shared engines", value: "9" },
+      { label: "Route modules", value: "19" },
+      { label: "Console screens", value: "29" },
+      { label: "API handlers", value: "227" },
+    ],
+    metric: { label: "Industries on one build", value: "2" },
     demoUrl: "/contact",
   },
 ];

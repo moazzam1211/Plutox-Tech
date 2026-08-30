@@ -19,7 +19,7 @@ import { cn } from "@/lib/utils";
 export const metadata = buildMetadata({
   title: "Products",
   description:
-    "Five platforms and eleven shared modules: POS for restaurants, pharmacies and marts, hotel ERP, fleet management, delivery and passwordless sign-in.",
+    "Six platforms and eleven shared modules: POS for restaurants, pharmacies and marts, hotel ERP, fleet management, delivery and passwordless sign-in.",
   path: "/products",
   keywords: [
     "restaurant management system",
@@ -65,7 +65,7 @@ export default function ProductsPage() {
         eyebrow="Products"
         title={
           <>
-            Five platforms,{" "}
+            Six platforms,{" "}
             <span className="text-primary">each with its own modules</span>
           </>
         }

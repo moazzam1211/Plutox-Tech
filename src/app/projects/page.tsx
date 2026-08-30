@@ -9,7 +9,7 @@ import { breadcrumbJsonLd, buildMetadata } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "Projects",
   description:
-    "Five platforms built by Plutox Tech — POS, hotel ERP, fleet management, cross-border delivery and identity — with module detail and real screenshots.",
+    "Six platforms built by Plutox Tech — POS, hotel ERP, fleet management, cross-border delivery, identity and manufacturing ERP — with module detail and real screenshots.",
   path: "/projects",
   keywords: [
     "restaurant POS software",
@@ -52,11 +52,11 @@ export default function ProjectsPage() {
         eyebrow="Projects"
         title={
           <>
-            Five platforms,{" "}
+            Six platforms,{" "}
             <span className="text-primary">built here, not resold</span>
           </>
         }
-        lede="Every figure below comes from the products' own documentation, and every screenshot is from the running software — nothing here is a mockup, and the one platform with no captures yet shows its roadmap rather than a borrowed screen. ServeSync alone runs restaurants, pharmacies and marts, as three editions of one codebase."
+        lede="Every figure below comes from the products' own documentation, and every screenshot is from the running software — nothing here is a mockup, and the two platforms with no captures yet show their roadmaps rather than a borrowed screen. ServeSync alone runs 62 business types on three engines from one codebase."
       >
         <StatStrip
           className="max-w-2xl border-t pt-4"

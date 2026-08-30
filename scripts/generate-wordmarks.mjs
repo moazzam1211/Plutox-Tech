@@ -121,6 +121,11 @@ function typographicLockup({ name, accent, tracking }) {
 const FILES = [
   { file: "onvee-logo.svg", svg: onveeLockup(), note: "real mark + wordmark" },
   {
+    file: "indux-logo.svg",
+    svg: typographicLockup({ name: "INDUX", accent: "#0F766E", tracking: 8 }),
+    note: "placeholder — no art in repo",
+  },
+  {
     file: "plutox-id-logo.svg",
     svg: typographicLockup({ name: "PLUTOX ID", accent: "#8B5CF6", tracking: 5 }),
     note: "placeholder — no art in repo",
