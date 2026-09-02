@@ -49,7 +49,8 @@ export const products: Product[] = [
       "Restaurant: kitchen display, live floor plan, delivery and Foodpanda",
       "PRA / FBR fiscal invoicing shared by all three editions",
       "Silent ESC/POS printing straight to the thermal printer, no browser dialog",
-      "A 2 MB Windows thin client that reloads the new UI when the server updates",
+      "A desktop app that updates itself \u2014 an \u201cUpdate now\u201d banner, not a reinstall",
+      "260 vector icons replacing every emoji, so the UI stays crisp at any DPI",
     ],
     moduleGroups: [
       {
@@ -298,7 +299,17 @@ export const products: Product[] = [
           {
             name: "Windows desktop client",
             detail:
-              "A .NET and WebView2 shell that asks once for the POS server address and then loads it. Updating the server updates every till — no reinstall, no version drift across a floor of terminals. Ctrl+Shift+O repoints it, and a failed load returns to the setup screen rather than a blank window. One installer carries all three editions.",
+              "A desktop app that updates itself. It runs the server in-process from editable files rather than a frozen binary, so a new version arrives as an \u201cUpdate now\u201d banner instead of a reinstall across a floor of terminals \u2014 which is the difference between shipping a fix and scheduling one. The thin-client shell also still exists: it asks once for the server address, Ctrl+Shift+O repoints it, and a failed load returns to setup rather than a blank window.",
+          },
+          {
+            name: "AI assistant, in a floating window",
+            detail:
+              "Answers over the screen someone is already working on rather than on a page of its own \u2014 an owner asking what today took wants a sentence, not a navigation. It is superadmin-switchable per install, and it answers from queried data rather than being handed the business to improvise over.",
+          },
+          {
+            name: "Plutox ID sign-in",
+            detail:
+              "Passwordless sign-in through Plutox ID, toggled on or off per install by the vendor superadmin next to the POS-access switch. A till that a client wants on local PINs stays on local PINs.",
           },
           {
             name: "Waiter order pad",
@@ -2155,7 +2166,7 @@ export const products: Product[] = [
     category: "Identity & Access",
     tagline: "One sign-in for every Plutox product. No passwords.",
     description:
-      "The identity provider the rest of the estate signs in through. Passkeys (WebAuthn/FIDO2) are the primary method and an emailed one-time code is the fallback — there are no passwords to phish, reuse or reset, and no biometric data ever reaches the server, only a cryptographic assertion. Other applications delegate sign-in to it over OAuth 2.0 Authorization Code with PKCE and OpenID Connect, so \"Login with Plutox ID\" is a standards-based flow rather than a shared session hack. Fleet Flow already signs in through it.",
+      "The identity provider the rest of the estate signs in through. Passkeys (WebAuthn/FIDO2) are the primary method and an emailed one-time code is the fallback — there are no passwords to phish, reuse or reset, and no biometric data ever reaches the server, only a cryptographic assertion. Other applications delegate sign-in to it over OAuth 2.0 Authorization Code with PKCE and OpenID Connect, so \"Login with Plutox ID\" is a standards-based flow rather than a shared session hack. Fleet Flow and ServeSync ERP both sign in through it today.",
     image: "/images/products/plutox-id-logo.svg",
     brandColor: "#8B5CF6",
     audience:
@@ -2168,7 +2179,7 @@ export const products: Product[] = [
       "No raw biometric data server-side, only WebAuthn assertions",
       "Admin console over users, registered apps, sessions and security activity",
       "Short-lived access tokens — 15 minutes, no long-lived bearer left lying around",
-      "Live in Fleet Flow, which signs in through it today",
+      "Live in Fleet Flow and ServeSync ERP, both signing in through it today",
     ],
     moduleGroups: [
       {
@@ -2210,9 +2221,9 @@ export const products: Product[] = [
               "Each product registered with its own client id and redirect URIs, managed in the console rather than configured by hand on both sides.",
           },
           {
-            name: "Fleet Flow integration",
+            name: "Two live integrations",
             detail:
-              "Already wired: Fleet Flow's login delegates to Plutox ID over the authorization-code flow and clears its own cookies before redirecting, so a sign-out actually signs out.",
+              "Fleet Flow's login delegates to Plutox ID over the authorization-code flow and clears its own cookies before redirecting, so a sign-out actually signs out. ServeSync ERP now does too, with the vendor superadmin able to switch it off per install \u2014 which is what makes it adoptable by a client who wants local PINs.",
           },
         ],
       },
@@ -2439,9 +2450,9 @@ export const products: Product[] = [
               "People, departments and the shift-level attribution that makes a production figure mean something.",
           },
           {
-            name: "Reports & assistant",
+            name: "Reports, briefing & assistant",
             detail:
-              "Reporting across the plants, with an in-product assistant answering from queried data.",
+              "Reporting across the plants, plus a floating assistant and help pair in the corner \u2014 not a page. A manager asking what a plant made today wants an answer over the work in front of them; sending them elsewhere to read one sentence loses their place. There is a daily briefing endpoint and language selection behind it, and the full Assistant screen remains for a longer conversation.",
           },
           {
             name: "Licensing",
@@ -2634,7 +2645,7 @@ export const products: Product[] = [
       { label: "Shared engines", value: "9" },
       { label: "Route modules", value: "19" },
       { label: "Console screens", value: "29" },
-      { label: "API handlers", value: "227" },
+      { label: "API handlers", value: "231" },
     ],
     /*
       Read out of `server/src/core/packages.ts` — the same table the Licence &
