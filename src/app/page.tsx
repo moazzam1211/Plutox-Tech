@@ -128,8 +128,8 @@ export default function IntroPage() {
       {/* ---------------- The products ---------------- */}
       <Block
         label="What we've built"
-        title="Six platforms"
-        description="Each one designed and built by us — not resold, not white-labelled. Five are shipped and running; Plutox ID is live inside Fleet Flow with key rotation still to come."
+        title="Seven platforms"
+        description="Each one designed and built by us — not resold, not white-labelled. Six are shipped and running; Plutox ID is live inside Fleet Flow with key rotation still to come."
       >
         <RevealGroup stagger={0.07} className="flex flex-col">
           {products.map((product) => (

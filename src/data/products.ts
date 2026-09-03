@@ -1,7 +1,7 @@
 import type { Product } from "@/types";
 
 /**
- * The products built by Plutox Tech — six platforms.
+ * The products built by Plutox Tech — seven platforms.
  *
  * ServeSync is one POS with three editions (restaurant / pharmacy / mart) chosen
  * at first run. It used to be three separate products; PharmaSync and Vendeez were
@@ -2707,6 +2707,349 @@ export const products: Product[] = [
       },
     ],
     metric: { label: "Industries on one build", value: "2" },
+    demoUrl: "/contact",
+  },
+
+  /* ------------------------------------------------------------------ */
+  /* VitaDrop — blood donation & blood-finding platform                 */
+  /* ------------------------------------------------------------------ */
+  {
+    slug: "vitadrop",
+    name: "VitaDrop",
+    category: "Healthcare Platform",
+    tagline: "Every Drop Saves a Life.",
+    description:
+      "A blood donation and blood-finding platform joining six kinds of account — donors, recipients, hospitals, blood banks, donation centres and foundations — around one matching engine. A request names a group, a component, a number of units and an urgency; the engine scores eligible donors on availability, distance and how long since they last gave, and the deferral rules that decide who may donate are data the platform enforces rather than guidance it displays. 33 pages and 40 API routes over a 24-model schema, with inventory, campaigns, messaging, consent and an audit trail around the core.",
+    image: "/images/products/vitadrop-logo.svg",
+    brandColor: "#DC2647",
+    audience:
+      "Donors and patients, and the blood banks, hospitals, donation centres and foundations that have to find each other quickly",
+    badge: "6 account types",
+    features: [
+      "Matching that scores donors on availability, distance and recency",
+      "Urgency widens the search radius instead of just colouring a label",
+      "Deferral intervals enforced at the point of asking, not printed as advice",
+      "Blood inventory by group and component, with a movement log",
+      "Find blood as a list or on a map, ranked by distance",
+      "Campaigns with public registration, run by banks and foundations",
+      "One message thread per match, so a conversation stays with its request",
+      "Verification and consent recorded as their own tables, not flags",
+      "Demo data that cannot be mistaken for a real blood bank",
+    ],
+    moduleGroups: [
+      {
+        title: "Matching — the part that has to be right",
+        items: [
+          {
+            name: "Donor scoring",
+            detail:
+              "A request scores every eligible donor rather than filtering to a list. Availability is weighted, distance decays exponentially — a donor twice the half-life away scores a quarter — and someone who last gave a long time ago ranks above someone just past the minimum interval, because the safer ask is the better ask.",
+          },
+          {
+            name: "Urgency changes the physics",
+            detail:
+              "Urgency sets both the search radius and the distance half-life, so an emergency genuinely reaches further rather than showing the same candidates with a red badge on them.",
+          },
+          {
+            name: "Eligibility as enforced rules",
+            detail:
+              "Minimum intervals between whole blood, plasma and platelet donations live in an `EligibilityRule` table, seeded as data and checked when a donor is considered. A platform that lets someone volunteer inside their deferral window has moved the risk onto the donor.",
+          },
+          {
+            name: "Requests, matches and donations",
+            detail:
+              "Three separate records rather than one row with a status: a request is what a patient needs, a match is a specific donor paired to it, and a donation is what actually happened. That separation is what makes the history honest when a match falls through.",
+          },
+        ],
+      },
+      {
+        title: "For donors and patients",
+        items: [
+          {
+            name: "Donor profile and eligibility",
+            detail:
+              "Blood group, health answers and availability, with the next date a donor becomes eligible computed from their own history rather than typed in.",
+          },
+          {
+            name: "Donation history",
+            detail:
+              "Every donation, what component it was, and what it made the donor eligible for next.",
+          },
+          {
+            name: "Raise a request",
+            detail:
+              "Group, component, units, urgency and the hospital it is for. Structured, because the matching engine reads it rather than a person.",
+          },
+          {
+            name: "Find blood",
+            detail:
+              "Search by group, component and distance, as a ranked list or plotted on a map — the two views over the same query, because a relative wants distance and an operator wants a list.",
+          },
+          {
+            name: "Messaging",
+            detail:
+              "One thread per match between donor and requester, so the conversation stays attached to the request it is about instead of becoming a phone number nobody logged.",
+          },
+          {
+            name: "Notifications",
+            detail:
+              "Matches, campaign reminders and stock alerts, with delivery recorded per channel and push tokens held per device — so \"they were never told\" is answerable.",
+          },
+        ],
+      },
+      {
+        title: "For banks, hospitals and foundations",
+        items: [
+          {
+            name: "Blood inventory",
+            detail:
+              "Units held by group and component, every change written to a movement log rather than adjusted in place, so a discrepancy has a history to read.",
+          },
+          {
+            name: "Branches",
+            detail:
+              "Collection points under one organisation, each with its own stock, so a group's total and a specific centre's shelf are different numbers.",
+          },
+          {
+            name: "Campaigns",
+            detail:
+              "A drive with a venue, its slots and public registration — run by a bank or a foundation, and listed on the public site where a donor can actually find it.",
+          },
+          {
+            name: "Organisation profile",
+            detail:
+              "What the public directory shows about a bank: where it is, what it holds and how to reach it.",
+          },
+          {
+            name: "Hospital requests",
+            detail:
+              "A hospital raising and tracking requests on a patient's behalf, which is how most urgent need actually arrives.",
+          },
+        ],
+      },
+      {
+        title: "Trust, safety and the platform",
+        items: [
+          {
+            name: "Verification and consent as records",
+            detail:
+              "`VerificationRecord` and `ConsentRecord` are their own tables rather than booleans on a user. When someone asks what a donor agreed to and when, the answer is a row with a timestamp, not an inference.",
+          },
+          {
+            name: "Admin approval of organisations",
+            detail:
+              "Who may hold blood and appear in the directory is an administrator's decision, not a signup outcome.",
+          },
+          {
+            name: "Audit log",
+            detail:
+              "Who did what to which record, written as work happens. On a platform touching medical eligibility that is the difference between a system of record and a website.",
+          },
+          {
+            name: "Demo data that cannot be mistaken for real",
+            detail:
+              "Every seeded organisation is prefixed `[DEMO]` and every seeded email sits on `demo.vitadrop.local`, so a demonstration record can never be read as a real blood bank holding real stock. `SEED_DEMO_DATA=false` seeds the eligibility rules and the admin account alone.",
+          },
+          {
+            name: "Real data behind every screen",
+            detail:
+              "No mock layer: the pages read the database through Prisma, and the matching, authorisation and eligibility checks are the same ones a production install would run.",
+          },
+        ],
+      },
+    ],
+    /*
+      33 captures from the project's own `npm run screenshots`, taken against the
+      running app with a real signed-in session per role — a donor never sees
+      inventory and a bank never sees a donor profile, so capturing everything as
+      the admin would have shown screens no real donor ever meets. Four mobile
+      views included, because the phone is where a donor answers a request.
+    */
+    screens: [
+      {
+        src: "/images/products/screens/vitadrop-landing.webp",
+        label: "Landing",
+        caption: "Every drop saves a life — the public front door",
+      },
+      {
+        src: "/images/products/screens/vitadrop-find-blood-list.webp",
+        label: "Find Blood",
+        caption: "Search by group, component and distance",
+      },
+      {
+        src: "/images/products/screens/vitadrop-find-blood-map.webp",
+        label: "Find Blood — Map",
+        caption: "Banks and centres plotted around the patient",
+      },
+      {
+        src: "/images/products/screens/vitadrop-blood-banks.webp",
+        label: "Blood Banks",
+        caption: "The directory, with what each one holds",
+      },
+      {
+        src: "/images/products/screens/vitadrop-campaigns.webp",
+        label: "Campaigns",
+        caption: "Donation drives open for registration",
+      },
+      {
+        src: "/images/products/screens/vitadrop-campaign-detail.webp",
+        label: "Campaign Detail",
+        caption: "One drive, its venue and its slots",
+      },
+      {
+        src: "/images/products/screens/vitadrop-learn-blood-groups.webp",
+        label: "Learn — Blood Groups",
+        caption: "Who can give to whom, without the jargon",
+      },
+      {
+        src: "/images/products/screens/vitadrop-learn-blood-donation.webp",
+        label: "Learn — Donating",
+        caption: "What actually happens when you donate",
+      },
+      {
+        src: "/images/products/screens/vitadrop-sign-in.webp",
+        label: "Sign In",
+        caption: "One door for six different kinds of account",
+      },
+      {
+        src: "/images/products/screens/vitadrop-register.webp",
+        label: "Register",
+        caption: "Donor, recipient or organisation",
+      },
+      {
+        src: "/images/products/screens/vitadrop-donor-dashboard.webp",
+        label: "Donor Dashboard",
+        caption: "Eligibility, next date and open matches",
+      },
+      {
+        src: "/images/products/screens/vitadrop-donor-profile.webp",
+        label: "Donor Profile",
+        caption: "Group, health answers and availability",
+      },
+      {
+        src: "/images/products/screens/vitadrop-donor-donations.webp",
+        label: "Donation History",
+        caption: "Every donation, and what it made you eligible for",
+      },
+      {
+        src: "/images/products/screens/vitadrop-requests.webp",
+        label: "Requests",
+        caption: "Live requests a donor can answer",
+      },
+      {
+        src: "/images/products/screens/vitadrop-request-new.webp",
+        label: "Raise a Request",
+        caption: "Group, units, urgency and the hospital",
+      },
+      {
+        src: "/images/products/screens/vitadrop-request-detail-matching.webp",
+        label: "Matching",
+        caption: "The engine pairing a request with eligible donors",
+      },
+      {
+        src: "/images/products/screens/vitadrop-messages.webp",
+        label: "Messages",
+        caption: "Donor and requester, in one thread per match",
+      },
+      {
+        src: "/images/products/screens/vitadrop-notifications.webp",
+        label: "Notifications",
+        caption: "Matches, campaign reminders and stock alerts",
+      },
+      {
+        src: "/images/products/screens/vitadrop-settings.webp",
+        label: "Settings",
+        caption: "Contact, privacy and notification channels",
+      },
+      {
+        src: "/images/products/screens/vitadrop-org-dashboard.webp",
+        label: "Organisation Dashboard",
+        caption: "A bank's day: stock, requests and drives",
+      },
+      {
+        src: "/images/products/screens/vitadrop-org-inventory.webp",
+        label: "Blood Inventory",
+        caption: "Units by group and component, with a movement log",
+      },
+      {
+        src: "/images/products/screens/vitadrop-org-branches.webp",
+        label: "Branches",
+        caption: "Collection points under one organisation",
+      },
+      {
+        src: "/images/products/screens/vitadrop-org-campaigns.webp",
+        label: "Run a Campaign",
+        caption: "Create a drive and take registrations",
+      },
+      {
+        src: "/images/products/screens/vitadrop-org-profile.webp",
+        label: "Organisation Profile",
+        caption: "What the public directory shows",
+      },
+      {
+        src: "/images/products/screens/vitadrop-admin-overview.webp",
+        label: "Admin Overview",
+        caption: "The whole platform on one screen",
+      },
+      {
+        src: "/images/products/screens/vitadrop-admin-users.webp",
+        label: "Users",
+        caption: "Accounts, roles and verification state",
+      },
+      {
+        src: "/images/products/screens/vitadrop-admin-organisations.webp",
+        label: "Organisations",
+        caption: "Approving who may hold blood",
+      },
+      {
+        src: "/images/products/screens/vitadrop-admin-rules.webp",
+        label: "Eligibility Rules",
+        caption: "The deferral rules the platform enforces",
+      },
+      {
+        src: "/images/products/screens/vitadrop-admin-audit.webp",
+        label: "Audit Log",
+        caption: "Who did what to which record",
+      },
+      {
+        src: "/images/products/screens/vitadrop-donor-dashboard-mobile.webp",
+        label: "Mobile — Dashboard",
+        caption: "The donor view on a phone",
+      },
+      {
+        src: "/images/products/screens/vitadrop-find-blood-mobile.webp",
+        label: "Mobile — Find Blood",
+        caption: "Searching on the move",
+      },
+      {
+        src: "/images/products/screens/vitadrop-menu-drawer-mobile.webp",
+        label: "Mobile — Navigation",
+        caption: "The drawer, role-aware",
+      },
+      {
+        src: "/images/products/screens/vitadrop-requests-mobile.webp",
+        label: "Mobile — Requests",
+        caption: "Answering a request from a phone",
+      },
+    ],
+    languages: ["TypeScript", "TSX", "CSS", "SQL"],
+    stack: [
+      "TypeScript",
+      "Next.js 16",
+      "Prisma",
+      "PostgreSQL",
+      "Socket.IO",
+      "Leaflet",
+      "Zod",
+      "Playwright",
+    ],
+    specs: [
+      { label: "Account types", value: "6" },
+      { label: "Pages", value: "33" },
+      { label: "API routes", value: "40" },
+      { label: "Prisma models", value: "24" },
+    ],
+    metric: { label: "Mock data behind the screens", value: "None" },
     demoUrl: "/contact",
   },
 ];

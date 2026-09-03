@@ -1,5 +1,5 @@
 /**
- * Product lock-ups for the two platforms that ship no PNG logo art.
+ * Product lock-ups for the platforms that ship no PNG logo art.
  *
  * **ONVEE has a real logo** and this reproduces it rather than inventing one.
  * The mark is the exact geometry from `apps/web/components/brand.tsx` in the
@@ -98,6 +98,38 @@ function onveeLockup() {
 `;
 }
 
+/**
+ * The VitaDrop mark, from `public/icon.svg` in its repo: a blood drop carrying a
+ * pulse line. Reproduced rather than redrawn, in its own crimson #dc2647.
+ *
+ * The drop's native box is 32×40, so the lock-up sizes the text off the drop's
+ * height and trims the viewBox to the ink — the same treatment ONVEE gets, so
+ * both sit at a consistent weight on the product plate.
+ */
+function vitadropLockup() {
+  const H = 160;                    // drop height, and the lock-up's height
+  const scale = H / 40;             // native viewBox is 32 wide by 40 tall
+  const dropW = 32 * scale;
+  const fontSize = H * 0.52;
+  const gap = H * 0.16;
+  const textX = dropW + gap;
+  const textWidth = (9 * 0.60 + 8 * 0.06) * fontSize;   // "VITADROP", lightly tracked
+  const baseline = H / 2 + fontSize * 0.36;
+  const top = Math.min(0, baseline - fontSize * 0.72);
+  const width = +(textX + textWidth).toFixed(1);
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 ${top.toFixed(1)} ${width} ${(H - top).toFixed(1)}" width="${width}" height="${(H - top).toFixed(1)}" role="img" aria-label="VitaDrop">
+  <g transform="scale(${scale.toFixed(4)})">
+    <path d="M16 1.5C16 1.5 3 17.2 3 25.1 3 32.2 8.8 38 16 38s13-5.8 13-12.9C29 17.2 16 1.5 16 1.5Z" fill="#DC2647"/>
+    <path d="M7.5 25.5h5l2.2-5.4 3 9.2 2.4-6.1 1.4 2.3h3.1" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <text x="${textX.toFixed(1)}" y="${baseline.toFixed(1)}" textLength="${textWidth.toFixed(1)}" lengthAdjust="spacing"
+        fill="#DC2647" font-family="'Space Grotesk','Inter',system-ui,sans-serif"
+        font-size="${fontSize.toFixed(1)}" font-weight="700">VITADROP</text>
+</svg>
+`;
+}
+
 /** Placeholder lock-up: the product name, set, with a rule under it. */
 function typographicLockup({ name, accent, tracking }) {
   const fontSize = 120;
@@ -120,6 +152,7 @@ function typographicLockup({ name, accent, tracking }) {
 
 const FILES = [
   { file: "onvee-logo.svg", svg: onveeLockup(), note: "real mark + wordmark" },
+  { file: "vitadrop-logo.svg", svg: vitadropLockup(), note: "real mark + wordmark" },
   {
     file: "plutox-id-logo.svg",
     svg: typographicLockup({ name: "PLUTOX ID", accent: "#8B5CF6", tracking: 5 }),
