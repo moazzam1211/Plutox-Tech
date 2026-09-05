@@ -232,7 +232,6 @@
 
   html {
     -webkit-tap-highlight-color: transparent;
-    scrollbar-gutter: stable;
 
     /*
       The fixed navbar's height, in one place. The bar sets its own height from
@@ -312,7 +311,7 @@
     outline-offset: 2px;
   }
 
-  /* Slim, themed scrollbar (Chromium + Firefox). */
+  /* Slim, themed scrollbar (Chromium + Firefox) for scrolling panels. */
   * {
     scrollbar-width: thin;
     scrollbar-color: var(--border) transparent;
@@ -320,6 +319,26 @@
   ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
+  }
+
+  /*
+    The page itself scrolls without a visible bar.
+
+    Only the root scroller is hidden — inner panels keep theirs, because a
+    horizontally scrolling code block or a tall drawer needs the bar to say it can
+    move. Hiding those too would remove the only affordance telling a reader there
+    is more to the right.
+
+    Scrolling is untouched: wheel, trackpad, touch, keyboard and Lenis all still
+    work. What is lost is the position indicator and the ability to drag the
+    thumb, which is the real cost of this and the reason it is scoped this
+    narrowly.
+  */
+  html {
+    scrollbar-width: none;
+  }
+  html::-webkit-scrollbar {
+    display: none;
   }
   ::-webkit-scrollbar-track {
     background: transparent;
