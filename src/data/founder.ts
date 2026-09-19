@@ -29,14 +29,16 @@ export const founder = {
    * ───────────────────────────────────────────────────────────────────────
    *  DROP THE SUPPLIED PORTRAIT AT THIS EXACT PATH:
    *
-   *    public/images/team/moazzam-naveed.jpg
+   *    public/images/team/moazzam-naveed.jpg   (any format sharp reads)
+   *
+   *  then run `npm run brand-webp` to produce the .webp this points at.
    *
    *  Any aspect ratio works — the profile section crops to 4:5 with
    *  `object-cover`. If the file is absent the component falls back to the
    *  generated placeholder rather than showing a broken image.
    * ───────────────────────────────────────────────────────────────────────
    */
-  photo: "/images/team/moazzam-naveed.jpg",
+  photo: "/images/team/moazzam-naveed.webp",
   /** Shown if the portrait above hasn't been added yet. */
   photoFallback: "/images/team/founder.svg",
   photoAlt: "Moazzam Naveed, Founder and CEO of Plutox Tech",

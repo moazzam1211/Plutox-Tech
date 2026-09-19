@@ -1,11 +1,15 @@
 /**
- * Convert the served brand and product-logo PNGs to WebP.
+ * Convert the served raster images to WebP.
  *
- * **Lossless**, deliberately. The brand files are the supplied artwork and the
- * standing instruction is to use them unmodified — re-encoding losslessly changes
- * the container, not a single pixel, which lossy WebP could not promise. Product
- * wordmarks are flat colour on transparency, where lossless usually beats lossy
- * anyway, so there is nothing to trade.
+ * Artwork is converted **losslessly**, deliberately. The brand files are the
+ * supplied artwork and the standing instruction is to use them unmodified —
+ * re-encoding losslessly changes the container, not a single pixel, which lossy
+ * WebP could not promise. Product wordmarks are flat colour on transparency,
+ * where lossless usually beats lossy anyway, so there is nothing to trade.
+ *
+ * Photographs are the exception and are encoded lossy at q82. Lossless WebP on a
+ * continuous-tone photo lands *larger* than the JPEG it replaced, so applying the
+ * artwork rule there would make the page heavier, not lighter.
  *
  * Some PNGs stay: `plutox-mark.png` feeds `generate-icons.mjs`, and the logo
  * sources now live outside `public/` in `assets/product-logos`, which feed
@@ -21,9 +25,12 @@ import sharp from "sharp";
 
 const ROOT = process.cwd();
 const DIRS = [
-  join(ROOT, "public", "images", "brand"),
-  join(ROOT, "public", "images", "products"),
+  { path: join(ROOT, "public", "images", "brand"), photo: false },
+  { path: join(ROOT, "public", "images", "products"), photo: false },
+  { path: join(ROOT, "public", "images", "team"), photo: true },
 ];
+
+const SOURCE = /\.(png|jpe?g)$/i;
 
 /** PNGs a script or the framework still needs in that format. */
 const KEEP_AS_PNG = new Set([
@@ -35,14 +42,16 @@ let before = 0;
 let after = 0;
 const converted = [];
 
-for (const dir of DIRS) {
+for (const { path: dir, photo } of DIRS) {
   for (const file of await readdir(dir)) {
-    if (!file.endsWith(".png") || KEEP_AS_PNG.has(file)) continue;
+    if (!SOURCE.test(file) || KEEP_AS_PNG.has(file)) continue;
 
     const from = join(dir, file);
-    const to = from.replace(/\.png$/, ".webp");
+    const to = from.replace(SOURCE, ".webp");
 
-    await sharp(from).webp({ lossless: true, effort: 6 }).toFile(to);
+    await sharp(from)
+      .webp(photo ? { quality: 82, effort: 6 } : { lossless: true, effort: 6 })
+      .toFile(to);
 
     const [a, b] = await Promise.all([stat(from), stat(to)]);
     before += a.size;
