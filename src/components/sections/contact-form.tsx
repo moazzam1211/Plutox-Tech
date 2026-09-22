@@ -107,7 +107,7 @@ export function ContactForm() {
           <Input
             id="name"
             autoComplete="name"
-            placeholder="Ayesha Karim"
+            placeholder="Enter full name"
             aria-invalid={Boolean(errors.name)}
             aria-describedby="name-message"
             {...register("name")}

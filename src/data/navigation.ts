@@ -3,6 +3,7 @@ import {
   Briefcase,
   CalendarCheck,
   Building2,
+  Download,
   Home,
   Mail,
   MessageSquareQuote,
@@ -139,6 +140,13 @@ export const secondaryRoutes: Route[] = [
     short: "Demo",
     summary: "See your edition running — 30 minutes, free, nothing to install",
     icon: CalendarCheck,
+  },
+  {
+    label: "Downloads",
+    href: "/downloads",
+    short: "Downloads",
+    summary: "Windows installers for all three ServeSync editions",
+    icon: Download,
   },
   {
     label: "Skills",
