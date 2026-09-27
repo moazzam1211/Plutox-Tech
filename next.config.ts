@@ -17,6 +17,28 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
 
   images: {
+    /**
+     * Optimisation OFF, deliberately.
+     *
+     * Vercel meters `/_next/image` transformations, and this site blew through
+     * the allowance: 235 images, each needing a variant per device size. Once the
+     * quota is gone the endpoint answers 402 and every image that had not already
+     * been transformed and cached simply fails to load — which is exactly what
+     * happened to the founder portrait the moment its filename changed and
+     * invalidated the cached variant.
+     *
+     * Turning it off costs very little here, because the work is already done at
+     * build time rather than per request: every raster in `public/images` is
+     * WebP (see `npm run brand-webp`), they average 47 KB, and the largest is
+     * 241 KB. What is actually lost is per-device downscaling and AVIF — a phone
+     * now gets the same file a desktop does. That is a fair trade against images
+     * that do not render at all, and it makes the page cost predictable instead
+     * of dependent on a monthly counter.
+     *
+     * To re-enable on a paid plan, delete `unoptimized` — the settings below are
+     * the ones that were tuned for it and are otherwise ignored.
+     */
+    unoptimized: true,
     // AVIF first, WebP fallback — both far smaller than PNG/JPEG.
     formats: ["image/avif", "image/webp"],
     deviceSizes: [360, 480, 640, 828, 1080, 1200, 1600, 1920],
