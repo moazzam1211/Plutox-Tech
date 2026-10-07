@@ -41,9 +41,9 @@ export const posBuilds: PosBuild[] = [
       "Till Report-X and shift close",
       "Multi-outlet stock and transfers"
     ],
-    "version": "2.1.49",
-    "bytes": 110097895,
-    "sha256": "f4e3ac6cbcd24168810b2bb497cb5354ed38cce8a41515928c92374355813b08",
+    "version": "2.1.50",
+    "bytes": 110099083,
+    "sha256": "e2275fa36800f9b06381300397fd33fecf6c0157ba43a6b4bcb9867e45ab5e40",
     "releasedAt": "2026-10-07",
     "filename": "ServeSync-Mart-Setup.exe",
     "href": "https://admin.plutoxtech.com/downloads/ServeSync-Mart-Setup.exe"
@@ -59,9 +59,9 @@ export const posBuilds: PosBuild[] = [
       "PRA / FBR fiscal reporting",
       "List-view till for counter service"
     ],
-    "version": "2.1.48",
-    "bytes": 113934802,
-    "sha256": "7c83e44674ef1bd5f1e150caf95ac41f62ecbab7799589e39908fd71266f3bfc",
+    "version": "2.1.49",
+    "bytes": 113935438,
+    "sha256": "f29befad4ac4432c2d6925c48b911843c5ad259c2cd611d954533a39d866c8a2",
     "releasedAt": "2026-10-07",
     "filename": "ServeSync-Pharmacy-Setup.exe",
     "href": "https://admin.plutoxtech.com/downloads/ServeSync-Pharmacy-Setup.exe"
