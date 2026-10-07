@@ -130,6 +130,37 @@ function vitadropLockup() {
 `;
 }
 
+/**
+ * The CareSync mark, from `apps/web/public/favicon.svg` in its repo: a white
+ * medical cross on a rounded square in the product's own `--color-brand-600`
+ * #0e8a76. Reproduced exactly rather than redrawn.
+ *
+ * The mark is a filled square, so unlike ONVEE there is no padding to trim — its
+ * ink is its box. The lock-up therefore only has to size the wordmark against it
+ * and extend the viewBox rightwards.
+ */
+function caresyncLockup() {
+  const S = 160;                     // mark is square, so this is the height too
+  const scale = S / 32;              // native viewBox is 32x32
+  const fontSize = S * 0.5;
+  const gap = S * 0.16;
+  const textX = S + gap;
+  const textWidth = (8 * 0.62 + 7 * 0.05) * fontSize;  // "CARESYNC", lightly tracked
+  const baseline = S / 2 + fontSize * 0.36;
+  const width = +(textX + textWidth).toFixed(1);
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${S}" width="${width}" height="${S}" role="img" aria-label="CareSync">
+  <g transform="scale(${scale.toFixed(4)})">
+    <rect width="32" height="32" rx="8" fill="#0E8A76"/>
+    <path d="M13 7h6v6h6v6h-6v6h-6v-6H7v-6h6z" fill="#fff"/>
+  </g>
+  <text x="${textX.toFixed(1)}" y="${baseline.toFixed(1)}" textLength="${textWidth.toFixed(1)}" lengthAdjust="spacing"
+        fill="#0E8A76" font-family="'Space Grotesk','Inter',system-ui,sans-serif"
+        font-size="${fontSize.toFixed(1)}" font-weight="700">CARESYNC</text>
+</svg>
+`;
+}
+
 /** Placeholder lock-up: the product name, set, with a rule under it. */
 function typographicLockup({ name, accent, tracking }) {
   const fontSize = 120;
@@ -153,6 +184,7 @@ function typographicLockup({ name, accent, tracking }) {
 const FILES = [
   { file: "onvee-logo.svg", svg: onveeLockup(), note: "real mark + wordmark" },
   { file: "vitadrop-logo.svg", svg: vitadropLockup(), note: "real mark + wordmark" },
+  { file: "caresync-logo.svg", svg: caresyncLockup(), note: "real mark + wordmark" },
   {
     file: "plutox-id-logo.svg",
     svg: typographicLockup({ name: "PLUTOX ID", accent: "#8B5CF6", tracking: 5 }),

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 610.4 160" width="610.4" height="160" role="img" aria-label="CareSync">
+  <g transform="scale(5.0000)">
+    <rect width="32" height="32" rx="8" fill="#0E8A76"/>
+    <path d="M13 7h6v6h6v6h-6v6h-6v-6H7v-6h6z" fill="#fff"/>
+  </g>
+  <text x="185.6" y="108.8" textLength="424.8" lengthAdjust="spacing"
+        fill="#0E8A76" font-family="'Space Grotesk','Inter',system-ui,sans-serif"
+        font-size="80.0" font-weight="700">CARESYNC</text>
+</svg>

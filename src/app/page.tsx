@@ -18,7 +18,7 @@ import {
   industries,
   technologies,
 } from "@/data/positioning";
-import { products } from "@/data/products";
+import { platformCountWord, products } from "@/data/products";
 import { siteConfig } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
@@ -128,8 +128,8 @@ export default function IntroPage() {
       {/* ---------------- The products ---------------- */}
       <Block
         label="What we've built"
-        title="Seven platforms"
-        description="Each one designed and built by us — not resold, not white-labelled. Six are shipped and running; Plutox ID is live inside Fleet Flow with key rotation still to come."
+        title={`${platformCountWord} platforms`}
+        description="Each one designed and built by us — not resold, not white-labelled. Six are shipped and running; Plutox ID is live inside Fleet Flow with key rotation still to come, and CareSync has its access layer built with the clinical modules still to write."
       >
         <RevealGroup stagger={0.07} className="flex flex-col">
           {products.map((product) => (

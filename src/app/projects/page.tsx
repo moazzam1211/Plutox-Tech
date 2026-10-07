@@ -3,13 +3,13 @@ import Link from "next/link";
 import { ProjectEntry } from "@/components/pages/project-entry";
 import { JsonLd } from "@/components/shared/json-ld";
 import { Pager, PageHeader, StatStrip } from "@/components/shared/page-shell";
-import { products } from "@/data/products";
+import { platformCountWord, products } from "@/data/products";
 import { breadcrumbJsonLd, buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
   title: "Projects",
   description:
-    "Seven platforms built by Plutox Tech — POS, hotel ERP, fleet management, cross-border delivery, identity, manufacturing ERP and a blood donation platform — with module detail and real screenshots.",
+    "Eight platforms built by Plutox Tech — POS, hotel ERP, hospital ERP, fleet management, cross-border delivery, identity, manufacturing ERP and a blood donation platform — with module detail and real screenshots.",
   path: "/projects",
   keywords: [
     "restaurant POS software",
@@ -52,7 +52,7 @@ export default function ProjectsPage() {
         eyebrow="Projects"
         title={
           <>
-            Seven platforms,{" "}
+            {platformCountWord} platforms,{" "}
             <span className="text-primary">built here, not resold</span>
           </>
         }

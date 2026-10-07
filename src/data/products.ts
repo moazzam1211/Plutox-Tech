@@ -1,7 +1,7 @@
 import type { Product } from "@/types";
 
 /**
- * The products built by Plutox Tech — seven platforms.
+ * The products built by Plutox Tech — eight platforms.
  *
  * ServeSync is one POS with three editions (restaurant / pharmacy / mart) chosen
  * at first run. It used to be three separate products; PharmaSync and Vendeez were
@@ -3052,4 +3052,211 @@ export const products: Product[] = [
     metric: { label: "Mock data behind the screens", value: "None" },
     demoUrl: "/contact",
   },
+
+  /* ------------------------------------------------------------------ */
+  /* CareSync — hospital ERP                                            */
+  /* ------------------------------------------------------------------ */
+  {
+    slug: "caresync",
+    name: "CareSync",
+    category: "Hospital ERP",
+    tagline: "One record, every department.",
+    description:
+      "A multi-tenant hospital ERP built foundation-first. The structure a hospital group actually has — organisation, group, hospital, branch, department — is modelled as real records rather than a text field, and every permission is checked against it on the server. The access layer is the whole product at this stage: 32 modules across seven groups are defined in one permission catalogue, 22 role templates are seeded from it, and the five administration modules behind them are built and running. The clinical, diagnostic and finance modules are mapped but not yet written, and the roadmap below says which is which rather than implying a finished hospital.",
+    image: "/images/products/caresync-logo.svg",
+    brandColor: "#0E8A76",
+    audience:
+      "Hospital groups and clinics that need one account system across several sites before they need another department tool",
+    badge: "Foundation shipped",
+    features: [
+      "Organisation → group → hospital → branch → department as real records",
+      "32 modules by ten actions in a single permission catalogue",
+      "22 seeded role templates, each a copy a tenant can edit",
+      "Permissions enforced on the server; the UI only hides what it already cannot do",
+      "TOTP two-factor, with enrolment per staff account",
+      "Sessions and failed sign-ins recorded as their own tables",
+      "Audit log written as work happens, not reconstructed",
+      "Platform console: every tenant on the installation, suspendable",
+      "Demo data banner-marked on every screen as sample, not real patients",
+    ],
+    moduleGroups: [
+      {
+        title: "Access — the part that is actually built",
+        items: [
+          {
+            name: "The permission catalogue",
+            detail:
+              "One list of 32 modules, each with the actions that make sense for it, grouped as Administration, Clinical, Diagnostics, Operations, Finance, People and Insights. The server is the only authority that checks a permission; the web app reads the same list purely to hide controls a user could not use anyway.",
+          },
+          {
+            name: "22 role templates",
+            detail:
+              "Hospital owner, administrator, branch manager, doctor, consultant, nurse, receptionist, cashier, pharmacist, lab technician, radiologist, radiology technician, OT manager, anaesthetist, accountant, HR manager, inventory manager, procurement officer, blood-bank staff, ambulance staff, housekeeping and maintenance. Each new tenant gets a copy it can edit, so a template change never rewrites a live hospital's access.",
+          },
+          {
+            name: "You cannot grant what you do not hold",
+            detail:
+              "The role editor greys out every permission the editing user lacks. Privilege escalation through the admin screen is the obvious hole in a role system, and closing it in the UI as well as the API is what stops a branch manager quietly promoting themselves.",
+          },
+          {
+            name: "Organisation structure as records",
+            detail:
+              "Group, hospital, branch and department are four tables, not labels. A user belongs somewhere specific, and a permission is answered against that position — which is the only way a nurse at one branch stays a nurse at that branch.",
+          },
+        ],
+      },
+      {
+        title: "Identity and trust",
+        items: [
+          {
+            name: "Two-factor sign-in",
+            detail:
+              "TOTP enrolment per account, with the secret handled server-side. A hospital account reaches patient data; a password alone is not a defensible boundary for that.",
+          },
+          {
+            name: "Sessions and sign-in attempts",
+            detail:
+              "Both are their own tables. Suspending a tenant signs out all of its users immediately rather than waiting for tokens to lapse, and a failed-attempt history is what makes an unusual sign-in answerable.",
+          },
+          {
+            name: "Audit log",
+            detail:
+              "Who did what to which record, written as the work happens. On a system that will hold medical records this is the difference between a system of record and a website.",
+          },
+          {
+            name: "Demo data that cannot be mistaken for real",
+            detail:
+              "Seeded organisations are suffixed (DEMO) and every screen carries a banner saying the records are sample data, not real patients or staff. A screenshot of a hospital system is exactly the thing that must never be misread as a real ward.",
+          },
+        ],
+      },
+      {
+        title: "Mapped, not yet built",
+        items: [
+          {
+            name: "Clinical",
+            detail:
+              "Patients, medical records, appointments, OPD, IPD, emergency and nursing. Named in the permission catalogue and visible in the role matrix; no screens behind them yet.",
+          },
+          {
+            name: "Diagnostics",
+            detail:
+              "Laboratory, radiology, operation theatre and blood bank — the same: permissions defined, modules not written.",
+          },
+          {
+            name: "Operations, finance and people",
+            detail:
+              "Pharmacy, inventory, procurement, assets, ambulance, housekeeping, maintenance, billing, insurance/TPA, accounting, HR and payroll. The access layer already knows about all of them, which is what lets each one ship without touching the permission model again.",
+          },
+          {
+            name: "Why this order",
+            detail:
+              "Retrofitting multi-tenancy and per-branch permissions onto a built hospital system is close to a rewrite. Doing the structure first is slower to demo and much cheaper to finish.",
+          },
+        ],
+      },
+    ],
+    screens: [
+      {
+        src: "/images/products/screens/caresync-login.webp",
+        label: "Sign In",
+        caption: "One door, with two-factor behind it",
+      },
+      {
+        src: "/images/products/screens/caresync-dashboard.webp",
+        label: "Overview",
+        caption: "Hospitals, branches, departments and staff at a glance",
+      },
+      {
+        src: "/images/products/screens/caresync-organization.webp",
+        label: "Organisation",
+        caption: "Group, hospital, branch and department as real structure",
+      },
+      {
+        src: "/images/products/screens/caresync-users.webp",
+        label: "Users",
+        caption: "Staff accounts across every branch",
+      },
+      {
+        src: "/images/products/screens/caresync-user-form.webp",
+        label: "Add a User",
+        caption: "Role and branch decided at the point of creation",
+      },
+      {
+        src: "/images/products/screens/caresync-user-detail.webp",
+        label: "User Detail",
+        caption: "One account, its roles and its access",
+      },
+      {
+        src: "/images/products/screens/caresync-role-matrix.webp",
+        label: "Roles & Access",
+        caption: "32 modules by ten actions — the permission grid itself",
+      },
+      {
+        src: "/images/products/screens/caresync-audit.webp",
+        label: "Audit Log",
+        caption: "Who did what to which record",
+      },
+      {
+        src: "/images/products/screens/caresync-account-mfa.webp",
+        label: "Two-Factor",
+        caption: "TOTP enrolment for a staff account",
+      },
+      {
+        src: "/images/products/screens/caresync-settings.webp",
+        label: "Settings",
+        caption: "What the tenant controls for itself",
+      },
+      {
+        src: "/images/products/screens/caresync-tenants.webp",
+        label: "Platform — Tenants",
+        caption: "Every organisation on the installation, suspendable",
+      },
+      {
+        src: "/images/products/screens/caresync-m1-dashboard.webp",
+        label: "Mobile — Overview",
+        caption: "The same workspace on a phone",
+      },
+      {
+        src: "/images/products/screens/caresync-m2-users.webp",
+        label: "Mobile — Users",
+        caption: "Staff administration on the move",
+      },    ],
+    languages: ["TypeScript", "TSX", "CSS", "SQL"],
+    stack: [
+      "TypeScript",
+      "NestJS",
+      "React",
+      "Vite",
+      "Prisma",
+      "PostgreSQL",
+      "Zod",
+      "TanStack Query",
+      "Playwright",
+    ],
+    specs: [
+      { label: "Modules in the catalogue", value: "32" },
+      { label: "Permissions", value: "146" },
+      { label: "Role templates", value: "22" },
+      { label: "API endpoints", value: "44" },
+    ],
+    metric: { label: "Administration modules live", value: "5 of 32" },
+    demoUrl: "/contact",
+  },
 ];
+
+/**
+ * The platform count, spelled out.
+ *
+ * Four pages and the navbar open with "N platforms". That line was hand-typed
+ * and went stale the moment a product was added — so it is derived here instead,
+ * from the same array the pages render. Past twelve it falls back to digits,
+ * which is the point at which prose would stop reading like prose anyway.
+ */
+const WORDS = [
+  "Zero", "One", "Two", "Three", "Four", "Five", "Six",
+  "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve",
+];
+
+export const platformCount = products.length;
+export const platformCountWord = WORDS[products.length] ?? String(products.length);

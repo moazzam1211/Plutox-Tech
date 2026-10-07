@@ -295,6 +295,32 @@ const PRODUCTS = [
       ["53-requests-mobile.png", "Mobile — Requests", "Answering a request from a phone"],
     ],
   },
+  /*
+    CareSync captures come from the project's own Playwright suite rather than a
+    separate script, so every frame is a screen the e2e run actually drove.
+    Skipped: the login-error state, the forced-password-change step and the
+    internal colour-palette reference — a failed sign-in and a design swatch are
+    not what a hospital is buying.
+  */
+  {
+    slug: "caresync",
+    src: "D:/dev/caresync/apps/web/test-results/screens",
+    screens: [
+      ["00-login.png", "Sign In", "One door, with two-factor behind it"],
+      ["02-dashboard.png", "Overview", "Hospitals, branches, departments and staff at a glance"],
+      ["03-organization.png", "Organisation", "Group, hospital, branch and department as real structure"],
+      ["04-users.png", "Users", "Staff accounts across every branch"],
+      ["05-user-form.png", "Add a User", "Role and branch decided at the point of creation"],
+      ["06-user-detail.png", "User Detail", "One account, its roles and its access"],
+      ["09-role-matrix.png", "Roles & Access", "32 modules by ten actions — the permission grid itself"],
+      ["07-audit.png", "Audit Log", "Who did what to which record"],
+      ["12-account-mfa.png", "Two-Factor", "TOTP enrolment for a staff account"],
+      ["11-settings.png", "Settings", "What the tenant controls for itself"],
+      ["13-tenants.png", "Platform — Tenants", "Every organisation on the installation, suspendable"],
+      ["m1-dashboard.png", "Mobile — Overview", "The same workspace on a phone"],
+      ["m2-users.png", "Mobile — Users", "Staff administration on the move"],
+    ],
+  },
 ];
 
 /**

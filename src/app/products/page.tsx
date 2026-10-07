@@ -12,14 +12,14 @@ import {
 import { Reveal } from "@/components/shared/reveal";
 import { Button } from "@/components/ui/button";
 import { productModules } from "@/data/modules";
-import { products } from "@/data/products";
+import { platformCountWord, products } from "@/data/products";
 import { breadcrumbJsonLd, buildMetadata } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
 export const metadata = buildMetadata({
   title: "Products",
   description:
-    "Seven platforms and eleven shared modules: POS for restaurants, pharmacies and marts, hotel ERP, fleet management, delivery and passwordless sign-in.",
+    "Eight platforms and eleven shared modules: POS for restaurants, pharmacies and marts, hotel ERP, hospital ERP, fleet management, delivery and passwordless sign-in.",
   path: "/products",
   keywords: [
     "restaurant management system",
@@ -65,7 +65,7 @@ export default function ProductsPage() {
         eyebrow="Products"
         title={
           <>
-            Seven platforms,{" "}
+            {platformCountWord} platforms,{" "}
             <span className="text-primary">each with its own modules</span>
           </>
         }
