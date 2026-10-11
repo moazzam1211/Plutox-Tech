@@ -23,9 +23,9 @@ export const posBuilds: PosBuild[] = [
       "Delivery zones, riders and a live map",
       "Foodpanda orders as a native channel"
     ],
-    "version": "2.2.79",
-    "bytes": 110585326,
-    "sha256": "94ed833f65ba3e8d30d3ac99c6ab28f9c50d6376ad057252b8aec173f97700fa",
+    "version": "2.2.80",
+    "bytes": 110585717,
+    "sha256": "ebe0885c56badc73f0d6cbdc7c39b3cf7586bf045730fa71e80fcfd50f9cb612",
     "releasedAt": "2026-10-11",
     "filename": "ServeSync-Restaurant-Setup.exe",
     "href": "https://admin.plutoxtech.com/downloads/ServeSync-Restaurant-Setup.exe"
@@ -41,9 +41,9 @@ export const posBuilds: PosBuild[] = [
       "Till Report-X and shift close",
       "Multi-outlet stock and transfers"
     ],
-    "version": "2.1.53",
-    "bytes": 110099720,
-    "sha256": "a1364978dcd95ec7bdc55acdbffa0a9f50b1404065f88540aa8d0fb94519661f",
+    "version": "2.1.54",
+    "bytes": 110099943,
+    "sha256": "05306ec35a3e9f3fef64a146fcfa4136af43ddef324be911160d1bf998f80949",
     "releasedAt": "2026-10-11",
     "filename": "ServeSync-Mart-Setup.exe",
     "href": "https://admin.plutoxtech.com/downloads/ServeSync-Mart-Setup.exe"
@@ -59,9 +59,9 @@ export const posBuilds: PosBuild[] = [
       "PRA / FBR fiscal reporting",
       "List-view till for counter service"
     ],
-    "version": "2.1.52",
-    "bytes": 113936271,
-    "sha256": "66e7d034512b5f975323fad8c10e2624e8bdd4c84e31feeee4c656eb13b0f547",
+    "version": "2.1.53",
+    "bytes": 113936610,
+    "sha256": "ed22afa52edf4bdf8d6631737f71fb5b432111c97873dbcac5770ba2dee359f5",
     "releasedAt": "2026-10-11",
     "filename": "ServeSync-Pharmacy-Setup.exe",
     "href": "https://admin.plutoxtech.com/downloads/ServeSync-Pharmacy-Setup.exe"
