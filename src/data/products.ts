@@ -1,7 +1,7 @@
 import type { Product } from "@/types";
 
 /**
- * The products built by Plutox Tech — eight platforms.
+ * The products built by Plutox Tech — nine platforms.
  *
  * ServeSync is one POS with three editions (restaurant / pharmacy / mart) chosen
  * at first run. It used to be three separate products; PharmaSync and Vendeez were
@@ -3241,6 +3241,265 @@ export const products: Product[] = [
       { label: "API endpoints", value: "44" },
     ],
     metric: { label: "Administration modules live", value: "5 of 32" },
+    demoUrl: "/contact",
+  },
+
+  /* ------------------------------------------------------------------ */
+  /* Dareen Parfum Atelier — perfume commerce                           */
+  /* ------------------------------------------------------------------ */
+  {
+    slug: "dareen",
+    name: "Dareen Parfum Atelier",
+    category: "E-commerce Platform",
+    tagline: "A symphony of scents.",
+    description:
+      "A perfume house's storefront and the back office that runs it, built as one application rather than a shop bolted onto a dashboard. 26 customer-facing pages and 26 admin pages over a 41-model schema, with 203 server actions doing the work instead of a REST layer nobody else calls. Payment covers what Pakistani customers actually use — cash on delivery, JazzCash, Easypaisa and Stripe — and the product photography is composed in code from a reference bottle, so a new fragrance ships with a studio shot without a studio.",
+    image: "/images/products/dareen-logo.webp",
+    brandColor: "#B08462",
+    audience:
+      "A perfume house selling direct, that needs the catalogue, the orders and the stock to be one system",
+    badge: "Store + admin",
+    features: [
+      "Storefront and admin in one codebase, one schema, one deploy",
+      "Product photography composed in code from a reference bottle",
+      "Cash on delivery, JazzCash, Easypaisa and Stripe",
+      "Passkeys alongside passwords, through WebAuthn",
+      "Stock by variant, with every movement written to a log",
+      "Coupons scoped to products or collections, with usage recorded",
+      "Shipping zones and methods priced per zone",
+      "First-party visitor analytics — no third-party tracker on the store",
+      "Packing slips generated as real PDFs",
+      "Admin activity log, and admin devices tracked per account",
+    ],
+    moduleGroups: [
+      {
+        title: "The storefront",
+        items: [
+          {
+            name: "Catalogue and collections",
+            detail:
+              "Categories are what a product is; collections are what a shop wants to sell together, and they are separate tables for that reason. A fragrance can sit in one category and three curated edits without duplicating the record.",
+          },
+          {
+            name: "Fragrance notes as data",
+            detail:
+              "Notes are their own table joined to products, not a comma-separated string in a description. That is what makes \"show me everything with oud\" a query rather than a text search that also matches the word in a paragraph.",
+          },
+          {
+            name: "Variants and real stock",
+            detail:
+              "Size and price live on the variant, and availability is read from inventory rather than a boolean someone remembers to switch. A sold-out 100ml does not hide the 50ml.",
+          },
+          {
+            name: "Cart, checkout and payment",
+            detail:
+              "Cash on delivery, JazzCash, Easypaisa and Stripe, each a transaction record with its webhook events kept. A payment nobody can reconcile later is the expensive kind.",
+          },
+          {
+            name: "Accounts, addresses and wishlist",
+            detail:
+              "Order history, saved addresses, reviews and a wishlist — with passkeys offered alongside the password, because a returning customer on a phone should not have to remember anything.",
+          },
+        ],
+      },
+      {
+        title: "The back office",
+        items: [
+          {
+            name: "Dashboard over a chosen range",
+            detail:
+              "Revenue, orders, average order value, low and out-of-stock counts, with revenue and orders plotted over the selected window and a breakdown by product and category under them.",
+          },
+          {
+            name: "Orders and their history",
+            detail:
+              "Every order carries its own event trail, so what happened to it is a record rather than an inference from the current status.",
+          },
+          {
+            name: "Inventory with a movement log",
+            detail:
+              "Stock changes are written as movements rather than adjusted in place. When a count disagrees with the shelf, there is a history to read.",
+          },
+          {
+            name: "Coupons that know their scope",
+            detail:
+              "A discount can be limited to products or collections, and every redemption is recorded against the customer — which is what makes a one-per-customer rule enforceable rather than aspirational.",
+          },
+          {
+            name: "Shipping zones and methods",
+            detail:
+              "Rates priced per zone, with shipments tracked against the order they belong to.",
+          },
+          {
+            name: "Reviews, moderated",
+            detail:
+              "What a customer writes and what appears on the product page are two different decisions.",
+          },
+        ],
+      },
+      {
+        title: "Decisions worth naming",
+        items: [
+          {
+            name: "The photography is composed, not shot",
+            detail:
+              "Each fragrance's studio photograph is rendered in code from one reference bottle, with the liquid colour and label set per product. A new scent ships with a consistent image on the day it is added, and re-rendering the whole catalogue after a colour change is one command rather than a photo shoot.",
+          },
+          {
+            name: "Server actions instead of an API nobody calls",
+            detail:
+              "203 server actions and eight route handlers. The routes exist for the things that genuinely need an HTTP endpoint — webhooks, uploads — and the rest is a function call the type checker can see both ends of.",
+          },
+          {
+            name: "Analytics without a third party",
+            detail:
+              "Page views and visitor identity are first-party tables. A perfume shop has no reason to hand its customers' browsing to an ad network, and a store that does cannot honestly write its own privacy page.",
+          },
+          {
+            name: "Roles enforced on the server",
+            detail:
+              "Owner, admin, staff and customer, checked server-side rather than by hiding a menu item. Admin devices are recorded per account, so an unfamiliar sign-in is visible.",
+          },
+        ],
+      },
+    ],
+    screens: [
+      {
+        src: "/images/products/screens/dareen-home.webp",
+        label: "Storefront",
+        caption: "A symphony of scents — the shop front",
+      },
+      {
+        src: "/images/products/screens/dareen-products.webp",
+        label: "Catalogue",
+        caption: "The collection, filtered and sorted",
+      },
+      {
+        src: "/images/products/screens/dareen-product-detail.webp",
+        label: "Product",
+        caption: "Notes, variants and what is actually in stock",
+      },
+      {
+        src: "/images/products/screens/dareen-collections.webp",
+        label: "Collections",
+        caption: "Curated groupings, not just categories",
+      },
+      {
+        src: "/images/products/screens/dareen-search.webp",
+        label: "Search",
+        caption: "Querying the catalogue by name and note",
+      },
+      {
+        src: "/images/products/screens/dareen-about.webp",
+        label: "Our Story",
+        caption: "The brand page",
+      },
+      {
+        src: "/images/products/screens/dareen-register.webp",
+        label: "Register",
+        caption: "Customer sign-up, with passkeys supported",
+      },
+      {
+        src: "/images/products/screens/dareen-admin-overview.webp",
+        label: "Admin Dashboard",
+        caption: "Revenue, orders and stock over a chosen range",
+      },
+      {
+        src: "/images/products/screens/dareen-admin-analytics.webp",
+        label: "Analytics",
+        caption: "Where the revenue actually came from",
+      },
+      {
+        src: "/images/products/screens/dareen-admin-orders.webp",
+        label: "Orders",
+        caption: "Every order and the events behind it",
+      },
+      {
+        src: "/images/products/screens/dareen-admin-products.webp",
+        label: "Products",
+        caption: "The catalogue as the shop manages it",
+      },
+      {
+        src: "/images/products/screens/dareen-admin-product-new.webp",
+        label: "New Product",
+        caption: "Variants, notes, images and inventory in one form",
+      },
+      {
+        src: "/images/products/screens/dareen-admin-inventory.webp",
+        label: "Inventory",
+        caption: "Stock by variant, with a movement log",
+      },
+      {
+        src: "/images/products/screens/dareen-admin-customers.webp",
+        label: "Customers",
+        caption: "Accounts, orders and lifetime value",
+      },
+      {
+        src: "/images/products/screens/dareen-admin-coupons.webp",
+        label: "Coupons",
+        caption: "Discounts scoped to products or collections",
+      },
+      {
+        src: "/images/products/screens/dareen-admin-collections.webp",
+        label: "Collections",
+        caption: "Building a curated group",
+      },
+      {
+        src: "/images/products/screens/dareen-admin-reviews.webp",
+        label: "Reviews",
+        caption: "Moderating what appears on a product",
+      },
+      {
+        src: "/images/products/screens/dareen-admin-visitors.webp",
+        label: "Visitors",
+        caption: "First-party traffic, no third-party tracker",
+      },
+      {
+        src: "/images/products/screens/dareen-admin-shipping.webp",
+        label: "Shipping",
+        caption: "Zones, methods and what each one costs",
+      },
+      {
+        src: "/images/products/screens/dareen-admin-payments.webp",
+        label: "Payments",
+        caption: "Transactions and their webhook history",
+      },
+      {
+        src: "/images/products/screens/dareen-admin-settings.webp",
+        label: "Settings",
+        caption: "What the store owner controls",
+      },
+      {
+        src: "/images/products/screens/dareen-admin-logs.webp",
+        label: "Activity Log",
+        caption: "Who changed what in the admin",
+      },
+      {
+        src: "/images/products/screens/dareen-admin-users.webp",
+        label: "Admin Users",
+        caption: "Owner, admin and staff, with devices",
+      },    ],
+    languages: ["TypeScript", "TSX", "CSS", "SQL"],
+    stack: [
+      "TypeScript",
+      "Next.js",
+      "Prisma",
+      "PostgreSQL",
+      "Zod",
+      "React Hook Form",
+      "Recharts",
+      "SimpleWebAuthn",
+      "pdf-lib",
+      "Sharp",
+      "Playwright",
+    ],
+    specs: [
+      { label: "Prisma models", value: "41" },
+      { label: "Pages", value: "52" },
+      { label: "Server actions", value: "203" },
+      { label: "Payment methods", value: "4" },
+    ],
+    metric: { label: "Third-party trackers on the store", value: "None" },
     demoUrl: "/contact",
   },
 ];

@@ -19,7 +19,7 @@ import { cn } from "@/lib/utils";
 export const metadata = buildMetadata({
   title: "Products",
   description:
-    "Eight platforms and eleven shared modules: POS for restaurants, pharmacies and marts, hotel ERP, hospital ERP, fleet management, delivery and passwordless sign-in.",
+    "Nine platforms and eleven shared modules: POS for restaurants, pharmacies and marts, hotel ERP, hospital ERP, fleet management, delivery, perfume commerce and passwordless sign-in.",
   path: "/products",
   keywords: [
     "restaurant management system",

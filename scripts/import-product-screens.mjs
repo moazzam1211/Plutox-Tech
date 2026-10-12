@@ -321,6 +321,41 @@ const PRODUCTS = [
       ["m2-users.png", "Mobile — Users", "Staff administration on the move"],
     ],
   },
+  /*
+    Dareen is captured from the running store and admin against its seeded
+    catalogue — 12 products, 49 orders, 47 reviews — so the charts and tables
+    hold real figures rather than the zeroes a fresh database would show.
+    Skipped: the cart (empty without a session) and the plain legal pages.
+  */
+  {
+    slug: "dareen",
+    src: "C:/Users/aaa/AppData/Local/Temp/claude/C--Users-aaa-Downloads/482801db-b3d8-4d16-8385-084b6d6927ab/scratchpad/dn-shots",
+    screens: [
+      ["01-home.png", "Storefront", "A symphony of scents — the shop front"],
+      ["02-products.png", "Catalogue", "The collection, filtered and sorted"],
+      ["10-product-detail.png", "Product", "Notes, variants and what is actually in stock"],
+      ["03-collections.png", "Collections", "Curated groupings, not just categories"],
+      ["04-search.png", "Search", "Querying the catalogue by name and note"],
+      ["06-about.png", "Our Story", "The brand page"],
+      ["09-register.png", "Register", "Customer sign-up, with passkeys supported"],
+      ["11-admin-overview.png", "Admin Dashboard", "Revenue, orders and stock over a chosen range"],
+      ["20-admin-analytics.png", "Analytics", "Where the revenue actually came from"],
+      ["12-admin-orders.png", "Orders", "Every order and the events behind it"],
+      ["13-admin-products.png", "Products", "The catalogue as the shop manages it"],
+      ["14-admin-product-new.png", "New Product", "Variants, notes, images and inventory in one form"],
+      ["15-admin-inventory.png", "Inventory", "Stock by variant, with a movement log"],
+      ["16-admin-customers.png", "Customers", "Accounts, orders and lifetime value"],
+      ["17-admin-coupons.png", "Coupons", "Discounts scoped to products or collections"],
+      ["18-admin-collections.png", "Collections", "Building a curated group"],
+      ["19-admin-reviews.png", "Reviews", "Moderating what appears on a product"],
+      ["21-admin-visitors.png", "Visitors", "First-party traffic, no third-party tracker"],
+      ["22-admin-shipping.png", "Shipping", "Zones, methods and what each one costs"],
+      ["23-admin-payments.png", "Payments", "Transactions and their webhook history"],
+      ["24-admin-settings.png", "Settings", "What the store owner controls"],
+      ["25-admin-logs.png", "Activity Log", "Who changed what in the admin"],
+      ["26-admin-users.png", "Admin Users", "Owner, admin and staff, with devices"],
+    ],
+  },
 ];
 
 /**
