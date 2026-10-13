@@ -47,6 +47,8 @@ export const products: Product[] = [
       "Pharmacy: batch stock with FEFO dispensing, Rx gating and a controlled register",
       "Mart: barcode scanning three ways, promotions, gift cards and scale labels",
       "Restaurant: kitchen display, live floor plan, delivery and Foodpanda",
+      "Partial payments \u2014 part cash, part card on one bill, or the balance on the customer\u2019s Khata",
+      "Set up from the vendor console \u2014 menu, staff, tables and receipt details arrive before the first sale",
       "PRA / FBR fiscal invoicing shared by all three editions",
       "Silent ESC/POS printing straight to the thermal printer, no browser dialog",
       "A desktop app that updates itself \u2014 an \u201cUpdate now\u201d banner, not a reinstall",
@@ -84,12 +86,12 @@ export const products: Product[] = [
           {
             name: "Point of sale",
             detail:
-              "Dine-in / takeaway / delivery for restaurants, scan-to-cart for marts and pharmacies. Modifiers and per-item add-ons, % or fixed discounts, surcharges, promo and loyalty redemption, split and method-based tax.",
+              "Dine-in / takeaway / delivery for restaurants, scan-to-cart for marts and pharmacies. Modifiers and per-item add-ons, % or fixed discounts, surcharges, promo and loyalty redemption, split and method-based tax. A bill can be settled in parts and by several methods \u2014 cash now, the rest by card \u2014 or its balance put on the customer\u2019s Khata, so the bill closes and the debt lands in their ledger.",
           },
           {
             name: "Orders & invoices",
             detail:
-              "The full order list with manage, void and refund behind a supervisor PIN, pre-bill and customer bill, and a QR code on every receipt.",
+              "The full order list with manage, void and refund behind a supervisor PIN, pre-bill and customer bill, and a QR code on every receipt. Cancelling or removing food the kitchen never made can put it back: each line records how much it drew from ready-made stock and how much from ingredients, so the return restores exactly that.",
           },
           {
             name: "Silent thermal printing",
@@ -114,7 +116,7 @@ export const products: Product[] = [
           {
             name: "Customers & CRM",
             detail:
-              "Profiles with purchase history, loyalty points and tiers, credit on account, and Excel export. Shown as Patients in the pharmacy edition.",
+              "Profiles with purchase history, loyalty points and tiers, and Excel export, plus a Khata credit ledger with statements, ageing and credit limits that a manager can override. Shown as Patients in the pharmacy edition.",
           },
           {
             name: "Reports & BI",
@@ -255,6 +257,11 @@ export const products: Product[] = [
             name: "Settings & packages",
             detail:
               "Branches with quick rename, tax rules, printers, OTP, branding, access control, integrations and the edition switch — plus three subscription packages whose module gating is enforced in the sidebar and again server-side.",
+          },
+          {
+            name: "Set up from the vendor console",
+            detail:
+              "The client\u2019s business details, tax rates, owner PIN, tables, menu and staff are prepared in the Plutox console \u2014 the menu pasted straight from Excel \u2014 and the till applies them itself the next time it calls home. A new install opens ready to sell; one that already has a menu is left alone unless the vendor chooses to add only what is missing. Nobody has to sit at the client\u2019s PC.",
           },
         ],
       },
