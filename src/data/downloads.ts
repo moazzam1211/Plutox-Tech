@@ -23,10 +23,10 @@ export const posBuilds: PosBuild[] = [
       "Delivery zones, riders and a live map",
       "Foodpanda orders as a native channel"
     ],
-    "version": "2.2.87",
-    "bytes": 110602789,
-    "sha256": "9bccd4f00127aa34e90aab549481c6de21fdcdead138ba9600abf1ed0de83801",
-    "releasedAt": "2026-10-13",
+    "version": "2.2.88",
+    "bytes": 110603212,
+    "sha256": "dfec33160d5555145f889057c05c70bdb599425705c8c393bd78b89b109bbbc1",
+    "releasedAt": "2026-10-14",
     "filename": "ServeSync-Restaurant-Setup.exe",
     "href": "https://admin.plutoxtech.com/downloads/ServeSync-Restaurant-Setup.exe"
   },
