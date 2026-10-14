@@ -302,31 +302,71 @@ const PRODUCTS = [
     internal colour-palette reference — a failed sign-in and a design swatch are
     not what a hospital is buying.
   */
+  /*
+    CareSync documents itself: `DOCS=1 npx playwright test` drives the whole
+    system and writes 131 captures to docs/screenshots. These are the ones that
+    show the product rather than a step in a test — every clinical, diagnostic,
+    financial and operational area, the A4 documents it prints, the patient
+    portal, the dark theme and two phone widths.
+  */
   {
     slug: "caresync",
-    src: "D:/dev/caresync/apps/web/test-results/screens",
+    src: "D:/dev/caresync/docs/screenshots",
     screens: [
-      ["00-login.png", "Sign In", "One door, with two-factor behind it"],
-      ["02-dashboard.png", "Overview", "Hospitals, branches, departments and staff at a glance"],
-      ["03-organization.png", "Organisation", "Group, hospital, branch and department as real structure"],
-      ["04-users.png", "Users", "Staff accounts across every branch"],
-      ["05-user-form.png", "Add a User", "Role and branch decided at the point of creation"],
-      ["06-user-detail.png", "User Detail", "One account, its roles and its access"],
-      ["09-role-matrix.png", "Roles & Access", "32 modules by ten actions — the permission grid itself"],
-      ["07-audit.png", "Audit Log", "Who did what to which record"],
-      ["12-account-mfa.png", "Two-Factor", "TOTP enrolment for a staff account"],
-      ["11-settings.png", "Settings", "What the tenant controls for itself"],
-      ["13-tenants.png", "Platform — Tenants", "Every organisation on the installation, suspendable"],
-      ["m1-dashboard.png", "Mobile — Overview", "The same workspace on a phone"],
-      ["m2-users.png", "Mobile — Users", "Staff administration on the move"],
+      ["03-overview.png", "Overview", "The hospital's day on one screen"],
+      ["27-patients.png", "Patients", "The register, searchable by MRN, name or phone"],
+      ["34-patient-chart.png", "Patient Chart", "History, vitals, orders and documents in one place"],
+      ["31-opd-queue.png", "OPD Queue", "Who is waiting, for whom, and since when"],
+      ["28-walk-in.png", "Walk-in", "Registration and a token at the desk"],
+      ["48-consultation.png", "Consultation", "Vitals, diagnosis, prescription and plan on one page"],
+      ["47-allergy-warning.png", "Allergy Warning", "The chart interrupts before the prescription is written"],
+      ["50-consultation-signed.png", "Signed & Complete", "A consultation closed and attributed"],
+      ["41-prescription-sheet-a4.png", "Prescription (A4)", "What the patient actually walks out with"],
+      ["37-appointment-diary.png", "Appointment Diary", "The day across every doctor"],
+      ["38-book-appointment.png", "Booking", "Slot, doctor and reason, checked against the schedule"],
+      ["51-bed-board.png", "Bed Board", "Every ward and bed, live"],
+      ["53-admission.png", "Admission", "One stay, its orders and its notes"],
+      ["56-discharge-summary-a4.png", "Discharge Summary (A4)", "The document the next clinician reads"],
+      ["58-er-board.png", "Emergency Board", "Arrivals ordered by acuity, not by arrival time"],
+      ["60-er-triage.png", "Triage", "Category assigned at the door"],
+      ["62-nursing-station.png", "Nursing Station", "The ward's work list for a shift"],
+      ["63-observations.png", "Observations", "Vitals charted over time with an early-warning score"],
+      ["64-mar.png", "Medication Chart", "What is due, what was given and by whom"],
+      ["66-order-tests.png", "Order Tests", "Investigations raised from the consultation"],
+      ["67-lab-worklist.png", "Lab Worklist", "Specimens through to verified results"],
+      ["69-lab-report-a4.png", "Lab Report (A4)", "Results with reference ranges, signed"],
+      ["70-radiology-report.png", "Radiology", "Reporting against the request"],
+      ["82-ot-board.png", "Operation Theatre", "The list, by theatre and session"],
+      ["84-surgery.png", "Surgery", "Team, procedure and the notes that follow"],
+      ["85-blood-stock.png", "Blood Bank", "Units by group, and who has asked for them"],
+      ["73-pharmacy-queue.png", "Pharmacy", "Prescriptions arriving from the clinic, not re-typed"],
+      ["74-dispense.png", "Dispensing", "Against the prescription, against the stock"],
+      ["87-inventory.png", "Inventory", "Stock by item and location, with movements"],
+      ["88-procurement.png", "Procurement", "Requests, approvals and purchase orders"],
+      ["76-billing.png", "Billing", "Charges accumulated from what was actually done"],
+      ["79-invoice-a4.png", "Invoice (A4)", "The bill as the patient receives it"],
+      ["80-claims.png", "Insurance Claims", "Panel and TPA claims against a bill"],
+      ["90-hr-overview.png", "Human Resources", "Staff, roster and attendance"],
+      ["95-payroll-run.png", "Payroll Run", "A period calculated and closed"],
+      ["99-profit-loss.png", "Profit & Loss", "Accounting that reads from the billing, not a spreadsheet"],
+      ["111-reports-executive.png", "Executive Reports", "The numbers an owner asks for"],
+      ["10-roles.png", "Roles", "23 seeded templates a tenant can edit"],
+      ["11-permission-matrix.png", "Permission Matrix", "32 modules by ten actions, enforced server-side"],
+      ["12-audit-log.png", "Audit Log", "Who did what to which record"],
+      ["16-two-factor-setup.png", "Two-Factor", "TOTP enrolment for a staff account"],
+      ["19-tenants.png", "Platform — Tenants", "Every hospital on the installation"],
+      ["22-plans.png", "Plans", "What each subscription tier unlocks"],
+      ["117-portal-sign-in.png", "Patient Portal", "The patient's own way in"],
+      ["118-portal-home.png", "Portal — Home", "Appointments, reports and bills, to the patient"],
+      ["119-portal-booking.png", "Portal — Booking", "A patient booking their own slot"],
+      ["121-portal-prescription.png", "Portal — Prescription", "The script, without a trip to the counter"],
+      ["115-integrations.png", "Integrations", "Lab analysers and outbound interfaces"],
+      ["131-global-search.png", "Global Search", "Staff, patients and pages from one box"],
+      ["43-dark-opd-queue.png", "Dark Theme", "The same queue for a night shift"],
+      ["25-mobile-overview.png", "Mobile — Overview", "The workspace at phone width"],
+      ["26-mobile-menu.png", "Mobile — Navigation", "The drawer, role-aware"],
     ],
   },
-  /*
-    Dareen is captured from the running store and admin against its seeded
-    catalogue — 12 products, 49 orders, 47 reviews — so the charts and tables
-    hold real figures rather than the zeroes a fresh database would show.
-    Skipped: the cart (empty without a session) and the plain legal pages.
-  */
   {
     slug: "dareen",
     src: "C:/Users/aaa/AppData/Local/Temp/claude/C--Users-aaa-Downloads/482801db-b3d8-4d16-8385-084b6d6927ab/scratchpad/dn-shots",

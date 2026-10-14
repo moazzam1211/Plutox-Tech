@@ -3069,165 +3069,411 @@ export const products: Product[] = [
     category: "Hospital ERP",
     tagline: "One record, every department.",
     description:
-      "A multi-tenant hospital ERP built foundation-first. The structure a hospital group actually has — organisation, group, hospital, branch, department — is modelled as real records rather than a text field, and every permission is checked against it on the server. The access layer is the whole product at this stage: 32 modules across seven groups are defined in one permission catalogue, 22 role templates are seeded from it, and the five administration modules behind them are built and running. The clinical, diagnostic and finance modules are mapped but not yet written, and the roadmap below says which is which rather than implying a finished hospital.",
+      "A multi-tenant hospital ERP covering the clinical day end to end: a patient registers at the desk, joins an OPD queue, is seen in a consultation that writes vitals, an ICD-coded diagnosis and a prescription, and the pharmacy dispenses against that same record while billing accumulates what was actually done. 420 endpoints over a 116-model schema, 79 screens, and 31 of the 32 modules in its permission catalogue are built. It runs in a browser, as a Windows application with its own updater, and as a portal the patient signs into themselves.",
     image: "/images/products/caresync-logo.svg",
     brandColor: "#0E8A76",
     audience:
-      "Hospital groups and clinics that need one account system across several sites before they need another department tool",
-    badge: "Foundation shipped",
+      "Hospital groups and clinics that want one system for the clinic, the ward, the lab, the pharmacy and the books",
+    badge: "31 of 32 modules",
     features: [
-      "Organisation → group → hospital → branch → department as real records",
-      "32 modules by ten actions in a single permission catalogue",
-      "22 seeded role templates, each a copy a tenant can edit",
-      "Permissions enforced on the server; the UI only hides what it already cannot do",
-      "TOTP two-factor, with enrolment per staff account",
-      "Sessions and failed sign-ins recorded as their own tables",
-      "Audit log written as work happens, not reconstructed",
-      "Platform console: every tenant on the installation, suspendable",
-      "Demo data banner-marked on every screen as sample, not real patients",
+      "OPD queue to consultation to pharmacy on one patient record",
+      "Prescriptions, discharge summaries, lab and radiology reports as real A4 documents",
+      "Allergy warnings raised before the prescription is written",
+      "Observations charted with an early-warning score, and a medication chart",
+      "Emergency board ordered by triage category, not arrival time",
+      "Billing that accumulates from what was done, with insurance and TPA claims",
+      "Accounting that reads the billing rather than a re-keyed spreadsheet",
+      "A patient portal for appointments, reports, prescriptions and payments",
+      "32 modules by ten actions in one permission catalogue, enforced server-side",
+      "Windows build with its own updater, and a dark theme for night shifts",
     ],
     moduleGroups: [
       {
-        title: "Access — the part that is actually built",
+        title: "The clinical day, end to end",
         items: [
           {
-            name: "The permission catalogue",
+            name: "Registration, queue and token",
             detail:
-              "One list of 32 modules, each with the actions that make sense for it, grouped as Administration, Clinical, Diagnostics, Operations, Finance, People and Insights. The server is the only authority that checks a permission; the web app reads the same list purely to hide controls a user could not use anyway.",
+              "A walk-in is registered at the desk, gets a token and joins the OPD queue for a named doctor. Duplicate registration is caught at the point of typing rather than found later as two charts for one person.",
           },
           {
-            name: "22 role templates",
+            name: "Consultation on one page",
             detail:
-              "Hospital owner, administrator, branch manager, doctor, consultant, nurse, receptionist, cashier, pharmacist, lab technician, radiologist, radiology technician, OT manager, anaesthetist, accountant, HR manager, inventory manager, procurement officer, blood-bank staff, ambulance staff, housekeeping and maintenance. Each new tenant gets a copy it can edit, so a template change never rewrites a live hospital's access.",
+              "Vitals, presenting complaint, history, examination, an ICD-coded diagnosis, a prescription built from a medicine list, advice and a follow-up interval — then signed, which is what turns it from a draft into a record.",
           },
           {
-            name: "You cannot grant what you do not hold",
+            name: "The chart interrupts",
             detail:
-              "The role editor greys out every permission the editing user lacks. Privilege escalation through the admin screen is the obvious hole in a role system, and closing it in the UI as well as the API is what stops a branch manager quietly promoting themselves.",
+              "A recorded allergy raises a warning on the consultation before the prescription is written. A system that stores the allergy and says nothing at the moment it matters has only moved the risk onto the doctor.",
           },
           {
-            name: "Organisation structure as records",
+            name: "In-patients and the bed board",
             detail:
-              "Group, hospital, branch and department are four tables, not labels. A user belongs somewhere specific, and a permission is answered against that position — which is the only way a nurse at one branch stays a nurse at that branch.",
+              "Every ward and bed live, admission from the consultation, and a discharge summary that prints as the document the next clinician will actually read.",
+          },
+          {
+            name: "Emergency, ordered by acuity",
+            detail:
+              "Arrivals are triaged at the door and the board sorts by category rather than by who walked in first — which is the entire point of having a triage category.",
+          },
+          {
+            name: "Nursing: observations and the medication chart",
+            detail:
+              "Vitals charted over time with an early-warning score computed from them, and a medication administration record showing what is due, what was given and by whom.",
           },
         ],
       },
       {
-        title: "Identity and trust",
+        title: "Diagnostics, pharmacy and stock",
         items: [
           {
-            name: "Two-factor sign-in",
+            name: "Orders that travel",
             detail:
-              "TOTP enrolment per account, with the secret handled server-side. A hospital account reaches patient data; a password alone is not a defensible boundary for that.",
+              "Investigations raised in the consultation arrive in the lab worklist as orders. Nobody re-types a request, which is where transcription errors come from.",
           },
           {
-            name: "Sessions and sign-in attempts",
+            name: "Lab and radiology reporting",
             detail:
-              "Both are their own tables. Suspending a tenant signs out all of its users immediately rather than waiting for tokens to lapse, and a failed-attempt history is what makes an unusual sign-in answerable.",
+              "Specimens through to verified results with reference ranges, and radiology reported against the request — both printing as signed A4 documents.",
           },
           {
-            name: "Audit log",
+            name: "Operation theatre and blood bank",
             detail:
-              "Who did what to which record, written as the work happens. On a system that will hold medical records this is the difference between a system of record and a website.",
+              "The list by theatre and session with the team and operative notes, and blood units held by group against the requests made for them.",
+          },
+          {
+            name: "Pharmacy dispensing",
+            detail:
+              "Prescriptions arrive from the clinic rather than being re-entered at the counter, and dispensing moves the stock it actually used.",
+          },
+          {
+            name: "Inventory and procurement",
+            detail:
+              "Stock by item and location with a movement history, and requests through approval to a purchase order.",
+          },
+        ],
+      },
+      {
+        title: "Money, people and the platform",
+        items: [
+          {
+            name: "Billing from what was done",
+            detail:
+              "Charges accumulate from the consultation, the investigation and the admission rather than being assembled by hand at the end, with panel and TPA claims raised against the bill.",
+          },
+          {
+            name: "Accounting on top of the billing",
+            detail:
+              "Journal, bank reconciliation, profit and loss, balance sheet and departmental profitability — reading the same records the bills came from, not a monthly re-key.",
+          },
+          {
+            name: "HR and payroll",
+            detail:
+              "Staff, roster, attendance and a payroll run that closes a period and produces payslips, with a self-service view for the employee.",
+          },
+          {
+            name: "Tenancy, plans and licensing",
+            detail:
+              "Organisation, hospital group, hospital, branch and department as real records; a platform console listing every tenant on the installation; subscription plans deciding which modules a tenant gets; and Plutox licence keys with vendor lock, unlock and ping commands verified cryptographically.",
+          },
+          {
+            name: "Access, enforced server-side",
+            detail:
+              "32 modules by ten actions — 147 permissions — with 23 role templates seeded per tenant. The server is the only authority; the web app reads the same catalogue purely to hide what a user could not do anyway, and the role editor greys out what the editing user does not hold themselves.",
+          },
+          {
+            name: "Audit, two-factor and sign-in history",
+            detail:
+              "Who did what to which record, TOTP enrolment per account, and sessions and failed attempts kept as their own tables. Suspending a tenant signs its users out immediately rather than waiting for tokens to lapse.",
+          },
+        ],
+      },
+      {
+        title: "How it is delivered",
+        items: [
+          {
+            name: "Browser, desktop and portal",
+            detail:
+              "The same application in a browser, as a Windows build with its own updater and an offline page, and as a patient portal where someone books their own appointment and reads their own reports.",
+          },
+          {
+            name: "It documents itself",
+            detail:
+              "`DOCS=1 npx playwright test` drives the whole system and writes 131 screenshots. Every capture on this page came from that run, so the gallery cannot drift from the software without the test failing first.",
           },
           {
             name: "Demo data that cannot be mistaken for real",
             detail:
-              "Seeded organisations are suffixed (DEMO) and every screen carries a banner saying the records are sample data, not real patients or staff. A screenshot of a hospital system is exactly the thing that must never be misread as a real ward.",
-          },
-        ],
-      },
-      {
-        title: "Mapped, not yet built",
-        items: [
-          {
-            name: "Clinical",
-            detail:
-              "Patients, medical records, appointments, OPD, IPD, emergency and nursing. Named in the permission catalogue and visible in the role matrix; no screens behind them yet.",
+              "The seeded tenant is suffixed (DEMO) and every screen says the records are sample data, not real patients or staff. On a system holding medical records that distinction has to be visible in the screenshot itself.",
           },
           {
-            name: "Diagnostics",
+            name: "The one module that is not built",
             detail:
-              "Laboratory, radiology, operation theatre and blood bank — the same: permissions defined, modules not written.",
-          },
-          {
-            name: "Operations, finance and people",
-            detail:
-              "Pharmacy, inventory, procurement, assets, ambulance, housekeeping, maintenance, billing, insurance/TPA, accounting, HR and payroll. The access layer already knows about all of them, which is what lets each one ship without touching the permission model again.",
-          },
-          {
-            name: "Why this order",
-            detail:
-              "Retrofitting multi-tenancy and per-branch permissions onto a built hospital system is close to a rewrite. Doing the structure first is slower to demo and much cheaper to finish.",
+              "Documents exists in the permission catalogue and nowhere else — there is no module behind it yet. Everything else named in the role matrix has screens and endpoints.",
           },
         ],
       },
     ],
     screens: [
       {
-        src: "/images/products/screens/caresync-login.webp",
-        label: "Sign In",
-        caption: "One door, with two-factor behind it",
-      },
-      {
-        src: "/images/products/screens/caresync-dashboard.webp",
+        src: "/images/products/screens/caresync-overview.webp",
         label: "Overview",
-        caption: "Hospitals, branches, departments and staff at a glance",
+        caption: "The hospital's day on one screen",
       },
       {
-        src: "/images/products/screens/caresync-organization.webp",
-        label: "Organisation",
-        caption: "Group, hospital, branch and department as real structure",
+        src: "/images/products/screens/caresync-patients.webp",
+        label: "Patients",
+        caption: "The register, searchable by MRN, name or phone",
       },
       {
-        src: "/images/products/screens/caresync-users.webp",
-        label: "Users",
-        caption: "Staff accounts across every branch",
+        src: "/images/products/screens/caresync-patient-chart.webp",
+        label: "Patient Chart",
+        caption: "History, vitals, orders and documents in one place",
       },
       {
-        src: "/images/products/screens/caresync-user-form.webp",
-        label: "Add a User",
-        caption: "Role and branch decided at the point of creation",
+        src: "/images/products/screens/caresync-opd-queue.webp",
+        label: "OPD Queue",
+        caption: "Who is waiting, for whom, and since when",
       },
       {
-        src: "/images/products/screens/caresync-user-detail.webp",
-        label: "User Detail",
-        caption: "One account, its roles and its access",
+        src: "/images/products/screens/caresync-walk-in.webp",
+        label: "Walk-in",
+        caption: "Registration and a token at the desk",
       },
       {
-        src: "/images/products/screens/caresync-role-matrix.webp",
-        label: "Roles & Access",
-        caption: "32 modules by ten actions — the permission grid itself",
+        src: "/images/products/screens/caresync-consultation.webp",
+        label: "Consultation",
+        caption: "Vitals, diagnosis, prescription and plan on one page",
       },
       {
-        src: "/images/products/screens/caresync-audit.webp",
+        src: "/images/products/screens/caresync-allergy-warning.webp",
+        label: "Allergy Warning",
+        caption: "The chart interrupts before the prescription is written",
+      },
+      {
+        src: "/images/products/screens/caresync-consultation-signed.webp",
+        label: "Signed & Complete",
+        caption: "A consultation closed and attributed",
+      },
+      {
+        src: "/images/products/screens/caresync-prescription-sheet-a4.webp",
+        label: "Prescription (A4)",
+        caption: "What the patient actually walks out with",
+      },
+      {
+        src: "/images/products/screens/caresync-appointment-diary.webp",
+        label: "Appointment Diary",
+        caption: "The day across every doctor",
+      },
+      {
+        src: "/images/products/screens/caresync-book-appointment.webp",
+        label: "Booking",
+        caption: "Slot, doctor and reason, checked against the schedule",
+      },
+      {
+        src: "/images/products/screens/caresync-bed-board.webp",
+        label: "Bed Board",
+        caption: "Every ward and bed, live",
+      },
+      {
+        src: "/images/products/screens/caresync-admission.webp",
+        label: "Admission",
+        caption: "One stay, its orders and its notes",
+      },
+      {
+        src: "/images/products/screens/caresync-discharge-summary-a4.webp",
+        label: "Discharge Summary (A4)",
+        caption: "The document the next clinician reads",
+      },
+      {
+        src: "/images/products/screens/caresync-er-board.webp",
+        label: "Emergency Board",
+        caption: "Arrivals ordered by acuity, not by arrival time",
+      },
+      {
+        src: "/images/products/screens/caresync-er-triage.webp",
+        label: "Triage",
+        caption: "Category assigned at the door",
+      },
+      {
+        src: "/images/products/screens/caresync-nursing-station.webp",
+        label: "Nursing Station",
+        caption: "The ward's work list for a shift",
+      },
+      {
+        src: "/images/products/screens/caresync-observations.webp",
+        label: "Observations",
+        caption: "Vitals charted over time with an early-warning score",
+      },
+      {
+        src: "/images/products/screens/caresync-mar.webp",
+        label: "Medication Chart",
+        caption: "What is due, what was given and by whom",
+      },
+      {
+        src: "/images/products/screens/caresync-order-tests.webp",
+        label: "Order Tests",
+        caption: "Investigations raised from the consultation",
+      },
+      {
+        src: "/images/products/screens/caresync-lab-worklist.webp",
+        label: "Lab Worklist",
+        caption: "Specimens through to verified results",
+      },
+      {
+        src: "/images/products/screens/caresync-lab-report-a4.webp",
+        label: "Lab Report (A4)",
+        caption: "Results with reference ranges, signed",
+      },
+      {
+        src: "/images/products/screens/caresync-radiology-report.webp",
+        label: "Radiology",
+        caption: "Reporting against the request",
+      },
+      {
+        src: "/images/products/screens/caresync-ot-board.webp",
+        label: "Operation Theatre",
+        caption: "The list, by theatre and session",
+      },
+      {
+        src: "/images/products/screens/caresync-surgery.webp",
+        label: "Surgery",
+        caption: "Team, procedure and the notes that follow",
+      },
+      {
+        src: "/images/products/screens/caresync-blood-stock.webp",
+        label: "Blood Bank",
+        caption: "Units by group, and who has asked for them",
+      },
+      {
+        src: "/images/products/screens/caresync-pharmacy-queue.webp",
+        label: "Pharmacy",
+        caption: "Prescriptions arriving from the clinic, not re-typed",
+      },
+      {
+        src: "/images/products/screens/caresync-dispense.webp",
+        label: "Dispensing",
+        caption: "Against the prescription, against the stock",
+      },
+      {
+        src: "/images/products/screens/caresync-inventory.webp",
+        label: "Inventory",
+        caption: "Stock by item and location, with movements",
+      },
+      {
+        src: "/images/products/screens/caresync-procurement.webp",
+        label: "Procurement",
+        caption: "Requests, approvals and purchase orders",
+      },
+      {
+        src: "/images/products/screens/caresync-billing.webp",
+        label: "Billing",
+        caption: "Charges accumulated from what was actually done",
+      },
+      {
+        src: "/images/products/screens/caresync-invoice-a4.webp",
+        label: "Invoice (A4)",
+        caption: "The bill as the patient receives it",
+      },
+      {
+        src: "/images/products/screens/caresync-claims.webp",
+        label: "Insurance Claims",
+        caption: "Panel and TPA claims against a bill",
+      },
+      {
+        src: "/images/products/screens/caresync-hr-overview.webp",
+        label: "Human Resources",
+        caption: "Staff, roster and attendance",
+      },
+      {
+        src: "/images/products/screens/caresync-payroll-run.webp",
+        label: "Payroll Run",
+        caption: "A period calculated and closed",
+      },
+      {
+        src: "/images/products/screens/caresync-profit-loss.webp",
+        label: "Profit & Loss",
+        caption: "Accounting that reads from the billing, not a spreadsheet",
+      },
+      {
+        src: "/images/products/screens/caresync-reports-executive.webp",
+        label: "Executive Reports",
+        caption: "The numbers an owner asks for",
+      },
+      {
+        src: "/images/products/screens/caresync-roles.webp",
+        label: "Roles",
+        caption: "23 seeded templates a tenant can edit",
+      },
+      {
+        src: "/images/products/screens/caresync-permission-matrix.webp",
+        label: "Permission Matrix",
+        caption: "32 modules by ten actions, enforced server-side",
+      },
+      {
+        src: "/images/products/screens/caresync-audit-log.webp",
         label: "Audit Log",
         caption: "Who did what to which record",
       },
       {
-        src: "/images/products/screens/caresync-account-mfa.webp",
+        src: "/images/products/screens/caresync-two-factor-setup.webp",
         label: "Two-Factor",
         caption: "TOTP enrolment for a staff account",
       },
       {
-        src: "/images/products/screens/caresync-settings.webp",
-        label: "Settings",
-        caption: "What the tenant controls for itself",
-      },
-      {
         src: "/images/products/screens/caresync-tenants.webp",
         label: "Platform — Tenants",
-        caption: "Every organisation on the installation, suspendable",
+        caption: "Every hospital on the installation",
       },
       {
-        src: "/images/products/screens/caresync-m1-dashboard.webp",
+        src: "/images/products/screens/caresync-plans.webp",
+        label: "Plans",
+        caption: "What each subscription tier unlocks",
+      },
+      {
+        src: "/images/products/screens/caresync-portal-sign-in.webp",
+        label: "Patient Portal",
+        caption: "The patient's own way in",
+      },
+      {
+        src: "/images/products/screens/caresync-portal-home.webp",
+        label: "Portal — Home",
+        caption: "Appointments, reports and bills, to the patient",
+      },
+      {
+        src: "/images/products/screens/caresync-portal-booking.webp",
+        label: "Portal — Booking",
+        caption: "A patient booking their own slot",
+      },
+      {
+        src: "/images/products/screens/caresync-portal-prescription.webp",
+        label: "Portal — Prescription",
+        caption: "The script, without a trip to the counter",
+      },
+      {
+        src: "/images/products/screens/caresync-integrations.webp",
+        label: "Integrations",
+        caption: "Lab analysers and outbound interfaces",
+      },
+      {
+        src: "/images/products/screens/caresync-global-search.webp",
+        label: "Global Search",
+        caption: "Staff, patients and pages from one box",
+      },
+      {
+        src: "/images/products/screens/caresync-dark-opd-queue.webp",
+        label: "Dark Theme",
+        caption: "The same queue for a night shift",
+      },
+      {
+        src: "/images/products/screens/caresync-mobile-overview.webp",
         label: "Mobile — Overview",
-        caption: "The same workspace on a phone",
+        caption: "The workspace at phone width",
       },
       {
-        src: "/images/products/screens/caresync-m2-users.webp",
-        label: "Mobile — Users",
-        caption: "Staff administration on the move",
+        src: "/images/products/screens/caresync-mobile-menu.webp",
+        label: "Mobile — Navigation",
+        caption: "The drawer, role-aware",
       },    ],
     languages: ["TypeScript", "TSX", "CSS", "SQL"],
     stack: [
@@ -3239,15 +3485,16 @@ export const products: Product[] = [
       "PostgreSQL",
       "Zod",
       "TanStack Query",
+      "Electron",
       "Playwright",
     ],
     specs: [
-      { label: "Modules in the catalogue", value: "32" },
-      { label: "Permissions", value: "146" },
-      { label: "Role templates", value: "22" },
-      { label: "API endpoints", value: "44" },
+      { label: "API endpoints", value: "420" },
+      { label: "Prisma models", value: "116" },
+      { label: "Screens", value: "79" },
+      { label: "Modules built", value: "31 of 32" },
     ],
-    metric: { label: "Administration modules live", value: "5 of 32" },
+    metric: { label: "Captures from its own test run", value: "131" },
     demoUrl: "/contact",
   },
 
