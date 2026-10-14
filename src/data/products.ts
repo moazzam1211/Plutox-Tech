@@ -1,7 +1,7 @@
 import type { Product } from "@/types";
 
 /**
- * The products built by Plutox Tech — nine platforms.
+ * The products built by Plutox Tech — ten platforms.
  *
  * ServeSync is one POS with three editions (restaurant / pharmacy / mart) chosen
  * at first run. It used to be three separate products; PharmaSync and Vendeez were
@@ -3507,6 +3507,144 @@ export const products: Product[] = [
       { label: "Payment methods", value: "4" },
     ],
     metric: { label: "Third-party trackers on the store", value: "None" },
+    demoUrl: "/contact",
+  },
+  /* ------------------------------------------------------------------ */
+  /* ORYNZA — lead follow-up for HVAC contractors                       */
+  /* ------------------------------------------------------------------ */
+  {
+    slug: "orynza",
+    name: "ORYNZA",
+    category: "SaaS · Lead Management",
+    tagline: "Answer every lead. Miss no follow-up.",
+    status: "shipped",
+    description:
+      "A multi-tenant SaaS for small and mid-sized US heating and air-conditioning contractors, built around one question an owner asks every morning: what needs attention today? New enquiries waiting for a first call, follow-ups gone overdue, estimates nobody chased, appointments still unconfirmed and automation that failed all land on one Action Center, each with the reason, the urgency and the button that deals with it. A separate worker process keeps reminders and automations running with no browser open, and the next-best-action suggestions are deterministic rules that explain themselves rather than a paid AI call.",
+    image: "/images/products/orynza-logo.svg",
+    brandColor: "#5140E0",
+    audience: "HVAC contractors with two to twenty-five people who lose jobs to slow replies and forgotten follow-ups",
+    badge: "Live SaaS",
+    features: [
+      "Today's Action Center: everything that needs a person, with the reason and the action",
+      "Lead CRM with table and kanban views, assignment, notes and a full activity history",
+      "Follow-ups with due-today, overdue, failed and needs-approval views",
+      "Appointments in the business's timezone, with technician double-booking detection",
+      "Automations owners can pause, edit and audit — they create tasks and drafts, never message customers",
+      "Eleven HVAC message templates, filled from the lead and copied to the owner's own phone",
+      "Explainable next-best-action suggestions, labelled as rule-based",
+      "Reports where every metric carries its written definition",
+      "CSV import with a preview, row-level errors and duplicate detection; formula-safe export",
+      "Owner, manager and agent roles, enforced on the server",
+    ],
+    moduleGroups: [
+      {
+        title: "The working day",
+        items: [
+          {
+            name: "Action Center",
+            detail:
+              "New leads awaiting contact, overdue and due-today follow-ups, estimates waiting on a reply, appointments in the next 48 hours, unassigned leads, leads with no next step and failed automations — each row shows who, why, how urgent and when, with Call, Complete, Confirm or Assign right there.",
+          },
+          {
+            name: "Leads and customers",
+            detail:
+              "Nine statuses from New to Won, Lost or Not interested, with every change written to the lead's history. Customers are matched by normalised phone and email; an ambiguous match is flagged for a person to link and never merged automatically.",
+          },
+          {
+            name: "Follow-ups and appointments",
+            detail:
+              "Tasks carry a type, a due time in the business's timezone and an assignee; double submits are made harmless by an idempotency key. Booking a technician into an overlapping slot is refused unless someone confirms the double-booking on purpose.",
+          },
+          {
+            name: "Next-best-action suggestions",
+            detail:
+              "Rules decide the suggestion and say why: a new lead past the response target, an estimate sent days ago with no reply, a visit tomorrow that nobody confirmed, an enquiry mentioning no heat or a gas smell. Nothing happens until someone accepts, edits or dismisses it.",
+          },
+        ],
+      },
+      {
+        title: "Automation people can trust",
+        items: [
+          {
+            name: "A worker that runs without a browser",
+            detail:
+              "A separate process claims due work from a Postgres queue with FOR UPDATE SKIP LOCKED, so several copies never pick up the same job. Retries back off exponentially with jitter, work left half-done by a crashed worker is recovered, and failures stay visible until a person resolves them.",
+          },
+          {
+            name: "Exactly once, or not at all",
+            detail:
+              "Each automation's actions and its execution record are written in one transaction, keyed by rule and event. A replayed event is a no-op, and a run either fully happened or did not happen at all.",
+          },
+          {
+            name: "Explained before it runs",
+            detail:
+              "Every automation states its trigger, what it touches, when it runs, whether it needs approval and what happens if it fails. Loops are prevented by design: an overdue-follow-up rule can notify people but never create more follow-ups.",
+          },
+        ],
+      },
+      {
+        title: "Decisions worth naming",
+        items: [
+          {
+            name: "Tenancy is checked on every query",
+            detail:
+              "The workspace comes only from the signed-in session and a fresh membership lookup, never from the request. Another company's record returns the same not-found as a missing one — proven by a dedicated cross-tenant test suite.",
+          },
+          {
+            name: "Drafts, not sends",
+            detail:
+              "ORYNZA writes the message and the contractor sends it from their own phone or email. \"Copied\" and \"marked as sent manually\" are recorded separately, so the history never claims a message went out that nobody sent.",
+          },
+          {
+            name: "No paid AI at runtime",
+            detail:
+              "Suggestions and summaries come from deterministic rules, so the product works with no API credits. A provider-independent adapter exists for a model later, behind configuration, with timeouts and usage limits.",
+          },
+          {
+            name: "Audit that cannot be edited",
+            detail:
+              "Security and admin events are append-only, enforced by a database trigger rather than by convention.",
+          },
+        ],
+      },
+    ],
+    screens: [
+      { src: "/images/products/screens/orynza-action-center.webp", label: "Action Center", caption: "What needs attention today, and why" },
+      { src: "/images/products/screens/orynza-leads.webp", label: "Leads", caption: "Status and owner changed inline" },
+      { src: "/images/products/screens/orynza-leads-board.webp", label: "Board", caption: "Every open lead by stage" },
+      { src: "/images/products/screens/orynza-lead-detail.webp", label: "Lead", caption: "Suggested next step, drafted message, full history" },
+      { src: "/images/products/screens/orynza-follow-ups.webp", label: "Follow-ups", caption: "Overdue work, kept in view until it is done" },
+      { src: "/images/products/screens/orynza-appointments.webp", label: "Appointments", caption: "Visits by day, in the business's timezone" },
+      { src: "/images/products/screens/orynza-customers.webp", label: "Customers", caption: "One record per customer, duplicates prevented" },
+      { src: "/images/products/screens/orynza-reports.webp", label: "Reports", caption: "Metrics with their definitions" },
+      { src: "/images/products/screens/orynza-automations.webp", label: "Automations", caption: "What each rule does, when, and if it failed" },
+      { src: "/images/products/screens/orynza-templates.webp", label: "Templates", caption: "HVAC message templates with variables" },
+      { src: "/images/products/screens/orynza-team.webp", label: "Team", caption: "Roles and each person's workload" },
+      { src: "/images/products/screens/orynza-import.webp", label: "CSV Import", caption: "Preview, errors and duplicates before anything is saved" },
+      { src: "/images/products/screens/orynza-settings.webp", label: "Settings", caption: "Business hours, response targets and plan limits" },
+      { src: "/images/products/screens/orynza-home.webp", label: "Website", caption: "The public site" },
+      { src: "/images/products/screens/orynza-login.webp", label: "Sign in", caption: "Server-side sessions, rate-limited sign-in" },
+    ],
+    languages: ["TypeScript", "TSX", "CSS", "SQL"],
+    stack: [
+      "TypeScript",
+      "Next.js",
+      "Prisma",
+      "PostgreSQL",
+      "Tailwind CSS",
+      "Zod",
+      "Vitest",
+      "Playwright",
+      "Caddy",
+      "systemd",
+    ],
+    specs: [
+      { label: "Prisma models", value: "23" },
+      { label: "Pages", value: "37" },
+      { label: "Server actions", value: "53" },
+      { label: "Automated tests", value: "152" },
+    ],
+    metric: { label: "Cross-tenant access paths tested", value: "38" },
     demoUrl: "/contact",
   },
 ];

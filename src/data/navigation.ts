@@ -92,7 +92,7 @@ export const routes: Route[] = [
     label: "Projects",
     href: "/projects",
     short: "Projects",
-    summary: "Nine platforms, built here",
+    summary: "Ten platforms, built here",
     children: [
       { label: "ServeSync ERP", href: "/projects/servesync-pos", hint: "Restaurant · pharmacy · mart" },
       { label: "StaySync Hotel ERP", href: "/projects/staysync", hint: "Hospitality" },
