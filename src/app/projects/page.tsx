@@ -9,7 +9,7 @@ import { breadcrumbJsonLd, buildMetadata } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "Projects",
   description:
-    "Ten platforms built by Plutox Tech — POS, hotel ERP, hospital ERP, fleet management, cross-border delivery, identity, manufacturing ERP, a blood donation platform, perfume commerce and HVAC lead follow-up — with module detail and real screenshots.",
+    "Eleven platforms built by Plutox Tech — POS, hotel ERP, hospital ERP, fleet management, cross-border delivery, identity, manufacturing ERP, a blood donation platform, e-commerce, a multi-vendor marketplace and HVAC lead follow-up — with module detail and real screenshots.",
   path: "/projects",
   keywords: [
     "restaurant POS software",

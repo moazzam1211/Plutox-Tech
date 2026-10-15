@@ -1,7 +1,7 @@
 import type { Product } from "@/types";
 
 /**
- * The products built by Plutox Tech — ten platforms.
+ * The products built by Plutox Tech — eleven platforms.
  *
  * ServeSync is one POS with three editions (restaurant / pharmacy / mart) chosen
  * at first run. It used to be three separate products; PharmaSync and Vendeez were
@@ -3892,6 +3892,337 @@ export const products: Product[] = [
       { label: "Automated tests", value: "152" },
     ],
     metric: { label: "Cross-tenant access paths tested", value: "38" },
+    demoUrl: "/contact",
+  },
+  /* ------------------------------------------------------------------ */
+  /* Modeza — multi-vendor fashion marketplace                          */
+  /* ------------------------------------------------------------------ */
+  {
+    slug: "modeza",
+    name: "Modeza",
+    category: "Marketplace",
+    tagline: "Every fashion brand. One destination.",
+    description:
+      "A multi-vendor fashion marketplace with four different systems behind one domain: customers browse every brand in one cart, vendors run their own shop and stock, riders carry the deliveries, and the platform approves who may trade and takes its commission. One order splits into a sub-order per vendor, each fulfilled and refunded independently while the customer still sees a single purchase. 51 screens and 49 API routes over a 39-model schema.",
+    image: "/images/products/modeza-logo.webp",
+    brandColor: "#5B21B6",
+    audience:
+      "A marketplace operator onboarding independent fashion brands, and the brands and couriers working inside it",
+    badge: "Four roles, one platform",
+    features: [
+      "One cart across many vendors, split into a sub-order each",
+      "Vendor onboarding with documents, approved by a human before trading",
+      "Commission and payouts calculated per vendor",
+      "Rider app with assigned deliveries, a map and earnings",
+      "Returns and refunds adjudicated against the sub-order that sold the item",
+      "Stock by variant with a movement log, per vendor",
+      "Promotions and coupons, scoped to a vendor's own lines",
+      "Cash on delivery, JazzCash, EasyPaisa and bank transfer",
+      "Audit log over every administrative change",
+      "Demo catalogue runs on fictional vendors, not real companies",
+    ],
+    moduleGroups: [
+      {
+        title: "The part that makes it a marketplace",
+        items: [
+          {
+            name: "One order, a sub-order per vendor",
+            detail:
+              "A customer buying from three brands makes one purchase and three sub-orders. Each vendor sees only theirs, fulfils on their own timetable and refunds independently, while the customer still tracks a single order. Collapsing that into one record is what makes multi-vendor refunds impossible later.",
+          },
+          {
+            name: "Who may trade is a decision",
+            detail:
+              "A brand registers, uploads documents and waits. An administrator approves them. A marketplace where signing up is the same as being listed has no answer when a seller turns out to be fictitious.",
+          },
+          {
+            name: "Commission and payouts",
+            detail:
+              "The platform's cut is calculated per sub-order and carried into a payout balance per vendor, so what a seller is owed is derived from what actually sold rather than reconciled by hand each month.",
+          },
+          {
+            name: "Returns adjudicated centrally",
+            detail:
+              "A return is raised against the sub-order that sold the item, so the money comes back from the right vendor's balance and the platform — not the customer — is the one chasing it.",
+          },
+        ],
+      },
+      {
+        title: "Four systems, one domain",
+        items: [
+          {
+            name: "Customer",
+            detail:
+              "Browse by brand or category, search across every vendor at once, one cart, one checkout, wishlist, order tracking and returns.",
+          },
+          {
+            name: "Vendor",
+            detail:
+              "Their own dashboard, catalogue, inventory by variant, orders limited to their sub-orders, promotions on their own lines, analytics, payouts, storefront settings and a catalogue integration.",
+          },
+          {
+            name: "Rider",
+            detail:
+              "Assigned deliveries with their status, a map to the next drop, and earnings. The courier is a first-class role with its own screens rather than a status field on an order.",
+          },
+          {
+            name: "Platform admin",
+            detail:
+              "Brand approval, every listing and order across the marketplace, customers, riders, payouts, returns, the shared taxonomy, analytics, an audit log and the commission and payment policy.",
+          },
+        ],
+      },
+      {
+        title: "Decisions worth naming",
+        items: [
+          {
+            name: "Stock belongs to the vendor",
+            detail:
+              "Inventory is per vendor and per variant with a movement log, because two brands selling a similar item are two independent stock positions, not one shared number.",
+          },
+          {
+            name: "Payment as Pakistani customers use it",
+            detail:
+              "Cash on delivery, JazzCash, EasyPaisa and bank transfer. A marketplace in this market that only takes cards is a marketplace most of its customers cannot buy from.",
+          },
+          {
+            name: "Fictional vendors in the demo",
+            detail:
+              "The seeded catalogue originally used real Pakistani fashion companies as sample vendors, which is why the hosted demo carries a noindex header. The captures on this page were taken after renaming them to invented labels: a real company must not appear as a seller on a marketplace it has no relationship with, beside invented orders and payouts.",
+          },
+          {
+            name: "Custom auth, not a provider",
+            detail:
+              "JWT sessions signed with jose and bcrypt password hashes, with the role carried in the token and checked server-side per route group — four roles meeting in one app is exactly where a bolted-on auth provider starts fighting the routing.",
+          },
+        ],
+      },
+    ],
+    screens: [
+      {
+        src: "/images/products/screens/modeza-home.webp",
+        label: "Storefront",
+        caption: "Every brand, one cart, one checkout",
+      },
+      {
+        src: "/images/products/screens/modeza-brands.webp",
+        label: "Brands",
+        caption: "The vendors trading on the platform",
+      },
+      {
+        src: "/images/products/screens/modeza-brand-storefront.webp",
+        label: "Brand Storefront",
+        caption: "A vendor's own shop inside the marketplace",
+      },
+      {
+        src: "/images/products/screens/modeza-categories.webp",
+        label: "Categories",
+        caption: "The catalogue by department",
+      },
+      {
+        src: "/images/products/screens/modeza-product-detail.webp",
+        label: "Product",
+        caption: "Variants, stock and the brand behind it",
+      },
+      {
+        src: "/images/products/screens/modeza-search.webp",
+        label: "Search",
+        caption: "Across every vendor at once",
+      },
+      {
+        src: "/images/products/screens/modeza-cart.webp",
+        label: "Cart",
+        caption: "One basket spanning several vendors",
+      },
+      {
+        src: "/images/products/screens/modeza-wishlist.webp",
+        label: "Wishlist",
+        caption: "Saved across sessions",
+      },
+      {
+        src: "/images/products/screens/modeza-orders.webp",
+        label: "My Orders",
+        caption: "One order, split by the vendors that fulfil it",
+      },
+      {
+        src: "/images/products/screens/modeza-notifications.webp",
+        label: "Notifications",
+        caption: "Order, delivery and return events",
+      },
+      {
+        src: "/images/products/screens/modeza-brand-signup.webp",
+        label: "Sell on Modeza",
+        caption: "Vendor onboarding, with documents",
+      },
+      {
+        src: "/images/products/screens/modeza-seller-terms.webp",
+        label: "Seller Terms",
+        caption: "What a vendor is agreeing to",
+      },
+      {
+        src: "/images/products/screens/modeza-vendor-dashboard.webp",
+        label: "Vendor Dashboard",
+        caption: "A seller's own trading figures",
+      },
+      {
+        src: "/images/products/screens/modeza-vendor-products.webp",
+        label: "Vendor Products",
+        caption: "The seller's catalogue",
+      },
+      {
+        src: "/images/products/screens/modeza-vendor-product-new.webp",
+        label: "Add a Product",
+        caption: "Variants, images and stock in one form",
+      },
+      {
+        src: "/images/products/screens/modeza-vendor-orders.webp",
+        label: "Vendor Orders",
+        caption: "Only the sub-orders that belong to them",
+      },
+      {
+        src: "/images/products/screens/modeza-vendor-inventory.webp",
+        label: "Vendor Inventory",
+        caption: "Stock by variant, with movements",
+      },
+      {
+        src: "/images/products/screens/modeza-vendor-promotions.webp",
+        label: "Promotions",
+        caption: "Discounts a vendor runs on their own lines",
+      },
+      {
+        src: "/images/products/screens/modeza-vendor-payouts.webp",
+        label: "Payouts",
+        caption: "Commission deducted, balance owed",
+      },
+      {
+        src: "/images/products/screens/modeza-vendor-returns.webp",
+        label: "Returns",
+        caption: "Requests against the seller's own orders",
+      },
+      {
+        src: "/images/products/screens/modeza-vendor-analytics.webp",
+        label: "Vendor Analytics",
+        caption: "What sold, and what did not",
+      },
+      {
+        src: "/images/products/screens/modeza-vendor-storefront.webp",
+        label: "Storefront Settings",
+        caption: "How the shop presents itself",
+      },
+      {
+        src: "/images/products/screens/modeza-vendor-integrations.webp",
+        label: "Integrations",
+        caption: "Pushing a catalogue in from elsewhere",
+      },
+      {
+        src: "/images/products/screens/modeza-admin-dashboard.webp",
+        label: "Admin Dashboard",
+        caption: "The whole marketplace on one screen",
+      },
+      {
+        src: "/images/products/screens/modeza-admin-brands.webp",
+        label: "Brand Approval",
+        caption: "Who may trade, decided by a human",
+      },
+      {
+        src: "/images/products/screens/modeza-admin-products.webp",
+        label: "Products",
+        caption: "Every listing across every vendor",
+      },
+      {
+        src: "/images/products/screens/modeza-admin-orders.webp",
+        label: "Orders",
+        caption: "The order and its sub-orders together",
+      },
+      {
+        src: "/images/products/screens/modeza-admin-customers.webp",
+        label: "Customers",
+        caption: "Accounts and their order history",
+      },
+      {
+        src: "/images/products/screens/modeza-admin-riders.webp",
+        label: "Riders",
+        caption: "The delivery fleet and its assignments",
+      },
+      {
+        src: "/images/products/screens/modeza-admin-payouts.webp",
+        label: "Payouts",
+        caption: "What the platform owes each vendor",
+      },
+      {
+        src: "/images/products/screens/modeza-admin-returns.webp",
+        label: "Returns",
+        caption: "Refunds adjudicated centrally",
+      },
+      {
+        src: "/images/products/screens/modeza-admin-categories.webp",
+        label: "Categories",
+        caption: "The taxonomy every vendor lists into",
+      },
+      {
+        src: "/images/products/screens/modeza-admin-analytics.webp",
+        label: "Platform Analytics",
+        caption: "Revenue, commission and growth",
+      },
+      {
+        src: "/images/products/screens/modeza-admin-audit.webp",
+        label: "Audit Log",
+        caption: "Who changed what",
+      },
+      {
+        src: "/images/products/screens/modeza-admin-settings.webp",
+        label: "Platform Settings",
+        caption: "Commission, payments and policy",
+      },
+      {
+        src: "/images/products/screens/modeza-rider-dashboard.webp",
+        label: "Rider Dashboard",
+        caption: "The courier's day",
+      },
+      {
+        src: "/images/products/screens/modeza-rider-deliveries.webp",
+        label: "Deliveries",
+        caption: "Assigned jobs, with their status",
+      },
+      {
+        src: "/images/products/screens/modeza-rider-map.webp",
+        label: "Rider Map",
+        caption: "Where the next drop is",
+      },
+      {
+        src: "/images/products/screens/modeza-rider-earnings.webp",
+        label: "Rider Earnings",
+        caption: "What the courier is owed",
+      },
+      {
+        src: "/images/products/screens/modeza-mobile-home.webp",
+        label: "Mobile — Storefront",
+        caption: "The shop at phone width",
+      },
+      {
+        src: "/images/products/screens/modeza-mobile-brands.webp",
+        label: "Mobile — Brands",
+        caption: "Browsing vendors on a phone",
+      },    ],
+    languages: ["TypeScript", "TSX", "CSS", "SQL"],
+    stack: [
+      "TypeScript",
+      "Next.js 16",
+      "Prisma",
+      "PostgreSQL",
+      "Zod",
+      "Radix UI",
+      "Tailwind CSS",
+      "framer-motion",
+      "jose",
+    ],
+    specs: [
+      { label: "Screens", value: "51" },
+      { label: "API routes", value: "49" },
+      { label: "Prisma models", value: "39" },
+      { label: "Roles", value: "4" },
+    ],
+    metric: { label: "Systems behind one domain", value: "4" },
     demoUrl: "/contact",
   },
 ];

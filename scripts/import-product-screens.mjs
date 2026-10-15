@@ -369,7 +369,13 @@ const PRODUCTS = [
   },
   {
     slug: "ecommerce",
-    src: "C:/Users/aaa/AppData/Local/Temp/claude/C--Users-aaa-Downloads/482801db-b3d8-4d16-8385-084b6d6927ab/scratchpad/dn-shots",
+    /*
+      Source captures were taken to a temporary directory that no longer
+      exists, so this re-imports nothing; the committed WebPs are the only
+      copy. Re-run the storefront and admin capture into
+      `D:/dev/dareen/docs/screenshots` to make this reproducible again.
+    */
+    src: "D:/dev/dareen/docs/screenshots",
     screens: [
       ["01-home.png", "Storefront", "A symphony of scents — the shop front"],
       ["02-products.png", "Catalogue", "The collection, filtered and sorted"],
@@ -394,6 +400,64 @@ const PRODUCTS = [
       ["24-admin-settings.png", "Settings", "What the store owner controls"],
       ["25-admin-logs.png", "Activity Log", "Who changed what in the admin"],
       ["26-admin-users.png", "Admin Users", "Owner, admin and staff, with devices"],
+    ],
+  },
+  /*
+    Modeza is captured from the running marketplace across all four roles —
+    customer, vendor, admin and rider — because each sees a different system and
+    capturing it all as the admin would show screens no vendor ever meets.
+
+    The seeded catalogue ships with real Pakistani fashion companies as demo
+    vendors, which is why the live demo carries `noindex`. Those records were
+    renamed to fictional labels in the local database before this run: a real
+    company must not appear as a vendor on a marketplace it has no relationship
+    with, least of all beside invented orders and payouts.
+  */
+  {
+    slug: "modeza",
+    src: `${DL}/stylesync-marketplace/docs/screenshots`,
+    screens: [
+      ["01-home.png", "Storefront", "Every brand, one cart, one checkout"],
+      ["02-brands.png", "Brands", "The vendors trading on the platform"],
+      ["08-brand-storefront.png", "Brand Storefront", "A vendor's own shop inside the marketplace"],
+      ["03-categories.png", "Categories", "The catalogue by department"],
+      ["09-product-detail.png", "Product", "Variants, stock and the brand behind it"],
+      ["04-search.png", "Search", "Across every vendor at once"],
+      ["10-cart.png", "Cart", "One basket spanning several vendors"],
+      ["11-wishlist.png", "Wishlist", "Saved across sessions"],
+      ["12-orders.png", "My Orders", "One order, split by the vendors that fulfil it"],
+      ["13-notifications.png", "Notifications", "Order, delivery and return events"],
+      ["06-brand-signup.png", "Sell on Modeza", "Vendor onboarding, with documents"],
+      ["07-seller-terms.png", "Seller Terms", "What a vendor is agreeing to"],
+      ["14-vendor-dashboard.png", "Vendor Dashboard", "A seller's own trading figures"],
+      ["15-vendor-products.png", "Vendor Products", "The seller's catalogue"],
+      ["16-vendor-product-new.png", "Add a Product", "Variants, images and stock in one form"],
+      ["17-vendor-orders.png", "Vendor Orders", "Only the sub-orders that belong to them"],
+      ["18-vendor-inventory.png", "Vendor Inventory", "Stock by variant, with movements"],
+      ["19-vendor-promotions.png", "Promotions", "Discounts a vendor runs on their own lines"],
+      ["20-vendor-payouts.png", "Payouts", "Commission deducted, balance owed"],
+      ["21-vendor-returns.png", "Returns", "Requests against the seller's own orders"],
+      ["22-vendor-analytics.png", "Vendor Analytics", "What sold, and what did not"],
+      ["23-vendor-storefront.png", "Storefront Settings", "How the shop presents itself"],
+      ["24-vendor-integrations.png", "Integrations", "Pushing a catalogue in from elsewhere"],
+      ["25-admin-dashboard.png", "Admin Dashboard", "The whole marketplace on one screen"],
+      ["26-admin-brands.png", "Brand Approval", "Who may trade, decided by a human"],
+      ["27-admin-products.png", "Products", "Every listing across every vendor"],
+      ["28-admin-orders.png", "Orders", "The order and its sub-orders together"],
+      ["29-admin-customers.png", "Customers", "Accounts and their order history"],
+      ["30-admin-riders.png", "Riders", "The delivery fleet and its assignments"],
+      ["31-admin-payouts.png", "Payouts", "What the platform owes each vendor"],
+      ["32-admin-returns.png", "Returns", "Refunds adjudicated centrally"],
+      ["33-admin-categories.png", "Categories", "The taxonomy every vendor lists into"],
+      ["34-admin-analytics.png", "Platform Analytics", "Revenue, commission and growth"],
+      ["35-admin-audit.png", "Audit Log", "Who changed what"],
+      ["36-admin-settings.png", "Platform Settings", "Commission, payments and policy"],
+      ["37-rider-dashboard.png", "Rider Dashboard", "The courier's day"],
+      ["38-rider-deliveries.png", "Deliveries", "Assigned jobs, with their status"],
+      ["39-rider-map.png", "Rider Map", "Where the next drop is"],
+      ["40-rider-earnings.png", "Rider Earnings", "What the courier is owed"],
+      ["41-mobile-home.png", "Mobile — Storefront", "The shop at phone width"],
+      ["42-mobile-brands.png", "Mobile — Brands", "Browsing vendors on a phone"],
     ],
   },
 ];
