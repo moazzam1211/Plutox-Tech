@@ -60,6 +60,18 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ["lucide-react"],
   },
 
+  /**
+   * The e-commerce entry was published under the client's brand name before it
+   * was changed to a capability listing. That URL is out there and indexed, so
+   * it redirects permanently rather than 404ing — and a 308 is also what tells a
+   * crawler to stop asking for the old one.
+   */
+  async redirects() {
+    return [
+      { source: "/projects/dareen", destination: "/projects/ecommerce", permanent: true },
+    ];
+  },
+
   async headers() {
     return [
       {

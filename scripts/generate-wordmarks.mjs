@@ -185,6 +185,16 @@ const FILES = [
   { file: "onvee-logo.svg", svg: onveeLockup(), note: "real mark + wordmark" },
   { file: "vitadrop-logo.svg", svg: vitadropLockup(), note: "real mark + wordmark" },
   { file: "caresync-logo.svg", svg: caresyncLockup(), note: "real mark + wordmark" },
+  /*
+    The client's own mark is deliberately not used here: this entry is published
+    as a capability rather than as a named brand, so a typographic lock-up stands
+    in for artwork that would identify them.
+  */
+  {
+    file: "ecommerce-logo.svg",
+    svg: typographicLockup({ name: "E-COMMERCE", accent: "#B08462", tracking: 5 }),
+    note: "typographic - client brand withheld",
+  },
   {
     file: "plutox-id-logo.svg",
     svg: typographicLockup({ name: "PLUTOX ID", accent: "#8B5CF6", tracking: 5 }),

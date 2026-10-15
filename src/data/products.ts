@@ -3499,23 +3499,23 @@ export const products: Product[] = [
   },
 
   /* ------------------------------------------------------------------ */
-  /* Dareen Parfum Atelier — perfume commerce                           */
+  /* E-Commerce Platform — storefront + back office                     */
   /* ------------------------------------------------------------------ */
   {
-    slug: "dareen",
-    name: "Dareen Parfum Atelier",
+    slug: "ecommerce",
+    name: "E-Commerce Platform",
     category: "E-commerce Platform",
-    tagline: "A symphony of scents.",
+    tagline: "A storefront and the office that runs it.",
     description:
-      "A perfume house's storefront and the back office that runs it, built as one application rather than a shop bolted onto a dashboard. 26 customer-facing pages and 26 admin pages over a 41-model schema, with 203 server actions doing the work instead of a REST layer nobody else calls. Payment covers what Pakistani customers actually use — cash on delivery, JazzCash, Easypaisa and Stripe — and the product photography is composed in code from a reference bottle, so a new fragrance ships with a studio shot without a studio.",
-    image: "/images/products/dareen-logo.webp",
+      "A direct-to-consumer storefront and the back office that runs it, built as one application rather than a shop bolted onto a dashboard. 26 customer-facing pages and 26 admin pages over a 41-model schema, with 203 server actions doing the work instead of a REST layer nobody else calls. Payment covers what Pakistani customers actually use — cash on delivery, JazzCash, Easypaisa and Stripe — and the product photography is composed in code from a single reference shot, so a new line ships with consistent studio imagery without a studio.",
+    image: "/images/products/ecommerce-logo.svg",
     brandColor: "#B08462",
     audience:
-      "A perfume house selling direct, that needs the catalogue, the orders and the stock to be one system",
+      "A brand selling direct, that needs the catalogue, the orders and the stock to be one system",
     badge: "Store + admin",
     features: [
       "Storefront and admin in one codebase, one schema, one deploy",
-      "Product photography composed in code from a reference bottle",
+      "Product photography composed in code from one reference shot",
       "Cash on delivery, JazzCash, Easypaisa and Stripe",
       "Passkeys alongside passwords, through WebAuthn",
       "Stock by variant, with every movement written to a log",
@@ -3532,12 +3532,12 @@ export const products: Product[] = [
           {
             name: "Catalogue and collections",
             detail:
-              "Categories are what a product is; collections are what a shop wants to sell together, and they are separate tables for that reason. A fragrance can sit in one category and three curated edits without duplicating the record.",
+              "Categories are what a product is; collections are what a shop wants to sell together, and they are separate tables for that reason. A product can sit in one category and three curated edits without duplicating the record.",
           },
           {
-            name: "Fragrance notes as data",
+            name: "Product attributes as data",
             detail:
-              "Notes are their own table joined to products, not a comma-separated string in a description. That is what makes \"show me everything with oud\" a query rather than a text search that also matches the word in a paragraph.",
+              "Attributes are their own table joined to products, not a comma-separated string in a description. That is what makes filtering by one a query rather than a text search that also matches the word in a paragraph.",
           },
           {
             name: "Variants and real stock",
@@ -3597,7 +3597,7 @@ export const products: Product[] = [
           {
             name: "The photography is composed, not shot",
             detail:
-              "Each fragrance's studio photograph is rendered in code from one reference bottle, with the liquid colour and label set per product. A new scent ships with a consistent image on the day it is added, and re-rendering the whole catalogue after a colour change is one command rather than a photo shoot.",
+              "Each product's studio photograph is rendered in code from one reference shot, with the colour and label set per item. A new line ships with a consistent image on the day it is added, and re-rendering the whole catalogue after a palette change is one command rather than a photo shoot.",
           },
           {
             name: "Server actions instead of an API nobody calls",
@@ -3607,7 +3607,7 @@ export const products: Product[] = [
           {
             name: "Analytics without a third party",
             detail:
-              "Page views and visitor identity are first-party tables. A perfume shop has no reason to hand its customers' browsing to an ad network, and a store that does cannot honestly write its own privacy page.",
+              "Page views and visitor identity are first-party tables. A shop has no reason to hand its customers' browsing to an ad network, and a store that does cannot honestly write its own privacy page.",
           },
           {
             name: "Roles enforced on the server",
@@ -3619,117 +3619,117 @@ export const products: Product[] = [
     ],
     screens: [
       {
-        src: "/images/products/screens/dareen-home.webp",
+        src: "/images/products/screens/ecommerce-home.webp",
         label: "Storefront",
-        caption: "A symphony of scents — the shop front",
+        caption: "The shop front",
       },
       {
-        src: "/images/products/screens/dareen-products.webp",
+        src: "/images/products/screens/ecommerce-products.webp",
         label: "Catalogue",
         caption: "The collection, filtered and sorted",
       },
       {
-        src: "/images/products/screens/dareen-product-detail.webp",
+        src: "/images/products/screens/ecommerce-product-detail.webp",
         label: "Product",
         caption: "Notes, variants and what is actually in stock",
       },
       {
-        src: "/images/products/screens/dareen-collections.webp",
+        src: "/images/products/screens/ecommerce-collections.webp",
         label: "Collections",
         caption: "Curated groupings, not just categories",
       },
       {
-        src: "/images/products/screens/dareen-search.webp",
+        src: "/images/products/screens/ecommerce-search.webp",
         label: "Search",
         caption: "Querying the catalogue by name and note",
       },
       {
-        src: "/images/products/screens/dareen-about.webp",
+        src: "/images/products/screens/ecommerce-about.webp",
         label: "Our Story",
         caption: "The brand page",
       },
       {
-        src: "/images/products/screens/dareen-register.webp",
+        src: "/images/products/screens/ecommerce-register.webp",
         label: "Register",
         caption: "Customer sign-up, with passkeys supported",
       },
       {
-        src: "/images/products/screens/dareen-admin-overview.webp",
+        src: "/images/products/screens/ecommerce-admin-overview.webp",
         label: "Admin Dashboard",
         caption: "Revenue, orders and stock over a chosen range",
       },
       {
-        src: "/images/products/screens/dareen-admin-analytics.webp",
+        src: "/images/products/screens/ecommerce-admin-analytics.webp",
         label: "Analytics",
         caption: "Where the revenue actually came from",
       },
       {
-        src: "/images/products/screens/dareen-admin-orders.webp",
+        src: "/images/products/screens/ecommerce-admin-orders.webp",
         label: "Orders",
         caption: "Every order and the events behind it",
       },
       {
-        src: "/images/products/screens/dareen-admin-products.webp",
+        src: "/images/products/screens/ecommerce-admin-products.webp",
         label: "Products",
         caption: "The catalogue as the shop manages it",
       },
       {
-        src: "/images/products/screens/dareen-admin-product-new.webp",
+        src: "/images/products/screens/ecommerce-admin-product-new.webp",
         label: "New Product",
         caption: "Variants, notes, images and inventory in one form",
       },
       {
-        src: "/images/products/screens/dareen-admin-inventory.webp",
+        src: "/images/products/screens/ecommerce-admin-inventory.webp",
         label: "Inventory",
         caption: "Stock by variant, with a movement log",
       },
       {
-        src: "/images/products/screens/dareen-admin-customers.webp",
+        src: "/images/products/screens/ecommerce-admin-customers.webp",
         label: "Customers",
         caption: "Accounts, orders and lifetime value",
       },
       {
-        src: "/images/products/screens/dareen-admin-coupons.webp",
+        src: "/images/products/screens/ecommerce-admin-coupons.webp",
         label: "Coupons",
         caption: "Discounts scoped to products or collections",
       },
       {
-        src: "/images/products/screens/dareen-admin-collections.webp",
+        src: "/images/products/screens/ecommerce-admin-collections.webp",
         label: "Collections",
         caption: "Building a curated group",
       },
       {
-        src: "/images/products/screens/dareen-admin-reviews.webp",
+        src: "/images/products/screens/ecommerce-admin-reviews.webp",
         label: "Reviews",
         caption: "Moderating what appears on a product",
       },
       {
-        src: "/images/products/screens/dareen-admin-visitors.webp",
+        src: "/images/products/screens/ecommerce-admin-visitors.webp",
         label: "Visitors",
         caption: "First-party traffic, no third-party tracker",
       },
       {
-        src: "/images/products/screens/dareen-admin-shipping.webp",
+        src: "/images/products/screens/ecommerce-admin-shipping.webp",
         label: "Shipping",
         caption: "Zones, methods and what each one costs",
       },
       {
-        src: "/images/products/screens/dareen-admin-payments.webp",
+        src: "/images/products/screens/ecommerce-admin-payments.webp",
         label: "Payments",
         caption: "Transactions and their webhook history",
       },
       {
-        src: "/images/products/screens/dareen-admin-settings.webp",
+        src: "/images/products/screens/ecommerce-admin-settings.webp",
         label: "Settings",
         caption: "What the store owner controls",
       },
       {
-        src: "/images/products/screens/dareen-admin-logs.webp",
+        src: "/images/products/screens/ecommerce-admin-logs.webp",
         label: "Activity Log",
         caption: "Who changed what in the admin",
       },
       {
-        src: "/images/products/screens/dareen-admin-users.webp",
+        src: "/images/products/screens/ecommerce-admin-users.webp",
         label: "Admin Users",
         caption: "Owner, admin and staff, with devices",
       },    ],

@@ -39,12 +39,6 @@ const LOGOS = [
   // Fleet Flow ships a stacked lock-up rather than a horizontal wordmark, so it
   // is trimmed to a taller target and rendered larger on the page.
   { src: "fleetflow.png", out: "fleetflow-logo.webp", height: 420 },
-  /*
-    Dareen's lock-up is the Arabic mark stacked over "PARFUM ATELIER.", so it gets
-    the taller target too. The dark variant is the source: product logos sit on a
-    white plate, so the light one washed out to a blank tile.
-  */
-  { src: "dareen.png", out: "dareen-logo.webp", height: 420 },
 ];
 
 async function prepare({ src, out, height = TARGET_HEIGHT }) {

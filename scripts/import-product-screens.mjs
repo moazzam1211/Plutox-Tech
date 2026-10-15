@@ -368,7 +368,7 @@ const PRODUCTS = [
     ],
   },
   {
-    slug: "dareen",
+    slug: "ecommerce",
     src: "C:/Users/aaa/AppData/Local/Temp/claude/C--Users-aaa-Downloads/482801db-b3d8-4d16-8385-084b6d6927ab/scratchpad/dn-shots",
     screens: [
       ["01-home.png", "Storefront", "A symphony of scents — the shop front"],
