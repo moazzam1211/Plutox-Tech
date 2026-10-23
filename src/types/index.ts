@@ -246,4 +246,6 @@ export interface PosBuild {
   releasedAt: string;
   filename: string;
   href: string;
+  /** What it installs on: the POS editions are Windows installers, Pocket is an Android app. */
+  platform: "windows" | "android";
 }

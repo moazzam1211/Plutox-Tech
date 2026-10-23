@@ -1,7 +1,7 @@
 import type { PosBuild } from "@/types";
 
 /**
- * The three ServeSync POS installers. GENERATED — run `npm run downloads`.
+ * The ServeSync downloads: three Windows POS installers and the Pocket Android app. GENERATED — run `npm run downloads`.
  *
  * Version, size and release date come from electron-builder's `latest.yml`; the
  * SHA-256 is computed from the artefact itself. Do not edit by hand — a figure
@@ -28,7 +28,8 @@ export const posBuilds: PosBuild[] = [
     "sha256": "d49ca90b9cadfca5039511dd12533cc07921c20ef07800afc1e17a58a283917d",
     "releasedAt": "2026-10-16",
     "filename": "ServeSync-Restaurant-Setup.exe",
-    "href": "https://admin.plutoxtech.com/downloads/ServeSync-Restaurant-Setup.exe"
+    "href": "https://admin.plutoxtech.com/downloads/ServeSync-Restaurant-Setup.exe",
+    "platform": "windows"
   },
   {
     "slug": "mart",
@@ -46,7 +47,8 @@ export const posBuilds: PosBuild[] = [
     "sha256": "ece459a46684bf1dc3e9a3b02378fde595c338a08856856460090f19804fe017",
     "releasedAt": "2026-10-16",
     "filename": "ServeSync-Mart-Setup.exe",
-    "href": "https://admin.plutoxtech.com/downloads/ServeSync-Mart-Setup.exe"
+    "href": "https://admin.plutoxtech.com/downloads/ServeSync-Mart-Setup.exe",
+    "platform": "windows"
   },
   {
     "slug": "pharmacy",
@@ -64,6 +66,26 @@ export const posBuilds: PosBuild[] = [
     "sha256": "f445eb2636c2c23e613fa5b183150aa95116b52d4572f629bbf8179254d7cd3a",
     "releasedAt": "2026-10-16",
     "filename": "ServeSync-Pharmacy-Setup.exe",
-    "href": "https://admin.plutoxtech.com/downloads/ServeSync-Pharmacy-Setup.exe"
+    "href": "https://admin.plutoxtech.com/downloads/ServeSync-Pharmacy-Setup.exe",
+    "platform": "windows"
+  },
+  {
+    "slug": "pocket",
+    "name": "ServeSync Pocket",
+    "tagline": "The whole shop on an Android phone",
+    "blurb": "Sell, stock and khata from a phone: scan barcodes with the camera, weigh loose items, print GST invoices and kitchen tickets to a Bluetooth printer, and keep selling offline — every sale uploads when the connection is back. Fits grocery, pharmacy, restaurant, wholesale and more.",
+    "highlights": [
+      "Camera scanning with auto-filled products",
+      "Works offline, syncs when back online",
+      "Bluetooth bills, KOT and day reports",
+      "Khata, shifts, inventory and reports"
+    ],
+    "version": "0.10.0",
+    "bytes": 83363567,
+    "sha256": "e7d211b54210973cc2237c8060fbae3832138645b7fada92469be2c2f7a75c3e",
+    "releasedAt": "2026-10-23",
+    "filename": "ServeSync-Pocket.apk",
+    "href": "https://admin.plutoxtech.com/downloads/ServeSync-Pocket.apk",
+    "platform": "android"
   }
 ];

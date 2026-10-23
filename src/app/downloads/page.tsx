@@ -1,4 +1,4 @@
-import { Download, ShieldAlert, Store, Cross, UtensilsCrossed } from "lucide-react";
+import { Download, ShieldAlert, Smartphone, Store, Cross, UtensilsCrossed } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import Link from "next/link";
 
@@ -12,7 +12,7 @@ import { breadcrumbJsonLd, buildMetadata } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "Download ServeSync POS",
   description:
-    "Windows installers for all three ServeSync editions — restaurant, mart and pharmacy — each with its version, size and SHA-256 so you can verify the file before you run it.",
+    "Windows installers for the three ServeSync editions — restaurant, mart and pharmacy — and the ServeSync Pocket Android app, each with its version, size and SHA-256 so you can verify the file before you run it.",
   path: "/downloads",
   keywords: [
     "POS software download",
@@ -20,6 +20,8 @@ export const metadata = buildMetadata({
     "pharmacy POS download",
     "supermarket POS Windows installer",
     "ServeSync download",
+    "mobile POS app Android",
+    "ServeSync Pocket APK",
   ],
 });
 
@@ -27,7 +29,10 @@ const ICONS: Record<string, LucideIcon> = {
   restaurant: UtensilsCrossed,
   mart: Store,
   pharmacy: Cross,
+  pocket: Smartphone,
 };
+
+const PLATFORM = { windows: "Windows 10/11 · 64-bit", android: "Android 7.0 or newer" } as const;
 
 const mb = (bytes: number) => `${(bytes / 1048576).toFixed(1)} MB`;
 
@@ -60,13 +65,13 @@ export default function DownloadsPage() {
             <span className="text-primary">pick your edition</span>
           </>
         }
-        lede="One Windows installer per edition — restaurant, mart or pharmacy. Each bundles its own server and runtime, so a single shop needs nothing else on the machine. Install, and the POS keeps itself current from the update channel after that."
+        lede="One Windows installer per edition — restaurant, mart or pharmacy — each bundling its own server and runtime, so a single shop needs nothing else on the machine. Or run the shop from a phone with ServeSync Pocket for Android. Install once, and each keeps itself current from the update channel after that."
       >
         <StatStrip
           className="max-w-2xl border-t pt-4"
           items={[
-            { value: String(posBuilds.length), label: "Editions" },
-            { value: "Windows", label: "Platform" },
+            { value: String(posBuilds.length), label: "Downloads" },
+            { value: "PC + Phone", label: "Windows · Android" },
             { value: "Included", label: "Server & runtime" },
             { value: "SHA-256", label: "Every file" },
           ]}
@@ -131,7 +136,7 @@ export default function DownloadsPage() {
                       </div>
                       <div>
                         <dt className="text-muted-foreground">Platform</dt>
-                        <dd className="font-medium">Windows 10/11 · 64-bit</dd>
+                        <dd className="font-medium">{PLATFORM[build.platform]}</dd>
                       </div>
                     </dl>
 
@@ -185,7 +190,7 @@ export default function DownloadsPage() {
             <ShieldAlert className="size-5 shrink-0 text-primary" />
             <div className="min-w-0">
               <h2 className="font-display text-base font-semibold">
-                Windows will warn you on first run
+                Windows (and Android) will ask before installing
               </h2>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                 These installers are not code-signed yet, so SmartScreen shows
@@ -195,6 +200,14 @@ export default function DownloadsPage() {
                 rather confirm the file first, check its SHA-256 against the value
                 listed above — that is the check that actually proves you have the
                 build we published.
+              </p>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                ServeSync Pocket is installed straight from this page rather than
+                Google Play, so Android asks once to{" "}
+                <span className="text-foreground">allow installs from your browser</span>{" "}
+                — tap <span className="text-foreground">Settings</span> → allow, then{" "}
+                <span className="text-foreground">Install</span>. After that the app
+                updates itself.
               </p>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                 Not sure which edition fits, or want it set up for you?{" "}

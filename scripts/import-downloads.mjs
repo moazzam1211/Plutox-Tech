@@ -134,6 +134,28 @@ function sha256(path) {
   });
 }
 
+/**
+ * ServeSync Pocket, the Android app. Not an electron-builder output: the version is the app's own
+ * (apps/mobile/app.json), the release date is the APK's build time, and the hash is the APK itself.
+ * Its stable name on the server is ServeSync-Pocket.apk (uploaded the same way, via .part).
+ */
+const POCKET = {
+  slug: "pocket",
+  apk: "D:/dev/servesync-erp/apps/mobile/android/app/build/outputs/apk/release/app-release.apk",
+  appJson: "D:/dev/servesync-erp/apps/mobile/app.json",
+  stable: "ServeSync-Pocket.apk",
+  name: "ServeSync Pocket",
+  tagline: "The whole shop on an Android phone",
+  blurb:
+    "Sell, stock and khata from a phone: scan barcodes with the camera, weigh loose items, print GST invoices and kitchen tickets to a Bluetooth printer, and keep selling offline — every sale uploads when the connection is back. Fits grocery, pharmacy, restaurant, wholesale and more.",
+  highlights: [
+    "Camera scanning with auto-filled products",
+    "Works offline, syncs when back online",
+    "Bluetooth bills, KOT and day reports",
+    "Khata, shifts, inventory and reports",
+  ],
+};
+
 const builds = [];
 for (const edition of EDITIONS) {
   const { version, releaseDate, size } = await manifest(edition.dir);
@@ -152,6 +174,7 @@ for (const edition of EDITIONS) {
     releasedAt: new Date(releaseDate).toISOString().slice(0, 10),
     filename: edition.stable,
     href: `${BASE}/${edition.stable}`,
+    platform: "windows",
   });
 
   console.log(
@@ -159,10 +182,31 @@ for (const edition of EDITIONS) {
   );
 }
 
+{
+  const { version } = JSON.parse(await readFile(POCKET.appJson, "utf8")).expo;
+  const { size, mtime } = await stat(POCKET.apk);
+  const checksum = await sha256(POCKET.apk);
+  builds.push({
+    slug: POCKET.slug,
+    name: POCKET.name,
+    tagline: POCKET.tagline,
+    blurb: POCKET.blurb,
+    highlights: POCKET.highlights,
+    version,
+    bytes: size,
+    sha256: checksum,
+    releasedAt: mtime.toISOString().slice(0, 10),
+    filename: POCKET.stable,
+    href: `${BASE}/${POCKET.stable}`,
+    platform: "android",
+  });
+  console.log(`✓ ${POCKET.name.padEnd(22)} v${version.padEnd(8)} ${(size / 1048576).toFixed(1)} MB  ${checksum.slice(0, 16)}…`);
+}
+
 const file = `import type { PosBuild } from "@/types";
 
 /**
- * The three ServeSync POS installers. GENERATED — run \`npm run downloads\`.
+ * The ServeSync downloads: three Windows POS installers and the Pocket Android app. GENERATED — run \`npm run downloads\`.
  *
  * Version, size and release date come from electron-builder's \`latest.yml\`; the
  * SHA-256 is computed from the artefact itself. Do not edit by hand — a figure
