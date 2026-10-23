@@ -80,9 +80,9 @@ export const posBuilds: PosBuild[] = [
       "Bluetooth bills, KOT and day reports",
       "Khata, shifts, inventory and reports"
     ],
-    "version": "0.10.0",
-    "bytes": 83363567,
-    "sha256": "e7d211b54210973cc2237c8060fbae3832138645b7fada92469be2c2f7a75c3e",
+    "version": "0.10.1",
+    "bytes": 83438899,
+    "sha256": "c9f5688fdff02987da784dba00a980f066258379116f1817769b34dcd315a1e2",
     "releasedAt": "2026-10-23",
     "filename": "ServeSync-Pocket.apk",
     "href": "https://admin.plutoxtech.com/downloads/ServeSync-Pocket.apk",
