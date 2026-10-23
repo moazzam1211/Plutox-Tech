@@ -27,6 +27,7 @@ export const products: Product[] = [
   /* ------------------------------------------------------------------ */
   {
     slug: "servesync-pos",
+    kind: "product",
     name: "ServeSync ERP",
     category: "Multi-vertical POS",
     tagline: "One POS, 62 kinds of business",
@@ -847,10 +848,186 @@ export const products: Product[] = [
   },
 
   /* ------------------------------------------------------------------ */
+  /* ServeSync Pocket — the shop on an Android phone                    */
+  /* ------------------------------------------------------------------ */
+  {
+    slug: "servesync-pocket",
+    kind: "product",
+    name: "ServeSync Pocket",
+    category: "Mobile POS",
+    tagline: "The whole shop on an Android phone.",
+    description:
+      "A point of sale that runs on the phone the owner already carries. Sell, stock, khata and the day's report from one app, for twelve business types — grocery, pharmacy, restaurant, wholesale and more — each opening on the screen that fits it. Scanning a barcode fills in the product from open product databases and the pack itself, read on the phone; loose items ask for a weight; bills, kitchen tickets and day reports print to a Bluetooth thermal printer. It keeps selling with no connection and uploads every sale when the signal is back. The screenshots below were captured on a real phone from a fictional demo shop.",
+    image: "/images/products/servesync-pocket-logo.webp",
+    brandColor: "#35BDA9",
+    audience:
+      "A shop owner who wants a till, a stock book and a khata without buying a counter PC",
+    badge: "Android",
+    features: [
+      "Twelve business types, each opening on the screen that fits it",
+      "Camera barcode scanning with a beep, for selling and for stock",
+      "Scan a new barcode and the product form fills itself — name, brand, size, category and photo",
+      "Loose items sold by weight: tap rice, enter 1.25 kg or Rs 500",
+      "Bluetooth bills, kitchen tickets and day reports in the ServeSync format",
+      "Works offline; every sale uploads when the connection returns",
+      "Customer and vendor khata with balances owed",
+      "Shifts with float, cash in/out and a counted close",
+      "Inventory with categories, low-stock filter and Excel export",
+      "Updates itself over the air, signed",
+    ],
+    moduleGroups: [
+      {
+        title: "Selling",
+        items: [
+          {
+            name: "A home screen per business type",
+            detail:
+              "A grocery or pharmacy opens on its catalogue as a searchable list with a scan button; a restaurant or café opens on dine-in, takeaway and delivery orders. The business type is chosen once, at sign-up, and decides the rest.",
+          },
+          {
+            name: "Weighed items",
+            detail:
+              "Products sold by the kilo or litre ask for the quantity when tapped — quick 250 g to 5 kg buttons, or type the weight, or type the rupees and let it work out the weight.",
+          },
+          {
+            name: "No sale without a shift",
+            detail:
+              "An order cannot be punched until a shift is open, so every rupee taken belongs to a drawer that will be counted at the end of it.",
+          },
+          {
+            name: "Bills and kitchen tickets",
+            detail:
+              "Shop invoices carry the GST table, a verify QR and a barcode; restaurant bills and KOTs follow the ServeSync Restaurant layout, with a DUPLICATE strip on reprints. The same lines print on 58 mm or 80 mm paper and save as a PDF to share.",
+          },
+        ],
+      },
+      {
+        title: "Stock",
+        items: [
+          {
+            name: "Scan to add",
+            detail:
+              "Scanning an unknown barcode opens the new-product form already filled from open product databases, with the real product photo and the brand's logo. Where the databases know nothing, the phone reads the pack itself with on-device text recognition — no paid API involved.",
+          },
+          {
+            name: "Brand, size and sold-by",
+            detail:
+              "Every product carries a brand, a pack size with units and whether it sells by the piece, kilo or litre, so search finds it by any of them.",
+          },
+          {
+            name: "Batches and expiry for pharmacies",
+            detail:
+              "Batch numbers and expiry dates on goods received, for the shops that have to track them.",
+          },
+        ],
+      },
+      {
+        title: "Money",
+        items: [
+          {
+            name: "Khata",
+            detail:
+              "Customers who buy on credit and vendors the shop owes, each with a running balance and the total outstanding at the top.",
+          },
+          {
+            name: "Reports",
+            detail:
+              "Today, yesterday, last 7 days or the month: sales, cost of goods, gross and net profit, tax collected, sales by hour and best sellers — on screen, as a PDF or on the receipt printer.",
+          },
+          {
+            name: "Staff, expenses and attendance",
+            detail:
+              "Staff accounts with roles, expenses paid from the drawer, and attendance and leave.",
+          },
+        ],
+      },
+    ],
+    screens: [
+      {
+        src: "/images/products/screens/servesync-pocket-orders.webp",
+        label: "Orders",
+        caption: "A restaurant's home screen: dine-in, takeaway, delivery",
+      },
+      {
+        src: "/images/products/screens/servesync-pocket-menu-grid.webp",
+        label: "Menu",
+        caption: "Searchable menu with categories, one tap to add",
+      },
+      {
+        src: "/images/products/screens/servesync-pocket-order.webp",
+        label: "Order",
+        caption: "The open order before it is sent and paid",
+      },
+      {
+        src: "/images/products/screens/servesync-pocket-inventory.webp",
+        label: "Inventory",
+        caption: "Stock value, low stock, scan to add, Excel export",
+      },
+      {
+        src: "/images/products/screens/servesync-pocket-reports.webp",
+        label: "Reports",
+        caption: "Sales, profit, tax and sales by hour",
+      },
+      {
+        src: "/images/products/screens/servesync-pocket-khata.webp",
+        label: "Khata",
+        caption: "What customers owe the shop",
+      },
+      {
+        src: "/images/products/screens/servesync-pocket-navigation.webp",
+        label: "Menu",
+        caption: "Every module one tap from anywhere",
+      },
+    ],
+    languages: ["TypeScript", "TSX", "SQL"],
+    stack: [
+      "React Native",
+      "Expo",
+      "TypeScript",
+      "Fastify",
+      "PostgreSQL",
+      "SQLite",
+      "ML Kit",
+      "ESC/POS",
+      "Playwright",
+    ],
+    specs: [
+      { label: "App screens", value: "30" },
+      { label: "API routes", value: "198" },
+      { label: "Business types", value: "12" },
+      { label: "Automated tests", value: "226" },
+    ],
+    payments: ["Cash", "Card", "Bank transfer", "Wallet", "Credit on khata"],
+    metric: { label: "Hardware needed beyond the phone", value: "None" },
+    pricing: [
+      {
+        note: "One plan, unlocked with a licence key from PlutoX Tech. Every new shop starts with a three-day free trial.",
+        plans: [
+          {
+            name: "Monthly",
+            price: "PKR 5,000",
+            period: "/ month",
+            summary: "Everything in the app, for one shop.",
+            includes: [
+              "All twelve business types",
+              "Selling, stock, khata and reports",
+              "Bluetooth printing and offline sales",
+              "Over-the-air updates",
+            ],
+            featured: true,
+          },
+        ],
+      },
+    ],
+    demoUrl: "/contact",
+  },
+
+  /* ------------------------------------------------------------------ */
   /* StaySync Hotel ERP                                                 */
   /* ------------------------------------------------------------------ */
   {
     slug: "staysync",
+    kind: "product",
     name: "StaySync Hotel ERP",
     category: "Hospitality",
     tagline: "One login, every property",
@@ -1175,10 +1352,1117 @@ export const products: Product[] = [
   },
 
   /* ------------------------------------------------------------------ */
+  /* INDUX — industrial ERP & smart factory OS                          */
+  /* ------------------------------------------------------------------ */
+  {
+    slug: "indux",
+    kind: "product",
+    name: "INDUX",
+    category: "Manufacturing ERP",
+    tagline: "A routing, a BOM and a station are data, not code.",
+    description:
+      "A configurable manufacturing ERP running procurement, inventory, MRP, production, quality, maintenance, workforce, sales, dispatch and double-entry finance, with an offline-capable terminal for the factory floor and an append-only audit trail over all of it. Nothing is hardcoded to one industry — the seed ships two plants on the same engines, a food factory and a textile unit, which is the proof that the routing and the bill of materials are configuration rather than a fork. Nine shared engines do the enforcing; nineteen route modules and twenty-nine console screens sit on top of them.",
+    image: "/images/products/indux-logo.webp",
+    brandColor: "#0F766E",
+    audience:
+      "Manufacturers running more than one plant, product line or process — food, textile and any industry whose routings differ but whose rules do not",
+    badge: "9 engines",
+    features: [
+      "Two plants on one engine set — food and textile, from the same seed",
+      "Every quantity change goes through one stock ledger, with lot genealogy",
+      "Double-entry finance: balanced journals, trial balance, P&L, balance sheet",
+      "MRP and production orders driven by real BOMs and routings",
+      "Approval chains resolved from threshold rules, not hardcoded per document",
+      "Append-only audit: who, what, when, where, before, after and why",
+      "Offline-capable factory-floor station that syncs when the network returns",
+      "Consignment tracking with QR, from material through dispatch",
+      "Signed offline licences — Starter, Professional and Enterprise",
+    ],
+    moduleGroups: [
+      {
+        title: "The engines — what every module is built on",
+        items: [
+          {
+            name: "Stock ledger",
+            detail:
+              "Every quantity change in the factory goes through one ledger, which owns lot picking, idempotency and genealogy. That is what makes a finished pallet traceable back to the specific material lots that made it, rather than to a date and a hope.",
+          },
+          {
+            name: "Accounting",
+            detail:
+              "Balanced journals, trial balance, P&L, balance sheet and cash flow, posted by the engine rather than by each feature. A financial act that would not balance does not post.",
+          },
+          {
+            name: "Approvals",
+            detail:
+              "Threshold rules resolve to an ordered chain of roles, so a purchase over a limit routes itself. The rule is data, which is why adding a tier does not mean touching a document type.",
+          },
+          {
+            name: "Permissions",
+            detail:
+              "Grants shaped as `module:action` with wildcard support and factory scoping — so a supervisor at one plant is not a supervisor at the other.",
+          },
+          {
+            name: "Workflow",
+            detail:
+              "One state machine every document shares. A purchase order, a production order and a dispatch note move through the same vocabulary, which is why the audit trail reads consistently.",
+          },
+          {
+            name: "Audit",
+            detail:
+              "Append-only, capturing who, what, when, where, before, after and why. Written as work happens rather than reconstructed from other tables afterwards.",
+          },
+          {
+            name: "Notifications",
+            detail:
+              "One alert pipeline with a dedupe window and pluggable channels, so a failing machine does not generate two hundred identical messages.",
+          },
+        ],
+      },
+      {
+        title: "Make",
+        items: [
+          {
+            name: "Production",
+            detail:
+              "Orders against real routings and stations, with the shop floor reporting progress rather than a planner guessing it.",
+          },
+          {
+            name: "MRP",
+            detail:
+              "Requirements planned from BOMs and demand, so shortages surface before the line stops rather than when it does.",
+          },
+          {
+            name: "BOM & master data",
+            detail:
+              "Bills of materials, routings, stations and items as configuration — the reason two industries run the same build.",
+          },
+          {
+            name: "Quality",
+            detail:
+              "Checks bound to the process rather than filed beside it, so a batch that failed QC cannot quietly move on.",
+          },
+          {
+            name: "Maintenance",
+            detail:
+              "Machine upkeep tracked against the asset, which is what turns unplanned downtime into a schedule.",
+          },
+          {
+            name: "Factory-floor station",
+            detail:
+              "A terminal built for the floor and able to keep working offline, syncing when the network returns. A line does not stop because the office switch did.",
+          },
+        ],
+      },
+      {
+        title: "Move & sell",
+        items: [
+          {
+            name: "Procurement",
+            detail:
+              "Purchase orders through the approval chain to goods received, posting to the ledger and the accounts in one step.",
+          },
+          {
+            name: "Inventory & warehouse",
+            detail:
+              "Material, packaging, finished goods and their locations, every movement written to the shared ledger.",
+          },
+          {
+            name: "Consignment tracking",
+            detail:
+              "Consignments followed from material through production, QC, packaging, warehouse and dispatch to delivery, with QR at the handover points.",
+          },
+          {
+            name: "Sales & dispatch",
+            detail:
+              "Orders through to what physically left the gate, reconciled against what was produced.",
+          },
+          {
+            name: "Trace",
+            detail:
+              "The genealogy read back: from a delivered consignment to the lots, the run and the shift behind it.",
+          },
+        ],
+      },
+      {
+        title: "Run the business",
+        items: [
+          {
+            name: "Finance",
+            detail:
+              "The reporting side of the accounting engine — statements built from posted journals rather than assembled in a spreadsheet.",
+          },
+          {
+            name: "HR & workforce",
+            detail:
+              "People, departments and the shift-level attribution that makes a production figure mean something.",
+          },
+          {
+            name: "Reports, briefing & assistant",
+            detail:
+              "Reporting across the plants, plus a floating assistant and help pair in the corner \u2014 not a page. A manager asking what a plant made today wants an answer over the work in front of them; sending them elsewhere to read one sentence loses their place. There is a daily briefing endpoint and language selection behind it, and the full Assistant screen remains for a longer conversation.",
+          },
+          {
+            name: "Licensing",
+            detail:
+              "Signed offline licences activated in the first-run wizard or in Admin — Starter at one plant and two terminals, Professional at two and ten, Enterprise unlimited. Perpetual or expiring, verified against the vendor key rather than a server call.",
+          },
+          {
+            name: "Onboarding & setup",
+            detail:
+              "A first-run wizard that configures the plant, its stations and its people, so a new site is a setup task rather than an implementation project.",
+          },
+        ],
+      },
+    ],
+    /*
+      26 captures of the running console, taken headlessly against the real
+      server with a signed-in owner session. The repo shipped no screenshot
+      tooling, so scripts/screenshots.mjs was written for it — the shots refresh
+      rather than rot.
+    */
+    screens: [
+      {
+        src: "/images/products/screens/indux-dashboard.webp",
+        label: "Dashboard",
+        caption: "The plant's day: output, orders and what needs attention",
+      },
+      {
+        src: "/images/products/screens/indux-portfolio.webp",
+        label: "Group Portfolio",
+        caption: "Both plants side by side — food and textile on one engine",
+      },
+      {
+        src: "/images/products/screens/indux-production.webp",
+        label: "Production Orders",
+        caption: "Orders against real routings and stations",
+      },
+      {
+        src: "/images/products/screens/indux-station.webp",
+        label: "Station Terminal",
+        caption: "The floor terminal, built to keep working offline",
+      },
+      {
+        src: "/images/products/screens/indux-mrp.webp",
+        label: "MRP Planning",
+        caption: "Requirements from BOMs and demand, before the line stops",
+      },
+      {
+        src: "/images/products/screens/indux-quality.webp",
+        label: "Quality Control",
+        caption: "Checks bound to the process, not filed beside it",
+      },
+      {
+        src: "/images/products/screens/indux-consignments.webp",
+        label: "Consignments",
+        caption: "Material through production, QC, packaging and dispatch",
+      },
+      {
+        src: "/images/products/screens/indux-trace.webp",
+        label: "Traceability",
+        caption: "Genealogy read back from a delivery to its lots",
+      },
+      {
+        src: "/images/products/screens/indux-inventory.webp",
+        label: "Inventory",
+        caption: "Every movement written to the shared stock ledger",
+      },
+      {
+        src: "/images/products/screens/indux-warehouse.webp",
+        label: "Warehouse",
+        caption: "Locations for material, packaging and finished goods",
+      },
+      {
+        src: "/images/products/screens/indux-procurement.webp",
+        label: "Procurement",
+        caption: "Requisition to purchase order to receipt",
+      },
+      {
+        src: "/images/products/screens/indux-suppliers.webp",
+        label: "Suppliers",
+        caption: "Vendors, terms and what is owed",
+      },
+      {
+        src: "/images/products/screens/indux-items.webp",
+        label: "Products & Materials",
+        caption: "The item master both plants share",
+      },
+      {
+        src: "/images/products/screens/indux-bom.webp",
+        label: "BOM & Recipes",
+        caption: "Bills of materials as data, not code",
+      },
+      {
+        src: "/images/products/screens/indux-routings.webp",
+        label: "Workflows",
+        caption: "Routings and the stations they run through",
+      },
+      {
+        src: "/images/products/screens/indux-machines.webp",
+        label: "Machines",
+        caption: "Assets on the floor and their state",
+      },
+      {
+        src: "/images/products/screens/indux-maintenance.webp",
+        label: "Maintenance",
+        caption: "Upkeep against the asset, turning downtime into a schedule",
+      },
+      {
+        src: "/images/products/screens/indux-workforce.webp",
+        label: "Workforce & HR",
+        caption: "People, departments and shift-level attribution",
+      },
+      {
+        src: "/images/products/screens/indux-sales.webp",
+        label: "Sales & Dispatch",
+        caption: "Orders through to what left the gate",
+      },
+      {
+        src: "/images/products/screens/indux-finance.webp",
+        label: "Finance",
+        caption: "Statements built from posted journals",
+      },
+      {
+        src: "/images/products/screens/indux-departments.webp",
+        label: "Department Accounts",
+        caption: "Cost carried by the department that incurred it",
+      },
+      {
+        src: "/images/products/screens/indux-reports.webp",
+        label: "Reports",
+        caption: "Reporting across both plants",
+      },
+      {
+        src: "/images/products/screens/indux-approvals.webp",
+        label: "Approvals",
+        caption: "Threshold rules resolved to an ordered role chain",
+      },
+      {
+        src: "/images/products/screens/indux-audit.webp",
+        label: "Audit Trail",
+        caption: "Who, what, when, where, before, after and why",
+      },
+      {
+        src: "/images/products/screens/indux-license.webp",
+        label: "Licence & Packages",
+        caption: "Signed offline activation and the tier's module set",
+      },
+      {
+        src: "/images/products/screens/indux-assistant.webp",
+        label: "AI Assistant",
+        caption: "Questions answered from queried data",
+      },
+    ],
+    /*
+      The roadmap stays alongside the gallery rather than being replaced by it:
+      the screens show what works, the roadmap names what does not.
+    */
+    roadmap: [
+      {
+        label: "Built",
+        title: "The engine layer",
+        detail:
+          "Nine shared engines — permissions, stock ledger, accounting, approvals, notifications, workflow, audit, CRUD and persistence — with domain services composing them and route files doing nothing but parse, call and return.",
+        state: "done",
+      },
+      {
+        label: "Built",
+        title: "The factory, end to end",
+        detail:
+          "Nineteen route modules and twenty-nine console screens covering procurement, inventory, MRP, production, quality, maintenance, workforce, sales, dispatch, finance, consignment tracking and trace — proven against two seeded plants in different industries.",
+        state: "done",
+      },
+      {
+        label: "Built",
+        title: "Licensing and the desktop build",
+        detail:
+          "Signed offline licences across three tiers with plant and terminal ceilings, activated in the first-run wizard, plus a packaged desktop console.",
+        state: "done",
+      },
+      {
+        label: "Next",
+        title: "Prisma persistence",
+        detail:
+          "Persistence sits behind a `Repository` interface and runs on memory plus JSON today, with Prisma as the stated next step. The seam exists precisely so that swap does not touch the engines — but until it lands, this is the honest limit on how large a deployment should get.",
+        state: "next",
+      },
+    ],
+    languages: ["TypeScript", "TSX", "CSS"],
+    stack: ["TypeScript", "Node.js", "Express", "Socket.IO", "React", "Electron"],
+    specs: [
+      { label: "Shared engines", value: "9" },
+      { label: "Route modules", value: "19" },
+      { label: "Console screens", value: "29" },
+      { label: "API handlers", value: "231" },
+    ],
+    /*
+      Read out of `server/src/core/packages.ts` — the same table the Licence &
+      Packages screen renders and the licence check enforces, so the page and the
+      product cannot disagree. Tiers are supersets: each unlocks the nav keys of
+      the one below it plus its own.
+    */
+    pricing: [
+      {
+        edition: "Per factory",
+        editionSummary:
+          "Billed monthly per plant. A tier unlocks modules; the signed licence sets how many plants and terminals it covers.",
+        note: "Modules are gated by nav key, checked against the licence rather than hidden in the sidebar alone. Licences are signed and verified offline — no server call at activation, which matters on a factory network.",
+        plans: [
+          {
+            name: "Starter",
+            price: "PKR 15,000",
+            period: "/ month",
+            summary: "Run one production line",
+            includes: [
+              "Products, BOM / recipes and routings",
+              "Inventory, warehouse and batch lots",
+              "Procurement: requisition → PO → receipt",
+              "Production orders and the station terminal",
+              "Reports, approvals and the audit trail",
+              "Users, roles and factory setup",
+            ],
+          },
+          {
+            name: "Professional",
+            price: "PKR 30,000",
+            period: "/ month",
+            summary: "The whole factory floor",
+            featured: true,
+            includes: [
+              "Everything in Starter",
+              "Quality control and rejection analysis",
+              "Machines, maintenance and downtime",
+              "MRP and multi-level planning",
+              "Batch traceability, end to end",
+              "Workforce, attendance and sales dispatch",
+            ],
+          },
+          {
+            name: "Enterprise",
+            price: "PKR 45,000",
+            period: "/ month",
+            summary: "Multi-factory ERP with full books",
+            includes: [
+              "Everything in Professional",
+              "Multi-factory group portfolio",
+              "Finance, double-entry accounting and AP/AR",
+              "Manufacturing costing and margins",
+              "AI management assistant",
+              "Priority support",
+            ],
+          },
+        ],
+      },
+    ],
+    metric: { label: "Industries on one build", value: "2" },
+    demoUrl: "/contact",
+  },
+
+  /* ------------------------------------------------------------------ */
+  /* CareSync — hospital ERP                                            */
+  /* ------------------------------------------------------------------ */
+  {
+    slug: "caresync",
+    kind: "product",
+    name: "CareSync",
+    category: "Hospital ERP",
+    tagline: "One record, every department.",
+    description:
+      "A multi-tenant hospital ERP covering the clinical day end to end: a patient registers at the desk, joins an OPD queue, is seen in a consultation that writes vitals, an ICD-coded diagnosis and a prescription, and the pharmacy dispenses against that same record while billing accumulates what was actually done. 420 endpoints over a 116-model schema, 79 screens, and 31 of the 32 modules in its permission catalogue are built. It runs in a browser, as a Windows application with its own updater, and as a portal the patient signs into themselves.",
+    image: "/images/products/caresync-logo.svg",
+    brandColor: "#0E8A76",
+    audience:
+      "Hospital groups and clinics that want one system for the clinic, the ward, the lab, the pharmacy and the books",
+    badge: "31 of 32 modules",
+    features: [
+      "OPD queue to consultation to pharmacy on one patient record",
+      "Prescriptions, discharge summaries, lab and radiology reports as real A4 documents",
+      "Allergy warnings raised before the prescription is written",
+      "Observations charted with an early-warning score, and a medication chart",
+      "Emergency board ordered by triage category, not arrival time",
+      "Billing that accumulates from what was done, with insurance and TPA claims",
+      "Accounting that reads the billing rather than a re-keyed spreadsheet",
+      "A patient portal for appointments, reports, prescriptions and payments",
+      "32 modules by ten actions in one permission catalogue, enforced server-side",
+      "Windows build with its own updater, and a dark theme for night shifts",
+    ],
+    moduleGroups: [
+      {
+        title: "The clinical day, end to end",
+        items: [
+          {
+            name: "Registration, queue and token",
+            detail:
+              "A walk-in is registered at the desk, gets a token and joins the OPD queue for a named doctor. Duplicate registration is caught at the point of typing rather than found later as two charts for one person.",
+          },
+          {
+            name: "Consultation on one page",
+            detail:
+              "Vitals, presenting complaint, history, examination, an ICD-coded diagnosis, a prescription built from a medicine list, advice and a follow-up interval — then signed, which is what turns it from a draft into a record.",
+          },
+          {
+            name: "The chart interrupts",
+            detail:
+              "A recorded allergy raises a warning on the consultation before the prescription is written. A system that stores the allergy and says nothing at the moment it matters has only moved the risk onto the doctor.",
+          },
+          {
+            name: "In-patients and the bed board",
+            detail:
+              "Every ward and bed live, admission from the consultation, and a discharge summary that prints as the document the next clinician will actually read.",
+          },
+          {
+            name: "Emergency, ordered by acuity",
+            detail:
+              "Arrivals are triaged at the door and the board sorts by category rather than by who walked in first — which is the entire point of having a triage category.",
+          },
+          {
+            name: "Nursing: observations and the medication chart",
+            detail:
+              "Vitals charted over time with an early-warning score computed from them, and a medication administration record showing what is due, what was given and by whom.",
+          },
+        ],
+      },
+      {
+        title: "Diagnostics, pharmacy and stock",
+        items: [
+          {
+            name: "Orders that travel",
+            detail:
+              "Investigations raised in the consultation arrive in the lab worklist as orders. Nobody re-types a request, which is where transcription errors come from.",
+          },
+          {
+            name: "Lab and radiology reporting",
+            detail:
+              "Specimens through to verified results with reference ranges, and radiology reported against the request — both printing as signed A4 documents.",
+          },
+          {
+            name: "Operation theatre and blood bank",
+            detail:
+              "The list by theatre and session with the team and operative notes, and blood units held by group against the requests made for them.",
+          },
+          {
+            name: "Pharmacy dispensing",
+            detail:
+              "Prescriptions arrive from the clinic rather than being re-entered at the counter, and dispensing moves the stock it actually used.",
+          },
+          {
+            name: "Inventory and procurement",
+            detail:
+              "Stock by item and location with a movement history, and requests through approval to a purchase order.",
+          },
+        ],
+      },
+      {
+        title: "Money, people and the platform",
+        items: [
+          {
+            name: "Billing from what was done",
+            detail:
+              "Charges accumulate from the consultation, the investigation and the admission rather than being assembled by hand at the end, with panel and TPA claims raised against the bill.",
+          },
+          {
+            name: "Accounting on top of the billing",
+            detail:
+              "Journal, bank reconciliation, profit and loss, balance sheet and departmental profitability — reading the same records the bills came from, not a monthly re-key.",
+          },
+          {
+            name: "HR and payroll",
+            detail:
+              "Staff, roster, attendance and a payroll run that closes a period and produces payslips, with a self-service view for the employee.",
+          },
+          {
+            name: "Tenancy, plans and licensing",
+            detail:
+              "Organisation, hospital group, hospital, branch and department as real records; a platform console listing every tenant on the installation; subscription plans deciding which modules a tenant gets; and Plutox licence keys with vendor lock, unlock and ping commands verified cryptographically.",
+          },
+          {
+            name: "Access, enforced server-side",
+            detail:
+              "32 modules by ten actions — 147 permissions — with 23 role templates seeded per tenant. The server is the only authority; the web app reads the same catalogue purely to hide what a user could not do anyway, and the role editor greys out what the editing user does not hold themselves.",
+          },
+          {
+            name: "Audit, two-factor and sign-in history",
+            detail:
+              "Who did what to which record, TOTP enrolment per account, and sessions and failed attempts kept as their own tables. Suspending a tenant signs its users out immediately rather than waiting for tokens to lapse.",
+          },
+        ],
+      },
+      {
+        title: "How it is delivered",
+        items: [
+          {
+            name: "Browser, desktop and portal",
+            detail:
+              "The same application in a browser, as a Windows build with its own updater and an offline page, and as a patient portal where someone books their own appointment and reads their own reports.",
+          },
+          {
+            name: "It documents itself",
+            detail:
+              "`DOCS=1 npx playwright test` drives the whole system and writes 131 screenshots. Every capture on this page came from that run, so the gallery cannot drift from the software without the test failing first.",
+          },
+          {
+            name: "Demo data that cannot be mistaken for real",
+            detail:
+              "The seeded tenant is suffixed (DEMO) and every screen says the records are sample data, not real patients or staff. On a system holding medical records that distinction has to be visible in the screenshot itself.",
+          },
+          {
+            name: "The one module that is not built",
+            detail:
+              "Documents exists in the permission catalogue and nowhere else — there is no module behind it yet. Everything else named in the role matrix has screens and endpoints.",
+          },
+        ],
+      },
+    ],
+    screens: [
+      {
+        src: "/images/products/screens/caresync-overview.webp",
+        label: "Overview",
+        caption: "The hospital's day on one screen",
+      },
+      {
+        src: "/images/products/screens/caresync-patients.webp",
+        label: "Patients",
+        caption: "The register, searchable by MRN, name or phone",
+      },
+      {
+        src: "/images/products/screens/caresync-patient-chart.webp",
+        label: "Patient Chart",
+        caption: "History, vitals, orders and documents in one place",
+      },
+      {
+        src: "/images/products/screens/caresync-opd-queue.webp",
+        label: "OPD Queue",
+        caption: "Who is waiting, for whom, and since when",
+      },
+      {
+        src: "/images/products/screens/caresync-walk-in.webp",
+        label: "Walk-in",
+        caption: "Registration and a token at the desk",
+      },
+      {
+        src: "/images/products/screens/caresync-consultation.webp",
+        label: "Consultation",
+        caption: "Vitals, diagnosis, prescription and plan on one page",
+      },
+      {
+        src: "/images/products/screens/caresync-allergy-warning.webp",
+        label: "Allergy Warning",
+        caption: "The chart interrupts before the prescription is written",
+      },
+      {
+        src: "/images/products/screens/caresync-consultation-signed.webp",
+        label: "Signed & Complete",
+        caption: "A consultation closed and attributed",
+      },
+      {
+        src: "/images/products/screens/caresync-prescription-sheet-a4.webp",
+        label: "Prescription (A4)",
+        caption: "What the patient actually walks out with",
+      },
+      {
+        src: "/images/products/screens/caresync-appointment-diary.webp",
+        label: "Appointment Diary",
+        caption: "The day across every doctor",
+      },
+      {
+        src: "/images/products/screens/caresync-book-appointment.webp",
+        label: "Booking",
+        caption: "Slot, doctor and reason, checked against the schedule",
+      },
+      {
+        src: "/images/products/screens/caresync-bed-board.webp",
+        label: "Bed Board",
+        caption: "Every ward and bed, live",
+      },
+      {
+        src: "/images/products/screens/caresync-admission.webp",
+        label: "Admission",
+        caption: "One stay, its orders and its notes",
+      },
+      {
+        src: "/images/products/screens/caresync-discharge-summary-a4.webp",
+        label: "Discharge Summary (A4)",
+        caption: "The document the next clinician reads",
+      },
+      {
+        src: "/images/products/screens/caresync-er-board.webp",
+        label: "Emergency Board",
+        caption: "Arrivals ordered by acuity, not by arrival time",
+      },
+      {
+        src: "/images/products/screens/caresync-er-triage.webp",
+        label: "Triage",
+        caption: "Category assigned at the door",
+      },
+      {
+        src: "/images/products/screens/caresync-nursing-station.webp",
+        label: "Nursing Station",
+        caption: "The ward's work list for a shift",
+      },
+      {
+        src: "/images/products/screens/caresync-observations.webp",
+        label: "Observations",
+        caption: "Vitals charted over time with an early-warning score",
+      },
+      {
+        src: "/images/products/screens/caresync-mar.webp",
+        label: "Medication Chart",
+        caption: "What is due, what was given and by whom",
+      },
+      {
+        src: "/images/products/screens/caresync-order-tests.webp",
+        label: "Order Tests",
+        caption: "Investigations raised from the consultation",
+      },
+      {
+        src: "/images/products/screens/caresync-lab-worklist.webp",
+        label: "Lab Worklist",
+        caption: "Specimens through to verified results",
+      },
+      {
+        src: "/images/products/screens/caresync-lab-report-a4.webp",
+        label: "Lab Report (A4)",
+        caption: "Results with reference ranges, signed",
+      },
+      {
+        src: "/images/products/screens/caresync-radiology-report.webp",
+        label: "Radiology",
+        caption: "Reporting against the request",
+      },
+      {
+        src: "/images/products/screens/caresync-ot-board.webp",
+        label: "Operation Theatre",
+        caption: "The list, by theatre and session",
+      },
+      {
+        src: "/images/products/screens/caresync-surgery.webp",
+        label: "Surgery",
+        caption: "Team, procedure and the notes that follow",
+      },
+      {
+        src: "/images/products/screens/caresync-blood-stock.webp",
+        label: "Blood Bank",
+        caption: "Units by group, and who has asked for them",
+      },
+      {
+        src: "/images/products/screens/caresync-pharmacy-queue.webp",
+        label: "Pharmacy",
+        caption: "Prescriptions arriving from the clinic, not re-typed",
+      },
+      {
+        src: "/images/products/screens/caresync-dispense.webp",
+        label: "Dispensing",
+        caption: "Against the prescription, against the stock",
+      },
+      {
+        src: "/images/products/screens/caresync-inventory.webp",
+        label: "Inventory",
+        caption: "Stock by item and location, with movements",
+      },
+      {
+        src: "/images/products/screens/caresync-procurement.webp",
+        label: "Procurement",
+        caption: "Requests, approvals and purchase orders",
+      },
+      {
+        src: "/images/products/screens/caresync-billing.webp",
+        label: "Billing",
+        caption: "Charges accumulated from what was actually done",
+      },
+      {
+        src: "/images/products/screens/caresync-invoice-a4.webp",
+        label: "Invoice (A4)",
+        caption: "The bill as the patient receives it",
+      },
+      {
+        src: "/images/products/screens/caresync-claims.webp",
+        label: "Insurance Claims",
+        caption: "Panel and TPA claims against a bill",
+      },
+      {
+        src: "/images/products/screens/caresync-hr-overview.webp",
+        label: "Human Resources",
+        caption: "Staff, roster and attendance",
+      },
+      {
+        src: "/images/products/screens/caresync-payroll-run.webp",
+        label: "Payroll Run",
+        caption: "A period calculated and closed",
+      },
+      {
+        src: "/images/products/screens/caresync-profit-loss.webp",
+        label: "Profit & Loss",
+        caption: "Accounting that reads from the billing, not a spreadsheet",
+      },
+      {
+        src: "/images/products/screens/caresync-reports-executive.webp",
+        label: "Executive Reports",
+        caption: "The numbers an owner asks for",
+      },
+      {
+        src: "/images/products/screens/caresync-roles.webp",
+        label: "Roles",
+        caption: "23 seeded templates a tenant can edit",
+      },
+      {
+        src: "/images/products/screens/caresync-permission-matrix.webp",
+        label: "Permission Matrix",
+        caption: "32 modules by ten actions, enforced server-side",
+      },
+      {
+        src: "/images/products/screens/caresync-audit-log.webp",
+        label: "Audit Log",
+        caption: "Who did what to which record",
+      },
+      {
+        src: "/images/products/screens/caresync-two-factor-setup.webp",
+        label: "Two-Factor",
+        caption: "TOTP enrolment for a staff account",
+      },
+      {
+        src: "/images/products/screens/caresync-tenants.webp",
+        label: "Platform — Tenants",
+        caption: "Every hospital on the installation",
+      },
+      {
+        src: "/images/products/screens/caresync-plans.webp",
+        label: "Plans",
+        caption: "What each subscription tier unlocks",
+      },
+      {
+        src: "/images/products/screens/caresync-portal-sign-in.webp",
+        label: "Patient Portal",
+        caption: "The patient's own way in",
+      },
+      {
+        src: "/images/products/screens/caresync-portal-home.webp",
+        label: "Portal — Home",
+        caption: "Appointments, reports and bills, to the patient",
+      },
+      {
+        src: "/images/products/screens/caresync-portal-booking.webp",
+        label: "Portal — Booking",
+        caption: "A patient booking their own slot",
+      },
+      {
+        src: "/images/products/screens/caresync-portal-prescription.webp",
+        label: "Portal — Prescription",
+        caption: "The script, without a trip to the counter",
+      },
+      {
+        src: "/images/products/screens/caresync-integrations.webp",
+        label: "Integrations",
+        caption: "Lab analysers and outbound interfaces",
+      },
+      {
+        src: "/images/products/screens/caresync-global-search.webp",
+        label: "Global Search",
+        caption: "Staff, patients and pages from one box",
+      },
+      {
+        src: "/images/products/screens/caresync-dark-opd-queue.webp",
+        label: "Dark Theme",
+        caption: "The same queue for a night shift",
+      },
+      {
+        src: "/images/products/screens/caresync-mobile-overview.webp",
+        label: "Mobile — Overview",
+        caption: "The workspace at phone width",
+      },
+      {
+        src: "/images/products/screens/caresync-mobile-menu.webp",
+        label: "Mobile — Navigation",
+        caption: "The drawer, role-aware",
+      },    ],
+    languages: ["TypeScript", "TSX", "CSS", "SQL"],
+    stack: [
+      "TypeScript",
+      "NestJS",
+      "React",
+      "Vite",
+      "Prisma",
+      "PostgreSQL",
+      "Zod",
+      "TanStack Query",
+      "Electron",
+      "Playwright",
+    ],
+    specs: [
+      { label: "API endpoints", value: "420" },
+      { label: "Prisma models", value: "116" },
+      { label: "Screens", value: "79" },
+      { label: "Modules built", value: "31 of 32" },
+    ],
+    metric: { label: "Captures from its own test run", value: "131" },
+    demoUrl: "/contact",
+  },
+
+  /* ------------------------------------------------------------------ */
+  /* E-Commerce Platform — storefront + back office                     */
+  /* ------------------------------------------------------------------ */
+  {
+    slug: "ecommerce",
+    kind: "product",
+    name: "E-Commerce Platform",
+    category: "E-commerce Platform",
+    tagline: "A storefront and the office that runs it.",
+    description:
+      "A direct-to-consumer storefront and the back office that runs it, built as one application rather than a shop bolted onto a dashboard. 26 customer-facing pages and 26 admin pages over a 41-model schema, with 203 server actions doing the work instead of a REST layer nobody else calls. Payment covers what Pakistani customers actually use — cash on delivery, JazzCash, Easypaisa and Stripe — and the product photography is composed in code from a single reference shot, so a new line ships with consistent studio imagery without a studio.",
+    image: "/images/products/ecommerce-logo.svg",
+    brandColor: "#B08462",
+    audience:
+      "A brand selling direct, that needs the catalogue, the orders and the stock to be one system",
+    badge: "Store + admin",
+    features: [
+      "Storefront and admin in one codebase, one schema, one deploy",
+      "Product photography composed in code from one reference shot",
+      "Cash on delivery, JazzCash, Easypaisa and Stripe",
+      "Passkeys alongside passwords, through WebAuthn",
+      "Stock by variant, with every movement written to a log",
+      "Coupons scoped to products or collections, with usage recorded",
+      "Shipping zones and methods priced per zone",
+      "First-party visitor analytics — no third-party tracker on the store",
+      "Packing slips generated as real PDFs",
+      "Admin activity log, and admin devices tracked per account",
+    ],
+    moduleGroups: [
+      {
+        title: "The storefront",
+        items: [
+          {
+            name: "Catalogue and collections",
+            detail:
+              "Categories are what a product is; collections are what a shop wants to sell together, and they are separate tables for that reason. A product can sit in one category and three curated edits without duplicating the record.",
+          },
+          {
+            name: "Product attributes as data",
+            detail:
+              "Attributes are their own table joined to products, not a comma-separated string in a description. That is what makes filtering by one a query rather than a text search that also matches the word in a paragraph.",
+          },
+          {
+            name: "Variants and real stock",
+            detail:
+              "Size and price live on the variant, and availability is read from inventory rather than a boolean someone remembers to switch. A sold-out 100ml does not hide the 50ml.",
+          },
+          {
+            name: "Cart, checkout and payment",
+            detail:
+              "Cash on delivery, JazzCash, Easypaisa and Stripe, each a transaction record with its webhook events kept. A payment nobody can reconcile later is the expensive kind.",
+          },
+          {
+            name: "Accounts, addresses and wishlist",
+            detail:
+              "Order history, saved addresses, reviews and a wishlist — with passkeys offered alongside the password, because a returning customer on a phone should not have to remember anything.",
+          },
+        ],
+      },
+      {
+        title: "The back office",
+        items: [
+          {
+            name: "Dashboard over a chosen range",
+            detail:
+              "Revenue, orders, average order value, low and out-of-stock counts, with revenue and orders plotted over the selected window and a breakdown by product and category under them.",
+          },
+          {
+            name: "Orders and their history",
+            detail:
+              "Every order carries its own event trail, so what happened to it is a record rather than an inference from the current status.",
+          },
+          {
+            name: "Inventory with a movement log",
+            detail:
+              "Stock changes are written as movements rather than adjusted in place. When a count disagrees with the shelf, there is a history to read.",
+          },
+          {
+            name: "Coupons that know their scope",
+            detail:
+              "A discount can be limited to products or collections, and every redemption is recorded against the customer — which is what makes a one-per-customer rule enforceable rather than aspirational.",
+          },
+          {
+            name: "Shipping zones and methods",
+            detail:
+              "Rates priced per zone, with shipments tracked against the order they belong to.",
+          },
+          {
+            name: "Reviews, moderated",
+            detail:
+              "What a customer writes and what appears on the product page are two different decisions.",
+          },
+        ],
+      },
+      {
+        title: "Decisions worth naming",
+        items: [
+          {
+            name: "The photography is composed, not shot",
+            detail:
+              "Each product's studio photograph is rendered in code from one reference shot, with the colour and label set per item. A new line ships with a consistent image on the day it is added, and re-rendering the whole catalogue after a palette change is one command rather than a photo shoot.",
+          },
+          {
+            name: "Server actions instead of an API nobody calls",
+            detail:
+              "203 server actions and eight route handlers. The routes exist for the things that genuinely need an HTTP endpoint — webhooks, uploads — and the rest is a function call the type checker can see both ends of.",
+          },
+          {
+            name: "Analytics without a third party",
+            detail:
+              "Page views and visitor identity are first-party tables. A shop has no reason to hand its customers' browsing to an ad network, and a store that does cannot honestly write its own privacy page.",
+          },
+          {
+            name: "Roles enforced on the server",
+            detail:
+              "Owner, admin, staff and customer, checked server-side rather than by hiding a menu item. Admin devices are recorded per account, so an unfamiliar sign-in is visible.",
+          },
+        ],
+      },
+    ],
+    screens: [
+      {
+        src: "/images/products/screens/ecommerce-home.webp",
+        label: "Storefront",
+        caption: "The shop front",
+      },
+      {
+        src: "/images/products/screens/ecommerce-products.webp",
+        label: "Catalogue",
+        caption: "The collection, filtered and sorted",
+      },
+      {
+        src: "/images/products/screens/ecommerce-product-detail.webp",
+        label: "Product",
+        caption: "Notes, variants and what is actually in stock",
+      },
+      {
+        src: "/images/products/screens/ecommerce-collections.webp",
+        label: "Collections",
+        caption: "Curated groupings, not just categories",
+      },
+      {
+        src: "/images/products/screens/ecommerce-search.webp",
+        label: "Search",
+        caption: "Querying the catalogue by name and note",
+      },
+      {
+        src: "/images/products/screens/ecommerce-about.webp",
+        label: "Our Story",
+        caption: "The brand page",
+      },
+      {
+        src: "/images/products/screens/ecommerce-register.webp",
+        label: "Register",
+        caption: "Customer sign-up, with passkeys supported",
+      },
+      {
+        src: "/images/products/screens/ecommerce-admin-overview.webp",
+        label: "Admin Dashboard",
+        caption: "Revenue, orders and stock over a chosen range",
+      },
+      {
+        src: "/images/products/screens/ecommerce-admin-analytics.webp",
+        label: "Analytics",
+        caption: "Where the revenue actually came from",
+      },
+      {
+        src: "/images/products/screens/ecommerce-admin-orders.webp",
+        label: "Orders",
+        caption: "Every order and the events behind it",
+      },
+      {
+        src: "/images/products/screens/ecommerce-admin-products.webp",
+        label: "Products",
+        caption: "The catalogue as the shop manages it",
+      },
+      {
+        src: "/images/products/screens/ecommerce-admin-product-new.webp",
+        label: "New Product",
+        caption: "Variants, notes, images and inventory in one form",
+      },
+      {
+        src: "/images/products/screens/ecommerce-admin-inventory.webp",
+        label: "Inventory",
+        caption: "Stock by variant, with a movement log",
+      },
+      {
+        src: "/images/products/screens/ecommerce-admin-customers.webp",
+        label: "Customers",
+        caption: "Accounts, orders and lifetime value",
+      },
+      {
+        src: "/images/products/screens/ecommerce-admin-coupons.webp",
+        label: "Coupons",
+        caption: "Discounts scoped to products or collections",
+      },
+      {
+        src: "/images/products/screens/ecommerce-admin-collections.webp",
+        label: "Collections",
+        caption: "Building a curated group",
+      },
+      {
+        src: "/images/products/screens/ecommerce-admin-reviews.webp",
+        label: "Reviews",
+        caption: "Moderating what appears on a product",
+      },
+      {
+        src: "/images/products/screens/ecommerce-admin-visitors.webp",
+        label: "Visitors",
+        caption: "First-party traffic, no third-party tracker",
+      },
+      {
+        src: "/images/products/screens/ecommerce-admin-shipping.webp",
+        label: "Shipping",
+        caption: "Zones, methods and what each one costs",
+      },
+      {
+        src: "/images/products/screens/ecommerce-admin-payments.webp",
+        label: "Payments",
+        caption: "Transactions and their webhook history",
+      },
+      {
+        src: "/images/products/screens/ecommerce-admin-settings.webp",
+        label: "Settings",
+        caption: "What the store owner controls",
+      },
+      {
+        src: "/images/products/screens/ecommerce-admin-logs.webp",
+        label: "Activity Log",
+        caption: "Who changed what in the admin",
+      },
+      {
+        src: "/images/products/screens/ecommerce-admin-users.webp",
+        label: "Admin Users",
+        caption: "Owner, admin and staff, with devices",
+      },    ],
+    languages: ["TypeScript", "TSX", "CSS", "SQL"],
+    stack: [
+      "TypeScript",
+      "Next.js",
+      "Prisma",
+      "PostgreSQL",
+      "Zod",
+      "React Hook Form",
+      "Recharts",
+      "SimpleWebAuthn",
+      "pdf-lib",
+      "Sharp",
+      "Playwright",
+    ],
+    specs: [
+      { label: "Prisma models", value: "41" },
+      { label: "Pages", value: "52" },
+      { label: "Server actions", value: "203" },
+      { label: "Payment methods", value: "4" },
+    ],
+    metric: { label: "Third-party trackers on the store", value: "None" },
+    demoUrl: "/contact",
+  },
+
+  /* ------------------------------------------------------------------ */
   /* Fleet Flow TMS                                                     */
   /* ------------------------------------------------------------------ */
   {
     slug: "fleet-flow",
+    kind: "project",
     name: "Fleet Flow",
     category: "Transport & Logistics",
     tagline: "Smart fleet. Real-time control.",
@@ -1792,6 +3076,7 @@ export const products: Product[] = [
   /* ------------------------------------------------------------------ */
   {
     slug: "onvee",
+    kind: "project",
     name: "ONVEE",
     category: "Marketplace & Logistics",
     // The product's own `BRAND.tagline`, not the README's headline line.
@@ -2163,557 +3448,336 @@ export const products: Product[] = [
     metric: { label: "Checks at handover", value: "3" },
     demoUrl: "/contact",
   },
-
   /* ------------------------------------------------------------------ */
-  /* Plutox ID — passwordless identity provider                         */
+  /* Modeza — multi-vendor fashion marketplace                          */
   /* ------------------------------------------------------------------ */
   {
-    slug: "plutox-id",
-    name: "Plutox ID",
-    category: "Identity & Access",
-    tagline: "One sign-in for every Plutox product. No passwords.",
+    slug: "modeza",
+    kind: "project",
+    name: "Modeza",
+    category: "Marketplace",
+    tagline: "Every fashion brand. One destination.",
     description:
-      "The identity provider the rest of the estate signs in through. Passkeys (WebAuthn/FIDO2) are the primary method and an emailed one-time code is the fallback — there are no passwords to phish, reuse or reset, and no biometric data ever reaches the server, only a cryptographic assertion. Other applications delegate sign-in to it over OAuth 2.0 Authorization Code with PKCE and OpenID Connect, so \"Login with Plutox ID\" is a standards-based flow rather than a shared session hack. Fleet Flow and ServeSync ERP both sign in through it today.",
-    image: "/images/products/plutox-id-logo.svg",
-    brandColor: "#8B5CF6",
+      "A multi-vendor fashion marketplace with four different systems behind one domain: customers browse every brand in one cart, vendors run their own shop and stock, riders carry the deliveries, and the platform approves who may trade and takes its commission. One order splits into a sub-order per vendor, each fulfilled and refunded independently while the customer still sees a single purchase. 51 screens and 49 API routes over a 39-model schema.",
+    image: "/images/products/modeza-logo.webp",
+    brandColor: "#5B21B6",
     audience:
-      "Every Plutox product and its users — and the administrators who need to see and revoke what is signed in",
-    badge: "Passwordless",
+      "A marketplace operator onboarding independent fashion brands, and the brands and couriers working inside it",
+    badge: "Four roles, one platform",
     features: [
-      "Passkeys as the primary sign-in — WebAuthn/FIDO2, no password to steal",
-      "Emailed one-time code as the fallback, single-use and expiring",
-      "OAuth 2.0 Authorization Code + PKCE, and OpenID Connect discovery",
-      "No raw biometric data server-side, only WebAuthn assertions",
-      "Admin console over users, registered apps, sessions and security activity",
-      "Short-lived access tokens — 15 minutes, no long-lived bearer left lying around",
-      "Live in Fleet Flow and ServeSync ERP, both signing in through it today",
+      "One cart across many vendors, split into a sub-order each",
+      "Vendor onboarding with documents, approved by a human before trading",
+      "Commission and payouts calculated per vendor",
+      "Rider app with assigned deliveries, a map and earnings",
+      "Returns and refunds adjudicated against the sub-order that sold the item",
+      "Stock by variant with a movement log, per vendor",
+      "Promotions and coupons, scoped to a vendor's own lines",
+      "Cash on delivery, JazzCash, EasyPaisa and bank transfer",
+      "Audit log over every administrative change",
+      "Demo catalogue runs on fictional vendors, not real companies",
     ],
     moduleGroups: [
       {
-        title: "Authentication",
+        title: "The part that makes it a marketplace",
         items: [
           {
-            name: "Passkeys (WebAuthn/FIDO2)",
+            name: "One order, a sub-order per vendor",
             detail:
-              "Registration and assertion against the platform authenticator — Windows Hello, Touch ID, a phone or a hardware key. The server stores a public key and a counter; the private key never leaves the device and no fingerprint or face template is ever transmitted.",
+              "A customer buying from three brands makes one purchase and three sub-orders. Each vendor sees only theirs, fulfils on their own timetable and refunds independently, while the customer still tracks a single order. Collapsing that into one record is what makes multi-vendor refunds impossible later.",
           },
           {
-            name: "Email one-time code",
+            name: "Who may trade is a decision",
             detail:
-              "The fallback for a device with no authenticator, or a user who has lost theirs. Codes are single-use and expiring, which keeps the fallback from becoming the weak path everybody takes.",
+              "A brand registers, uploads documents and waits. An administrator approves them. A marketplace where signing up is the same as being listed has no answer when a seller turns out to be fictitious.",
           },
           {
-            name: "Sessions",
+            name: "Commission and payouts",
             detail:
-              "Issued on successful authentication and revocable individually or wholesale from the admin console, so a lost laptop is one action rather than a password reset email.",
+              "The platform's cut is calculated per sub-order and carried into a payout balance per vendor, so what a seller is owed is derived from what actually sold rather than reconciled by hand each month.",
+          },
+          {
+            name: "Returns adjudicated centrally",
+            detail:
+              "A return is raised against the sub-order that sold the item, so the money comes back from the right vendor's balance and the platform — not the customer — is the one chasing it.",
           },
         ],
       },
       {
-        title: "Single sign-on",
+        title: "Four systems, one domain",
         items: [
           {
-            name: "OAuth 2.0 + PKCE",
+            name: "Customer",
             detail:
-              "Authorization Code with PKCE, which is the flow a public client should use — no client secret shipped in a browser bundle, and an intercepted code is useless without the verifier.",
+              "Browse by brand or category, search across every vendor at once, one cart, one checkout, wishlist, order tracking and returns.",
           },
           {
-            name: "OpenID Connect",
+            name: "Vendor",
             detail:
-              "ID tokens and a discovery document, so an application integrates against the standard rather than against bespoke endpoints that drift.",
+              "Their own dashboard, catalogue, inventory by variant, orders limited to their sub-orders, promotions on their own lines, analytics, payouts, storefront settings and a catalogue integration.",
           },
           {
-            name: "Registered applications",
+            name: "Rider",
             detail:
-              "Each product registered with its own client id and redirect URIs, managed in the console rather than configured by hand on both sides.",
+              "Assigned deliveries with their status, a map to the next drop, and earnings. The courier is a first-class role with its own screens rather than a status field on an order.",
           },
           {
-            name: "Two live integrations",
+            name: "Platform admin",
             detail:
-              "Fleet Flow's login delegates to Plutox ID over the authorization-code flow and clears its own cookies before redirecting, so a sign-out actually signs out. ServeSync ERP now does too, with the vendor superadmin able to switch it off per install \u2014 which is what makes it adoptable by a client who wants local PINs.",
+              "Brand approval, every listing and order across the marketplace, customers, riders, payouts, returns, the shared taxonomy, analytics, an audit log and the commission and payment policy.",
           },
         ],
       },
       {
-        title: "Administration",
+        title: "Decisions worth naming",
         items: [
           {
-            name: "Users",
+            name: "Stock belongs to the vendor",
             detail:
-              "Accounts, their registered authenticators and their standing, with the ability to revoke a credential without deleting the person.",
+              "Inventory is per vendor and per variant with a movement log, because two brands selling a similar item are two independent stock positions, not one shared number.",
           },
           {
-            name: "Sessions & security activity",
+            name: "Payment as Pakistani customers use it",
             detail:
-              "What is signed in, from where, and what has been attempted — the view you need at the moment something looks wrong.",
+              "Cash on delivery, JazzCash, EasyPaisa and bank transfer. A marketplace in this market that only takes cards is a marketplace most of its customers cannot buy from.",
           },
           {
-            name: "Four applications",
+            name: "Fictional vendors in the demo",
             detail:
-              "A user-facing web app (login, register, authorize, security settings), an Express API carrying the auth and OIDC endpoints, an admin console, and a dashboard — separated so the admin surface is not reachable from the login surface.",
-          },
-        ],
-      },
-    ],
-    /*
-      No gallery: the repository ships no screenshots, and this page's whole
-      claim is that its images are captures of running software. A roadmap that
-      names what is missing is worth more than an invented screen.
-    */
-    roadmap: [
-      {
-        label: "Built",
-        title: "Passwordless authentication",
-        detail:
-          "WebAuthn passkey registration and assertion, email OTP fallback, sessions, and the user-facing web app for login, registration and security settings.",
-        state: "done",
-      },
-      {
-        label: "Built",
-        title: "Standards-based SSO",
-        detail:
-          "OAuth 2.0 Authorization Code with PKCE and OpenID Connect, registered applications with their own client ids and redirect URIs, and a working Fleet Flow integration.",
-        state: "done",
-      },
-      {
-        label: "Built",
-        title: "Administration",
-        detail:
-          "Admin console over users, registered applications, active sessions and security activity, across a four-app split (web, API, admin, dashboard).",
-        state: "done",
-      },
-      {
-        label: "Next",
-        title: "Key rotation and refresh tokens",
-        detail:
-          "Two things the repository is explicit about not having yet: a single long-lived signing key with no rotation and no multi-`kid` JWKS, and no refresh-token flow — access tokens are 15 minutes with no renewal, so a long session means re-authenticating. Both are the difference between working and operable.",
-        state: "next",
-      },
-    ],
-    languages: ["TypeScript", "TSX", "SQL"],
-    stack: [
-      "TypeScript",
-      "Next.js",
-      "Express",
-      "Prisma",
-      "PostgreSQL",
-      "WebAuthn / FIDO2",
-      "OAuth 2.0 / OIDC",
-      "Docker",
-    ],
-    specs: [
-      { label: "API endpoints", value: "62" },
-      { label: "Prisma models", value: "17" },
-      { label: "Applications", value: "4" },
-      { label: "Passwords stored", value: "0" },
-    ],
-    metric: { label: "Primary sign-in method", value: "Passkey" },
-    demoUrl: "/contact",
-  },
-
-  /* ------------------------------------------------------------------ */
-  /* INDUX — industrial ERP & smart factory OS                          */
-  /* ------------------------------------------------------------------ */
-  {
-    slug: "indux",
-    name: "INDUX",
-    category: "Manufacturing ERP",
-    tagline: "A routing, a BOM and a station are data, not code.",
-    description:
-      "A configurable manufacturing ERP running procurement, inventory, MRP, production, quality, maintenance, workforce, sales, dispatch and double-entry finance, with an offline-capable terminal for the factory floor and an append-only audit trail over all of it. Nothing is hardcoded to one industry — the seed ships two plants on the same engines, a food factory and a textile unit, which is the proof that the routing and the bill of materials are configuration rather than a fork. Nine shared engines do the enforcing; nineteen route modules and twenty-nine console screens sit on top of them.",
-    image: "/images/products/indux-logo.webp",
-    brandColor: "#0F766E",
-    audience:
-      "Manufacturers running more than one plant, product line or process — food, textile and any industry whose routings differ but whose rules do not",
-    badge: "9 engines",
-    features: [
-      "Two plants on one engine set — food and textile, from the same seed",
-      "Every quantity change goes through one stock ledger, with lot genealogy",
-      "Double-entry finance: balanced journals, trial balance, P&L, balance sheet",
-      "MRP and production orders driven by real BOMs and routings",
-      "Approval chains resolved from threshold rules, not hardcoded per document",
-      "Append-only audit: who, what, when, where, before, after and why",
-      "Offline-capable factory-floor station that syncs when the network returns",
-      "Consignment tracking with QR, from material through dispatch",
-      "Signed offline licences — Starter, Professional and Enterprise",
-    ],
-    moduleGroups: [
-      {
-        title: "The engines — what every module is built on",
-        items: [
-          {
-            name: "Stock ledger",
-            detail:
-              "Every quantity change in the factory goes through one ledger, which owns lot picking, idempotency and genealogy. That is what makes a finished pallet traceable back to the specific material lots that made it, rather than to a date and a hope.",
+              "The seeded catalogue originally used real Pakistani fashion companies as sample vendors, which is why the hosted demo carries a noindex header. The captures on this page were taken after renaming them to invented labels: a real company must not appear as a seller on a marketplace it has no relationship with, beside invented orders and payouts.",
           },
           {
-            name: "Accounting",
+            name: "Custom auth, not a provider",
             detail:
-              "Balanced journals, trial balance, P&L, balance sheet and cash flow, posted by the engine rather than by each feature. A financial act that would not balance does not post.",
-          },
-          {
-            name: "Approvals",
-            detail:
-              "Threshold rules resolve to an ordered chain of roles, so a purchase over a limit routes itself. The rule is data, which is why adding a tier does not mean touching a document type.",
-          },
-          {
-            name: "Permissions",
-            detail:
-              "Grants shaped as `module:action` with wildcard support and factory scoping — so a supervisor at one plant is not a supervisor at the other.",
-          },
-          {
-            name: "Workflow",
-            detail:
-              "One state machine every document shares. A purchase order, a production order and a dispatch note move through the same vocabulary, which is why the audit trail reads consistently.",
-          },
-          {
-            name: "Audit",
-            detail:
-              "Append-only, capturing who, what, when, where, before, after and why. Written as work happens rather than reconstructed from other tables afterwards.",
-          },
-          {
-            name: "Notifications",
-            detail:
-              "One alert pipeline with a dedupe window and pluggable channels, so a failing machine does not generate two hundred identical messages.",
-          },
-        ],
-      },
-      {
-        title: "Make",
-        items: [
-          {
-            name: "Production",
-            detail:
-              "Orders against real routings and stations, with the shop floor reporting progress rather than a planner guessing it.",
-          },
-          {
-            name: "MRP",
-            detail:
-              "Requirements planned from BOMs and demand, so shortages surface before the line stops rather than when it does.",
-          },
-          {
-            name: "BOM & master data",
-            detail:
-              "Bills of materials, routings, stations and items as configuration — the reason two industries run the same build.",
-          },
-          {
-            name: "Quality",
-            detail:
-              "Checks bound to the process rather than filed beside it, so a batch that failed QC cannot quietly move on.",
-          },
-          {
-            name: "Maintenance",
-            detail:
-              "Machine upkeep tracked against the asset, which is what turns unplanned downtime into a schedule.",
-          },
-          {
-            name: "Factory-floor station",
-            detail:
-              "A terminal built for the floor and able to keep working offline, syncing when the network returns. A line does not stop because the office switch did.",
-          },
-        ],
-      },
-      {
-        title: "Move & sell",
-        items: [
-          {
-            name: "Procurement",
-            detail:
-              "Purchase orders through the approval chain to goods received, posting to the ledger and the accounts in one step.",
-          },
-          {
-            name: "Inventory & warehouse",
-            detail:
-              "Material, packaging, finished goods and their locations, every movement written to the shared ledger.",
-          },
-          {
-            name: "Consignment tracking",
-            detail:
-              "Consignments followed from material through production, QC, packaging, warehouse and dispatch to delivery, with QR at the handover points.",
-          },
-          {
-            name: "Sales & dispatch",
-            detail:
-              "Orders through to what physically left the gate, reconciled against what was produced.",
-          },
-          {
-            name: "Trace",
-            detail:
-              "The genealogy read back: from a delivered consignment to the lots, the run and the shift behind it.",
-          },
-        ],
-      },
-      {
-        title: "Run the business",
-        items: [
-          {
-            name: "Finance",
-            detail:
-              "The reporting side of the accounting engine — statements built from posted journals rather than assembled in a spreadsheet.",
-          },
-          {
-            name: "HR & workforce",
-            detail:
-              "People, departments and the shift-level attribution that makes a production figure mean something.",
-          },
-          {
-            name: "Reports, briefing & assistant",
-            detail:
-              "Reporting across the plants, plus a floating assistant and help pair in the corner \u2014 not a page. A manager asking what a plant made today wants an answer over the work in front of them; sending them elsewhere to read one sentence loses their place. There is a daily briefing endpoint and language selection behind it, and the full Assistant screen remains for a longer conversation.",
-          },
-          {
-            name: "Licensing",
-            detail:
-              "Signed offline licences activated in the first-run wizard or in Admin — Starter at one plant and two terminals, Professional at two and ten, Enterprise unlimited. Perpetual or expiring, verified against the vendor key rather than a server call.",
-          },
-          {
-            name: "Onboarding & setup",
-            detail:
-              "A first-run wizard that configures the plant, its stations and its people, so a new site is a setup task rather than an implementation project.",
+              "JWT sessions signed with jose and bcrypt password hashes, with the role carried in the token and checked server-side per route group — four roles meeting in one app is exactly where a bolted-on auth provider starts fighting the routing.",
           },
         ],
       },
     ],
-    /*
-      26 captures of the running console, taken headlessly against the real
-      server with a signed-in owner session. The repo shipped no screenshot
-      tooling, so scripts/screenshots.mjs was written for it — the shots refresh
-      rather than rot.
-    */
     screens: [
       {
-        src: "/images/products/screens/indux-dashboard.webp",
-        label: "Dashboard",
-        caption: "The plant's day: output, orders and what needs attention",
+        src: "/images/products/screens/modeza-home.webp",
+        label: "Storefront",
+        caption: "Every brand, one cart, one checkout",
       },
       {
-        src: "/images/products/screens/indux-portfolio.webp",
-        label: "Group Portfolio",
-        caption: "Both plants side by side — food and textile on one engine",
+        src: "/images/products/screens/modeza-brands.webp",
+        label: "Brands",
+        caption: "The vendors trading on the platform",
       },
       {
-        src: "/images/products/screens/indux-production.webp",
-        label: "Production Orders",
-        caption: "Orders against real routings and stations",
+        src: "/images/products/screens/modeza-brand-storefront.webp",
+        label: "Brand Storefront",
+        caption: "A vendor's own shop inside the marketplace",
       },
       {
-        src: "/images/products/screens/indux-station.webp",
-        label: "Station Terminal",
-        caption: "The floor terminal, built to keep working offline",
+        src: "/images/products/screens/modeza-categories.webp",
+        label: "Categories",
+        caption: "The catalogue by department",
       },
       {
-        src: "/images/products/screens/indux-mrp.webp",
-        label: "MRP Planning",
-        caption: "Requirements from BOMs and demand, before the line stops",
+        src: "/images/products/screens/modeza-product-detail.webp",
+        label: "Product",
+        caption: "Variants, stock and the brand behind it",
       },
       {
-        src: "/images/products/screens/indux-quality.webp",
-        label: "Quality Control",
-        caption: "Checks bound to the process, not filed beside it",
+        src: "/images/products/screens/modeza-search.webp",
+        label: "Search",
+        caption: "Across every vendor at once",
       },
       {
-        src: "/images/products/screens/indux-consignments.webp",
-        label: "Consignments",
-        caption: "Material through production, QC, packaging and dispatch",
+        src: "/images/products/screens/modeza-cart.webp",
+        label: "Cart",
+        caption: "One basket spanning several vendors",
       },
       {
-        src: "/images/products/screens/indux-trace.webp",
-        label: "Traceability",
-        caption: "Genealogy read back from a delivery to its lots",
+        src: "/images/products/screens/modeza-wishlist.webp",
+        label: "Wishlist",
+        caption: "Saved across sessions",
       },
       {
-        src: "/images/products/screens/indux-inventory.webp",
-        label: "Inventory",
-        caption: "Every movement written to the shared stock ledger",
+        src: "/images/products/screens/modeza-orders.webp",
+        label: "My Orders",
+        caption: "One order, split by the vendors that fulfil it",
       },
       {
-        src: "/images/products/screens/indux-warehouse.webp",
-        label: "Warehouse",
-        caption: "Locations for material, packaging and finished goods",
+        src: "/images/products/screens/modeza-notifications.webp",
+        label: "Notifications",
+        caption: "Order, delivery and return events",
       },
       {
-        src: "/images/products/screens/indux-procurement.webp",
-        label: "Procurement",
-        caption: "Requisition to purchase order to receipt",
+        src: "/images/products/screens/modeza-brand-signup.webp",
+        label: "Sell on Modeza",
+        caption: "Vendor onboarding, with documents",
       },
       {
-        src: "/images/products/screens/indux-suppliers.webp",
-        label: "Suppliers",
-        caption: "Vendors, terms and what is owed",
+        src: "/images/products/screens/modeza-seller-terms.webp",
+        label: "Seller Terms",
+        caption: "What a vendor is agreeing to",
       },
       {
-        src: "/images/products/screens/indux-items.webp",
-        label: "Products & Materials",
-        caption: "The item master both plants share",
+        src: "/images/products/screens/modeza-vendor-dashboard.webp",
+        label: "Vendor Dashboard",
+        caption: "A seller's own trading figures",
       },
       {
-        src: "/images/products/screens/indux-bom.webp",
-        label: "BOM & Recipes",
-        caption: "Bills of materials as data, not code",
+        src: "/images/products/screens/modeza-vendor-products.webp",
+        label: "Vendor Products",
+        caption: "The seller's catalogue",
       },
       {
-        src: "/images/products/screens/indux-routings.webp",
-        label: "Workflows",
-        caption: "Routings and the stations they run through",
+        src: "/images/products/screens/modeza-vendor-product-new.webp",
+        label: "Add a Product",
+        caption: "Variants, images and stock in one form",
       },
       {
-        src: "/images/products/screens/indux-machines.webp",
-        label: "Machines",
-        caption: "Assets on the floor and their state",
+        src: "/images/products/screens/modeza-vendor-orders.webp",
+        label: "Vendor Orders",
+        caption: "Only the sub-orders that belong to them",
       },
       {
-        src: "/images/products/screens/indux-maintenance.webp",
-        label: "Maintenance",
-        caption: "Upkeep against the asset, turning downtime into a schedule",
+        src: "/images/products/screens/modeza-vendor-inventory.webp",
+        label: "Vendor Inventory",
+        caption: "Stock by variant, with movements",
       },
       {
-        src: "/images/products/screens/indux-workforce.webp",
-        label: "Workforce & HR",
-        caption: "People, departments and shift-level attribution",
+        src: "/images/products/screens/modeza-vendor-promotions.webp",
+        label: "Promotions",
+        caption: "Discounts a vendor runs on their own lines",
       },
       {
-        src: "/images/products/screens/indux-sales.webp",
-        label: "Sales & Dispatch",
-        caption: "Orders through to what left the gate",
+        src: "/images/products/screens/modeza-vendor-payouts.webp",
+        label: "Payouts",
+        caption: "Commission deducted, balance owed",
       },
       {
-        src: "/images/products/screens/indux-finance.webp",
-        label: "Finance",
-        caption: "Statements built from posted journals",
+        src: "/images/products/screens/modeza-vendor-returns.webp",
+        label: "Returns",
+        caption: "Requests against the seller's own orders",
       },
       {
-        src: "/images/products/screens/indux-departments.webp",
-        label: "Department Accounts",
-        caption: "Cost carried by the department that incurred it",
+        src: "/images/products/screens/modeza-vendor-analytics.webp",
+        label: "Vendor Analytics",
+        caption: "What sold, and what did not",
       },
       {
-        src: "/images/products/screens/indux-reports.webp",
-        label: "Reports",
-        caption: "Reporting across both plants",
+        src: "/images/products/screens/modeza-vendor-storefront.webp",
+        label: "Storefront Settings",
+        caption: "How the shop presents itself",
       },
       {
-        src: "/images/products/screens/indux-approvals.webp",
-        label: "Approvals",
-        caption: "Threshold rules resolved to an ordered role chain",
+        src: "/images/products/screens/modeza-vendor-integrations.webp",
+        label: "Integrations",
+        caption: "Pushing a catalogue in from elsewhere",
       },
       {
-        src: "/images/products/screens/indux-audit.webp",
-        label: "Audit Trail",
-        caption: "Who, what, when, where, before, after and why",
+        src: "/images/products/screens/modeza-admin-dashboard.webp",
+        label: "Admin Dashboard",
+        caption: "The whole marketplace on one screen",
       },
       {
-        src: "/images/products/screens/indux-license.webp",
-        label: "Licence & Packages",
-        caption: "Signed offline activation and the tier's module set",
+        src: "/images/products/screens/modeza-admin-brands.webp",
+        label: "Brand Approval",
+        caption: "Who may trade, decided by a human",
       },
       {
-        src: "/images/products/screens/indux-assistant.webp",
-        label: "AI Assistant",
-        caption: "Questions answered from queried data",
+        src: "/images/products/screens/modeza-admin-products.webp",
+        label: "Products",
+        caption: "Every listing across every vendor",
       },
+      {
+        src: "/images/products/screens/modeza-admin-orders.webp",
+        label: "Orders",
+        caption: "The order and its sub-orders together",
+      },
+      {
+        src: "/images/products/screens/modeza-admin-customers.webp",
+        label: "Customers",
+        caption: "Accounts and their order history",
+      },
+      {
+        src: "/images/products/screens/modeza-admin-riders.webp",
+        label: "Riders",
+        caption: "The delivery fleet and its assignments",
+      },
+      {
+        src: "/images/products/screens/modeza-admin-payouts.webp",
+        label: "Payouts",
+        caption: "What the platform owes each vendor",
+      },
+      {
+        src: "/images/products/screens/modeza-admin-returns.webp",
+        label: "Returns",
+        caption: "Refunds adjudicated centrally",
+      },
+      {
+        src: "/images/products/screens/modeza-admin-categories.webp",
+        label: "Categories",
+        caption: "The taxonomy every vendor lists into",
+      },
+      {
+        src: "/images/products/screens/modeza-admin-analytics.webp",
+        label: "Platform Analytics",
+        caption: "Revenue, commission and growth",
+      },
+      {
+        src: "/images/products/screens/modeza-admin-audit.webp",
+        label: "Audit Log",
+        caption: "Who changed what",
+      },
+      {
+        src: "/images/products/screens/modeza-admin-settings.webp",
+        label: "Platform Settings",
+        caption: "Commission, payments and policy",
+      },
+      {
+        src: "/images/products/screens/modeza-rider-dashboard.webp",
+        label: "Rider Dashboard",
+        caption: "The courier's day",
+      },
+      {
+        src: "/images/products/screens/modeza-rider-deliveries.webp",
+        label: "Deliveries",
+        caption: "Assigned jobs, with their status",
+      },
+      {
+        src: "/images/products/screens/modeza-rider-map.webp",
+        label: "Rider Map",
+        caption: "Where the next drop is",
+      },
+      {
+        src: "/images/products/screens/modeza-rider-earnings.webp",
+        label: "Rider Earnings",
+        caption: "What the courier is owed",
+      },
+      {
+        src: "/images/products/screens/modeza-mobile-home.webp",
+        label: "Mobile — Storefront",
+        caption: "The shop at phone width",
+      },
+      {
+        src: "/images/products/screens/modeza-mobile-brands.webp",
+        label: "Mobile — Brands",
+        caption: "Browsing vendors on a phone",
+      },    ],
+    languages: ["TypeScript", "TSX", "CSS", "SQL"],
+    stack: [
+      "TypeScript",
+      "Next.js 16",
+      "Prisma",
+      "PostgreSQL",
+      "Zod",
+      "Radix UI",
+      "Tailwind CSS",
+      "framer-motion",
+      "jose",
     ],
-    /*
-      The roadmap stays alongside the gallery rather than being replaced by it:
-      the screens show what works, the roadmap names what does not.
-    */
-    roadmap: [
-      {
-        label: "Built",
-        title: "The engine layer",
-        detail:
-          "Nine shared engines — permissions, stock ledger, accounting, approvals, notifications, workflow, audit, CRUD and persistence — with domain services composing them and route files doing nothing but parse, call and return.",
-        state: "done",
-      },
-      {
-        label: "Built",
-        title: "The factory, end to end",
-        detail:
-          "Nineteen route modules and twenty-nine console screens covering procurement, inventory, MRP, production, quality, maintenance, workforce, sales, dispatch, finance, consignment tracking and trace — proven against two seeded plants in different industries.",
-        state: "done",
-      },
-      {
-        label: "Built",
-        title: "Licensing and the desktop build",
-        detail:
-          "Signed offline licences across three tiers with plant and terminal ceilings, activated in the first-run wizard, plus a packaged desktop console.",
-        state: "done",
-      },
-      {
-        label: "Next",
-        title: "Prisma persistence",
-        detail:
-          "Persistence sits behind a `Repository` interface and runs on memory plus JSON today, with Prisma as the stated next step. The seam exists precisely so that swap does not touch the engines — but until it lands, this is the honest limit on how large a deployment should get.",
-        state: "next",
-      },
-    ],
-    languages: ["TypeScript", "TSX", "CSS"],
-    stack: ["TypeScript", "Node.js", "Express", "Socket.IO", "React", "Electron"],
     specs: [
-      { label: "Shared engines", value: "9" },
-      { label: "Route modules", value: "19" },
-      { label: "Console screens", value: "29" },
-      { label: "API handlers", value: "231" },
+      { label: "Screens", value: "51" },
+      { label: "API routes", value: "49" },
+      { label: "Prisma models", value: "39" },
+      { label: "Roles", value: "4" },
     ],
-    /*
-      Read out of `server/src/core/packages.ts` — the same table the Licence &
-      Packages screen renders and the licence check enforces, so the page and the
-      product cannot disagree. Tiers are supersets: each unlocks the nav keys of
-      the one below it plus its own.
-    */
-    pricing: [
-      {
-        edition: "Per factory",
-        editionSummary:
-          "Billed monthly per plant. A tier unlocks modules; the signed licence sets how many plants and terminals it covers.",
-        note: "Modules are gated by nav key, checked against the licence rather than hidden in the sidebar alone. Licences are signed and verified offline — no server call at activation, which matters on a factory network.",
-        plans: [
-          {
-            name: "Starter",
-            price: "PKR 15,000",
-            period: "/ month",
-            summary: "Run one production line",
-            includes: [
-              "Products, BOM / recipes and routings",
-              "Inventory, warehouse and batch lots",
-              "Procurement: requisition → PO → receipt",
-              "Production orders and the station terminal",
-              "Reports, approvals and the audit trail",
-              "Users, roles and factory setup",
-            ],
-          },
-          {
-            name: "Professional",
-            price: "PKR 30,000",
-            period: "/ month",
-            summary: "The whole factory floor",
-            featured: true,
-            includes: [
-              "Everything in Starter",
-              "Quality control and rejection analysis",
-              "Machines, maintenance and downtime",
-              "MRP and multi-level planning",
-              "Batch traceability, end to end",
-              "Workforce, attendance and sales dispatch",
-            ],
-          },
-          {
-            name: "Enterprise",
-            price: "PKR 45,000",
-            period: "/ month",
-            summary: "Multi-factory ERP with full books",
-            includes: [
-              "Everything in Professional",
-              "Multi-factory group portfolio",
-              "Finance, double-entry accounting and AP/AR",
-              "Manufacturing costing and margins",
-              "AI management assistant",
-              "Priority support",
-            ],
-          },
-        ],
-      },
-    ],
-    metric: { label: "Industries on one build", value: "2" },
+    metric: { label: "Systems behind one domain", value: "4" },
     demoUrl: "/contact",
   },
 
@@ -2722,6 +3786,7 @@ export const products: Product[] = [
   /* ------------------------------------------------------------------ */
   {
     slug: "vitadrop",
+    kind: "project",
     name: "VitaDrop",
     category: "Healthcare Platform",
     tagline: "Every Drop Saves a Life.",
@@ -3059,708 +4124,12 @@ export const products: Product[] = [
     metric: { label: "Mock data behind the screens", value: "None" },
     demoUrl: "/contact",
   },
-
-  /* ------------------------------------------------------------------ */
-  /* CareSync — hospital ERP                                            */
-  /* ------------------------------------------------------------------ */
-  {
-    slug: "caresync",
-    name: "CareSync",
-    category: "Hospital ERP",
-    tagline: "One record, every department.",
-    description:
-      "A multi-tenant hospital ERP covering the clinical day end to end: a patient registers at the desk, joins an OPD queue, is seen in a consultation that writes vitals, an ICD-coded diagnosis and a prescription, and the pharmacy dispenses against that same record while billing accumulates what was actually done. 420 endpoints over a 116-model schema, 79 screens, and 31 of the 32 modules in its permission catalogue are built. It runs in a browser, as a Windows application with its own updater, and as a portal the patient signs into themselves.",
-    image: "/images/products/caresync-logo.svg",
-    brandColor: "#0E8A76",
-    audience:
-      "Hospital groups and clinics that want one system for the clinic, the ward, the lab, the pharmacy and the books",
-    badge: "31 of 32 modules",
-    features: [
-      "OPD queue to consultation to pharmacy on one patient record",
-      "Prescriptions, discharge summaries, lab and radiology reports as real A4 documents",
-      "Allergy warnings raised before the prescription is written",
-      "Observations charted with an early-warning score, and a medication chart",
-      "Emergency board ordered by triage category, not arrival time",
-      "Billing that accumulates from what was done, with insurance and TPA claims",
-      "Accounting that reads the billing rather than a re-keyed spreadsheet",
-      "A patient portal for appointments, reports, prescriptions and payments",
-      "32 modules by ten actions in one permission catalogue, enforced server-side",
-      "Windows build with its own updater, and a dark theme for night shifts",
-    ],
-    moduleGroups: [
-      {
-        title: "The clinical day, end to end",
-        items: [
-          {
-            name: "Registration, queue and token",
-            detail:
-              "A walk-in is registered at the desk, gets a token and joins the OPD queue for a named doctor. Duplicate registration is caught at the point of typing rather than found later as two charts for one person.",
-          },
-          {
-            name: "Consultation on one page",
-            detail:
-              "Vitals, presenting complaint, history, examination, an ICD-coded diagnosis, a prescription built from a medicine list, advice and a follow-up interval — then signed, which is what turns it from a draft into a record.",
-          },
-          {
-            name: "The chart interrupts",
-            detail:
-              "A recorded allergy raises a warning on the consultation before the prescription is written. A system that stores the allergy and says nothing at the moment it matters has only moved the risk onto the doctor.",
-          },
-          {
-            name: "In-patients and the bed board",
-            detail:
-              "Every ward and bed live, admission from the consultation, and a discharge summary that prints as the document the next clinician will actually read.",
-          },
-          {
-            name: "Emergency, ordered by acuity",
-            detail:
-              "Arrivals are triaged at the door and the board sorts by category rather than by who walked in first — which is the entire point of having a triage category.",
-          },
-          {
-            name: "Nursing: observations and the medication chart",
-            detail:
-              "Vitals charted over time with an early-warning score computed from them, and a medication administration record showing what is due, what was given and by whom.",
-          },
-        ],
-      },
-      {
-        title: "Diagnostics, pharmacy and stock",
-        items: [
-          {
-            name: "Orders that travel",
-            detail:
-              "Investigations raised in the consultation arrive in the lab worklist as orders. Nobody re-types a request, which is where transcription errors come from.",
-          },
-          {
-            name: "Lab and radiology reporting",
-            detail:
-              "Specimens through to verified results with reference ranges, and radiology reported against the request — both printing as signed A4 documents.",
-          },
-          {
-            name: "Operation theatre and blood bank",
-            detail:
-              "The list by theatre and session with the team and operative notes, and blood units held by group against the requests made for them.",
-          },
-          {
-            name: "Pharmacy dispensing",
-            detail:
-              "Prescriptions arrive from the clinic rather than being re-entered at the counter, and dispensing moves the stock it actually used.",
-          },
-          {
-            name: "Inventory and procurement",
-            detail:
-              "Stock by item and location with a movement history, and requests through approval to a purchase order.",
-          },
-        ],
-      },
-      {
-        title: "Money, people and the platform",
-        items: [
-          {
-            name: "Billing from what was done",
-            detail:
-              "Charges accumulate from the consultation, the investigation and the admission rather than being assembled by hand at the end, with panel and TPA claims raised against the bill.",
-          },
-          {
-            name: "Accounting on top of the billing",
-            detail:
-              "Journal, bank reconciliation, profit and loss, balance sheet and departmental profitability — reading the same records the bills came from, not a monthly re-key.",
-          },
-          {
-            name: "HR and payroll",
-            detail:
-              "Staff, roster, attendance and a payroll run that closes a period and produces payslips, with a self-service view for the employee.",
-          },
-          {
-            name: "Tenancy, plans and licensing",
-            detail:
-              "Organisation, hospital group, hospital, branch and department as real records; a platform console listing every tenant on the installation; subscription plans deciding which modules a tenant gets; and Plutox licence keys with vendor lock, unlock and ping commands verified cryptographically.",
-          },
-          {
-            name: "Access, enforced server-side",
-            detail:
-              "32 modules by ten actions — 147 permissions — with 23 role templates seeded per tenant. The server is the only authority; the web app reads the same catalogue purely to hide what a user could not do anyway, and the role editor greys out what the editing user does not hold themselves.",
-          },
-          {
-            name: "Audit, two-factor and sign-in history",
-            detail:
-              "Who did what to which record, TOTP enrolment per account, and sessions and failed attempts kept as their own tables. Suspending a tenant signs its users out immediately rather than waiting for tokens to lapse.",
-          },
-        ],
-      },
-      {
-        title: "How it is delivered",
-        items: [
-          {
-            name: "Browser, desktop and portal",
-            detail:
-              "The same application in a browser, as a Windows build with its own updater and an offline page, and as a patient portal where someone books their own appointment and reads their own reports.",
-          },
-          {
-            name: "It documents itself",
-            detail:
-              "`DOCS=1 npx playwright test` drives the whole system and writes 131 screenshots. Every capture on this page came from that run, so the gallery cannot drift from the software without the test failing first.",
-          },
-          {
-            name: "Demo data that cannot be mistaken for real",
-            detail:
-              "The seeded tenant is suffixed (DEMO) and every screen says the records are sample data, not real patients or staff. On a system holding medical records that distinction has to be visible in the screenshot itself.",
-          },
-          {
-            name: "The one module that is not built",
-            detail:
-              "Documents exists in the permission catalogue and nowhere else — there is no module behind it yet. Everything else named in the role matrix has screens and endpoints.",
-          },
-        ],
-      },
-    ],
-    screens: [
-      {
-        src: "/images/products/screens/caresync-overview.webp",
-        label: "Overview",
-        caption: "The hospital's day on one screen",
-      },
-      {
-        src: "/images/products/screens/caresync-patients.webp",
-        label: "Patients",
-        caption: "The register, searchable by MRN, name or phone",
-      },
-      {
-        src: "/images/products/screens/caresync-patient-chart.webp",
-        label: "Patient Chart",
-        caption: "History, vitals, orders and documents in one place",
-      },
-      {
-        src: "/images/products/screens/caresync-opd-queue.webp",
-        label: "OPD Queue",
-        caption: "Who is waiting, for whom, and since when",
-      },
-      {
-        src: "/images/products/screens/caresync-walk-in.webp",
-        label: "Walk-in",
-        caption: "Registration and a token at the desk",
-      },
-      {
-        src: "/images/products/screens/caresync-consultation.webp",
-        label: "Consultation",
-        caption: "Vitals, diagnosis, prescription and plan on one page",
-      },
-      {
-        src: "/images/products/screens/caresync-allergy-warning.webp",
-        label: "Allergy Warning",
-        caption: "The chart interrupts before the prescription is written",
-      },
-      {
-        src: "/images/products/screens/caresync-consultation-signed.webp",
-        label: "Signed & Complete",
-        caption: "A consultation closed and attributed",
-      },
-      {
-        src: "/images/products/screens/caresync-prescription-sheet-a4.webp",
-        label: "Prescription (A4)",
-        caption: "What the patient actually walks out with",
-      },
-      {
-        src: "/images/products/screens/caresync-appointment-diary.webp",
-        label: "Appointment Diary",
-        caption: "The day across every doctor",
-      },
-      {
-        src: "/images/products/screens/caresync-book-appointment.webp",
-        label: "Booking",
-        caption: "Slot, doctor and reason, checked against the schedule",
-      },
-      {
-        src: "/images/products/screens/caresync-bed-board.webp",
-        label: "Bed Board",
-        caption: "Every ward and bed, live",
-      },
-      {
-        src: "/images/products/screens/caresync-admission.webp",
-        label: "Admission",
-        caption: "One stay, its orders and its notes",
-      },
-      {
-        src: "/images/products/screens/caresync-discharge-summary-a4.webp",
-        label: "Discharge Summary (A4)",
-        caption: "The document the next clinician reads",
-      },
-      {
-        src: "/images/products/screens/caresync-er-board.webp",
-        label: "Emergency Board",
-        caption: "Arrivals ordered by acuity, not by arrival time",
-      },
-      {
-        src: "/images/products/screens/caresync-er-triage.webp",
-        label: "Triage",
-        caption: "Category assigned at the door",
-      },
-      {
-        src: "/images/products/screens/caresync-nursing-station.webp",
-        label: "Nursing Station",
-        caption: "The ward's work list for a shift",
-      },
-      {
-        src: "/images/products/screens/caresync-observations.webp",
-        label: "Observations",
-        caption: "Vitals charted over time with an early-warning score",
-      },
-      {
-        src: "/images/products/screens/caresync-mar.webp",
-        label: "Medication Chart",
-        caption: "What is due, what was given and by whom",
-      },
-      {
-        src: "/images/products/screens/caresync-order-tests.webp",
-        label: "Order Tests",
-        caption: "Investigations raised from the consultation",
-      },
-      {
-        src: "/images/products/screens/caresync-lab-worklist.webp",
-        label: "Lab Worklist",
-        caption: "Specimens through to verified results",
-      },
-      {
-        src: "/images/products/screens/caresync-lab-report-a4.webp",
-        label: "Lab Report (A4)",
-        caption: "Results with reference ranges, signed",
-      },
-      {
-        src: "/images/products/screens/caresync-radiology-report.webp",
-        label: "Radiology",
-        caption: "Reporting against the request",
-      },
-      {
-        src: "/images/products/screens/caresync-ot-board.webp",
-        label: "Operation Theatre",
-        caption: "The list, by theatre and session",
-      },
-      {
-        src: "/images/products/screens/caresync-surgery.webp",
-        label: "Surgery",
-        caption: "Team, procedure and the notes that follow",
-      },
-      {
-        src: "/images/products/screens/caresync-blood-stock.webp",
-        label: "Blood Bank",
-        caption: "Units by group, and who has asked for them",
-      },
-      {
-        src: "/images/products/screens/caresync-pharmacy-queue.webp",
-        label: "Pharmacy",
-        caption: "Prescriptions arriving from the clinic, not re-typed",
-      },
-      {
-        src: "/images/products/screens/caresync-dispense.webp",
-        label: "Dispensing",
-        caption: "Against the prescription, against the stock",
-      },
-      {
-        src: "/images/products/screens/caresync-inventory.webp",
-        label: "Inventory",
-        caption: "Stock by item and location, with movements",
-      },
-      {
-        src: "/images/products/screens/caresync-procurement.webp",
-        label: "Procurement",
-        caption: "Requests, approvals and purchase orders",
-      },
-      {
-        src: "/images/products/screens/caresync-billing.webp",
-        label: "Billing",
-        caption: "Charges accumulated from what was actually done",
-      },
-      {
-        src: "/images/products/screens/caresync-invoice-a4.webp",
-        label: "Invoice (A4)",
-        caption: "The bill as the patient receives it",
-      },
-      {
-        src: "/images/products/screens/caresync-claims.webp",
-        label: "Insurance Claims",
-        caption: "Panel and TPA claims against a bill",
-      },
-      {
-        src: "/images/products/screens/caresync-hr-overview.webp",
-        label: "Human Resources",
-        caption: "Staff, roster and attendance",
-      },
-      {
-        src: "/images/products/screens/caresync-payroll-run.webp",
-        label: "Payroll Run",
-        caption: "A period calculated and closed",
-      },
-      {
-        src: "/images/products/screens/caresync-profit-loss.webp",
-        label: "Profit & Loss",
-        caption: "Accounting that reads from the billing, not a spreadsheet",
-      },
-      {
-        src: "/images/products/screens/caresync-reports-executive.webp",
-        label: "Executive Reports",
-        caption: "The numbers an owner asks for",
-      },
-      {
-        src: "/images/products/screens/caresync-roles.webp",
-        label: "Roles",
-        caption: "23 seeded templates a tenant can edit",
-      },
-      {
-        src: "/images/products/screens/caresync-permission-matrix.webp",
-        label: "Permission Matrix",
-        caption: "32 modules by ten actions, enforced server-side",
-      },
-      {
-        src: "/images/products/screens/caresync-audit-log.webp",
-        label: "Audit Log",
-        caption: "Who did what to which record",
-      },
-      {
-        src: "/images/products/screens/caresync-two-factor-setup.webp",
-        label: "Two-Factor",
-        caption: "TOTP enrolment for a staff account",
-      },
-      {
-        src: "/images/products/screens/caresync-tenants.webp",
-        label: "Platform — Tenants",
-        caption: "Every hospital on the installation",
-      },
-      {
-        src: "/images/products/screens/caresync-plans.webp",
-        label: "Plans",
-        caption: "What each subscription tier unlocks",
-      },
-      {
-        src: "/images/products/screens/caresync-portal-sign-in.webp",
-        label: "Patient Portal",
-        caption: "The patient's own way in",
-      },
-      {
-        src: "/images/products/screens/caresync-portal-home.webp",
-        label: "Portal — Home",
-        caption: "Appointments, reports and bills, to the patient",
-      },
-      {
-        src: "/images/products/screens/caresync-portal-booking.webp",
-        label: "Portal — Booking",
-        caption: "A patient booking their own slot",
-      },
-      {
-        src: "/images/products/screens/caresync-portal-prescription.webp",
-        label: "Portal — Prescription",
-        caption: "The script, without a trip to the counter",
-      },
-      {
-        src: "/images/products/screens/caresync-integrations.webp",
-        label: "Integrations",
-        caption: "Lab analysers and outbound interfaces",
-      },
-      {
-        src: "/images/products/screens/caresync-global-search.webp",
-        label: "Global Search",
-        caption: "Staff, patients and pages from one box",
-      },
-      {
-        src: "/images/products/screens/caresync-dark-opd-queue.webp",
-        label: "Dark Theme",
-        caption: "The same queue for a night shift",
-      },
-      {
-        src: "/images/products/screens/caresync-mobile-overview.webp",
-        label: "Mobile — Overview",
-        caption: "The workspace at phone width",
-      },
-      {
-        src: "/images/products/screens/caresync-mobile-menu.webp",
-        label: "Mobile — Navigation",
-        caption: "The drawer, role-aware",
-      },    ],
-    languages: ["TypeScript", "TSX", "CSS", "SQL"],
-    stack: [
-      "TypeScript",
-      "NestJS",
-      "React",
-      "Vite",
-      "Prisma",
-      "PostgreSQL",
-      "Zod",
-      "TanStack Query",
-      "Electron",
-      "Playwright",
-    ],
-    specs: [
-      { label: "API endpoints", value: "420" },
-      { label: "Prisma models", value: "116" },
-      { label: "Screens", value: "79" },
-      { label: "Modules built", value: "31 of 32" },
-    ],
-    metric: { label: "Captures from its own test run", value: "131" },
-    demoUrl: "/contact",
-  },
-
-  /* ------------------------------------------------------------------ */
-  /* E-Commerce Platform — storefront + back office                     */
-  /* ------------------------------------------------------------------ */
-  {
-    slug: "ecommerce",
-    name: "E-Commerce Platform",
-    category: "E-commerce Platform",
-    tagline: "A storefront and the office that runs it.",
-    description:
-      "A direct-to-consumer storefront and the back office that runs it, built as one application rather than a shop bolted onto a dashboard. 26 customer-facing pages and 26 admin pages over a 41-model schema, with 203 server actions doing the work instead of a REST layer nobody else calls. Payment covers what Pakistani customers actually use — cash on delivery, JazzCash, Easypaisa and Stripe — and the product photography is composed in code from a single reference shot, so a new line ships with consistent studio imagery without a studio.",
-    image: "/images/products/ecommerce-logo.svg",
-    brandColor: "#B08462",
-    audience:
-      "A brand selling direct, that needs the catalogue, the orders and the stock to be one system",
-    badge: "Store + admin",
-    features: [
-      "Storefront and admin in one codebase, one schema, one deploy",
-      "Product photography composed in code from one reference shot",
-      "Cash on delivery, JazzCash, Easypaisa and Stripe",
-      "Passkeys alongside passwords, through WebAuthn",
-      "Stock by variant, with every movement written to a log",
-      "Coupons scoped to products or collections, with usage recorded",
-      "Shipping zones and methods priced per zone",
-      "First-party visitor analytics — no third-party tracker on the store",
-      "Packing slips generated as real PDFs",
-      "Admin activity log, and admin devices tracked per account",
-    ],
-    moduleGroups: [
-      {
-        title: "The storefront",
-        items: [
-          {
-            name: "Catalogue and collections",
-            detail:
-              "Categories are what a product is; collections are what a shop wants to sell together, and they are separate tables for that reason. A product can sit in one category and three curated edits without duplicating the record.",
-          },
-          {
-            name: "Product attributes as data",
-            detail:
-              "Attributes are their own table joined to products, not a comma-separated string in a description. That is what makes filtering by one a query rather than a text search that also matches the word in a paragraph.",
-          },
-          {
-            name: "Variants and real stock",
-            detail:
-              "Size and price live on the variant, and availability is read from inventory rather than a boolean someone remembers to switch. A sold-out 100ml does not hide the 50ml.",
-          },
-          {
-            name: "Cart, checkout and payment",
-            detail:
-              "Cash on delivery, JazzCash, Easypaisa and Stripe, each a transaction record with its webhook events kept. A payment nobody can reconcile later is the expensive kind.",
-          },
-          {
-            name: "Accounts, addresses and wishlist",
-            detail:
-              "Order history, saved addresses, reviews and a wishlist — with passkeys offered alongside the password, because a returning customer on a phone should not have to remember anything.",
-          },
-        ],
-      },
-      {
-        title: "The back office",
-        items: [
-          {
-            name: "Dashboard over a chosen range",
-            detail:
-              "Revenue, orders, average order value, low and out-of-stock counts, with revenue and orders plotted over the selected window and a breakdown by product and category under them.",
-          },
-          {
-            name: "Orders and their history",
-            detail:
-              "Every order carries its own event trail, so what happened to it is a record rather than an inference from the current status.",
-          },
-          {
-            name: "Inventory with a movement log",
-            detail:
-              "Stock changes are written as movements rather than adjusted in place. When a count disagrees with the shelf, there is a history to read.",
-          },
-          {
-            name: "Coupons that know their scope",
-            detail:
-              "A discount can be limited to products or collections, and every redemption is recorded against the customer — which is what makes a one-per-customer rule enforceable rather than aspirational.",
-          },
-          {
-            name: "Shipping zones and methods",
-            detail:
-              "Rates priced per zone, with shipments tracked against the order they belong to.",
-          },
-          {
-            name: "Reviews, moderated",
-            detail:
-              "What a customer writes and what appears on the product page are two different decisions.",
-          },
-        ],
-      },
-      {
-        title: "Decisions worth naming",
-        items: [
-          {
-            name: "The photography is composed, not shot",
-            detail:
-              "Each product's studio photograph is rendered in code from one reference shot, with the colour and label set per item. A new line ships with a consistent image on the day it is added, and re-rendering the whole catalogue after a palette change is one command rather than a photo shoot.",
-          },
-          {
-            name: "Server actions instead of an API nobody calls",
-            detail:
-              "203 server actions and eight route handlers. The routes exist for the things that genuinely need an HTTP endpoint — webhooks, uploads — and the rest is a function call the type checker can see both ends of.",
-          },
-          {
-            name: "Analytics without a third party",
-            detail:
-              "Page views and visitor identity are first-party tables. A shop has no reason to hand its customers' browsing to an ad network, and a store that does cannot honestly write its own privacy page.",
-          },
-          {
-            name: "Roles enforced on the server",
-            detail:
-              "Owner, admin, staff and customer, checked server-side rather than by hiding a menu item. Admin devices are recorded per account, so an unfamiliar sign-in is visible.",
-          },
-        ],
-      },
-    ],
-    screens: [
-      {
-        src: "/images/products/screens/ecommerce-home.webp",
-        label: "Storefront",
-        caption: "The shop front",
-      },
-      {
-        src: "/images/products/screens/ecommerce-products.webp",
-        label: "Catalogue",
-        caption: "The collection, filtered and sorted",
-      },
-      {
-        src: "/images/products/screens/ecommerce-product-detail.webp",
-        label: "Product",
-        caption: "Notes, variants and what is actually in stock",
-      },
-      {
-        src: "/images/products/screens/ecommerce-collections.webp",
-        label: "Collections",
-        caption: "Curated groupings, not just categories",
-      },
-      {
-        src: "/images/products/screens/ecommerce-search.webp",
-        label: "Search",
-        caption: "Querying the catalogue by name and note",
-      },
-      {
-        src: "/images/products/screens/ecommerce-about.webp",
-        label: "Our Story",
-        caption: "The brand page",
-      },
-      {
-        src: "/images/products/screens/ecommerce-register.webp",
-        label: "Register",
-        caption: "Customer sign-up, with passkeys supported",
-      },
-      {
-        src: "/images/products/screens/ecommerce-admin-overview.webp",
-        label: "Admin Dashboard",
-        caption: "Revenue, orders and stock over a chosen range",
-      },
-      {
-        src: "/images/products/screens/ecommerce-admin-analytics.webp",
-        label: "Analytics",
-        caption: "Where the revenue actually came from",
-      },
-      {
-        src: "/images/products/screens/ecommerce-admin-orders.webp",
-        label: "Orders",
-        caption: "Every order and the events behind it",
-      },
-      {
-        src: "/images/products/screens/ecommerce-admin-products.webp",
-        label: "Products",
-        caption: "The catalogue as the shop manages it",
-      },
-      {
-        src: "/images/products/screens/ecommerce-admin-product-new.webp",
-        label: "New Product",
-        caption: "Variants, notes, images and inventory in one form",
-      },
-      {
-        src: "/images/products/screens/ecommerce-admin-inventory.webp",
-        label: "Inventory",
-        caption: "Stock by variant, with a movement log",
-      },
-      {
-        src: "/images/products/screens/ecommerce-admin-customers.webp",
-        label: "Customers",
-        caption: "Accounts, orders and lifetime value",
-      },
-      {
-        src: "/images/products/screens/ecommerce-admin-coupons.webp",
-        label: "Coupons",
-        caption: "Discounts scoped to products or collections",
-      },
-      {
-        src: "/images/products/screens/ecommerce-admin-collections.webp",
-        label: "Collections",
-        caption: "Building a curated group",
-      },
-      {
-        src: "/images/products/screens/ecommerce-admin-reviews.webp",
-        label: "Reviews",
-        caption: "Moderating what appears on a product",
-      },
-      {
-        src: "/images/products/screens/ecommerce-admin-visitors.webp",
-        label: "Visitors",
-        caption: "First-party traffic, no third-party tracker",
-      },
-      {
-        src: "/images/products/screens/ecommerce-admin-shipping.webp",
-        label: "Shipping",
-        caption: "Zones, methods and what each one costs",
-      },
-      {
-        src: "/images/products/screens/ecommerce-admin-payments.webp",
-        label: "Payments",
-        caption: "Transactions and their webhook history",
-      },
-      {
-        src: "/images/products/screens/ecommerce-admin-settings.webp",
-        label: "Settings",
-        caption: "What the store owner controls",
-      },
-      {
-        src: "/images/products/screens/ecommerce-admin-logs.webp",
-        label: "Activity Log",
-        caption: "Who changed what in the admin",
-      },
-      {
-        src: "/images/products/screens/ecommerce-admin-users.webp",
-        label: "Admin Users",
-        caption: "Owner, admin and staff, with devices",
-      },    ],
-    languages: ["TypeScript", "TSX", "CSS", "SQL"],
-    stack: [
-      "TypeScript",
-      "Next.js",
-      "Prisma",
-      "PostgreSQL",
-      "Zod",
-      "React Hook Form",
-      "Recharts",
-      "SimpleWebAuthn",
-      "pdf-lib",
-      "Sharp",
-      "Playwright",
-    ],
-    specs: [
-      { label: "Prisma models", value: "41" },
-      { label: "Pages", value: "52" },
-      { label: "Server actions", value: "203" },
-      { label: "Payment methods", value: "4" },
-    ],
-    metric: { label: "Third-party trackers on the store", value: "None" },
-    demoUrl: "/contact",
-  },
   /* ------------------------------------------------------------------ */
   /* ORYNZA — lead follow-up for HVAC contractors                       */
   /* ------------------------------------------------------------------ */
   {
     slug: "orynza",
+    kind: "project",
     name: "ORYNZA",
     category: "SaaS · Lead Management",
     tagline: "Answer every lead. Miss no follow-up.",
@@ -3894,338 +4263,165 @@ export const products: Product[] = [
     metric: { label: "Cross-tenant access paths tested", value: "38" },
     demoUrl: "/contact",
   },
+
   /* ------------------------------------------------------------------ */
-  /* Modeza — multi-vendor fashion marketplace                          */
+  /* Plutox ID — passwordless identity provider                         */
   /* ------------------------------------------------------------------ */
   {
-    slug: "modeza",
-    name: "Modeza",
-    category: "Marketplace",
-    tagline: "Every fashion brand. One destination.",
+    slug: "plutox-id",
+    kind: "project",
+    name: "Plutox ID",
+    category: "Identity & Access",
+    tagline: "One sign-in for every Plutox product. No passwords.",
     description:
-      "A multi-vendor fashion marketplace with four different systems behind one domain: customers browse every brand in one cart, vendors run their own shop and stock, riders carry the deliveries, and the platform approves who may trade and takes its commission. One order splits into a sub-order per vendor, each fulfilled and refunded independently while the customer still sees a single purchase. 51 screens and 49 API routes over a 39-model schema.",
-    image: "/images/products/modeza-logo.webp",
-    brandColor: "#5B21B6",
+      "The identity provider the rest of the estate signs in through. Passkeys (WebAuthn/FIDO2) are the primary method and an emailed one-time code is the fallback — there are no passwords to phish, reuse or reset, and no biometric data ever reaches the server, only a cryptographic assertion. Other applications delegate sign-in to it over OAuth 2.0 Authorization Code with PKCE and OpenID Connect, so \"Login with Plutox ID\" is a standards-based flow rather than a shared session hack. Fleet Flow and ServeSync ERP both sign in through it today.",
+    image: "/images/products/plutox-id-logo.svg",
+    brandColor: "#8B5CF6",
     audience:
-      "A marketplace operator onboarding independent fashion brands, and the brands and couriers working inside it",
-    badge: "Four roles, one platform",
+      "Every Plutox product and its users — and the administrators who need to see and revoke what is signed in",
+    badge: "Passwordless",
     features: [
-      "One cart across many vendors, split into a sub-order each",
-      "Vendor onboarding with documents, approved by a human before trading",
-      "Commission and payouts calculated per vendor",
-      "Rider app with assigned deliveries, a map and earnings",
-      "Returns and refunds adjudicated against the sub-order that sold the item",
-      "Stock by variant with a movement log, per vendor",
-      "Promotions and coupons, scoped to a vendor's own lines",
-      "Cash on delivery, JazzCash, EasyPaisa and bank transfer",
-      "Audit log over every administrative change",
-      "Demo catalogue runs on fictional vendors, not real companies",
+      "Passkeys as the primary sign-in — WebAuthn/FIDO2, no password to steal",
+      "Emailed one-time code as the fallback, single-use and expiring",
+      "OAuth 2.0 Authorization Code + PKCE, and OpenID Connect discovery",
+      "No raw biometric data server-side, only WebAuthn assertions",
+      "Admin console over users, registered apps, sessions and security activity",
+      "Short-lived access tokens — 15 minutes, no long-lived bearer left lying around",
+      "Live in Fleet Flow and ServeSync ERP, both signing in through it today",
     ],
     moduleGroups: [
       {
-        title: "The part that makes it a marketplace",
+        title: "Authentication",
         items: [
           {
-            name: "One order, a sub-order per vendor",
+            name: "Passkeys (WebAuthn/FIDO2)",
             detail:
-              "A customer buying from three brands makes one purchase and three sub-orders. Each vendor sees only theirs, fulfils on their own timetable and refunds independently, while the customer still tracks a single order. Collapsing that into one record is what makes multi-vendor refunds impossible later.",
+              "Registration and assertion against the platform authenticator — Windows Hello, Touch ID, a phone or a hardware key. The server stores a public key and a counter; the private key never leaves the device and no fingerprint or face template is ever transmitted.",
           },
           {
-            name: "Who may trade is a decision",
+            name: "Email one-time code",
             detail:
-              "A brand registers, uploads documents and waits. An administrator approves them. A marketplace where signing up is the same as being listed has no answer when a seller turns out to be fictitious.",
+              "The fallback for a device with no authenticator, or a user who has lost theirs. Codes are single-use and expiring, which keeps the fallback from becoming the weak path everybody takes.",
           },
           {
-            name: "Commission and payouts",
+            name: "Sessions",
             detail:
-              "The platform's cut is calculated per sub-order and carried into a payout balance per vendor, so what a seller is owed is derived from what actually sold rather than reconciled by hand each month.",
-          },
-          {
-            name: "Returns adjudicated centrally",
-            detail:
-              "A return is raised against the sub-order that sold the item, so the money comes back from the right vendor's balance and the platform — not the customer — is the one chasing it.",
+              "Issued on successful authentication and revocable individually or wholesale from the admin console, so a lost laptop is one action rather than a password reset email.",
           },
         ],
       },
       {
-        title: "Four systems, one domain",
+        title: "Single sign-on",
         items: [
           {
-            name: "Customer",
+            name: "OAuth 2.0 + PKCE",
             detail:
-              "Browse by brand or category, search across every vendor at once, one cart, one checkout, wishlist, order tracking and returns.",
+              "Authorization Code with PKCE, which is the flow a public client should use — no client secret shipped in a browser bundle, and an intercepted code is useless without the verifier.",
           },
           {
-            name: "Vendor",
+            name: "OpenID Connect",
             detail:
-              "Their own dashboard, catalogue, inventory by variant, orders limited to their sub-orders, promotions on their own lines, analytics, payouts, storefront settings and a catalogue integration.",
+              "ID tokens and a discovery document, so an application integrates against the standard rather than against bespoke endpoints that drift.",
           },
           {
-            name: "Rider",
+            name: "Registered applications",
             detail:
-              "Assigned deliveries with their status, a map to the next drop, and earnings. The courier is a first-class role with its own screens rather than a status field on an order.",
+              "Each product registered with its own client id and redirect URIs, managed in the console rather than configured by hand on both sides.",
           },
           {
-            name: "Platform admin",
+            name: "Two live integrations",
             detail:
-              "Brand approval, every listing and order across the marketplace, customers, riders, payouts, returns, the shared taxonomy, analytics, an audit log and the commission and payment policy.",
+              "Fleet Flow's login delegates to Plutox ID over the authorization-code flow and clears its own cookies before redirecting, so a sign-out actually signs out. ServeSync ERP now does too, with the vendor superadmin able to switch it off per install \u2014 which is what makes it adoptable by a client who wants local PINs.",
           },
         ],
       },
       {
-        title: "Decisions worth naming",
+        title: "Administration",
         items: [
           {
-            name: "Stock belongs to the vendor",
+            name: "Users",
             detail:
-              "Inventory is per vendor and per variant with a movement log, because two brands selling a similar item are two independent stock positions, not one shared number.",
+              "Accounts, their registered authenticators and their standing, with the ability to revoke a credential without deleting the person.",
           },
           {
-            name: "Payment as Pakistani customers use it",
+            name: "Sessions & security activity",
             detail:
-              "Cash on delivery, JazzCash, EasyPaisa and bank transfer. A marketplace in this market that only takes cards is a marketplace most of its customers cannot buy from.",
+              "What is signed in, from where, and what has been attempted — the view you need at the moment something looks wrong.",
           },
           {
-            name: "Fictional vendors in the demo",
+            name: "Four applications",
             detail:
-              "The seeded catalogue originally used real Pakistani fashion companies as sample vendors, which is why the hosted demo carries a noindex header. The captures on this page were taken after renaming them to invented labels: a real company must not appear as a seller on a marketplace it has no relationship with, beside invented orders and payouts.",
-          },
-          {
-            name: "Custom auth, not a provider",
-            detail:
-              "JWT sessions signed with jose and bcrypt password hashes, with the role carried in the token and checked server-side per route group — four roles meeting in one app is exactly where a bolted-on auth provider starts fighting the routing.",
+              "A user-facing web app (login, register, authorize, security settings), an Express API carrying the auth and OIDC endpoints, an admin console, and a dashboard — separated so the admin surface is not reachable from the login surface.",
           },
         ],
       },
     ],
-    screens: [
+    /*
+      No gallery: the repository ships no screenshots, and this page's whole
+      claim is that its images are captures of running software. A roadmap that
+      names what is missing is worth more than an invented screen.
+    */
+    roadmap: [
       {
-        src: "/images/products/screens/modeza-home.webp",
-        label: "Storefront",
-        caption: "Every brand, one cart, one checkout",
+        label: "Built",
+        title: "Passwordless authentication",
+        detail:
+          "WebAuthn passkey registration and assertion, email OTP fallback, sessions, and the user-facing web app for login, registration and security settings.",
+        state: "done",
       },
       {
-        src: "/images/products/screens/modeza-brands.webp",
-        label: "Brands",
-        caption: "The vendors trading on the platform",
+        label: "Built",
+        title: "Standards-based SSO",
+        detail:
+          "OAuth 2.0 Authorization Code with PKCE and OpenID Connect, registered applications with their own client ids and redirect URIs, and a working Fleet Flow integration.",
+        state: "done",
       },
       {
-        src: "/images/products/screens/modeza-brand-storefront.webp",
-        label: "Brand Storefront",
-        caption: "A vendor's own shop inside the marketplace",
+        label: "Built",
+        title: "Administration",
+        detail:
+          "Admin console over users, registered applications, active sessions and security activity, across a four-app split (web, API, admin, dashboard).",
+        state: "done",
       },
       {
-        src: "/images/products/screens/modeza-categories.webp",
-        label: "Categories",
-        caption: "The catalogue by department",
+        label: "Next",
+        title: "Key rotation and refresh tokens",
+        detail:
+          "Two things the repository is explicit about not having yet: a single long-lived signing key with no rotation and no multi-`kid` JWKS, and no refresh-token flow — access tokens are 15 minutes with no renewal, so a long session means re-authenticating. Both are the difference between working and operable.",
+        state: "next",
       },
-      {
-        src: "/images/products/screens/modeza-product-detail.webp",
-        label: "Product",
-        caption: "Variants, stock and the brand behind it",
-      },
-      {
-        src: "/images/products/screens/modeza-search.webp",
-        label: "Search",
-        caption: "Across every vendor at once",
-      },
-      {
-        src: "/images/products/screens/modeza-cart.webp",
-        label: "Cart",
-        caption: "One basket spanning several vendors",
-      },
-      {
-        src: "/images/products/screens/modeza-wishlist.webp",
-        label: "Wishlist",
-        caption: "Saved across sessions",
-      },
-      {
-        src: "/images/products/screens/modeza-orders.webp",
-        label: "My Orders",
-        caption: "One order, split by the vendors that fulfil it",
-      },
-      {
-        src: "/images/products/screens/modeza-notifications.webp",
-        label: "Notifications",
-        caption: "Order, delivery and return events",
-      },
-      {
-        src: "/images/products/screens/modeza-brand-signup.webp",
-        label: "Sell on Modeza",
-        caption: "Vendor onboarding, with documents",
-      },
-      {
-        src: "/images/products/screens/modeza-seller-terms.webp",
-        label: "Seller Terms",
-        caption: "What a vendor is agreeing to",
-      },
-      {
-        src: "/images/products/screens/modeza-vendor-dashboard.webp",
-        label: "Vendor Dashboard",
-        caption: "A seller's own trading figures",
-      },
-      {
-        src: "/images/products/screens/modeza-vendor-products.webp",
-        label: "Vendor Products",
-        caption: "The seller's catalogue",
-      },
-      {
-        src: "/images/products/screens/modeza-vendor-product-new.webp",
-        label: "Add a Product",
-        caption: "Variants, images and stock in one form",
-      },
-      {
-        src: "/images/products/screens/modeza-vendor-orders.webp",
-        label: "Vendor Orders",
-        caption: "Only the sub-orders that belong to them",
-      },
-      {
-        src: "/images/products/screens/modeza-vendor-inventory.webp",
-        label: "Vendor Inventory",
-        caption: "Stock by variant, with movements",
-      },
-      {
-        src: "/images/products/screens/modeza-vendor-promotions.webp",
-        label: "Promotions",
-        caption: "Discounts a vendor runs on their own lines",
-      },
-      {
-        src: "/images/products/screens/modeza-vendor-payouts.webp",
-        label: "Payouts",
-        caption: "Commission deducted, balance owed",
-      },
-      {
-        src: "/images/products/screens/modeza-vendor-returns.webp",
-        label: "Returns",
-        caption: "Requests against the seller's own orders",
-      },
-      {
-        src: "/images/products/screens/modeza-vendor-analytics.webp",
-        label: "Vendor Analytics",
-        caption: "What sold, and what did not",
-      },
-      {
-        src: "/images/products/screens/modeza-vendor-storefront.webp",
-        label: "Storefront Settings",
-        caption: "How the shop presents itself",
-      },
-      {
-        src: "/images/products/screens/modeza-vendor-integrations.webp",
-        label: "Integrations",
-        caption: "Pushing a catalogue in from elsewhere",
-      },
-      {
-        src: "/images/products/screens/modeza-admin-dashboard.webp",
-        label: "Admin Dashboard",
-        caption: "The whole marketplace on one screen",
-      },
-      {
-        src: "/images/products/screens/modeza-admin-brands.webp",
-        label: "Brand Approval",
-        caption: "Who may trade, decided by a human",
-      },
-      {
-        src: "/images/products/screens/modeza-admin-products.webp",
-        label: "Products",
-        caption: "Every listing across every vendor",
-      },
-      {
-        src: "/images/products/screens/modeza-admin-orders.webp",
-        label: "Orders",
-        caption: "The order and its sub-orders together",
-      },
-      {
-        src: "/images/products/screens/modeza-admin-customers.webp",
-        label: "Customers",
-        caption: "Accounts and their order history",
-      },
-      {
-        src: "/images/products/screens/modeza-admin-riders.webp",
-        label: "Riders",
-        caption: "The delivery fleet and its assignments",
-      },
-      {
-        src: "/images/products/screens/modeza-admin-payouts.webp",
-        label: "Payouts",
-        caption: "What the platform owes each vendor",
-      },
-      {
-        src: "/images/products/screens/modeza-admin-returns.webp",
-        label: "Returns",
-        caption: "Refunds adjudicated centrally",
-      },
-      {
-        src: "/images/products/screens/modeza-admin-categories.webp",
-        label: "Categories",
-        caption: "The taxonomy every vendor lists into",
-      },
-      {
-        src: "/images/products/screens/modeza-admin-analytics.webp",
-        label: "Platform Analytics",
-        caption: "Revenue, commission and growth",
-      },
-      {
-        src: "/images/products/screens/modeza-admin-audit.webp",
-        label: "Audit Log",
-        caption: "Who changed what",
-      },
-      {
-        src: "/images/products/screens/modeza-admin-settings.webp",
-        label: "Platform Settings",
-        caption: "Commission, payments and policy",
-      },
-      {
-        src: "/images/products/screens/modeza-rider-dashboard.webp",
-        label: "Rider Dashboard",
-        caption: "The courier's day",
-      },
-      {
-        src: "/images/products/screens/modeza-rider-deliveries.webp",
-        label: "Deliveries",
-        caption: "Assigned jobs, with their status",
-      },
-      {
-        src: "/images/products/screens/modeza-rider-map.webp",
-        label: "Rider Map",
-        caption: "Where the next drop is",
-      },
-      {
-        src: "/images/products/screens/modeza-rider-earnings.webp",
-        label: "Rider Earnings",
-        caption: "What the courier is owed",
-      },
-      {
-        src: "/images/products/screens/modeza-mobile-home.webp",
-        label: "Mobile — Storefront",
-        caption: "The shop at phone width",
-      },
-      {
-        src: "/images/products/screens/modeza-mobile-brands.webp",
-        label: "Mobile — Brands",
-        caption: "Browsing vendors on a phone",
-      },    ],
-    languages: ["TypeScript", "TSX", "CSS", "SQL"],
+    ],
+    languages: ["TypeScript", "TSX", "SQL"],
     stack: [
       "TypeScript",
-      "Next.js 16",
+      "Next.js",
+      "Express",
       "Prisma",
       "PostgreSQL",
-      "Zod",
-      "Radix UI",
-      "Tailwind CSS",
-      "framer-motion",
-      "jose",
+      "WebAuthn / FIDO2",
+      "OAuth 2.0 / OIDC",
+      "Docker",
     ],
     specs: [
-      { label: "Screens", value: "51" },
-      { label: "API routes", value: "49" },
-      { label: "Prisma models", value: "39" },
-      { label: "Roles", value: "4" },
+      { label: "API endpoints", value: "62" },
+      { label: "Prisma models", value: "17" },
+      { label: "Applications", value: "4" },
+      { label: "Passwords stored", value: "0" },
     ],
-    metric: { label: "Systems behind one domain", value: "4" },
+    metric: { label: "Primary sign-in method", value: "Passkey" },
     demoUrl: "/contact",
   },
 ];
+
+/**
+ * The two indexes, split at the source.
+ *
+ * Products are the systems we sell — the ERPs, the POS and the e-commerce
+ * platform. Projects are builds shown as work. Both pages used to render the
+ * same array, so each one showed the other's content.
+ */
+export const catalogue = products.filter((p) => p.kind === "product");
+export const caseStudies = products.filter((p) => p.kind === "project");
 
 /**
  * The platform count, spelled out.
@@ -4242,3 +4438,6 @@ const WORDS = [
 
 export const platformCount = products.length;
 export const platformCountWord = WORDS[products.length] ?? String(products.length);
+
+/** The same spelling, for a list that is only part of the whole. */
+export const countWord = (n: number) => WORDS[n] ?? String(n);

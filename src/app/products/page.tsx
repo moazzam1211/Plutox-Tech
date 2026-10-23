@@ -12,14 +12,14 @@ import {
 import { Reveal } from "@/components/shared/reveal";
 import { Button } from "@/components/ui/button";
 import { productModules } from "@/data/modules";
-import { platformCountWord, products } from "@/data/products";
+import { catalogue, countWord } from "@/data/products";
 import { breadcrumbJsonLd, buildMetadata } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
 export const metadata = buildMetadata({
   title: "Products",
   description:
-    "Eleven platforms and eleven shared modules: POS for restaurants, pharmacies and marts, hotel ERP, hospital ERP, fleet management, delivery, e-commerce, a multi-vendor marketplace, HVAC lead follow-up and passwordless sign-in.",
+    "Five management systems and eleven shared modules: POS for restaurants, pharmacies and marts, hotel ERP, manufacturing ERP, hospital ERP and a complete e-commerce platform.",
   path: "/products",
   keywords: [
     "restaurant management system",
@@ -42,7 +42,7 @@ export const metadata = buildMetadata({
  * own page.
  */
 export default function ProductsPage() {
-  const totalModules = products.reduce(
+  const totalModules = catalogue.reduce(
     (sum, product) =>
       sum +
       product.moduleGroups.reduce(
@@ -65,16 +65,16 @@ export default function ProductsPage() {
         eyebrow="Products"
         title={
           <>
-            {platformCountWord} platforms,{" "}
+            {countWord(catalogue.length)} systems,{" "}
             <span className="text-primary">each with its own modules</span>
           </>
         }
-        lede="A restaurant does not need a pharmacy's controlled-drug register, and a pharmacy has no use for a kitchen display — so ServeSync ships them as editions, hiding what does not apply and relabelling what does. Every module named here exists in software we have built."
+        lede="The systems we sell, each one built here and running in production. A restaurant does not need a pharmacy's controlled-drug register, and a pharmacy has no use for a kitchen display — so ServeSync ships them as editions, hiding what does not apply and relabelling what does. Every module named here exists in software we have built."
       >
         <StatStrip
           className="max-w-2xl border-t pt-4"
           items={[
-            { value: String(products.length), label: "Management systems" },
+            { value: String(catalogue.length), label: "Management systems" },
             { value: String(totalModules), label: "Modules across them" },
             { value: String(productModules.length), label: "Shared modules" },
             { value: "3", label: "POS editions" },
@@ -88,7 +88,7 @@ export default function ProductsPage() {
         className="border-b border-border px-6 py-5 sm:px-10 lg:px-14"
       >
         <ul className="flex flex-wrap gap-2">
-          {products.map((product) => (
+          {catalogue.map((product) => (
             <li key={product.slug}>
               <Link
                 href={`#${product.slug}`}
@@ -102,7 +102,7 @@ export default function ProductsPage() {
       </nav>
 
       {/* ---------------- One section per system ---------------- */}
-      {products.map((product) => {
+      {catalogue.map((product) => {
         const moduleCount = product.moduleGroups.reduce(
           (count, group) => count + group.items.length,
           0,

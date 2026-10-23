@@ -76,6 +76,15 @@ export interface Product {
   category: string;
   tagline: string;
   /**
+   * Which index this belongs on. `product` is something we sell as a system —
+   * the ERPs, the POS and the e-commerce platform; `project` is a build we
+   * did, shown as work rather than as a thing to buy.
+   *
+   * The two pages used to render the same list, which meant a client reading
+   * Products saw case studies and a client reading Projects saw the catalogue.
+   */
+  kind: "product" | "project";
+  /**
    * Whether the product is shipped or still being built. Drives the status pill
    * and, for `in-development`, swaps the screenshot gallery for the roadmap —
    * there are no screenshots of software that isn't finished, and inventing them

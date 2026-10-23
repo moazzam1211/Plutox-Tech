@@ -3,13 +3,13 @@ import Link from "next/link";
 import { ProjectEntry } from "@/components/pages/project-entry";
 import { JsonLd } from "@/components/shared/json-ld";
 import { Pager, PageHeader, StatStrip } from "@/components/shared/page-shell";
-import { platformCountWord, products } from "@/data/products";
+import { caseStudies, countWord } from "@/data/products";
 import { breadcrumbJsonLd, buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
   title: "Projects",
   description:
-    "Eleven platforms built by Plutox Tech — POS, hotel ERP, hospital ERP, fleet management, cross-border delivery, identity, manufacturing ERP, a blood donation platform, e-commerce, a multi-vendor marketplace and HVAC lead follow-up — with module detail and real screenshots.",
+    "Six platforms built by Plutox Tech — fleet management, cross-border delivery, a multi-vendor marketplace, a blood donation platform, HVAC lead follow-up and passwordless sign-in — with module detail and real screenshots.",
   path: "/projects",
   keywords: [
     "restaurant POS software",
@@ -27,13 +27,13 @@ export const metadata = buildMetadata({
   StaySync publishes a module count but not an endpoint count, so it contributes
   nothing to the sum and the figure carries a "+".
 */
-const specNumber = (product: (typeof products)[number], pattern: RegExp) => {
+const specNumber = (product: (typeof caseStudies)[number], pattern: RegExp) => {
   const spec = product.specs.find((entry) => pattern.test(entry.label));
   return spec ? Number.parseInt(spec.value.replace(/[^0-9]/g, ""), 10) || 0 : 0;
 };
-const moduleTotal = products.reduce((n, p) => n + specNumber(p, /module/i), 0);
-const endpointTotal = products.reduce((n, p) => n + specNumber(p, /endpoint/i), 0);
-const capabilityTotal = products.reduce(
+const moduleTotal = caseStudies.reduce((n, p) => n + specNumber(p, /module/i), 0);
+const endpointTotal = caseStudies.reduce((n, p) => n + specNumber(p, /endpoint/i), 0);
+const capabilityTotal = caseStudies.reduce(
   (n, p) => n + p.moduleGroups.reduce((m, group) => m + group.items.length, 0),
   0,
 );
@@ -52,16 +52,16 @@ export default function ProjectsPage() {
         eyebrow="Projects"
         title={
           <>
-            {platformCountWord} platforms,{" "}
+            {countWord(caseStudies.length)} platforms,{" "}
             <span className="text-primary">built here, not resold</span>
           </>
         }
-        lede="Every figure below comes from the products' own documentation, and every screenshot is from the running software — nothing here is a mockup, and the one platform with no captures yet shows its roadmap rather than a borrowed screen. ServeSync alone runs 62 business types on three engines from one codebase."
+        lede="Builds we have delivered, shown as work rather than as something to buy — the systems we sell live under Products. Every figure comes from the project's own documentation and every screenshot is from the running software: nothing here is a mockup, and the one platform with no captures yet shows its roadmap rather than a borrowed screen."
       >
         <StatStrip
           className="max-w-2xl border-t pt-4"
           items={[
-            { value: String(products.length), label: "Platforms" },
+            { value: String(caseStudies.length), label: "Platforms" },
             { value: String(moduleTotal), label: "Live modules" },
             { value: endpointTotal + "+", label: "REST endpoints" },
             { value: String(capabilityTotal), label: "Capabilities detailed" },
@@ -75,7 +75,7 @@ export default function ProjectsPage() {
         className="border-b border-border px-6 py-5 sm:px-10 lg:px-14"
       >
         <ul className="flex flex-wrap gap-2">
-          {products.map((product) => (
+          {caseStudies.map((product) => (
             <li key={product.slug}>
               <Link
                 href={`/projects/${product.slug}`}
@@ -89,7 +89,7 @@ export default function ProjectsPage() {
       </nav>
 
       <div className="divide-y divide-border">
-        {products.map((product) => (
+        {caseStudies.map((product) => (
           <div key={product.slug} className="px-6 py-12 sm:px-10 lg:px-14">
             <ProjectEntry product={product} />
           </div>
